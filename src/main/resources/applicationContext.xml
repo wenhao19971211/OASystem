@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+        http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	<!--配置包扫描器-->
+	<context:component-scan base-package="com"></context:component-scan>
+	<!--导入外部文件-->
+	<context:property-placeholder location="classpath:db.properties"></context:property-placeholder>
+	<!--数据池-->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+		<property name="username" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
+		<property name="url" value="${jdbc.url}"></property>
+		<property name="driverClassName" value="${jdbc.driver}"></property>
+		<property name="minIdle" value="${jdbc.min}"></property>
+		<property name="maxActive" value="${jdbc.max}"></property>
+		<property name="initialSize" value="${jdbc.init}"></property>
+	</bean>
+
+	<!--配置事务管理器-->
+	<bean id="dataSourceTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<!--注入数据源-->
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<!--配置事务通知（事务拦截器）-->
+	<tx:advice id="transactionInterceptor" transaction-manager="dataSourceTransactionManager">
+		<tx:attributes>
+			<tx:method name="find*" isolation="READ_COMMITTED"/>
+			<tx:method name="del*" isolation="READ_COMMITTED"/>
+			<tx:method name="update*" isolation="READ_COMMITTED"/>
+			<tx:method name="add*" isolation="READ_COMMITTED"/>
+		</tx:attributes>
+	</tx:advice>
+
+
+	<!--开启aop注解-->
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	<!--开启事务注解-->
+	<tx:annotation-driven transaction-manager="dataSourceTransactionManager"></tx:annotation-driven>
+
+	<!--配置SqlSessionFactory用在替换本来的sessionFactory-->
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!--注入数据源-->
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="configLocation" value="classpath:mybatis.xml"></property>
+	</bean>
+	<!--配置MyBatis生成的dao扫描器-->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.geek.dao"></property>
+	</bean>
+
+	<!--导入其他配置文件-->
+	<import resource="classpath:jedis.xml"/>
+</beans>
