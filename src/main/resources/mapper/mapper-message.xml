@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.igeek.dao.EmpDao">
+    <resultMap id="empMap" type="emp">
+        <id property="empId" column="empId"></id>
+        <result property="empName" column="empName"></result>
+        <result property="hireDate" column="hire_date"></result>
+    </resultMap>
+    <select id="findByDepId" resultMap="empMap">
+        select * from emp where depId=#{depId}
+    </select>
+    <update id="updateSalary">
+        update emp set salary=#{salary} where empId=#{empId}
+    </update>
+</mapper>
