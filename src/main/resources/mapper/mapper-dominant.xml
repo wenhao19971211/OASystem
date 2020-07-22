@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geek.dao.DominantDao">
+    <!--根据员工编号查询可调休的时间-->
+    <resultMap id="dominantMap" type="com.geek.pojo.Dominant">
+        <result property="yaerLeaveSumTime" column="yaerLeaveSumTime"></result>
+        <result property="reYearLeaveTime" column="reYearLeaveTime"></result>
+        <result property="allowLeaveTime" column="allowLeaveTime"></result>
+        <result property="reCollectionCount" column="reCollectionCount"></result>
+        <association property="emp" javaType="com.geek.pojo.Emp">
+            <id property="empId" column="empId"></id>
+            <result property="empName" column="empName"></result>
+        </association>
+    </resultMap>
+    <!--查询员工的可调配时间-->
+    <select id="findDominantByEmpId" resultMap="dominantMap">
+        select * from dominant inner join emp on dominant.empId=emp.empId  where dominant.empId=#{empId}
+    </select>
+    <!--修改年假总时长-->
+    <update id="updateYaerLeaveSumTimeByEmpId">
+        update dominant set yaerLeaveSumTime=yaerLeaveSumTime+#{sum} where empId=#{id}
+    </update>
+    <!--修改年假剩余时长-->
+    <update id="updateReYearLeaveTimeByEmpId">
+        update dominant set reYearLeaveTime=reYearLeaveTime+#{sum} where empId=#{id}
+    </update>
+
+    <!--修改加班调休时长-->
+    <update id="updateAllowLeaveTimeByEmpId">
+        update dominant set allowLeaveTime=allowLeaveTime+#{sum} where empId=#{id}
+    </update>
+
+    <!--修改可补卡次数-->
+    <update id="updateReCollectionCountByEmpId">
+        update dominant set reCollectionCount=reCollectionCount+#{sum} where empId=#{id}
+    </update>
+</mapper>

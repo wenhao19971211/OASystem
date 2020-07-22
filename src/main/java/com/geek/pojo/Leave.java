@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * 事假
  */
-public class LeaveId {
+public class Leave {
     private Integer leaveId;
     private Emp emp;
     private String leaveCause;
