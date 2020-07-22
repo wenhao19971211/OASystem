@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         "http://ibatis.apache.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.igeek.dao.EmpDao">
+<mapper namespace="com.geek.dao.MessageDao">
     <resultMap id="messageMap" type="message">
         <id property="messageId" column="messageId"></id>
         <result property="messageType" column="messageType"></result>
@@ -14,7 +14,7 @@
             <id property="empId" column="empId"></id>
         </association>
     </resultMap>
-   <select id="findAllById" resultMap="">
+   <select id="findAllById" resultMap="messageMap">
        select * from message where empId=#{empId}
    </select>
 </mapper>

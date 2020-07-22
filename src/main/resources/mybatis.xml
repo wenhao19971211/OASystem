@@ -13,10 +13,11 @@
     <!--设置类型的别名-->
     <typeAliases>
         <typeAlias type="com.geek.pojo.Message" alias="message"></typeAlias>
-
+        <typeAlias type="com.geek.pojo.Emp" alias="emp"></typeAlias>
     </typeAliases>
     <!--配置dao文件-->
     <mappers>
         <mapper resource="mapper/mapper-message.xml"></mapper>
+
     </mappers>
 </configuration>
