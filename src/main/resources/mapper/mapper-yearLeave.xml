@@ -2,15 +2,15 @@
 <!DOCTYPE mapper
         PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         "http://ibatis.apache.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.geek.dao.DayOffDao">
+<mapper namespace="com.geek.dao.YearLeaveDao">
     <!--1.调休申请-->
-  <insert id="addDayOff" >
-       insert into dayoff values(null,#{id},#{cause},now(),#{start},#{end},#{auditorId},#{checkTime},#{state})
+  <insert id="addYearLeave" >
+       insert into yearleave values(null,#{id},#{cause},now(),#{start},#{end},#{auditorId},#{checkTime},#{state})
   </insert>
     <!--2.查看所有的-->
-    <resultMap id="dayOffMap" type="com.geek.pojo.DayOff">
-        <id property="dayOffId" column="dayOffId"></id>
-        <result property="dayOffCause" column="dayOffCause"></result>
+    <resultMap id="yearLeaveMap" type="com.geek.pojo.YearLeave">
+        <id property="yearLeaveId" column="yearLeaveId"></id>
+        <result property="yearLeaveCause" column="yearLeaveCause"></result>
         <result property="sendTime" column="sendTime"></result>
         <result property="startTime" column="startTime"></result>
         <result property="endTime" column="endTime"></result>
@@ -21,15 +21,15 @@
             <result property="empName" column="empName"></result>
         </association>
     </resultMap>
-    <select id="findAllDayOff" resultMap="dayOffMap">
-        select * from dayoff inner join emp on dayoff.applyEmpId=emp.empId
+    <select id="findAllYearLeave" resultMap="yearLeaveMap">
+        select * from  yearleave inner join emp on  yearleave.applyEmpId=emp.empId
     </select>
     <!--3.修改审核的时间-->
-    <update id="updateCheckTimeByDayOffId">
-        update dayoff set checkTime=#{date} where dayOffId=#{id}
+    <update id="updateCheckTimeByYearLeaveId">
+        update yearleave set checkTime=#{date} where yearLeaveId=#{id}
     </update>
     <!--4.修改审核的状态-->
-    <update id="updatecheckStatusByDayOffId">
-        update dayoff set checkStatus=#{state} where dayOffId=#{id}
+    <update id="updateCheckStatusByYearLeaveId">
+        update yearleave set checkStatus=#{state} where yearLeaveId=#{id}
     </update>
 </mapper>
