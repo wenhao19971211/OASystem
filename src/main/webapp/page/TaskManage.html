@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Manager</title>
+    <script src="../js/jquery.js"></script>
+</head>
+<body>
+
+<div style="width: 900px;height: 800px">
+    <form id="formTask">
+        <input type="hidden" name="loginEmpId" value="1" >
+        <div>
+            任务标题：<input name="title">
+        </div>
+        <div>
+            开始时间：<input type="datetime-local" name="startTime">
+        </div>
+        <div>
+            截至时间：<input type="datetime-local" name="finishTime">
+        </div>
+        <!--
+        <div>
+            选择接收人:<input disabled name="receiveEmpIds" value="2">
+        </div>
+        -->
+        <div>
+            任务内容：<textarea name="content" placeholder="请填写任务内容" style="height: 100px;width: 200px">
+
+                </textarea>
+        </div>
+        <div>
+            <input type="button" value="发起任务" onclick="sendTask()">
+        </div>
+
+
+
+
+
+    </form>
+</div>
+
+
+
+</body>
+</html>
+<script>
+    function sendTask() {
+
+
+        $.ajax({
+            url:"http://localhost/OASystem_war_exploded/addTask",
+            type:"GET",
+            data:$("#formTask").serialize(),
+            success:function (result) {
+                confirm(result);
+            },
+            error:function () {
+                confirm("error");
+            }
+        })
+    }
+
+
+</script>
