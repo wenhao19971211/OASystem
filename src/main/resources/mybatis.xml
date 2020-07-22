@@ -18,6 +18,8 @@
     <!--配置dao文件-->
     <mappers>
         <mapper resource="mapper/mapper-message.xml"></mapper>
+        <mapper resource="mapper/mapper-taskreceive.xml"></mapper>
+        <mapper resource="mapper/mapper-tasksend.xml"></mapper>
         <mapper resource="mapper/mapper-dominant.xml"></mapper>
         <mapper resource="mapper/mapper-dayoff.xml"></mapper>
         <mapper resource="mapper/mapper-.xml"></mapper>

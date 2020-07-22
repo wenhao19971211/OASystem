@@ -12,7 +12,32 @@ public class Message {
     private Integer readStatus;
     private String messageContent;
     private Date sendTime;
+    private Integer empId;
     private Emp emp;
+
+    public Message() {
+    }
+
+    public Message(Integer messageId, Integer messageType, Integer messageStatus, Integer readStatus, String messageContent, Date sendTime, Integer empId) {
+        this.messageId = messageId;
+        this.messageType = messageType;
+        this.messageStatus = messageStatus;
+        this.readStatus = readStatus;
+        this.messageContent = messageContent;
+        this.sendTime = sendTime;
+        this.empId = empId;
+    }
+
+    public Message(Integer messageId, Integer messageType, Integer messageStatus, Integer readStatus, String messageContent, Date sendTime, Integer empId, Emp emp) {
+        this.messageId = messageId;
+        this.messageType = messageType;
+        this.messageStatus = messageStatus;
+        this.readStatus = readStatus;
+        this.messageContent = messageContent;
+        this.sendTime = sendTime;
+        this.empId = empId;
+        this.emp = emp;
+    }
 
     public Integer getMessageId() {
         return messageId;
@@ -60,6 +85,14 @@ public class Message {
 
     public void setSendTime(Date sendTime) {
         this.sendTime = sendTime;
+    }
+
+    public Integer getEmpId() {
+        return empId;
+    }
+
+    public void setEmpId(Integer empId) {
+        this.empId = empId;
     }
 
     public Emp getEmp() {

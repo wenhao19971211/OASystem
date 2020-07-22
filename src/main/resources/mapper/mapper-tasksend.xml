@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geek.dao.TaskSendDao">
+
+    <insert id="addTaskSend">
+        insert into tasksend values (null,#{empId},#{startTime},#{title},#{content},#{finishTime},#{status},#{today})
+    </insert>
+
+    <select id="findTaskSenndByEmpIdAndToday" resultType="com.geek.pojo.TaskSend">
+        select * from taskSend where empId = #{empId} and today = #{today}
+    </select>
+
+
+</mapper>

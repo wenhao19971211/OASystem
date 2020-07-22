@@ -7,12 +7,40 @@ import java.util.Date;
  */
 public class TaskSend {
     private Integer taskSendId;
-    private Emp emp;
-    private Date startTime;
+    private int empId;
+    private Date today;
     private String title;
     private String content;
+    private Date startTime;
     private Date finishTime;
     private Integer status;
+    private Emp emp;
+
+    public TaskSend() {
+    }
+
+    public TaskSend(Integer taskSendId, int empId, Date today, String title, String content, Date startTime, Date finishTime, Integer status) {
+        this.taskSendId = taskSendId;
+        this.empId = empId;
+        this.today = today;
+        this.title = title;
+        this.content = content;
+        this.startTime = startTime;
+        this.finishTime = finishTime;
+        this.status = status;
+    }
+
+    public TaskSend(Integer taskSendId, int empId, Date today, String title, String content, Date startTime, Date finishTime, Integer status, Emp emp) {
+        this.taskSendId = taskSendId;
+        this.empId = empId;
+        this.today = today;
+        this.title = title;
+        this.content = content;
+        this.startTime = startTime;
+        this.finishTime = finishTime;
+        this.status = status;
+        this.emp = emp;
+    }
 
     public Integer getTaskSendId() {
         return taskSendId;
@@ -22,12 +50,12 @@ public class TaskSend {
         this.taskSendId = taskSendId;
     }
 
-    public Emp getEmp() {
-        return emp;
+    public int getEmpId() {
+        return empId;
     }
 
-    public void setEmp(Emp emp) {
-        this.emp = emp;
+    public void setEmpId(int empId) {
+        this.empId = empId;
     }
 
     public Date getStartTime() {
@@ -68,5 +96,34 @@ public class TaskSend {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Date getToday() {
+        return today;
+    }
+
+    public void setToday(Date today) {
+        this.today = today;
+    }
+
+    public Emp getEmp() {
+        return emp;
+    }
+
+    public void setEmp(Emp emp) {
+        this.emp = emp;
+    }
+
+    @Override
+    public String toString() {
+        return "TaskSend{" +
+                "taskSendId=" + taskSendId +
+                ", empId=" + empId +
+                ", today=" + today +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", startTime=" + startTime +
+                ", finishTime=" + finishTime +
+                ", status=" + status ;
     }
 }

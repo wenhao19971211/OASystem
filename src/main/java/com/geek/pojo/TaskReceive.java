@@ -7,10 +7,49 @@ import java.util.Date;
  */
 public class TaskReceive {
     private Integer taskReceiveId;
-    private Emp emp;
-    private TaskSend taskSend;
+    private Integer empId;
+    private Integer taskSendId;
     private Date finishTime;
     private Integer status;
+    private Emp emp;
+    private TaskSend taskSend;
+    public TaskReceive() {
+    }
+
+    public TaskReceive(Integer taskReceiveId, Integer empId, Integer taskSendId, Date finishTime, Integer status) {
+        this.taskReceiveId = taskReceiveId;
+        this.empId = empId;
+        this.taskSendId = taskSendId;
+        this.finishTime = finishTime;
+        this.status = status;
+    }
+
+    public TaskReceive(Integer taskReceiveId, Integer empId, Integer taskSendId, Date finishTime, Integer status, Emp emp) {
+        this.taskReceiveId = taskReceiveId;
+        this.empId = empId;
+        this.taskSendId = taskSendId;
+        this.finishTime = finishTime;
+        this.status = status;
+        this.emp = emp;
+    }
+
+    public TaskReceive(Integer taskReceiveId, Integer empId, Integer taskSendId, Date finishTime, Integer status, Emp emp, TaskSend taskSend) {
+        this.taskReceiveId = taskReceiveId;
+        this.empId = empId;
+        this.taskSendId = taskSendId;
+        this.finishTime = finishTime;
+        this.status = status;
+        this.emp = emp;
+        this.taskSend = taskSend;
+    }
+
+    public Integer getTaskSendId() {
+        return taskSendId;
+    }
+
+    public void setTaskSendId(Integer taskSendId) {
+        this.taskSendId = taskSendId;
+    }
 
     public Integer getTaskReceiveId() {
         return taskReceiveId;
@@ -20,12 +59,12 @@ public class TaskReceive {
         this.taskReceiveId = taskReceiveId;
     }
 
-    public Emp getEmp() {
-        return emp;
+    public Integer getEmpId() {
+        return empId;
     }
 
-    public void setEmp(Emp emp) {
-        this.emp = emp;
+    public void setEmpId(Integer empId) {
+        this.empId = empId;
     }
 
     public TaskSend getTaskSend() {
@@ -50,5 +89,13 @@ public class TaskReceive {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Emp getEmp() {
+        return emp;
+    }
+
+    public void setEmp(Emp emp) {
+        this.emp = emp;
     }
 }
