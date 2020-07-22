@@ -6,7 +6,7 @@ package com.geek.pojo;
 public class Dep {
     private Integer depId;
     private String depName;
-    private String manager;
+    private Emp emp;
 
     public Integer getDepId() {
         return depId;
@@ -24,11 +24,11 @@ public class Dep {
         this.depName = depName;
     }
 
-    public String getManager() {
-        return manager;
+    public Emp getEmp() {
+        return emp;
     }
 
-    public void setManager(String manager) {
-        this.manager = manager;
+    public void setEmp(Emp emp) {
+        this.emp = emp;
     }
 }

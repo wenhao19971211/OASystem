@@ -6,17 +6,17 @@ import java.util.Date;
  * 信息发布
  */
 public class ReleaseTabe {
-    private Integer releseId;
+    private Integer releaseId;
     private String releaseTitle;
     private String releaseContent;
     private Date releaseTime;
 
-    public Integer getReleseId() {
-        return releseId;
+    public Integer getReleaseId() {
+        return releaseId;
     }
 
-    public void setReleseId(Integer releseId) {
-        this.releseId = releseId;
+    public void setReleaseId(Integer releaseId) {
+        this.releaseId = releaseId;
     }
 
     public String getReleaseTitle() {

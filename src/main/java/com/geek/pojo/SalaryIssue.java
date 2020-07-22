@@ -7,10 +7,10 @@ import java.util.Date;
  */
 public class SalaryIssue {
     private Integer salaryIssueId;
-    private Integer salaryId;
+    private Salary salary;
     private double issueMoney;
     private Date issueTime;
-    private Integer empId;
+    private Emp emp;
     private Integer status;
 
     public Integer getSalaryIssueId() {
@@ -19,14 +19,6 @@ public class SalaryIssue {
 
     public void setSalaryIssueId(Integer salaryIssueId) {
         this.salaryIssueId = salaryIssueId;
-    }
-
-    public Integer getSalaryId() {
-        return salaryId;
-    }
-
-    public void setSalaryId(Integer salaryId) {
-        this.salaryId = salaryId;
     }
 
     public double getIssueMoney() {
@@ -45,12 +37,20 @@ public class SalaryIssue {
         this.issueTime = issueTime;
     }
 
-    public Integer getEmpId() {
-        return empId;
+    public Salary getSalary() {
+        return salary;
     }
 
-    public void setEmpId(Integer empId) {
-        this.empId = empId;
+    public void setSalary(Salary salary) {
+        this.salary = salary;
+    }
+
+    public Emp getEmp() {
+        return emp;
+    }
+
+    public void setEmp(Emp emp) {
+        this.emp = emp;
     }
 
     public Integer getStatus() {

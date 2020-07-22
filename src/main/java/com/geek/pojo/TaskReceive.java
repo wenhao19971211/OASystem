@@ -6,34 +6,34 @@ import java.util.Date;
  * 任务接收
  */
 public class TaskReceive {
-    private Integer taskReceive;
-    private Integer empId;
-    private Integer taskSendId;
+    private Integer taskReceiveId;
+    private Emp emp;
+    private TaskSend taskSend;
     private Date finishTime;
     private Integer status;
 
-    public Integer getTaskReceive() {
-        return taskReceive;
+    public Integer getTaskReceiveId() {
+        return taskReceiveId;
     }
 
-    public void setTaskReceive(Integer taskReceive) {
-        this.taskReceive = taskReceive;
+    public void setTaskReceiveId(Integer taskReceiveId) {
+        this.taskReceiveId = taskReceiveId;
     }
 
-    public Integer getEmpId() {
-        return empId;
+    public Emp getEmp() {
+        return emp;
     }
 
-    public void setEmpId(Integer empId) {
-        this.empId = empId;
+    public void setEmp(Emp emp) {
+        this.emp = emp;
     }
 
-    public Integer getTaskSendId() {
-        return taskSendId;
+    public TaskSend getTaskSend() {
+        return taskSend;
     }
 
-    public void setTaskSendId(Integer taskSendId) {
-        this.taskSendId = taskSendId;
+    public void setTaskSend(TaskSend taskSend) {
+        this.taskSend = taskSend;
     }
 
     public Date getFinishTime() {

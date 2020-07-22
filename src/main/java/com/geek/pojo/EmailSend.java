@@ -7,7 +7,7 @@ import java.util.Date;
  */
 public class EmailSend {
     private Integer emailSendId;
-    private Integer sendEmpId;
+    private Emp emp;
     private Date sendTime;
     private String title;
     private String content;
@@ -21,12 +21,12 @@ public class EmailSend {
         this.emailSendId = emailSendId;
     }
 
-    public Integer getSendEmpId() {
-        return sendEmpId;
+    public Emp getEmp() {
+        return emp;
     }
 
-    public void setSendEmpId(Integer sendEmpId) {
-        this.sendEmpId = sendEmpId;
+    public void setEmp(Emp emp) {
+        this.emp = emp;
     }
 
     public Date getSendTime() {

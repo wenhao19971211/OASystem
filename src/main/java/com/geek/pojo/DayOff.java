@@ -7,12 +7,11 @@ import java.util.Date;
  */
 public class DayOff {
     private Integer dayOffId;
-    private Integer applyEmpId;
+    private Emp emp;
     private String dayOffCause;
     private Date sendTime;
     private Date startTime;
     private Date endTime;
-    private Integer checkEmpId;
     private Date checkTime;
     private Integer checkStatus;
 
@@ -24,13 +23,7 @@ public class DayOff {
         this.dayOffId = dayOffId;
     }
 
-    public Integer getApplyEmpId() {
-        return applyEmpId;
-    }
 
-    public void setApplyEmpId(Integer applyEmpId) {
-        this.applyEmpId = applyEmpId;
-    }
 
     public String getDayOffCause() {
         return dayOffCause;
@@ -64,12 +57,12 @@ public class DayOff {
         this.endTime = endTime;
     }
 
-    public Integer getCheckEmpId() {
-        return checkEmpId;
+    public Emp getEmp() {
+        return emp;
     }
 
-    public void setCheckEmpId(Integer checkEmpId) {
-        this.checkEmpId = checkEmpId;
+    public void setEmp(Emp emp) {
+        this.emp = emp;
     }
 
     public Date getCheckTime() {

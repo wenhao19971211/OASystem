@@ -8,7 +8,7 @@ public class ReimbursementDetail {
     private Integer type;
     private String detail;
     private double money;
-    private Integer reimbursementId;
+    private Reimbursement reimbursement;
 
     public Integer getReimbursementDetailId() {
         return reimbursementDetailId;
@@ -42,12 +42,12 @@ public class ReimbursementDetail {
         this.money = money;
     }
 
-    public Integer getReimbursementId() {
-        return reimbursementId;
+    public Reimbursement getReimbursement() {
+        return reimbursement;
     }
 
-    public void setReimbursementId(Integer reimbursementId) {
-        this.reimbursementId = reimbursementId;
+    public void setReimbursement(Reimbursement reimbursement) {
+        this.reimbursement = reimbursement;
     }
 }
 

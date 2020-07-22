@@ -7,7 +7,7 @@ import java.util.Date;
  */
 public class TaskSend {
     private Integer taskSendId;
-    private Integer empId;
+    private Emp emp;
     private Date startTime;
     private String title;
     private String content;
@@ -22,12 +22,12 @@ public class TaskSend {
         this.taskSendId = taskSendId;
     }
 
-    public Integer getEmpId() {
-        return empId;
+    public Emp getEmp() {
+        return emp;
     }
 
-    public void setEmpId(Integer empId) {
-        this.empId = empId;
+    public void setEmp(Emp emp) {
+        this.emp = emp;
     }
 
     public Date getStartTime() {

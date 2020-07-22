@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Salary {
     private Integer salaryId;
-    private Integer empId;
+    private Emp emp;
     private Date month;
     private double baseSalary;
     private double perSalary;
@@ -17,12 +17,12 @@ public class Salary {
         this.salaryId = salaryId;
     }
 
-    public Integer getEmpId() {
-        return empId;
+    public Emp getEmp() {
+        return emp;
     }
 
-    public void setEmpId(Integer empId) {
-        this.empId = empId;
+    public void setEmp(Emp emp) {
+        this.emp = emp;
     }
 
     public Date getMonth() {

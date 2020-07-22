@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * 邮件回复
  */
-public class EmailReplyId {
+public class EmailReply {
     private Integer emailReplyId;
     private Integer replyEmpId;
     private Date replyTime;

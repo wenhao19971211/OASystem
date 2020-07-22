@@ -6,8 +6,8 @@ package com.geek.pojo;
 public class Annex {
     private Integer annexId;
     private String annex;
-    private Integer emailSendId;
-    private Integer emailReplyId;
+    private EmailSend emailSend;
+    private EmailReply emailReply;
 
     public Integer getAnnexId() {
         return annexId;
@@ -25,19 +25,19 @@ public class Annex {
         this.annex = annex;
     }
 
-    public Integer getEmailSendId() {
-        return emailSendId;
+    public EmailSend getEmailSend() {
+        return emailSend;
     }
 
-    public void setEmailSendId(Integer emailSendId) {
-        this.emailSendId = emailSendId;
+    public void setEmailSend(EmailSend emailSend) {
+        this.emailSend = emailSend;
     }
 
-    public Integer getEmailReplyId() {
-        return emailReplyId;
+    public EmailReply getEmailReply() {
+        return emailReply;
     }
 
-    public void setEmailReplyId(Integer emailReplyId) {
-        this.emailReplyId = emailReplyId;
+    public void setEmailReply(EmailReply emailReply) {
+        this.emailReply = emailReply;
     }
 }

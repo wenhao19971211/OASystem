@@ -7,13 +7,12 @@ import java.util.Date;
  */
 public class Contract {
     private Integer contractId;
-    private Integer empId;
+    private Emp emp;
     private Integer contractType;
     private double salary;
     private Date effectTime;
     private Date failureTime;
     private Integer isTrainningContract;
-    private Integer checkEmpId;
 
     public Integer getContractId() {
         return contractId;
@@ -23,13 +22,7 @@ public class Contract {
         this.contractId = contractId;
     }
 
-    public Integer getEmpId() {
-        return empId;
-    }
 
-    public void setEmpId(Integer empId) {
-        this.empId = empId;
-    }
 
     public Integer getContractType() {
         return contractType;
@@ -71,11 +64,11 @@ public class Contract {
         this.isTrainningContract = isTrainningContract;
     }
 
-    public Integer getCheckEmpId() {
-        return checkEmpId;
+    public Emp getEmp() {
+        return emp;
     }
 
-    public void setCheckEmpId(Integer checkEmpId) {
-        this.checkEmpId = checkEmpId;
+    public void setEmp(Emp emp) {
+        this.emp = emp;
     }
 }

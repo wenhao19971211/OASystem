@@ -7,12 +7,11 @@ import java.util.Date;
  */
 public class LeaveId {
     private Integer leaveId;
-    private Integer applyEmpId;
+    private Emp emp;
     private String leaveCause;
     private Date sendTime;
     private Date startTime;
     private Date endTime;
-    private Integer checkEmpId;
     private Date checkTime;
     private Integer checkStatus;
 
@@ -24,12 +23,12 @@ public class LeaveId {
         this.leaveId = leaveId;
     }
 
-    public Integer getApplyEmpId() {
-        return applyEmpId;
+    public Emp getEmp() {
+        return emp;
     }
 
-    public void setApplyEmpId(Integer applyEmpId) {
-        this.applyEmpId = applyEmpId;
+    public void setEmp(Emp emp) {
+        this.emp = emp;
     }
 
     public String getLeaveCause() {
@@ -62,14 +61,6 @@ public class LeaveId {
 
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
-    }
-
-    public Integer getCheckEmpId() {
-        return checkEmpId;
-    }
-
-    public void setCheckEmpId(Integer checkEmpId) {
-        this.checkEmpId = checkEmpId;
     }
 
     public Date getCheckTime() {

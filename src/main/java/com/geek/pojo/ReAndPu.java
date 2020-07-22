@@ -7,7 +7,7 @@ import java.util.Date;
  */
 public class ReAndPu {
     private Integer rewardAndPuishId;
-    private Integer empId;
+    private Emp emp;
     private Integer type;
     private double money;
     private String cause;
@@ -22,12 +22,12 @@ public class ReAndPu {
         this.rewardAndPuishId = rewardAndPuishId;
     }
 
-    public Integer getEmpId() {
-        return empId;
+    public Emp getEmp() {
+        return emp;
     }
 
-    public void setEmpId(Integer empId) {
-        this.empId = empId;
+    public void setEmp(Emp emp) {
+        this.emp = emp;
     }
 
     public Integer getType() {

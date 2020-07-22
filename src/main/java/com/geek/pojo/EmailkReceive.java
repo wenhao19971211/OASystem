@@ -5,8 +5,8 @@ package com.geek.pojo;
  */
 public class EmailkReceive {
     private Integer emailkReceiveId;
-    private Integer receiveEmpId;
-    private Integer emailSendId;
+    private Emp emp;
+    private EmailSend emailSend;
     private Integer readStatus;
     private Integer isDelete;
 
@@ -18,20 +18,20 @@ public class EmailkReceive {
         this.emailkReceiveId = emailkReceiveId;
     }
 
-    public Integer getReceiveEmpId() {
-        return receiveEmpId;
+    public Emp getEmp() {
+        return emp;
     }
 
-    public void setReceiveEmpId(Integer receiveEmpId) {
-        this.receiveEmpId = receiveEmpId;
+    public void setEmp(Emp emp) {
+        this.emp = emp;
     }
 
-    public Integer getEmailSendId() {
-        return emailSendId;
+    public EmailSend getEmailSend() {
+        return emailSend;
     }
 
-    public void setEmailSendId(Integer emailSendId) {
-        this.emailSendId = emailSendId;
+    public void setEmailSend(EmailSend emailSend) {
+        this.emailSend = emailSend;
     }
 
     public Integer getReadStatus() {

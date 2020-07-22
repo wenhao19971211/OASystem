@@ -7,10 +7,10 @@ import java.util.Date;
  */
 public class Rimbursement {
     private Integer rimbursementIssue;
-    private Integer rimbursementId;
+    private Reimbursement reimbursement;
     private double factMoney;
     private Date issueTime;
-    private Integer empId;
+    private Emp emp;
     private Integer status;
 
     public Integer getRimbursementIssue() {
@@ -21,12 +21,20 @@ public class Rimbursement {
         this.rimbursementIssue = rimbursementIssue;
     }
 
-    public Integer getRimbursementId() {
-        return rimbursementId;
+    public Reimbursement getReimbursement() {
+        return reimbursement;
     }
 
-    public void setRimbursementId(Integer rimbursementId) {
-        this.rimbursementId = rimbursementId;
+    public void setReimbursement(Reimbursement reimbursement) {
+        this.reimbursement = reimbursement;
+    }
+
+    public Emp getEmp() {
+        return emp;
+    }
+
+    public void setEmp(Emp emp) {
+        this.emp = emp;
     }
 
     public double getFactMoney() {
@@ -43,14 +51,6 @@ public class Rimbursement {
 
     public void setIssueTime(Date issueTime) {
         this.issueTime = issueTime;
-    }
-
-    public Integer getEmpId() {
-        return empId;
-    }
-
-    public void setEmpId(Integer empId) {
-        this.empId = empId;
     }
 
     public Integer getStatus() {

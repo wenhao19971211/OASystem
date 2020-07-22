@@ -6,17 +6,17 @@ import java.util.Date;
  * 上班打卡
  */
 public class WorkOn {
-    private Integer empId;
+    private Emp emp;
     private Date today;
     private Date workInTime;
     private Date workOutTime;
 
-    public Integer getEmpId() {
-        return empId;
+    public Emp getEmp() {
+        return emp;
     }
 
-    public void setEmpId(Integer empId) {
-        this.empId = empId;
+    public void setEmp(Emp emp) {
+        this.emp = emp;
     }
 
     public Date getToday() {

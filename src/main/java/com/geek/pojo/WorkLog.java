@@ -7,10 +7,9 @@ import java.util.Date;
  */
 public class WorkLog {
     private Integer logId;
-    private Integer empId;
+    private Emp emp;
     private String content;
     private Date writLogTime;
-    private Integer checkEmpId;
     private Date checkTime;
     private Integer checkStatus;
     private Date thatDay;
@@ -23,12 +22,12 @@ public class WorkLog {
         this.logId = logId;
     }
 
-    public Integer getEmpId() {
-        return empId;
+    public Emp getEmp() {
+        return emp;
     }
 
-    public void setEmpId(Integer empId) {
-        this.empId = empId;
+    public void setEmp(Emp emp) {
+        this.emp = emp;
     }
 
     public String getContent() {
@@ -47,13 +46,6 @@ public class WorkLog {
         this.writLogTime = writLogTime;
     }
 
-    public Integer getCheckEmpId() {
-        return checkEmpId;
-    }
-
-    public void setCheckEmpId(Integer checkEmpId) {
-        this.checkEmpId = checkEmpId;
-    }
 
     public Date getCheckTime() {
         return checkTime;

@@ -7,12 +7,11 @@ import java.util.Date;
  */
 public class Collection {
     private Integer collectionId;
-    private Integer empId;
+    private Emp emp;
     private Date today;
     private Date startTime;
     private Date endTime;
     private String collectionCause;
-    private Integer checkEmpId;
     private Date checkTime;
     private Integer checkStatus;
 
@@ -24,13 +23,6 @@ public class Collection {
         this.collectionId = collectionId;
     }
 
-    public Integer getEmpId() {
-        return empId;
-    }
-
-    public void setEmpId(Integer empId) {
-        this.empId = empId;
-    }
 
     public Date getToday() {
         return today;
@@ -64,12 +56,12 @@ public class Collection {
         this.collectionCause = collectionCause;
     }
 
-    public Integer getCheckEmpId() {
-        return checkEmpId;
+    public Emp getEmp() {
+        return emp;
     }
 
-    public void setCheckEmpId(Integer checkEmpId) {
-        this.checkEmpId = checkEmpId;
+    public void setEmp(Emp emp) {
+        this.emp = emp;
     }
 
     public Date getCheckTime() {

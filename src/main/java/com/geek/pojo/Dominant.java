@@ -4,17 +4,17 @@ package com.geek.pojo;
  * 员工可支配时间
  */
 public class Dominant {
-    private Integer empId;
+    private Emp emp;
     private Integer yaerLeaveSumTime;
     private Integer allowLeaveTime;
     private Integer reCollectionCount;
 
-    public Integer getEmpId() {
-        return empId;
+    public Emp getEmp() {
+        return emp;
     }
 
-    public void setEmpId(Integer empId) {
-        this.empId = empId;
+    public void setEmp(Emp emp) {
+        this.emp = emp;
     }
 
     public Integer getYaerLeaveSumTime() {

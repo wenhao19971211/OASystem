@@ -11,7 +11,7 @@ public class Emp {
     private String password;
     private String empName;
     private Integer sex;
-    private Integer depId;
+    private Dep dep;
     private Date hireDate;
     private String head;
     private String education;
@@ -65,12 +65,12 @@ public class Emp {
         this.sex = sex;
     }
 
-    public Integer getDepId() {
-        return depId;
+    public Dep getDep() {
+        return dep;
     }
 
-    public void setDepId(Integer depId) {
-        this.depId = depId;
+    public void setDep(Dep dep) {
+        this.dep = dep;
     }
 
     public Date getHireDate() {

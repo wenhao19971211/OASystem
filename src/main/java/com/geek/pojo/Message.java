@@ -12,7 +12,7 @@ public class Message {
     private Integer readStatus;
     private String messageContent;
     private Date sendTime;
-    private Integer empId;
+    private Emp emp;
 
     public Integer getMessageId() {
         return messageId;
@@ -62,11 +62,11 @@ public class Message {
         this.sendTime = sendTime;
     }
 
-    public Integer getEmpId() {
-        return empId;
+    public Emp getEmp() {
+        return emp;
     }
 
-    public void setEmpId(Integer empId) {
-        this.empId = empId;
+    public void setEmp(Emp emp) {
+        this.emp = emp;
     }
 }

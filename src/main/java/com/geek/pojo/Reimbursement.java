@@ -7,11 +7,10 @@ import java.util.Date;
  */
 public class Reimbursement {
     private Integer reimbursementId;
-    private Integer applyEmpId;
-    private Integer taskSendId;
+    private Emp emp;
+    private TaskSend taskSend;
     private Date sendTime;
     private double sum;
-    private Integer checkEmpId;
     private Date checkTime;
     private Integer checkStatus;
 
@@ -23,20 +22,20 @@ public class Reimbursement {
         this.reimbursementId = reimbursementId;
     }
 
-    public Integer getApplyEmpId() {
-        return applyEmpId;
+    public Emp getEmp() {
+        return emp;
     }
 
-    public void setApplyEmpId(Integer applyEmpId) {
-        this.applyEmpId = applyEmpId;
+    public void setEmp(Emp emp) {
+        this.emp = emp;
     }
 
-    public Integer getTaskSendId() {
-        return taskSendId;
+    public TaskSend getTaskSend() {
+        return taskSend;
     }
 
-    public void setTaskSendId(Integer taskSendId) {
-        this.taskSendId = taskSendId;
+    public void setTaskSend(TaskSend taskSend) {
+        this.taskSend = taskSend;
     }
 
     public Date getSendTime() {
@@ -53,14 +52,6 @@ public class Reimbursement {
 
     public void setSum(double sum) {
         this.sum = sum;
-    }
-
-    public Integer getCheckEmpId() {
-        return checkEmpId;
-    }
-
-    public void setCheckEmpId(Integer checkEmpId) {
-        this.checkEmpId = checkEmpId;
     }
 
     public Date getCheckTime() {

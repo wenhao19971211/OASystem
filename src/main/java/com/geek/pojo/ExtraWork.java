@@ -7,12 +7,11 @@ import java.util.Date;
  */
 public class ExtraWork {
     private Integer extraWorkId;
-    private Integer applyEmpId;
+    private Emp emp;
     private Date sendTime;
     private Date startTime;
     private Date endTime;
     private String extraWorkCause;
-    private Integer checkEmpId;
     private Integer checkStatus;
     private Date checkTime;
     private Integer extraWorkTime;
@@ -25,12 +24,12 @@ public class ExtraWork {
         this.extraWorkId = extraWorkId;
     }
 
-    public Integer getApplyEmpId() {
-        return applyEmpId;
+    public Emp getEmp() {
+        return emp;
     }
 
-    public void setApplyEmpId(Integer applyEmpId) {
-        this.applyEmpId = applyEmpId;
+    public void setEmp(Emp emp) {
+        this.emp = emp;
     }
 
     public Date getSendTime() {
@@ -65,13 +64,6 @@ public class ExtraWork {
         this.extraWorkCause = extraWorkCause;
     }
 
-    public Integer getCheckEmpId() {
-        return checkEmpId;
-    }
-
-    public void setCheckEmpId(Integer checkEmpId) {
-        this.checkEmpId = checkEmpId;
-    }
 
     public Integer getCheckStatus() {
         return checkStatus;
