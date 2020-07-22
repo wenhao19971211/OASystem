@@ -3,15 +3,18 @@
         PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         "http://ibatis.apache.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.igeek.dao.EmpDao">
-    <resultMap id="empMap" type="emp">
-        <id property="empId" column="empId"></id>
-        <result property="empName" column="empName"></result>
-        <result property="hireDate" column="hire_date"></result>
+    <resultMap id="messageMap" type="message">
+        <id property="messageId" column="messageId"></id>
+        <result property="messageType" column="messageType"></result>
+        <result property="messageStatus" column="messageStatus"></result>
+        <result property="readStatus" column="readStatus"></result>
+        <result property="messageContent" column="messageContent"></result>
+        <result property="sendTime" column="sendTime"></result>
+        <association property="emp" javaType="emp">
+            <id property="empId" column="empId"></id>
+        </association>
     </resultMap>
-    <select id="findByDepId" resultMap="empMap">
-        select * from emp where depId=#{depId}
-    </select>
-    <update id="updateSalary">
-        update emp set salary=#{salary} where empId=#{empId}
-    </update>
+   <select id="findAllById" resultMap="">
+       select * from message where empId=#{empId}
+   </select>
 </mapper>

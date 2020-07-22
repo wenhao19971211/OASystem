@@ -12,11 +12,11 @@
     </settings>
     <!--设置类型的别名-->
     <typeAliases>
-        <typeAlias type="com.geek.pojo.User" alias="user"></typeAlias>
+        <typeAlias type="com.geek.pojo.Message" alias="message"></typeAlias>
 
     </typeAliases>
     <!--配置dao文件-->
     <mappers>
-        <mapper resource="mapper/user-mapper.xml"></mapper>
+        <mapper resource="mapper/mapper-message.xml"></mapper>
     </mappers>
 </configuration>

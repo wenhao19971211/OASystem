@@ -6,6 +6,7 @@ package com.geek.pojo;
 public class Dominant {
     private Emp emp;
     private Integer yaerLeaveSumTime;
+    private Integer reYearLeaveTime;
     private Integer allowLeaveTime;
     private Integer reCollectionCount;
 
@@ -15,6 +16,14 @@ public class Dominant {
 
     public void setEmp(Emp emp) {
         this.emp = emp;
+    }
+
+    public Integer getReYearLeaveTime() {
+        return reYearLeaveTime;
+    }
+
+    public void setReYearLeaveTime(Integer reYearLeaveTime) {
+        this.reYearLeaveTime = reYearLeaveTime;
     }
 
     public Integer getYaerLeaveSumTime() {
