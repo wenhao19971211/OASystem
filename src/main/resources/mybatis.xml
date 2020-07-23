@@ -23,5 +23,6 @@
         <mapper resource="mapper/mapper-tasksend.xml"></mapper>
         <mapper resource="mapper/mapper-dominant.xml"></mapper>
         <mapper resource="mapper/mapper-dayoff.xml"></mapper>
+        <mapper resource="mapper/mapper-emp.xml"></mapper>
     </mappers>
 </configuration>
