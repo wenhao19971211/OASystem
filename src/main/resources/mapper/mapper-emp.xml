@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geek.dao.EmpDao">
+    <resultMap id="empMap" type="emp">
+        <id property="empId" column="empId"></id>
+        <result property="account" column="account"></result>
+        <result property="password" column="password"></result>
+        <result property="empName" column="empName"></result>
+        <result property="sex" column="sex"></result>
+        <result property="hireDate" column="hireDate"></result>
+        <result property="head" column="head"></result>
+        <result property="education" column="education"></result>
+        <result property="card" column="card"></result>
+        <result property="politic" column="politic"></result>
+        <result property="school" column="school"></result>
+        <result property="marriage" column="marriage"></result>
+        <result property="phone" column="phone"></result>
+        <result property="email" column="email"></result>
+        <result property="registratin" column="registratin"></result>
+        <result property="position" column="position"></result>
+        <result property="isDeparture" column="isDeparture"></result>
+        <association property="dep" javaType="dep">
+            <id property="depId" column="depId"></id>
+            <result property="depName" column="depName"></result>
+            <result property="manager" column="manager"></result>
+        </association>
+    </resultMap>
+
+   <select id="findEmpByAccount" resultMap="empMap">
+       select * from emp where account=#{account}
+   </select>
+
+    <select id="findEmpById" resultMap="empMap">
+        select * from emp where empId=#{empId}
+    </select>
+
+    <update id="updateEmpById">
+        update emp set head=#{head},phone=#{phone},email=#{email} where empId=#{empId}
+    </update>
+</mapper>
