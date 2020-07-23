@@ -55,12 +55,9 @@ public class LoginHandler {
         Emp emp=empService.findEmpByAccount(account);
         if (emp!=null){
             if (emp.getPassword().equals(password)){
-                session.setAttribute(SessionNameUtil.Login_User,emp);
-                System.out.println(session.getAttribute(SessionNameUtil.Login_User));
-                if (session.getAttribute(RandomValidateCode.RANDOMCODEKEY).equals(verCode)){
 
-                    redisUtil.set("account",emp.getAccount());
-                    System.out.println("已存入");
+                if (session.getAttribute(RandomValidateCode.RANDOMCODEKEY).equals(verCode)){
+                    session.setAttribute(SessionNameUtil.Login_User,emp);
                     return "1";
                 }else {
                     return "4";
