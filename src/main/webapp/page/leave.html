@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="http://localhost:8080/OASystem_war_exploded/">
+    <script src="js/jquery.js"></script>
+    <script src="js/common.js"></script>
+    <meta charset="UTF-8">
+    <title>请假</title>
+</head>
+<body>
+        <div>请假申请</div>
+        <!--假期余额-->
+        <div id="DaysBalance">
+            <table border="1"  style="border-collapse: collapse ">
+                <tr><td colspan="2">您的假期结余</td></tr>
+                <tr>
+                    <td>年假剩余天数:<span id="YearDays"></span></td>
+                    <td>可调休天数:<span id="leaveDays"></span></td>
+                </tr>
+            </table>
+        </div>
+        <div id="leave">
+            <table border="1" style="border-collapse: collapse ">
+                <thead>
+                <td>假期类型</td>
+                <td>开始时间</td>
+                <td>结束时间</td>
+                </thead>
+                <tr>
+                    <td>
+                        <select id="Type">
+                        <option value="0">请选择</option>
+                        <option value="1">调休</option>
+                        <option value="2">事假</option>
+                        <option value="3">年假</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="date" id="startTime">
+                    </td>
+                    <td>
+                        <input type="date" id="endTime">
+                    </td>
+                </tr>
+                <tr>
+                    <td>请假原因</td>
+                    <!--div中请假的内容-->
+                    <td colspan="2">
+                        <div id="cause" contenteditable="true" style="overflow: auto; height: 80px;width: 300px">
+
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <input type="button" value="提交" id="subButton">
+        </div>
+
+</body>
+<script>
+        $(function () {
+            var param=parseUrl(location.href);
+            //param["empId"]
+            $.ajax({
+                url:"leaveInfo/"+param["empId"],
+                type:"get",
+                dataType:"json",
+                success:function (data) {
+                    console.log(data);
+                    $("#YearDays").text(data.reYearLeaveTime+"天");
+                    var days=data.allowLeaveTime/8;
+                    $("#leaveDays").text(days+"天");
+                }
+
+            })
+
+
+
+
+
+
+            $("#subButton").click(function () {
+                var type= $("#Type").val();
+                var startDate=$("#startTime").val();
+                var endDate=$("#endTime").val();
+                var cause=$("#cause").html();
+                // console.log(type+" , "+startDate+" , "+endDate+" , "+cause);
+                //把时间替换成同一类型比较
+                var start=new Date(startDate.replace("-", "/").replace("-", "/"));
+                var end=new Date(endDate.replace("-", "/").replace("-", "/"));
+                var now=new Date(getNowFormatDate().replace("-", "/").replace("-", "/"));
+
+                if (type!=0){
+                   if (startDate!=""){
+                       if (endDate!=""){
+                           if (cause!=""){
+                               //判断开始时间与结束时间对比
+                               if (start>end){
+                                  alert("起始时间不可以比截止时间大")
+                               } else {
+                                   //判断是否小于当前时间
+                                   if (start>=now){
+                                       if (end>=now){
+                                           $.ajax({
+                                               url:"leave",
+                                               type:"post",
+                                               data:{"type":type,"startDate":startDate,"endDate":endDate,"cause":cause},
+                                               success:function (data) {
+                                                   if (data==1){
+                                                       alert("请假申请已发送！");
+                                                   } else {
+                                                       alert("请求失败");
+                                                   }
+                                               }
+                                           })
+                                       }else {
+                                           alert("截止的时间不可以小于今天");
+                                       }
+                                   } else {
+                                       alert("起始时间不可以小于今天");
+                                   }
+                               }
+
+                           } else {
+                              alert("请假原因不可为空！")
+                           }
+                       } else {
+                           alert("截止时间不可为空!")
+                       }
+                   } else {
+                       alert("起始时间不可为空！")
+                   }
+                } else {
+                    alert("请假类型不可为空！")
+                }
+
+            })
+        })
+
+
+
+
+
+</script>
+</html>

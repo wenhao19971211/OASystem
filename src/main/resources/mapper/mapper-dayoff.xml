@@ -7,7 +7,7 @@
   <insert id="addDayOff" >
        insert into dayoff values(null,#{id},#{cause},now(),#{start},#{end},#{auditorId},#{checkTime},#{state})
   </insert>
-    <!--2.查看所有的-->
+    <!--2.查看请假 只写dep代表经理查询审批emp写0 反之-->
     <resultMap id="dayOffMap" type="com.geek.pojo.DayOff">
         <id property="dayOffId" column="dayOffId"></id>
         <result property="dayOffCause" column="dayOffCause"></result>
@@ -21,8 +21,14 @@
             <result property="empName" column="empName"></result>
         </association>
     </resultMap>
-    <select id="findAllDayOff" resultMap="dayOffMap">
-        select * from dayoff inner join emp on dayoff.applyEmpId=emp.empId
+    <select id="findAllDayOffBydepIdAndempId" resultMap="dayOffMap">
+        select * from dayoff inner join emp on dayoff.applyEmpId=emp.empId where 1=1
+        <if test="depId != 0">
+           and emp.depId=#{depId}
+        </if>
+        <if test="empId != 0">
+           and dayoff.applyEmpId=#{empId}
+        </if>
     </select>
     <!--3.修改审核的时间-->
     <update id="updateCheckTimeByDayOffId">

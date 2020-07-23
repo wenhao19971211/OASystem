@@ -32,7 +32,7 @@ public interface DayOffDao {
      * 查看所有的调休申请
      * @return
      */
-    public List<DayOff> findAllDayOff();
+    public List<DayOff> findAllDayOffBydepIdAndempId(@Param("depId")int depId,@Param("empId")int empId);
 
     /**
      * 修改审核时间
@@ -47,5 +47,7 @@ public interface DayOffDao {
      * @param id
      */
     public void updatecheckStatusByDayOffId(@Param("state")int state,@Param("id") int id);
+
+
 
 }

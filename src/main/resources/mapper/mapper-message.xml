@@ -17,7 +17,7 @@
    <select id="findAllById" resultMap="messageMap">
        select * from message where empId=#{empId}
    </select>
-
+    <!--添加消息-->
     <insert id="addMessage">
         insert into message values (null,#{messageType},#{messageStatus},#{readStatus},#{messageContent},#{sendTime},#{empId})
     </insert>

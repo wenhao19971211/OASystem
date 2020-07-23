@@ -1,4 +1,5 @@
-import com.geek.handler.TaskSendHandler;
+import com.geek.service.LeaveService;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -8,16 +9,13 @@ import java.util.Date;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/applicationContext.xml")
-public class Test {
+public class ServiceTest {
     @Autowired
-    private TaskSendHandler taskSendHandler;
-
-    @org.junit.Test
-    public void test1()
-    {
-        Integer[] receiveEmpIds = new Integer[]{2,3};
-        //String flag = taskSendHandler.addTask(1, "ceshi", "ceshi", new Date(), new Date(), receiveEmpIds);
-        //System.out.println("flag:"+flag);
+    LeaveService leaveService;
+    @Test
+    public void leaveServiceTest(){
+        leaveService.addLeave(1,5,"service请个假测试",new Date(),
+                new Date(),1);
+        System.out.println("测试成功");
     }
-
 }

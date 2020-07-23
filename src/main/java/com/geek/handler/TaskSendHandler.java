@@ -11,17 +11,30 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 import java.util.Date;
 
+/**
+ * 任务控制器
+ */
 @Controller
 public class TaskSendHandler {
     @Autowired
     private TaskSendService taskSendService;
 
+    /**
+     * 新增任务
+     * @param loginEmpId
+     * @param title
+     * @param content
+     * @param startTime
+     * @param finishTime
+     * @param receiveEmpIds
+     * @return
+     */
     @GetMapping("addTask")
-    public String addTask( Integer loginEmpId, String title, String content, Date startTime, Date finishTime/*, Integer[] receiveEmpIds*/)
+    public String addTask( Integer loginEmpId, String title, String content, Date startTime, Date finishTime, Integer[] receiveEmpIds)
     {
         //需要从session中获取当前用户
 
-        Integer[] receiveEmpIds = new Integer[]{2,3};
+        //Integer[] receiveEmpIds = new Integer[]{2,3};
 
         String flag = "success";
         boolean b1 = taskSendService.addTaskSend(loginEmpId, title, content, startTime, finishTime, receiveEmpIds);
