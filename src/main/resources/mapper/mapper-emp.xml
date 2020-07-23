@@ -39,4 +39,8 @@
     <update id="updateEmpById">
         update emp set head=#{head},phone=#{phone},email=#{email} where empId=#{empId}
     </update>
+
+    <select id="findManagerBydepId" resultMap="empMap">
+        select * from emp where position='经理' and depId=#{depId}
+    </select>
 </mapper>

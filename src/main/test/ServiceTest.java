@@ -37,5 +37,8 @@ public class ServiceTest {
 //        }
 //        Emp emp = empService.findEmpById(1);
 //        System.out.println(emp.getEmpName());
+
+        Emp emp = empService.findManagerBydepId(60);
+        System.out.println(emp.getEmpName());
     }
 }
