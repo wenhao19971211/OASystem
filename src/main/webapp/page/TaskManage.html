@@ -50,7 +50,7 @@
 
         $.ajax({
             url:"http://localhost/OASystem_war_exploded/addTask",
-            type:"GET",
+            type:"POST",
             data:$("#formTask").serialize(),
             success:function (result) {
                 confirm(result);
@@ -60,6 +60,26 @@
             }
         })
     }
+
+
+    $.ajax({
+        url:"../findTaskByStatus",
+        type:"GET",
+        data:{"loginEmpId":6,"status":1},
+        dataType:"json",
+        success:function (result) {
+            console.log(result)
+            for(var i in result)
+            {
+                console.log("content:"+result[i].taskSend.content)
+            }
+
+
+        }
+
+    })
+
+
 
 
 </script>

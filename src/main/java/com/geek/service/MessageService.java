@@ -33,7 +33,7 @@ public class MessageService {
      * @param empId
      * @return
      */
-    public int addMessage(Integer messageType, Integer messageStatus, Integer readStatus, String messageContent, Date sendTime,Integer empId)
+    public boolean addMessage(Integer messageType, Integer messageStatus, Integer readStatus, String messageContent, Date sendTime,Integer empId)
     {
         Message message = new Message();
         message.setMessageType(messageType);
@@ -43,7 +43,7 @@ public class MessageService {
         message.setSendTime(sendTime);
         message.setEmpId(empId);
         int count = messageDao.addMessage(message);
-        return count;
+        return count>0;
     }
 
     /**

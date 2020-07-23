@@ -11,7 +11,7 @@ public class Emp {
     private String password;
     private String empName;
     private Integer sex;
-    private Dep dep;
+    private Integer depId;
     private Date hireDate;
     private String head;
     private String education;
@@ -24,6 +24,53 @@ public class Emp {
     private String registratin;
     private String position;
     private String isDeparture;
+    private Dep dep;
+
+    public Emp() {
+    }
+
+    public Emp(Integer empId, String account, String password, String empName, Integer sex, Integer depId, Date hireDate, String head, String education, String card, String politic, String school, String marriage, String phone, String email, String registratin, String position, String isDeparture) {
+        this.empId = empId;
+        this.account = account;
+        this.password = password;
+        this.empName = empName;
+        this.sex = sex;
+        this.depId = depId;
+        this.hireDate = hireDate;
+        this.head = head;
+        this.education = education;
+        this.card = card;
+        this.politic = politic;
+        this.school = school;
+        this.marriage = marriage;
+        this.phone = phone;
+        this.email = email;
+        this.registratin = registratin;
+        this.position = position;
+        this.isDeparture = isDeparture;
+    }
+
+    public Emp(Integer empId, String account, String password, String empName, Integer sex, Integer depId, Date hireDate, String head, String education, String card, String politic, String school, String marriage, String phone, String email, String registratin, String position, String isDeparture, Dep dep) {
+        this.empId = empId;
+        this.account = account;
+        this.password = password;
+        this.empName = empName;
+        this.sex = sex;
+        this.depId = depId;
+        this.hireDate = hireDate;
+        this.head = head;
+        this.education = education;
+        this.card = card;
+        this.politic = politic;
+        this.school = school;
+        this.marriage = marriage;
+        this.phone = phone;
+        this.email = email;
+        this.registratin = registratin;
+        this.position = position;
+        this.isDeparture = isDeparture;
+        this.dep = dep;
+    }
 
     public Integer getEmpId() {
         return empId;
@@ -63,6 +110,14 @@ public class Emp {
 
     public void setSex(Integer sex) {
         this.sex = sex;
+    }
+
+    public Integer getDepId() {
+        return depId;
+    }
+
+    public void setDepId(Integer depId) {
+        this.depId = depId;
     }
 
     public Dep getDep() {
