@@ -22,4 +22,23 @@
         insert into message values (null,#{messageType},#{messageStatus},#{readStatus},#{messageContent},#{sendTime},#{empId})
     </insert>
 
+    <select id="findNoExamineById" resultMap="messageMap">
+        select * from message where empId=#{empId} and messageStatus=1
+    </select>
+
+    <select id="findExamineById" resultMap="messageMap">
+        select * from message where empId=#{empId} and messageStatus=2
+    </select>
+
+    <select id="findNoReadById" resultMap="messageMap">
+        select * from message where empId=#{empId} and readStatus=1
+    </select>
+
+    <select id="findReadById" resultMap="messageMap">
+        select * from message where empId=#{empId} and readStatus=2
+    </select>
+
+    <select id="findEmpByEmpName" resultType="emp">
+        select * from emp where empName=#{empName}
+    </select>
 </mapper>

@@ -9,12 +9,6 @@ import java.util.List;
  * 消息提醒
  */
 public interface MessageDao {
-    /**
-     * 根据员工id查询所有消息
-     * @param empId
-     * @return
-     */
-    public List<Message> findAllById(@Param("empId") int empId);
 
     /**
      * 添加新的消息表数据
@@ -25,4 +19,38 @@ public interface MessageDao {
 
 
 
+    /**
+     * 查询所有消息
+     * @param empId
+     * @return
+     */
+    public List<Message> findAllById(int empId);
+
+    /**
+     * 查询待审
+     * @param empId
+     * @return
+     */
+    public List<Message> findNoExamineById(int empId);
+
+    /**
+     * 查询已审
+     * @param empId
+     * @return
+     */
+    public List<Message> findExamineById(int empId);
+
+    /**
+     * 待阅
+     * @param empId
+     * @return
+     */
+    public List<Message> findNoReadById(int empId);
+
+    /**
+     * 已阅
+     * @param empId
+     * @return
+     */
+    public List<Message> findReadById(int empId);
 }
