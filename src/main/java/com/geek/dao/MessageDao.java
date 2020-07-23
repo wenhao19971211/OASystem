@@ -10,7 +10,6 @@ import java.util.List;
  */
 public interface MessageDao {
 
-
     /**
      * 添加新的消息表数据
      * @param message
@@ -20,4 +19,38 @@ public interface MessageDao {
 
 
 
+    /**
+     * 查询所有消息
+     * @param empId
+     * @return
+     */
+    public List<Message> findAllById(int empId);
+
+    /**
+     * 查询待审
+     * @param empId
+     * @return
+     */
+    public List<Message> findNoExamineById(int empId);
+
+    /**
+     * 查询已审
+     * @param empId
+     * @return
+     */
+    public List<Message> findExamineById(int empId);
+
+    /**
+     * 待阅
+     * @param empId
+     * @return
+     */
+    public List<Message> findNoReadById(int empId);
+
+    /**
+     * 已阅
+     * @param empId
+     * @return
+     */
+    public List<Message> findReadById(int empId);
 }

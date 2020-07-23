@@ -14,6 +14,7 @@
     <typeAliases>
         <typeAlias type="com.geek.pojo.Message" alias="message"></typeAlias>
         <typeAlias type="com.geek.pojo.Emp" alias="emp"></typeAlias>
+        <typeAlias type="com.geek.pojo.Dep" alias="dep"></typeAlias>
     </typeAliases>
     <!--配置dao文件-->
     <mappers>
@@ -22,8 +23,5 @@
         <mapper resource="mapper/mapper-tasksend.xml"></mapper>
         <mapper resource="mapper/mapper-dominant.xml"></mapper>
         <mapper resource="mapper/mapper-dayoff.xml"></mapper>
-        <mapper resource="mapper/mapper-leave.xml"></mapper>
-
-
     </mappers>
 </configuration>

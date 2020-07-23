@@ -73,6 +73,7 @@ public class TaskSendHandler {
     public String finishTask(Integer taskReceiveId)
     {
         String flag = "success";
+        //任务状态：1、进行中；2、已完成；
         boolean b1 = taskSendService.updateStatusByTaskReceiveId(taskReceiveId, 2);
         if (!b1)
         {

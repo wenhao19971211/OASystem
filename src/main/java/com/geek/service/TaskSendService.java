@@ -117,7 +117,7 @@ public class TaskSendService {
         int count2 = 1;
         if (flag)
         {
-            count2 = taskSendDao.updateStatusByTaskSendId(taskReceiveId, status);
+            count2 = taskSendDao.updateStatusByTaskSendId(taskSend.getTaskSendId(), status);
         }
 
         return count1>0&&count2>0;

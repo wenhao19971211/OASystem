@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="http://localhost:8080/ssm_framework_war_exploded/">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery.js"></script>
+    <style>
+        #btn{
+            width: 200px;
+            height: 500px;
+            float: left;
+        }
+        #message{
+            width: 500px;
+            height: 500px;
+            border: 1px solid #ddd;
+            float: left;
+        }
+        .clear:after{
+            clear: both;
+            content: '';
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div class="clear">
+    <div id="btn">
+        <input type="button" value="全部" id="all"><br>
+        <input type="button" value="待审" id="noExamine"><br>
+        <input type="button" value="已审" id="examine"><br>
+        <input type="button" value="待阅" id="noRead"><br>
+        <input type="button" value="已阅" id="read"><br>
+    </div>
+    <div id="messageContent"></div>
+</div>
+</body>
+</html>
+<script>
+    /**
+     * 全部
+     */
+    $("#all").click(function () {
+        $.ajax({
+            url:"findAll",
+            type:"get",
+            data:{"empId":1},
+            dataType:"json",
+            success:function (data) {
+                $("#messageContent").html("");
+                for (var i = 0; i < data.list.length; i++){
+                    var type = "";
+                    if (data.list[i].messageType == 1){
+                        type = "任务";
+                    }
+                    else if (data.list[i].messageType == 2){
+                        type = "请假";
+                    }
+                    else if (data.list[i].messageType == 3){
+                        type = "报销";
+                    }
+                    else if (data.list[i].messageType == 4){
+                        type = "补录";
+                    }
+                    else{
+                        type = "加班";
+                    }
+                    var readStatus = "";
+                    if (data.list[i].readStatus ==1){
+                        readStatus = "待阅";
+                    }
+                    else{
+                        readStatus = "已阅";
+                    }
+                    var message = "<input type='text' value='"+type+"'> " +
+                        "<input type='text' value='"+data.list[i].messageContent+"'>" +
+                        " <input type='text' value='"+readStatus+"'><br>";
+                    $("#messageContent").append(message);
+                }
+
+            }
+        })
+    })
+    /**
+     * 待审
+     */
+    $("#noExamine").click(function () {
+        $("#messageContent").html("");
+        $.ajax({
+            url:"findNoExamine",
+            data:{"empId":1},
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+                for (var i = 0; i < data.list.length; i++){
+                    var type = "";
+                    if (data.list[i].messageType == 1){
+                        type = "任务";
+                    }
+                    else if (data.list[i].messageType == 2){
+                        type = "请假";
+                    }
+                    else if (data.list[i].messageType == 3){
+                        type = "报销";
+                    }
+                    else if (data.list[i].messageType == 4){
+                        type = "补录";
+                    }
+                    else{
+                        type = "加班";
+                    }
+                    var readStatus = "";
+                    if (data.list[i].readStatus ==1){
+                        readStatus = "待阅";
+                    }
+                    else{
+                        readStatus = "已阅";
+                    }
+                    var message = "<input type='text' value='"+type+"'> " +
+                        "<input type='text' value='"+data.list[i].messageContent+"'>" +
+                        " <input type='text' value='"+readStatus+"'><br>";
+                    $("#messageContent").append(message);
+                }
+            }
+        })
+    })
+
+    /**
+     * 已审
+     */
+    $("#examine").click(function () {
+        $("#messageContent").html("");
+        $.ajax({
+            url:"examine",
+            data:{"empId":1},
+            dataType:"json",
+            success:function (data) {
+                for (var i = 0; i < data.list.length; i++){
+                    var type = "";
+                    if (data.list[i].messageType == 1){
+                        type = "任务";
+                    }
+                    else if (data.list[i].messageType == 2){
+                        type = "请假";
+                    }
+                    else if (data.list[i].messageType == 3){
+                        type = "报销";
+                    }
+                    else if (data.list[i].messageType == 4){
+                        type = "补录";
+                    }
+                    else{
+                        type = "加班";
+                    }
+                    var readStatus = "";
+                    if (data.list[i].readStatus ==1){
+                        readStatus = "待阅";
+                    }
+                    else{
+                        readStatus = "已阅";
+                    }
+                    var message = "<input type='text' value='"+type+"'> " +
+                        "<input type='text' value='"+data.list[i].messageContent+"'>" +
+                        " <input type='text' value='"+readStatus+"'><br>";
+                    $("#messageContent").append(message);
+                }
+            }
+        })
+    })
+
+    /**
+     * 待阅
+     */
+    $("#noRead").click(function () {
+        $("#messageContent").html("");
+        $.ajax({
+            url:"noRead",
+            data:{"empId":1},
+            dataType:"json",
+            success:function (data) {
+                for (var i = 0; i < data.list.length; i++){
+                    var type = "";
+                    if (data.list[i].messageType == 1){
+                        type = "任务";
+                    }
+                    else if (data.list[i].messageType == 2){
+                        type = "请假";
+                    }
+                    else if (data.list[i].messageType == 3){
+                        type = "报销";
+                    }
+                    else if (data.list[i].messageType == 4){
+                        type = "补录";
+                    }
+                    else{
+                        type = "加班";
+                    }
+                    var readStatus = "";
+                    if (data.list[i].readStatus ==1){
+                        readStatus = "待阅";
+                    }
+                    var message = "<input type='text' value='"+type+"'> " +
+                        "<input type='text' value='"+data.list[i].messageContent+"'>" +
+                        " <input type='text' value='"+readStatus+"'><br>";
+                    $("#messageContent").append(message);
+                }
+            }
+        })
+    })
+
+    /**
+     * 已阅
+     */
+    $("#read").click(function () {
+        $("#messageContent").html("");
+        $.ajax({
+            url:"read",
+            data:{"empId":1},
+            dataType:"json",
+            success:function (data) {
+                for (var i = 0; i < data.list.length; i++){
+                    var type = "";
+                    if (data.list[i].messageType == 1){
+                        type = "任务";
+                    }
+                    else if (data.list[i].messageType == 2){
+                        type = "请假";
+                    }
+                    else if (data.list[i].messageType == 3){
+                        type = "报销";
+                    }
+                    else if (data.list[i].messageType == 4){
+                        type = "补录";
+                    }
+                    else{
+                        type = "加班";
+                    }
+                    var readStatus = "";
+                    if (data.list[i].readStatus ==2){
+                        readStatus = "已阅";
+                    }
+                    var message = "<input type='text' value='"+type+"'> " +
+                        "<input type='text' value='"+data.list[i].messageContent+"'>" +
+                        " <input type='text' value='"+readStatus+"'><br>";
+                    $("#messageContent").append(message);
+                }
+            }
+        })
+    })
+
+</script>

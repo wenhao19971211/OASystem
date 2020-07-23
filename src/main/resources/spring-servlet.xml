@@ -43,5 +43,5 @@
 	需要通过以下配置对静态资源放行-->
 	<mvc:resources mapping="js/**/" location="js/"></mvc:resources>
 	<mvc:resources mapping="page/**/" location="page/"></mvc:resources>
-
+	<mvc:resources mapping="img/**/" location="image/"></mvc:resources>
 </beans>
