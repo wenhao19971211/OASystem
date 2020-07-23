@@ -3,11 +3,11 @@
         PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         "http://ibatis.apache.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.geek.dao.YearLeaveDao">
-    <!--1.调休申请-->
+    <!--1.年假申请-->
   <insert id="addYearLeave" >
        insert into yearleave values(null,#{id},#{cause},now(),#{start},#{end},#{auditorId},#{checkTime},#{state})
   </insert>
-    <!--2.查看所有的-->
+    <!--2.查看请假 只写dep代表经理查询审批emp写0 反之-->
     <resultMap id="yearLeaveMap" type="com.geek.pojo.YearLeave">
         <id property="yearLeaveId" column="yearLeaveId"></id>
         <result property="yearLeaveCause" column="yearLeaveCause"></result>
@@ -22,7 +22,13 @@
         </association>
     </resultMap>
     <select id="findAllYearLeave" resultMap="yearLeaveMap">
-        select * from  yearleave inner join emp on  yearleave.applyEmpId=emp.empId
+        select * from  yearleave inner join emp on  yearleave.applyEmpId=emp.empId where 1=1
+        <if test="depId != 0">
+            and emp.depId=#{depId}
+        </if>
+        <if test="empId != 0">
+            and yearleave.applyEmpId=#{empId}
+        </if>
     </select>
     <!--3.修改审核的时间-->
     <update id="updateCheckTimeByYearLeaveId">

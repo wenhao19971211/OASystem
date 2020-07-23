@@ -7,7 +7,7 @@
     <insert id="addLeave" >
         insert into `leave` values(null,#{id},#{cause},now(),#{start},#{end},#{auditorId},#{checkTime},#{state})
     </insert>
-    <!--2.查看所有的-->
+    <!--2.查看请假 只写dep代表经理查询审批emp写0 反之-->
     <resultMap id="leaveMap" type="com.geek.pojo.Leave">
         <id property="leaveId" column="leaveId"></id>
         <result property="leaveCause" column="leaveCause"></result>
@@ -22,7 +22,13 @@
         </association>
     </resultMap>
     <select id="findAllLeave" resultMap="leaveMap">
-        select * from `leave` inner join emp on `leave`.applyEmpId=emp.empId
+        select * from `leave` inner join emp on `leave`.applyEmpId=emp.empId where 1=1
+        <if test="depId != 0">
+            and emp.depId=#{depId}
+        </if>
+        <if test="empId != 0">
+            and `leave`.applyEmpId=#{empId}
+        </if>
     </select>
 
     <!--3.修改审核的时间-->

@@ -29,10 +29,10 @@ public interface LeaveDao {
                           @Param("checkTime")Date checkTime,
                           @Param("state")int checkStatus);
     /**
-     * 查看所有的事假申请
+     * 查看请假 只写dep代表经理查询审批,emp写0 员工反之
      * @return
      */
-    public List<Leave> findAllLeave();
+    public List<Leave> findAllLeave(@Param("depId")int depId,@Param("empId")int empId);
 
 
     /**
