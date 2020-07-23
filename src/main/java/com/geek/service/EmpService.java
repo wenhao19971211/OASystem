@@ -28,4 +28,12 @@ public class EmpService {
     public void updateInformation(int empId,String head,String phone,String email){
         empDao.updateEmpById(empId,head,phone,email);
     }
+
+    /**
+     * 根据部门id查询部门经理
+     * @return
+     */
+    public Emp findManagerBydepId(int depId){
+        return empDao.findManagerBydepId(depId);
+    }
 }

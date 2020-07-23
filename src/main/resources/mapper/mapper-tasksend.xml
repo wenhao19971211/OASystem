@@ -8,8 +8,32 @@
         insert into tasksend values (null,#{empId},#{startTime},#{title},#{content},#{finishTime},#{status},#{today})
     </insert>
 
+    <update id="updateStatusByTaskSendId">
+        update taskSend set status = #{status} where taskSendId = #{taskSendId}
+    </update>
+
     <select id="findTaskSenndByEmpIdAndToday" resultType="com.geek.pojo.TaskSend">
         select * from taskSend where empId = #{empId} and today = #{today}
+    </select>
+
+
+    <select id="findTaskSendByTaskSendId" resultType="com.geek.pojo.TaskSend">
+        select * from taskSend where taskSendId = #{taskSendId}
+    </select>
+
+    <select id="findTaskSendByEmpId" resultType="com.geek.pojo.TaskSend">
+        select * from taskSend where empId = #{empId} order by today
+        <if test="pageSize != null and index != null">
+            limit #{index},#{pageSize}
+        </if>
+    </select>
+
+    <select id="findTaskSendByTitleAndReEmpIdAndSeEmpId" resultType="com.geek.pojo.TaskSend">
+        select * from taskSend where title like #{title} and empId = #{empId} or  title like #{title} and taskSendId in (select taskSendId from taskReceive where empId = #{empId})
+        order by today
+        <if test="pageSize != null and index != null">
+            limit #{index},#{pageSize}
+        </if>
     </select>
 
 
