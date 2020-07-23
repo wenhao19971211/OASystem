@@ -98,4 +98,15 @@ public class TaskReceive {
     public void setEmp(Emp emp) {
         this.emp = emp;
     }
+
+    @Override
+    public String toString() {
+        return "TaskReceive{" +
+                "taskReceiveId=" + taskReceiveId +
+                ", empId=" + empId +
+                ", taskSendId=" + taskSendId +
+                ", finishTime=" + finishTime +
+                ", status=" + status +
+                '}';
+    }
 }

@@ -1,6 +1,7 @@
 package com.geek.pojo;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 任务发起
@@ -15,6 +16,7 @@ public class TaskSend {
     private Date finishTime;
     private Integer status;
     private Emp emp;
+    private List<TaskReceive> taskReceives;
 
     public TaskSend() {
     }
@@ -40,6 +42,19 @@ public class TaskSend {
         this.finishTime = finishTime;
         this.status = status;
         this.emp = emp;
+    }
+
+    public TaskSend(Integer taskSendId, int empId, Date today, String title, String content, Date startTime, Date finishTime, Integer status, Emp emp, List<TaskReceive> taskReceives) {
+        this.taskSendId = taskSendId;
+        this.empId = empId;
+        this.today = today;
+        this.title = title;
+        this.content = content;
+        this.startTime = startTime;
+        this.finishTime = finishTime;
+        this.status = status;
+        this.emp = emp;
+        this.taskReceives = taskReceives;
     }
 
     public Integer getTaskSendId() {
@@ -112,6 +127,14 @@ public class TaskSend {
 
     public void setEmp(Emp emp) {
         this.emp = emp;
+    }
+
+    public List<TaskReceive> getTaskReceives() {
+        return taskReceives;
+    }
+
+    public void setTaskReceives(List<TaskReceive> taskReceives) {
+        this.taskReceives = taskReceives;
     }
 
     @Override

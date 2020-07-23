@@ -8,7 +8,23 @@
         insert into taskreceive values (null,#{empId},#{taskSendId},#{finishTime},#{status})
     </insert>
 
+    <select id="findTaskReceivesByStatusAndEmpId" resultType="com.geek.pojo.TaskReceive">
+        select * from TaskReceive where status = #{status} and empId = #{empId} order by finishTime
+        <if test="pageSize != null and index != null">
+            limit #{index},#{pageSize}
+        </if>
+    </select>
 
+    <select id="findTaskReceivesByTaskSendId" resultType="com.geek.pojo.TaskReceive">
+        select * from taskReceive where tasksendid = #{taskSendId}
+    </select>
 
+    <update id="updateStatusByTaskReceiveId" >
+        update taskReceive set status = #{status} where taskReceiveId = #{taskReceiveId}
+    </update>
+
+    <select id="findTaskReceiveByTaskReceiveId" resultType="com.geek.pojo.TaskReceive">
+        select * from taskReceive where taskReceiveId = #{taskReceiveId}
+    </select>
 
 </mapper>
