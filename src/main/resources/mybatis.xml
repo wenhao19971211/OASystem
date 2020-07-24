@@ -24,5 +24,7 @@
         <mapper resource="mapper/mapper-dominant.xml"></mapper>
         <mapper resource="mapper/mapper-dayoff.xml"></mapper>
         <mapper resource="mapper/mapper-emp.xml"></mapper>
+        <mapper resource="mapper/mapper-leave.xml"></mapper>
+        <mapper resource="mapper/mapper-yearLeave.xml"></mapper>
     </mappers>
 </configuration>

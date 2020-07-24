@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="http://localhost:8080/OASystem_war_exploded/">
+    <script src="js/jquery.js"></script>
+    <script src="js/common.js"></script>
+    <meta charset="UTF-8">
+    <title>请假审核</title>
+</head>
+<body>
+        <div>
+            <table id="tab1" border="1">
+                <thead>
+                <td>序号</td>
+                <td>员工姓名</td>
+                <td>假期类型</td>
+                <td>请假原因</td>
+                <td>申请时间</td>
+                <td>起始时间</td>
+                <td>截止时间</td>
+                <td>审核状态</td>
+                <td></td>
+                </thead>
+            </table>
+        </div>
+</body>
+<script>
+    $(function () {
+
+        var param=parseUrl(location.href);
+        //param["depId"]
+        $.ajax({
+            url:"leaveAudit/"+50,
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+                console.log(data)
+                //请假消息的长度
+                var length=data.list.length;
+                for (var i=0;i<length;i++){
+                    var leaveList="";
+                    //   data.list[i].intType,data.list[i].applyId,3
+                    leaveList+="<tr><td>"+(i+1)+"</td><td>"+data.list[i].empName+"</td><td>"+data.list[i].type+"</td><td>"+data.list[i].cause.substr(0,6)+"</td><td>"+parseDate(data.list[i].sendTime)+"</td><td>"+ parseDate(data.list[i].startTime)+"</td><td>"+parseDate(data.list[i].endTime)+"</td><td>"+data.list[i].checkStatus+"</td><td>" +
+                        "<input type='button' value='同意'  id='but1"+i+"' type='"+data.list[i].intType+"' applyId='"+data.list[i].applyId+"' opinion='2'>" +
+                        "<input type='button' value='不同意' id='but2"+i+"' type='"+data.list[i].intType+"' applyId='"+data.list[i].applyId+"' opinion='3'>" +
+                        "</td></tr>";
+                    $("#tab1").append(leaveList);
+
+                    $("#but1"+i).click(function () {
+                        var Type=$(this).attr("type");
+                        var applyId=$(this).attr("applyId");
+                        var opinion=$(this).attr("opinion");
+                        //修改请假相关的
+                        $.ajax({
+                            url:"updateLeave?type="+Type+"&applyId="+applyId+"&opinion="+opinion,
+                            type:"put",
+                            dataType:"json",
+                            success:function (data) {
+                                //整合需要修改
+                                location.href("leaveAudit.html");
+                            }
+                        })
+                    })
+
+                }
+            }
+        })
+
+    })
+
+</script>
+</html>

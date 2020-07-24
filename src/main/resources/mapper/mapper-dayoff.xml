@@ -29,6 +29,10 @@
         <if test="empId != 0">
            and dayoff.applyEmpId=#{empId}
         </if>
+        <if test="state != 0">
+            and dayoff.checkStatus=#{state}
+        </if>
+        order by sendTime
     </select>
     <!--3.修改审核的时间-->
     <update id="updateCheckTimeByDayOffId">

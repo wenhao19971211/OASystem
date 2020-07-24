@@ -29,6 +29,10 @@
         <if test="empId != 0">
             and `leave`.applyEmpId=#{empId}
         </if>
+        <if test="state != 0">
+            and `leave`.checkStatus=#{state}
+        </if>
+        order by sendTime
     </select>
 
     <!--3.修改审核的时间-->
