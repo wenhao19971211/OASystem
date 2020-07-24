@@ -66,8 +66,7 @@
             type:"put",
             dataType:"json",
             success:function (data) {
-                console.log(data.code);
-                if (data == 1){
+                if (data.code == 1){
                     alert("保存成功");
                     location.href = "page/index.html";
                 }

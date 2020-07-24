@@ -42,4 +42,12 @@
     <select id="findManagerBydepId" resultMap="empMap">
         select * from emp where position='经理' and depId=#{depId}
     </select>
+
+    <select id="findAll" resultMap="empMap">
+        select * from emp inner join dep on emp.depId=dep.depId limit #{start},#{end}
+    </select>
+
+    <select id="findCount" resultType="java.lang.Integer">
+        select count(*) from emp
+    </select>
 </mapper>

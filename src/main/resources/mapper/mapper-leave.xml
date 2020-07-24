@@ -3,5 +3,40 @@
         PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         "http://ibatis.apache.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.geek.dao.LeaveDao">
+    <!--1.事假申请-->
+    <insert id="addLeave" >
+        insert into `leave` values(null,#{id},#{cause},now(),#{start},#{end},#{auditorId},#{checkTime},#{state})
+    </insert>
+    <!--2.查看请假 只写dep代表经理查询审批emp写0 反之-->
+    <resultMap id="leaveMap" type="com.geek.pojo.Leave">
+        <id property="leaveId" column="leaveId"></id>
+        <result property="leaveCause" column="leaveCause"></result>
+        <result property="sendTime" column="sendTime"></result>
+        <result property="startTime" column="startTime"></result>
+        <result property="endTime" column="endTime"></result>
+        <result property="checkTime" column="checkTime"></result>
+        <result property="checkStatus" column="checkStatus"></result>
+        <association property="emp" column="com.geek.pojo.Emp">
+            <id property="empId" column="empId"></id>
+            <result property="empName" column="empName"></result>
+        </association>
+    </resultMap>
+    <select id="findAllLeave" resultMap="leaveMap">
+        select * from `leave` inner join emp on `leave`.applyEmpId=emp.empId where 1=1
+        <if test="depId != 0">
+            and emp.depId=#{depId}
+        </if>
+        <if test="empId != 0">
+            and `leave`.applyEmpId=#{empId}
+        </if>
+    </select>
 
+    <!--3.修改审核的时间-->
+    <update id="updateCheckTimeByleaveId">
+        update `leave` set checkTime=#{date} where leaveId=#{id}
+    </update>
+    <!--4.修改审核的状态-->
+    <update id="updateCheckStatusByleaveId">
+        update `leave` set checkStatus=#{state} where leaveId=#{id}
+    </update>
 </mapper>

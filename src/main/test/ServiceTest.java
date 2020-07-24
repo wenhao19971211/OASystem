@@ -38,7 +38,12 @@ public class ServiceTest {
 //        Emp emp = empService.findEmpById(1);
 //        System.out.println(emp.getEmpName());
 
-        Emp emp = empService.findManagerBydepId(60);
-        System.out.println(emp.getEmpName());
+//        Emp emp = empService.findManagerBydepId(60);
+//        System.out.println(emp.getEmpName());
+//        List<Emp> list = empService.findAll(1);
+//        for (Emp emp : list) {
+//            System.out.println(emp.getEmpName()+"\t"+emp.getDep().getDepName());
+//        }
+
     }
 }

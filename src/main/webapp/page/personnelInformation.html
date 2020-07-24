@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="http://localhost:8080/ssm_framework_war_exploded/">
+    <meta charset="UTF-8">
+    <title>人事信息</title>
+    <script src="js/jquery.js"></script>
+</head>
+<body>
+
+<table border="1" id="content" style="border-collapse: collapse">
+    <head>
+        <td>姓名</td>
+        <td>部门</td>
+        <td>工号</td>
+        <td>岗位</td>
+        <td>性别</td>
+    </head>
+</table>
+<div id="page"><span class="page">1</span><span class="page">2</span></div>
+</body>
+</html>
+<script>
+    $.ajax({
+        url:"personnelInformation",
+        data:{"page":1},
+        dataType:"json",
+        type:"get",
+        success:function (data) {
+            for (var i = 0; i < data.list.length; i++){
+                var sex = "";
+                if (data.list[i].sex==1){
+                    sex = "男";
+                }
+                else{
+                    sex = "女";
+                }
+                var information = "<tr onclick='empInfo("+data.list[i].empId+")'>" +
+                    "<td>"+data.list[i].empName+"</td>" +
+                    "<td>"+data.list[i].dep.depName+"</td>" +
+                    "<td>"+data.list[i].empId+"</td>" +
+                    "<td>"+data.list[i].position+"</td>" +
+                    "<td>"+sex+"</td></tr>";
+                $("#content").append(information);
+            }
+        }
+    })
+    $(".page").click(function () {
+        $("#content").html("");
+        $("#content").append("<thead>" +
+            "<td>姓名</td>" +
+            "<td>部门</td>" +
+            "<td>工号</td>" +
+            "<td>岗位</td>" +
+            "<td>性别</td></thead>");
+        var page = $(this).html();
+        console.log(page);
+        $.ajax({
+            url:"personnelInformation",
+            data:{"page":page},
+            dataType:"json",
+            type:"get",
+            success:function (data) {
+                for (var i = 0; i < data.list.length; i++){
+                    var sex = "";
+                    if (data.list[i].sex==1){
+                        sex = "男";
+                    }
+                    else{
+                        sex = "女";
+                    }
+                    var information = "<tr onclick='empInfo("+data.list[i].empId+")'>" +
+                        "<td>"+data.list[i].empName+"</td>" +
+                        "<td>"+data.list[i].dep.depName+"</td>" +
+                        "<td>"+data.list[i].empId+"</td>" +
+                        "<td>"+data.list[i].position+"</td>" +
+                        "<td>"+sex+"</td></tr>";
+                    $("#content").append(information);
+                }
+            }
+        })
+    });
+
+    /**
+     * 详细信息
+     * @param empId
+     */
+    function empInfo(empId) {
+       location.href = "empInfo?empId="+empId;
+    }
+</script>
