@@ -8,7 +8,6 @@
     <title>查看请假</title>
 </head>
 <body>
-
     <div>
         <table id="tab1" border="1">
             <thead>
@@ -36,11 +35,18 @@
                     var length=data.list.length;
                     for (var i=0;i<length;i++){
                         var leaveList="";
-                        leaveList+="<tr><td>"+(i+1)+"</td><td>"+data.list[i].type+"</td><td>"+data.list[i].cause.substr(0,6)+"</td><td>"+parseDate(data.list[i].sendTime)+"</td><td>"+ parseDate(data.list[i].startTime)+"</td><td>"+parseDate(data.list[i].endTime)+"</td><td>"+data.list[i].checkStatus+"</td></tr>";
+                        leaveList+="<tr>" +
+                            "<td>"+(i+1)+"</td>" +
+                            "<td>"+data.list[i].type+"</td>" +
+                            "<td>"+data.list[i].cause.substr(0,6)+"</td>" +
+                            "<td>"+parseDate(data.list[i].sendTime)+"</td>" +
+                            "<td>"+ parseDate(data.list[i].startTime)+"</td>" +
+                            "<td>"+parseDate(data.list[i].endTime)+"</td>" +
+                            "<td>"+data.list[i].checkStatus+"</td>" +
+                            "</tr>";
                         $("#tab1").append(leaveList);
                     }
                 }
             })
-
     </script>
-</html>
+

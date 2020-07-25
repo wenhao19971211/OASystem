@@ -32,8 +32,14 @@
         <if test="state != 0">
             and dayoff.checkStatus=#{state}
         </if>
+        <if test="flag != 0">
+            and dayoff.checkStatus !=#{flag}
+        </if>
         order by sendTime
     </select>
+
+
+
     <!--3.修改审核的时间-->
     <update id="updateCheckTimeByDayOffId">
         update dayoff set checkTime=#{date} where dayOffId=#{id}
@@ -42,4 +48,6 @@
     <update id="updatecheckStatusByDayOffId">
         update dayoff set checkStatus=#{state} where dayOffId=#{id}
     </update>
+
+
 </mapper>

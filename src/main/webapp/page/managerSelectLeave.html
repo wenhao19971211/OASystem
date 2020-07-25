@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="http://localhost:8080/OASystem_war_exploded/">
+    <script src="js/jquery.js"></script>
+    <script src="js/common.js"></script>
+    <meta charset="UTF-8">
+    <title>流程管理中查看已批阅的请假申请</title>
+</head>
+<body>
+        <div>
+            <table id="tab1" border="1">
+                <thead>
+                <td>序号</td>
+                <td>员工姓名</td>
+                <td>假期类型</td>
+                <td>请假原因</td>
+                <td>申请时间</td>
+                <td>起始时间</td>
+                <td>截止时间</td>
+                <td>请假天数(天)</td>
+                <td>审核状态</td>
+                <td>审核时间</td>
+                </thead>
+            </table>
+        </div>
+</body>
+<script>
+    $(function () {
+        var param=parseUrl(location.href);
+        //param["depId"]
+        $.ajax({
+            url:"managerLeave/"+50,
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+                console.log(data)
+                //请假消息的长度
+                var length=data.list.length;
+                for (var i=0;i<length;i++){
+                    var leaveList="";
+                    //   data.list[i].intType,data.list[i].applyId,3
+                    leaveList+="<tr><td>"+(i+1)+"</td><td>"+data.list[i].emp.empName+"</td>" +
+                        "<td>"+data.list[i].type+"</td>" +
+                        "<td>"+data.list[i].cause.substr(0,6)+"</td>" +
+                        "<td>"+parseDate(data.list[i].sendTime)+"</td>" +
+                        "<td>"+ parseDate(data.list[i].startTime)+"</td>" +
+                        "<td>"+parseDate(data.list[i].endTime)+"</td>" +
+                        "<td>"+data.list[i].days+"</td>" +
+                        "<td>"+data.list[i].checkStatus+"</td>" +
+                        "<td>"+parseDate(data.list[i].checkTime)+"</td></tr>";
+
+                    $("#tab1").append(leaveList);
+
+
+                }
+            }
+        })
+
+    })
+</script>
+</html>

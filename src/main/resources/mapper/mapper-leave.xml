@@ -32,6 +32,9 @@
         <if test="state != 0">
             and `leave`.checkStatus=#{state}
         </if>
+        <if test="flag != 0">
+            and `leave`.checkStatus !=#{flag}
+        </if>
         order by sendTime
     </select>
 
