@@ -32,4 +32,13 @@
     <update id="updatecheckStatusByDayOffId">
         update dayoff set checkStatus=#{state} where dayOffId=#{id}
     </update>
+
+    <select id="findDayOffsByEmpIdAndStartAndEnd" resultType="com.geek.pojo.DayOff">
+        select * from dayoff
+        where applyempId = #{empId}
+        AND checkstatus = 2
+        and (endTime BETWEEN #{start} AND #{end}
+        OR startTime BETWEEN #{start} AND #{end})
+    </select>
+
 </mapper>

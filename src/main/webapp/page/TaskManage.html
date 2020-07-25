@@ -69,9 +69,9 @@
         dataType:"json",
         success:function (result) {
             console.log(result)
-            for(var i in result)
+            for(var i in result.taskSends)
             {
-                console.log("content:"+result[i].taskSend.content)
+                console.log("content:"+result.taskSends[i].content);
             }
 
 
