@@ -15,7 +15,7 @@ public class Leave_bo {
     //类型
     private String type;
     //员工
-    private String empName;
+    private Emp emp;
     //原因
     private String cause;
     //申请时间
@@ -24,8 +24,28 @@ public class Leave_bo {
     private Date startTime;
     //截止时间
     private Date endTime;
+    //请假天数
+    private long days;
+    //审核时间
+    private Date checkTime;
     //审核状态
     private String checkStatus;
+
+    public Date getCheckTime() {
+        return checkTime;
+    }
+
+    public void setCheckTime(Date checkTime) {
+        this.checkTime = checkTime;
+    }
+
+    public long getDays() {
+        return days;
+    }
+
+    public void setDays(long days) {
+        this.days = days;
+    }
 
     public int getIntType() {
         return intType;
@@ -51,12 +71,12 @@ public class Leave_bo {
         this.type = type;
     }
 
-    public String getEmpName() {
-        return empName;
+    public Emp getEmp() {
+        return emp;
     }
 
-    public void setEmpName(String empName) {
-        this.empName = empName;
+    public void setEmp(Emp emp) {
+        this.emp = emp;
     }
 
     public String getCause() {

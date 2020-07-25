@@ -72,7 +72,7 @@ public class HolidayHandler {
     public Result findLeaveList(@PathVariable("empId") int empId){
         System.out.println("进入了list");
         Result result=new Result();
-        List<Leave_bo>leaveList=leaveService.findLeaveList(0,empId,0);
+        List<Leave_bo>leaveList=leaveService.findLeaveList(0,empId,0,0);
         result.setList(leaveList);
         return result;
     }
@@ -85,11 +85,44 @@ public class HolidayHandler {
     @GetMapping("leaveAudit/{depId}")
     public Result findAllLeaveByStateAndDepId(@PathVariable("depId")int depId){
         Result result=new Result();
-        List<Leave_bo>list=leaveService.findLeaveList(depId,0,1);
+        List<Leave_bo>list=leaveService.findLeaveList(depId,0,1,0);
         result.setList(list);
         return result;
     }
 
+    /**
+     * 批准与否的请假
+     * @param type
+     * @param applyId
+     * @param opinion
+     * @param days
+     * @param empId
+     * @return
+     */
+    @PutMapping("updateLeave")
+    public Integer updateStateAndTime(int type,int applyId,int opinion,int days,int empId){
+            System.out.println("请假类型是"+type);
+            System.out.println("时间的编号是"+applyId);
+            System.out.println("同意还是不同意是"+opinion);
+            System.out.println("请假的天数是"+days);
+            System.out.println("请假的员工编号是"+empId);
+            leaveService.updateStateAndTime(type,applyId,opinion,days,empId);
+            System.out.println("执行完毕");
 
+        return 1;
+    }
+
+    /**
+     * 经理流程管理查询中查询已已批阅的请假请求
+     * @param depId
+     * @return
+     */
+    @GetMapping("managerLeave/{depId}")
+    public Result findAllLeaveByStatus(@PathVariable("depId")int depId){
+        Result result=new Result();
+        List<Leave_bo>leave_bos=leaveService.findLeaveList(depId,0,0,1);
+        result.setList(leave_bos);
+        return result;
+    }
 
 }
