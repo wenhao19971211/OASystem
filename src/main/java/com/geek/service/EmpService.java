@@ -1,10 +1,14 @@
 package com.geek.service;
 
+import com.geek.bo.PersonnelInformation_bo;
 import com.geek.dao.EmpDao;
 import com.geek.pojo.Emp;
+import com.geek.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class EmpService {
@@ -36,4 +40,23 @@ public class EmpService {
     public Emp findManagerBydepId(int depId){
         return empDao.findManagerBydepId(depId);
     }
+
+    /**
+     * 查询人事信息
+     * @param start
+     * @param end
+     * @return
+     */
+    public List<Emp> findAll(int start,int end){
+       return empDao.findAll(start,end);
+    }
+
+    /**
+     * 员工总数
+     * @return
+     */
+    public int findCount(){
+        return empDao.findCount();
+    }
+
 }

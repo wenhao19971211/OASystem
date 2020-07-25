@@ -7,7 +7,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="OASystem" />
-        <module name="ssm_framework" />
       </profile>
     </annotationProcessing>
   </component>

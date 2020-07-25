@@ -1,5 +1,6 @@
 package com.geek.handler;
 
+import com.alibaba.fastjson.JSONObject;
 import com.geek.bo.Leave_bo;
 import com.geek.dto.Result;
 import com.geek.pojo.DayOff;
@@ -15,7 +16,9 @@ import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 与假期有关
@@ -72,7 +75,9 @@ public class HolidayHandler {
     public Result findLeaveList(@PathVariable("empId") int empId){
         System.out.println("进入了list");
         Result result=new Result();
+
         List<Leave_bo>leaveList=leaveService.findLeaveList(0,empId,0,0);
+        int count=leaveList.size();
         result.setList(leaveList);
         return result;
     }
@@ -86,6 +91,7 @@ public class HolidayHandler {
     public Result findAllLeaveByStateAndDepId(@PathVariable("depId")int depId){
         Result result=new Result();
         List<Leave_bo>list=leaveService.findLeaveList(depId,0,1,0);
+
         result.setList(list);
         return result;
     }

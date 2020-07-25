@@ -3,6 +3,8 @@ package com.geek.dao;
 import com.geek.pojo.Emp;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface EmpDao {
     /**
      * 根据用户名查询
@@ -33,4 +35,18 @@ public interface EmpDao {
      * @return
      */
     public Emp findManagerBydepId(int depId);
+
+    /**
+     * 查询所有信息
+     * @param start
+     * @param end
+     * @return
+     */
+    public List<Emp> findAll(@Param("start")int start,@Param("end")int end);
+
+    /**
+     * 查询总数
+     * @return
+     */
+    public int findCount();
 }
