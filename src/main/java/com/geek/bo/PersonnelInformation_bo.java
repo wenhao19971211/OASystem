@@ -5,26 +5,53 @@ import com.geek.pojo.Emp;
 import java.util.List;
 
 /**
- * 人事信息（分页）
+ * 人事信息
  */
 public class PersonnelInformation_bo {
 
-    private List<Emp> list;
-    private Integer pageCount;
+    private Integer empId;
+    private String empName;
+    private String depName;
+    private String position;
+    private String sex;
 
-    public List<Emp> getList() {
-        return list;
+    public Integer getEmpId() {
+        return empId;
     }
 
-    public void setList(List<Emp> list) {
-        this.list = list;
+    public void setEmpId(Integer empId) {
+        this.empId = empId;
     }
 
-    public Integer getPageCount() {
-        return pageCount;
+    public String getEmpName() {
+        return empName;
     }
 
-    public void setPageCount(Integer pageCount) {
-        this.pageCount = pageCount;
+    public void setEmpName(String empName) {
+        this.empName = empName;
+    }
+
+    public String getDepName() {
+        return depName;
+    }
+
+    public void setDepName(String depName) {
+        this.depName = depName;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 }

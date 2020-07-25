@@ -32,7 +32,7 @@ public interface DayOffDao {
      * 查看请假 只写dep代表经理查询审批,emp写0 员工反之
      * @return
      */
-    public List<DayOff> findAllDayOffBydepIdAndempId(@Param("depId")int depId,@Param("empId")int empId);
+    public List<DayOff> findAllDayOffBydepIdAndempId(@Param("depId")int depId,@Param("empId")int empId,@Param("state") int state );
 
     /**
      * 修改审核时间

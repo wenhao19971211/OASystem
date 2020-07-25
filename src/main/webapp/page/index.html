@@ -15,19 +15,14 @@
 			margin-top: -12px;
 			height: 1000px;
 		}
-		.imgss{
-			    /*width:100%;
-    			height:100%;
-    			background-size:100% 100%;
-    			overflow: hidden;*/
-		}
 		a{
 			cursor:pointer;
 		}
 	</style>
-	
-	
+
 	<body style="background-color:#393D49;" >
+	<input type="hidden" id="empId">
+	<input type="hidden" id="depId">
    <div class="layui-row" >
 	<div class="layui-tab layui-tab-brief " lay-filter="docDemoTabBrief">
 	  <ul class="layui-tab-title layui-col-xs12 layui-col-sm12 layui-col-md12" style="background-color: #393D49; color: #F3F3F3;">
@@ -160,4 +155,18 @@
                $("#d1").append("<iframe src='http://www.jd.com' frameborder='0' scrolling='no' width='1000px' height='1000px' ></iframe>");
            }
 	}
+
+	/**
+	 * 获取登录人信息
+	 */
+	$.ajax({
+		url:"empLogin",
+		dataType:"json",
+		type:"get",
+		success:function (data) {
+			$("#empId").val(data.object.empId);
+			$("#depId").val(data.object.dep.depId);
+		}
+
+	})
 	</script>

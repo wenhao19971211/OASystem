@@ -32,7 +32,7 @@ public interface LeaveDao {
      * 查看请假 只写dep代表经理查询审批,emp写0 员工反之
      * @return
      */
-    public List<Leave> findAllLeave(@Param("depId")int depId,@Param("empId")int empId);
+    public List<Leave> findAllLeave(@Param("depId")int depId,@Param("empId")int empId,@Param("state") int state);
 
 
     /**

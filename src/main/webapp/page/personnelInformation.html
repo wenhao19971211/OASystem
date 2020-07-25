@@ -1,91 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <base href="http://localhost:8080/ssm_framework_war_exploded/">
     <meta charset="UTF-8">
-    <title>人事信息</title>
+    <title></title>
+    <base href="http://localhost:8080/ssm_framework_war_exploded/">
+    <link rel="stylesheet" href="js/dist/css/layui.css">
+    <script src="js/dist/layui.js"></script>
     <script src="js/jquery.js"></script>
 </head>
 <body>
 
-<table border="1" id="content" style="border-collapse: collapse">
-    <head>
-        <td>姓名</td>
-        <td>部门</td>
-        <td>工号</td>
-        <td>岗位</td>
-        <td>性别</td>
-    </head>
-</table>
-<div id="page"><span class="page">1</span><span class="page">2</span></div>
+
+<table class="" id="content" lay-filter="test"></table>
 </body>
 </html>
 <script>
-    $.ajax({
-        url:"personnelInformation",
-        data:{"page":1},
-        dataType:"json",
-        type:"get",
-        success:function (data) {
-            for (var i = 0; i < data.list.length; i++){
-                var sex = "";
-                if (data.list[i].sex==1){
-                    sex = "男";
-                }
-                else{
-                    sex = "女";
-                }
-                var information = "<tr onclick='empInfo("+data.list[i].empId+")'>" +
-                    "<td>"+data.list[i].empName+"</td>" +
-                    "<td>"+data.list[i].dep.depName+"</td>" +
-                    "<td>"+data.list[i].empId+"</td>" +
-                    "<td>"+data.list[i].position+"</td>" +
-                    "<td>"+sex+"</td></tr>";
-                $("#content").append(information);
+    layui.use('table', function(){
+        var table = layui.table;
+        // console.log(data);
+        // data =$.parseJSON(data);
+        //第一个实例
+        table.render({
+            elem: '#content'
+            ,height: 500
+            ,url:'personnelInformation'
+            ,parseData:function(data){//res 即为原始返回的数据
+                data =$.parseJSON(data);
+                return data;
             }
-        }
-    })
-    $(".page").click(function () {
-        $("#content").html("");
-        $("#content").append("<thead>" +
-            "<td>姓名</td>" +
-            "<td>部门</td>" +
-            "<td>工号</td>" +
-            "<td>岗位</td>" +
-            "<td>性别</td></thead>");
-        var page = $(this).html();
-        console.log(page);
-        $.ajax({
-            url:"personnelInformation",
-            data:{"page":page},
-            dataType:"json",
-            type:"get",
-            success:function (data) {
-                for (var i = 0; i < data.list.length; i++){
-                    var sex = "";
-                    if (data.list[i].sex==1){
-                        sex = "男";
-                    }
-                    else{
-                        sex = "女";
-                    }
-                    var information = "<tr onclick='empInfo("+data.list[i].empId+")'>" +
-                        "<td>"+data.list[i].empName+"</td>" +
-                        "<td>"+data.list[i].dep.depName+"</td>" +
-                        "<td>"+data.list[i].empId+"</td>" +
-                        "<td>"+data.list[i].position+"</td>" +
-                        "<td>"+sex+"</td></tr>";
-                    $("#content").append(information);
-                }
+            ,page:
+                { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+                layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
+                ,curr: 1 //设定初始在第 5 页
+                ,groups: 5//只显示 1 个连续页码
+                ,limit:5
+                ,first: true //不显示首页
+                ,last: true //不显示尾页
             }
+            ,cols: [[ //表头
+                {field: 'empName', title: '姓名', width:80, fixed: 'left'}
+                ,{field: 'depName', title: '部门', width:80,}
+                ,{field: 'empId', title: '工号', width:80,sort:true}
+                ,{field: 'position', title: '岗位', width:80}
+                ,{field: 'sex', title: '性别', width: 177}
+            ]]
         })
-    });
-
+    })
     /**
-     * 详细信息
-     * @param empId
+     * 查询详细信息
      */
-    function empInfo(empId) {
-       location.href = "empInfo?empId="+empId;
-    }
+    $("#content tr:first-child").click(function () {
+    var empId = $("#content tr:eq(2)").html();
+    console.log(empId);
+    location.href = "empInfo?empId="+empId;
+})
+
 </script>

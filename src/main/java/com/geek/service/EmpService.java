@@ -42,23 +42,21 @@ public class EmpService {
     }
 
     /**
-     * 查询人事信息（分页）
-     * @param page
+     * 查询人事信息
+     * @param start
+     * @param end
      * @return
      */
-    public PersonnelInformation_bo findAll(int page){
-        PersonnelInformation_bo person = new PersonnelInformation_bo();
-        //数据总数
-        int count = empDao.findCount();
-        //总页数
-        int pageCount = (count+CommonUtil.getPageSize()-1)/CommonUtil.getPageSize();
-        int start =(page-1)*CommonUtil.getPageSize();
-        int end =(page*CommonUtil.getPageSize());
-        List<Emp> list = empDao.findAll(start,end);
-        //封装数据
-        person.setList(list);
-        person.setPageCount(pageCount);
-        return person;
+    public List<Emp> findAll(int start,int end){
+       return empDao.findAll(start,end);
+    }
+
+    /**
+     * 员工总数
+     * @return
+     */
+    public int findCount(){
+        return empDao.findCount();
     }
 
 }
