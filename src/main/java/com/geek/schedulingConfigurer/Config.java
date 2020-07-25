@@ -1,13 +1,19 @@
 package com.geek.schedulingConfigurer;
 
 
+import com.geek.service.SalaryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 @Component
 @EnableScheduling//可以在启动类上注解也可以在当前文件
 public class Config  {
+    @Autowired
+    private SalaryService salaryService;
 
     //每月10号01：02执行
     // 规则：
@@ -20,7 +26,17 @@ public class Config  {
     //年份（1970－2099
     @Scheduled(cron = "0 2 1 10 * ?")
     public void runfirst(){
-        System.out.println("********first job is ok******");
+
+        System.out.println("********定时计算薪资******");
+        boolean b = salaryService.updateLastMonthSalary(new Date());
+        if (b)
+        {
+            System.out.println("上个月薪资计算成功");
+        }
+        else
+        {
+            System.out.println("上个月薪资计算出错，请及时人工补救");
+        }
     }
 
 
