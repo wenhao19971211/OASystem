@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery.js"></script>
+</head>
+<body>
+<div class="left">
+    <div id="empInfo">基本信息</div>
+    <div id="contract">合同信息</div>
+    <div id="workOn">考勤记录</div>
+    <div id="prize">奖惩记录</div>
+</div>
+<div class="right">
+    <div id="info">
+        <p>基本信息</p>
+        <div id="empId">工号：</div>
+        <div id="empName">姓名：</div>
+        <div id="card">身份证号：</div>
+        <div id="sex">性别：</div>
+        <div id="marriage">婚姻状况</div>
+        <div id="politic">政治面貌</div>
+        <div id="registratin">户口所在地：</div>
+
+        <p>部门岗位</p>
+        <div>公司：极客营</div>
+        <div id="depName">所在部门：</div>
+        <div id="position">职位：</div>
+        <p>学历信息</p>
+        <div id="education">最高学历</div>
+        <div id="school">毕业学校</div>
+        <p>联络信息</p>
+        <div id="phone">电话：</div>
+        <div id="email">邮箱：</div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    var param = parseUrl(location.href);
+    var empId = param[empId];
+    $.ajax({
+        url:"empInfo",
+        data:{"empId":empId},
+        dataType:"json",
+        type:"get",
+        success:function (data) {
+            var sex = "";
+            if (data.objcet.sex==1){
+                sex="男";
+            }
+            else{
+                sex="女";
+            }
+            $("#empId").html(empId);
+            $("#empName").html(data.object.empName);
+            $("#card").html(data.object.card);
+            $("#sex").html(sex);
+            $("#marriage").html(data.object.marriage);
+            $("#politic").html(data.object.politic);
+            $("#registratin").html(data.object.registratin);
+            $("#depName").html(data.objcet.dep.depName);
+            $("#position").html(data.object.position);
+            $("#education").html(data.object.education);
+            $("#school").html(data.object.school);
+            $("#phone").html(data.object.phone);
+            $("#email").html(data.object.email);
+        }
+    })
+</script>
