@@ -31,5 +31,6 @@
         <mapper resource="mapper/mapper-yearleave.xml"></mapper>
         <mapper resource="mapper/mapper-salary.xml"></mapper>
         <mapper resource="mapper/mapper-salaryissue.xml"></mapper>
+
     </mappers>
 </configuration>

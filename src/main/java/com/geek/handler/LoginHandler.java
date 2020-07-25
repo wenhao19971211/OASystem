@@ -1,9 +1,13 @@
 package com.geek.handler;
 
+import com.geek.dto.Result;
 import com.geek.pojo.Emp;
 import com.geek.redis.RedisUtil;
 import com.geek.service.EmpService;
+import com.geek.util.CommonUtil;
 import com.geek.util.RandomValidateCode;
+import com.geek.util.SerizableUtil;
+import com.geek.util.SessionNameUtil;
 import org.apache.ibatis.annotations.ResultMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -55,8 +59,7 @@ public class LoginHandler {
         if (emp!=null){
             if (emp.getPassword().equals(password)){
                 if (session.getAttribute(RandomValidateCode.RANDOMCODEKEY).equals(verCode)){
-                    redisUtil.set("account",emp.getAccount());
-                    System.out.println("已存入");
+                    session.setAttribute(SessionNameUtil.Login_User,emp);
                     return "1";
                 }else {
                     return "4";
@@ -68,5 +71,14 @@ public class LoginHandler {
         }else {
             return "3";
         }
+    }
+    @GetMapping("empLogin")
+    @ResponseBody
+    public Result findLoginEmp(HttpSession session){
+        Emp emp = (Emp) session.getAttribute(SessionNameUtil.Login_User);
+        System.out.println(emp.getEmpName());
+        Result result = new Result();
+        result.setObject(emp);
+        return result;
     }
 }

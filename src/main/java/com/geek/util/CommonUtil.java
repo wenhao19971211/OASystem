@@ -46,8 +46,7 @@ public class CommonUtil {
     }
 
    /* LocalDateTime类型的字符串转为Date*/
-    public static Date getDate(String str)
-    {
+    public static Date getDate(String str) {
 
         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime localDateTime = LocalDateTime.parse(str.replaceAll("T", " ") + ":00", df);

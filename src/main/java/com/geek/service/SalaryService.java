@@ -97,6 +97,21 @@ public class SalaryService {
                     //本月入职的不计算薪资，直接下一个员工计算
                     continue;
                 }
+                //如果该员工在上个月离职
+                if (contract.getFailureTime().getTime()>start.getTime()&&contract.getFailureTime().getTime()<end.getTime())
+                {
+                    //考勤时间到合同失效时间截至
+                    end = contract.getFailureTime();
+
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTime(end);
+                    //获取实际应得的基本薪资
+                    baseSalary = standardSalary.getBaseSalary()*(calendar.get(Calendar.DATE)-0)/31;
+                    //获取实际应得的绩效工资
+                    perSalary = standardSalary.getPerSalary()*(calendar.get(Calendar.DATE)-0)/31;
+
+                }
+
                 //根据时间段查询该员工的打卡表
                 List<WorkOn> workOns = workOnDao.findWorkOnsByEmpIdAndMonth(standardSalary.getEmpId(), start, end);
                 //该员工的工作时间
@@ -202,6 +217,17 @@ public class SalaryService {
                 {
                     perSalary = perSalary - punishMoney;
                 }
+                //扣除社保
+                if((perSalary+baseSalary)>5000 && (perSalary+baseSalary)<=10000)
+                {
+                    perSalary = perSalary - (perSalary + baseSalary) * (0.11+0.03);
+                }
+                else if ((perSalary+baseSalary)>10000)
+                {
+                    perSalary = perSalary - (perSalary + baseSalary) * (0.11+0.1);
+                }
+
+
                 //添加到薪酬表
                 Salary salary = new Salary();
                 salary.setEmpId(standardSalary.getEmpId());

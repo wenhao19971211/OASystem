@@ -42,4 +42,18 @@ public interface EmpDao {
      * @return
      */
     public Emp findManagerBydepId(int depId);
+
+    /**
+     * 查询所有信息
+     * @param start
+     * @param end
+     * @return
+     */
+    public List<Emp> findAll(@Param("start")int start,@Param("end")int end);
+
+    /**
+     * 查询总数
+     * @return
+     */
+    public int findCount();
 }

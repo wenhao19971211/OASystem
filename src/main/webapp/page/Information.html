@@ -4,27 +4,74 @@
     <base href="http://localhost:8080/ssm_framework_war_exploded/">
     <meta charset="UTF-8">
     <title>个人信息</title>
+    <script src="js/jquery.js"></script>
     <style>
-        p{
-            width: 200px;
-            height: 40px;
-            margin-right: 20px;
-            margin-left: 20px;
-            padding-left: 20px;
-            float: left;
-        }
+
     </style>
 </head>
 <body>
 <h3>个人资料</h3>
-<input type="button" value="保存"><input type="button" value="返回"><br>
+<input type="hidden" id="emp" value="1">
+<input type="button" value="保存" id="save"><input type="button" value="返回"><br>
 <div>
-    <table border="1">
-        <tr>
-            <td>姓名：</td>
-            <td></td>
-        </tr>
-    </table>
+    <div id="empId">工号：</div>
+    <div id="empName">姓名：</div>
+    <div id="sex">性别：</div>
+    <div id="depName">所在部门：</div>
+    <div id="position">职位：</div>
+    <div id="password">密码：</div>
+    <div>电话：<input type="text" id="phone"></div>
+    <div>邮箱：<input type="text" id="email"></div>
+
 </div>
+<div><img src="" alt="" id="head"></div>
 </body>
 </html>
+<script>
+    var empId = $("#emp").val();
+    $.ajax({
+        url:"information",
+        data:{"empId":empId},
+        dataType:"json",
+        type:"get",
+        success:function (data) {
+
+          var sex = "";
+          if (data.object.sex ==1){
+              sex = "男";
+          }
+          else{
+              sex = "女";
+          }
+            $("#empId").append(data.object.empId);
+            $("#empName").append(data.object.empName);
+            $("#sex").append(sex);
+            $("#depName").append(data.object.dep.depName);
+            $("#position").append(data.object.position);
+            $("#password").append(data.object.password);
+            $("#phone").val(data.object.phone);
+            $("#email").val(data.object.email);
+            $("#head").attr("src","img/"+data.object.head);
+        }
+    })
+    /**
+     * 保存
+     */
+    $("#save").click(function () {
+        var head = $("#head").attr("src");
+        var phone = $("#phone").val();
+        var email = $("#email").val();
+        $.ajax({
+            url:"update?empId="+empId+"&head="+head+"&phone="+phone+"&email="+email,
+            type:"put",
+            dataType:"json",
+            success:function (data) {
+                if (data.code == 1){
+                    alert("保存成功");
+                    location.href = "page/index.html";
+                }
+
+            }
+        })
+    })
+</script>
