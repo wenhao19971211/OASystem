@@ -38,6 +38,16 @@
         order by sendTime
     </select>
 
+<select id="findLeavesByEmpIdAndStartAndEnd" resultType="com.geek.pojo.Leave">
+    select * from `leave`
+    where applyempId = #{empId}
+    AND checkstatus = 2
+    and (endTime BETWEEN #{start} AND #{end}
+    OR startTime BETWEEN #{start} AND #{end})
+</select>
+
+
+
     <!--3.修改审核的时间-->
     <update id="updateCheckTimeByleaveId">
         update `leave` set checkTime=#{date} where leaveId=#{id}

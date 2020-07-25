@@ -27,6 +27,11 @@
         </association>
     </resultMap>
 
+    <select id="findAllEmp" resultType="com.geek.pojo.Emp">
+        select * from emp
+    </select>
+
+
    <select id="findEmpByAccount" resultMap="empMap">
        select * from emp where account=#{account}
    </select>

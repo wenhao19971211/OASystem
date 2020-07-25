@@ -6,6 +6,13 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface EmpDao {
+
+    /**
+     * 查询所有员工信息
+     * @return
+     */
+    public List<Emp> findAllEmp();
+
     /**
      * 根据用户名查询
      * @param account

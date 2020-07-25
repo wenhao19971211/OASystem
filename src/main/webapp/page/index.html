@@ -8,6 +8,7 @@
  		<link rel="stylesheet" href="page/leave.html" />
 	 	<script src="js/dist/layui.js" charset="utf-8"></script>
 	  	<script src="js/jquery.js" ></script>
+
 	</head>
 	<style>
 		.dd{
@@ -133,7 +134,9 @@
 				<div class="layui-col-xs12 layui-col-sm12 layui-col-md12 imgss">
 
 				</div>
-				<div class="layui-col-xs12 layui-col-sm12 layui-col-md12" >
+				<div class="layui-col-xs12 layui-col-sm12 layui-col-md12" id="nr" >
+
+
 				  <div class="grid-demo layui-bg-blue"></div>
 				</div>
 
@@ -175,4 +178,20 @@
 		}
 
 	})
+
+	$("#qj").click(function () {
+		alert("哈哈哈");
+		var empId=$("#empId").val();
+		$.ajax({
+			url:"page/leave.html",
+			data:{"empId":empId},
+			type:"get",
+			dataType:"html",
+			success:function (data) {
+				$("#nr").html(data);
+			}
+		})
+	})
+
+
 	</script>
