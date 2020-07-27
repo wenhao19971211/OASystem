@@ -5,7 +5,11 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.geek.bo.PersonnelInformation_bo;
 import com.geek.dto.Result;
+import com.geek.pojo.CheckWork;
+import com.geek.pojo.Contract;
 import com.geek.pojo.Emp;
+import com.geek.service.CheckWorkService;
+import com.geek.service.ContractService;
 import com.geek.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,9 +28,12 @@ import java.util.Map;
 public class PersonnelHandler {
     @Autowired
     private EmpService empService;
-
+    @Autowired
+    private ContractService contractService;
+    @Autowired
+    private CheckWorkService checkWorkService;
     /**
-     * 人事合同
+     * 人事合同（集合）
      * @param page
      * @param limit
      * @return
@@ -75,6 +82,33 @@ public class PersonnelHandler {
         Result result = new Result();
         Emp emp = empService.findEmpById(empId);
         result.setObject(emp);
+        return result;
+    }
+
+    /**
+     * 个人合同信息
+     * @param empId
+     * @return
+     */
+    @GetMapping("contractInfo")
+    public Result contractInfo(int empId){
+        Result result = new Result();
+        Contract contract = contractService.findContractByEmpId(empId);
+        System.out.println(contract.getContractId()+"\t"+contract.getEmp().getEmpName());
+        result.setObject(contract);
+        return result;
+    }
+
+    /**
+     * 个人考勤
+     * @param empId
+     * @return
+     */
+    @GetMapping("checkWork")
+    public Result checkWork(int empId){
+        Result result = new Result();
+        List<CheckWork> list = checkWorkService.findById(empId);
+        result.setList(list);
         return result;
     }
 }

@@ -30,13 +30,13 @@
             }
             ,page:
                 { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
-                layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
-                ,curr: 1 //设定初始在第 5 页
-                ,groups: 5//只显示 1 个连续页码
-                ,limit:5
-                ,first: true //不显示首页
-                ,last: true //不显示尾页
-            }
+                    layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
+                    ,curr: 1 //设定初始在第 5 页
+                    ,groups: 5//只显示 1 个连续页码
+                    ,limit:5
+                    ,first: true //不显示首页
+                    ,last: true //不显示尾页
+                }
             ,cols: [[ //表头
                 {field: 'empName', title: '姓名', width:80, fixed: 'left'}
                 ,{field: 'depName', title: '部门', width:80,}
@@ -50,9 +50,9 @@
      * 查询详细信息
      */
     $("#content tr:first-child").click(function () {
-    var empId = $("#content tr:eq(2)").html();
-    console.log(empId);
-    location.href = "empInfo?empId="+empId;
-})
+        var empId = $("#content tr:eq(2)").html();
+        console.log(empId);
+        location.href = "page/empInfo?empId="+empId;
+    })
 
 </script>

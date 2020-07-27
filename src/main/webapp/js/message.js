@@ -6,7 +6,7 @@ $(function () {
             type:"get",
             dataType:"html",
             success:function (data) {
-                $("#d1").html(data);
+                $("#nr").html(data);
             }
         })
     })

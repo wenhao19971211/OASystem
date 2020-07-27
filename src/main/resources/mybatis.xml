@@ -15,6 +15,8 @@
         <typeAlias type="com.geek.pojo.Message" alias="message"></typeAlias>
         <typeAlias type="com.geek.pojo.Emp" alias="emp"></typeAlias>
         <typeAlias type="com.geek.pojo.Dep" alias="dep"></typeAlias>
+        <typeAlias type="com.geek.pojo.Contract" alias="contract"></typeAlias>
+        <typeAlias type="com.geek.pojo.CheckWork" alias="checkWork"></typeAlias>
     </typeAliases>
     <!--配置dao文件-->
     <mappers>
@@ -26,5 +28,7 @@
         <mapper resource="mapper/mapper-emp.xml"></mapper>
         <mapper resource="mapper/mapper-leave.xml"></mapper>
         <mapper resource="mapper/mapper-yearLeave.xml"></mapper>
+        <mapper resource="mapper/mapper-contract.xml"></mapper>
+        <mapper resource="mapper/mapper-checkWork.xml"></mapper>
     </mappers>
 </configuration>
