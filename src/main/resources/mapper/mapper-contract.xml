@@ -20,7 +20,12 @@
             <result property="checkEmpName" column="checkEmpName"></result>
         </association>
     </resultMap>
+
     <select id="findContractByEmpId" resultMap="contractMap">
         select * from contract inner join emp on contract.empId=emp.empId where contract.empId=#{empId}
+    </select>
+
+    <select id="findAll" resultMap="contractMap">
+        select * from contract inner join emp on contract.empId=emp.empId
     </select>
 </mapper>
