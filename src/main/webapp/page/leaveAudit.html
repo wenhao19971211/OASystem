@@ -18,11 +18,13 @@
                 <td>申请时间</td>
                 <td>起始时间</td>
                 <td>截止时间</td>
+                <td>请假天数(天)</td>
                 <td>审核状态</td>
                 <td></td>
                 </thead>
             </table>
         </div>
+
 </body>
 <script>
     $(function () {
@@ -40,24 +42,38 @@
                 for (var i=0;i<length;i++){
                     var leaveList="";
                     //   data.list[i].intType,data.list[i].applyId,3
-                    leaveList+="<tr><td>"+(i+1)+"</td><td>"+data.list[i].empName+"</td><td>"+data.list[i].type+"</td><td>"+data.list[i].cause.substr(0,6)+"</td><td>"+parseDate(data.list[i].sendTime)+"</td><td>"+ parseDate(data.list[i].startTime)+"</td><td>"+parseDate(data.list[i].endTime)+"</td><td>"+data.list[i].checkStatus+"</td><td>" +
-                        "<input type='button' value='同意'  id='but1"+i+"' type='"+data.list[i].intType+"' applyId='"+data.list[i].applyId+"' opinion='2'>" +
-                        "<input type='button' value='不同意' id='but2"+i+"' type='"+data.list[i].intType+"' applyId='"+data.list[i].applyId+"' opinion='3'>" +
+                    leaveList+="<tr><td>"+(i+1)+"</td><td>"+data.list[i].emp.empName+"</td>" +
+                        "<td>"+data.list[i].type+"</td>" +
+                        "<td>"+data.list[i].cause.substr(0,6)+"</td>" +
+                        "<td>"+parseDate(data.list[i].sendTime)+"</td>" +
+                        "<td>"+ parseDate(data.list[i].startTime)+"</td>" +
+                        "<td>"+parseDate(data.list[i].endTime)+"</td>" +
+                        "<td>"+data.list[i].days+"</td>" +
+                        "<td>"+data.list[i].checkStatus+"</td><td>" +
+                        "<input type='button' value='同意'  class='but1"+i+"' LeaveType='"+data.list[i].intType+"'  applyId='"+data.list[i].applyId+"' opinion='2' day='"+data.list[i].days+"' empId='"+data.list[i].emp.empId+"'>" +
+                        "<input type='button' value='不同意' class='but1"+i+"' LeaveType='"+data.list[i].intType+"'  applyId='"+data.list[i].applyId+"' opinion='3' day='"+data.list[i].days+"' empId='"+data.list[i].emp.empId+"'>" +
                         "</td></tr>";
+                    //type='"+data.list[i].intType+"' applyId='"+data.list[i].applyId+"' opinion='3' day='"+data.list[i].days+"'
                     $("#tab1").append(leaveList);
-
-                    $("#but1"+i).click(function () {
-                        var Type=$(this).attr("type");
+                    $(".but1"+i).click(function () {
+                        var Type=$(this).attr("LeaveType");
                         var applyId=$(this).attr("applyId");
                         var opinion=$(this).attr("opinion");
-                        //修改请假相关的
+                        var days=$(this).attr("day");
+                        var empId=$(this).attr("empId");
+                        // alert(Type);
+                        // alert(applyId);
+                        // alert(days);
+                        // alert(empId);
+                        // alert(opinion);
+                        // 修改请假相关的
                         $.ajax({
-                            url:"updateLeave?type="+Type+"&applyId="+applyId+"&opinion="+opinion,
+                            url:"updateLeave?type="+Type+"&applyId="+applyId+"&opinion="+opinion+"&days="+days+"&empId="+empId,
                             type:"put",
                             dataType:"json",
                             success:function (data) {
                                 //整合需要修改
-                                location.href("leaveAudit.html");
+                                // location.href("leaveAudit.html");
                             }
                         })
                     })

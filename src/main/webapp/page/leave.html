@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <base href="http://localhost:8080/ssm_framework_war_exploded/">
+    <base href="http://localhost:8080/OASystem_war_exploded/">
     <script src="js/jquery.js"></script>
     <script src="js/common.js"></script>
     <meta charset="UTF-8">
@@ -46,7 +46,7 @@
                     <td>请假原因</td>
                     <!--div中请假的内容-->
                     <td colspan="2">
-                        <div id="cause" contenteditable="true" style="overflow: auto; height: 80px;width: 300px">
+                        <div id="cause1" contenteditable="true" style="overflow: auto; height: 80px;width: 300px">
 
                         </div>
                     </td>
@@ -57,13 +57,17 @@
 
 </body>
 <script>
+
         $(function () {
+
             var param=parseUrl(location.href);
-            //param["empId"]
+            console.log(param)
+            console.log(param["empId"])
+            // param["empId"]
             var a="";
             var b="";
             $.ajax({
-                url:"leaveInfo/"+1,
+                url:"leaveInfo/"+param["empId"],
                 type:"get",
                 dataType:"json",
                 success:function (data) {
@@ -87,8 +91,8 @@
                 var type= $("#Type").val();
                 var startDate=$("#startTime").val();
                 var endDate=$("#endTime").val();
-                var cause1=$("#cause").val();
-                console.log(type+" , "+startDate+" , "+endDate+" , "+cause);
+                var cause1=$("#cause1").html();
+                console.log(type+" , "+startDate+" , "+endDate+" , "+cause1);
                 //把时间替换成同一类型比较
                 var start=new Date(startDate.replace("-", "/").replace("-", "/"));
                 var end=new Date(endDate.replace("-", "/").replace("-", "/"));
@@ -112,6 +116,19 @@
                                     //判断是否小于当前时间
                                     if (start>=now){
                                         if (end>=now){
+                                            if (type==1){
+                                             //选择的时间跨度与额度做对比
+                                                if (leaveDays>hasDays2){
+                                                    alert("调休超过了你的额度");
+                                                    return;
+                                                }
+                                            }else if (type==3){
+                                                if (leaveDays>hasDays1){
+                                                    alert("年假超过了你的额度");
+                                                    return;
+                                                }
+                                            }
+
                                             $.ajax({
                                                 url:"leave",
                                                 type:"post",

@@ -1,5 +1,11 @@
 package com.geek.dao;
 
+import com.geek.pojo.Leave;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Date;
+import java.util.List;
+
 import com.geek.pojo.DayOff;
 import com.geek.pojo.Leave;
 import org.apache.ibatis.annotations.Param;
@@ -32,7 +38,18 @@ public interface LeaveDao {
      * 查看请假 只写dep代表经理查询审批,emp写0 员工反之
      * @return
      */
-    public List<Leave> findAllLeave(@Param("depId")int depId,@Param("empId")int empId,@Param("state") int state);
+    public List<Leave> findAllLeave(@Param("depId")int depId,@Param("empId")int empId,@Param("state") int state,@Param("flag")int flag);
+
+
+    /**
+     * 根据empId和时间段查询该时间段内该员工的所有事假信息
+     * @param empId
+     * @param start
+     * @param end
+     * @return
+     */
+    public List<Leave> findLeavesByEmpIdAndStartAndEnd(@Param("empId") Integer empId, @Param("start") Date start, @Param("end") Date end);
+
 
 
     /**

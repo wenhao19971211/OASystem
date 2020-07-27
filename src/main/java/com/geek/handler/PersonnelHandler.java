@@ -1,7 +1,5 @@
 package com.geek.handler;
 
-import com.alibaba.druid.support.json.JSONUtils;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.geek.bo.PersonnelInformation_bo;
 import com.geek.dto.Result;

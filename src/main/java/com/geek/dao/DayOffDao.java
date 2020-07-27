@@ -32,7 +32,7 @@ public interface DayOffDao {
      * 查看请假 只写dep代表经理查询审批,emp写0 员工反之
      * @return
      */
-    public List<DayOff> findAllDayOffBydepIdAndempId(@Param("depId")int depId,@Param("empId")int empId,@Param("state") int state );
+    public List<DayOff> findAllDayOffBydepIdAndempId(@Param("depId")int depId,@Param("empId")int empId,@Param("state") int state ,@Param("flag")int flag);
 
     /**
      * 修改审核时间
@@ -47,6 +47,16 @@ public interface DayOffDao {
      * @param id
      */
     public void updatecheckStatusByDayOffId(@Param("state")int state,@Param("id") int id);
+
+    /**
+     * 根据empId和时间段查询该时间段内该员工的所有调休信息
+     * @param empId
+     * @param start
+     * @param end
+     * @return
+     */
+    public List<DayOff> findDayOffsByEmpIdAndStartAndEnd(@Param("empId") Integer empId,@Param("start") Date start,@Param("end") Date end);
+
 
 
 

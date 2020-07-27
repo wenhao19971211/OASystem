@@ -26,7 +26,14 @@
         <mapper resource="mapper/mapper-dominant.xml"></mapper>
         <mapper resource="mapper/mapper-dayoff.xml"></mapper>
         <mapper resource="mapper/mapper-emp.xml"></mapper>
+        <mapper resource="mapper/mapper-standardsalary.xml"></mapper>
+        <mapper resource="mapper/mapper-contrat.xml"></mapper>
+        <mapper resource="mapper/mapper-workon.xml"></mapper>
         <mapper resource="mapper/mapper-leave.xml"></mapper>
+        <mapper resource="mapper/mapper-yearleave.xml"></mapper>
+        <mapper resource="mapper/mapper-salary.xml"></mapper>
+        <mapper resource="mapper/mapper-salaryissue.xml"></mapper>
+
         <mapper resource="mapper/mapper-yearLeave.xml"></mapper>
         <mapper resource="mapper/mapper-contract.xml"></mapper>
         <mapper resource="mapper/mapper-checkWork.xml"></mapper>

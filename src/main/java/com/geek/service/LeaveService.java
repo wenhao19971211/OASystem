@@ -86,20 +86,24 @@ public class LeaveService {
      * @return
      */
     @Transactional
-    public List findLeaveList(int depId,int empId,int state){
+    public List findLeaveList(int depId,int empId,int state,int flag){
         List<Leave_bo>list=new ArrayList();
-        List<DayOff>dayOffList=dayOffDao.findAllDayOffBydepIdAndempId(depId,empId,state);
-        List<Leave>leaveList=leaveDao.findAllLeave(depId,empId,state);
-        List<YearLeave>yearLeaveList=yearLeaveDao.findAllYearLeave(depId,empId,state);
+        List<DayOff>dayOffList=dayOffDao.findAllDayOffBydepIdAndempId(depId,empId,state,flag);
+        List<Leave>leaveList=leaveDao.findAllLeave(depId,empId,state,flag);
+        List<YearLeave>yearLeaveList=yearLeaveDao.findAllYearLeave(depId,empId,state,flag);
         if (dayOffList!=null){
 
             for (DayOff dayOff : dayOffList) {
+                long days =(dayOff.getEndTime().getTime()-dayOff.getStartTime().getTime())/(60*60*24*1000)+1;
+
                 //封装数据
                 Leave_bo leave_bo=new Leave_bo();
 //                System.out.println("获取到empName"+dayOff.getEmp().getEmpName());
+                leave_bo.setDays(days);
+                leave_bo.setCheckTime(dayOff.getCheckTime());
                 leave_bo.setApplyId(dayOff.getDayOffId());
                 leave_bo.setIntType(dayOff.getCheckStatus());
-                leave_bo.setEmpName(dayOff.getEmp().getEmpName());
+                leave_bo.setEmp(dayOff.getEmp());
                 leave_bo.setCause(dayOff.getDayOffCause());
                 leave_bo.setSendTime(dayOff.getSendTime());
                 leave_bo.setStartTime(dayOff.getStartTime());
@@ -117,11 +121,14 @@ public class LeaveService {
         }
         if (leaveList!=null){
             for (Leave leave : leaveList) {
+                long days =(leave.getEndTime().getTime()-leave.getStartTime().getTime())/(60*60*24*1000)+1;
                 //封装数据
                 Leave_bo leave_bo=new Leave_bo();
+                leave_bo.setCheckTime(leave.getCheckTime());
                 leave_bo.setApplyId(leave.getLeaveId());
+                leave_bo.setDays(days);
                 leave_bo.setIntType(leave.getCheckStatus());
-                leave_bo.setEmpName(leave.getEmp().getEmpName());
+                leave_bo.setEmp(leave.getEmp());
                 leave_bo.setCause(leave.getLeaveCause());
                 leave_bo.setEndTime(leave.getEndTime());
                 leave_bo.setSendTime(leave.getSendTime());
@@ -140,11 +147,15 @@ public class LeaveService {
         if (yearLeaveList!=null){
 //            System.out.println("yearLeaveList长度为"+yearLeaveList.size());
             for (YearLeave yearLeave : yearLeaveList) {
+                long days =(yearLeave.getEndTime().getTime()-yearLeave.getStartTime().getTime())/(60*60*24*1000)+1;
                 //封装数据
                 Leave_bo leave_bo=new Leave_bo();
+
                 leave_bo.setApplyId(yearLeave.getYearLeaveId());
+                leave_bo.setDays(days);
+                leave_bo.setCheckTime(yearLeave.getCheckTime());
                 leave_bo.setIntType(yearLeave.getCheckStatus());
-                leave_bo.setEmpName(yearLeave.getEmp().getEmpName());
+                leave_bo.setEmp(yearLeave.getEmp());
                 leave_bo.setSendTime(yearLeave.getSendTime());
                 leave_bo.setCause(yearLeave.getYearLeaveCause());
                 leave_bo.setStartTime(yearLeave.getStartTime());
@@ -166,19 +177,38 @@ public class LeaveService {
     /**
      * 审批通过与不通过的相关事务
      * @param type 请假类型 1.调休 2.事假 3.年假
-     * @param leaveId  对应类型中的申请Id
+     * @param leaveId 对应类型中的申请Id
+     * @param opinion 2.同意 3.不同意
+     * @param days 请假天数
+     * @param empId 员工Id
      */
     @Transactional
-    public void updateStateAndTime(int type,int leaveId,int opinion){
+    public void updateStateAndTime(int type,int leaveId,int opinion,int days,int empId){
         if (type==1){
-            dayOffDao.updateCheckTimeByDayOffId(new Date(),leaveId);
-            dayOffDao.updatecheckStatusByDayOffId(opinion,leaveId);
+            if (opinion==2){
+                int time=days*8;
+                System.out.println("time"+time);
+                dayOffDao.updateCheckTimeByDayOffId(new Date(),leaveId);
+                dayOffDao.updatecheckStatusByDayOffId(opinion,leaveId);
+                dominantDao.updateAllowLeaveTimeByEmpId(empId,(-time));
+            }else {
+                dayOffDao.updateCheckTimeByDayOffId(new Date(),leaveId);
+                dayOffDao.updatecheckStatusByDayOffId(opinion,leaveId);
+            }
+
         }else if (type==2){
             leaveDao.updateCheckStatusByleaveId(opinion,leaveId);
             leaveDao.updateCheckTimeByleaveId(new Date(),leaveId);
         }else {
-            yearLeaveDao.updateCheckStatusByYearLeaveId(opinion,leaveId);
-            yearLeaveDao.updateCheckTimeByYearLeaveId(new Date(),leaveId);
+            if (opinion==2){
+                yearLeaveDao.updateCheckStatusByYearLeaveId(opinion,leaveId);
+                yearLeaveDao.updateCheckTimeByYearLeaveId(new Date(),leaveId);
+                dominantDao.updateReYearLeaveTimeByEmpId(empId,(-days));
+            }else {
+                yearLeaveDao.updateCheckStatusByYearLeaveId(opinion,leaveId);
+                yearLeaveDao.updateCheckTimeByYearLeaveId(new Date(),leaveId);
+            }
+
         }
     }
 

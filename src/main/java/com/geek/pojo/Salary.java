@@ -4,10 +4,31 @@ import java.util.Date;
 
 public class Salary {
     private Integer salaryId;
-    private Emp emp;
+    private Integer empId;
     private Date month;
     private double baseSalary;
     private double perSalary;
+    private Emp emp;
+
+    public Salary() {
+    }
+
+    public Salary(Integer salaryId, Integer empId, Date month, double baseSalary, double perSalary) {
+        this.salaryId = salaryId;
+        this.empId = empId;
+        this.month = month;
+        this.baseSalary = baseSalary;
+        this.perSalary = perSalary;
+    }
+
+    public Salary(Integer salaryId, Integer empId, Date month, double baseSalary, double perSalary, Emp emp) {
+        this.salaryId = salaryId;
+        this.empId = empId;
+        this.month = month;
+        this.baseSalary = baseSalary;
+        this.perSalary = perSalary;
+        this.emp = emp;
+    }
 
     public Integer getSalaryId() {
         return salaryId;
@@ -47,5 +68,13 @@ public class Salary {
 
     public void setPerSalary(double perSalary) {
         this.perSalary = perSalary;
+    }
+
+    public Integer getEmpId() {
+        return empId;
+    }
+
+    public void setEmpId(Integer empId) {
+        this.empId = empId;
     }
 }
