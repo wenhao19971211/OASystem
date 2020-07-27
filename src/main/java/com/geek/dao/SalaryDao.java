@@ -4,6 +4,7 @@ import com.geek.pojo.Salary;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 薪资表
@@ -24,5 +25,14 @@ public interface SalaryDao {
      * @return
      */
     public Salary findSalaryByEmpIdAndMonth(@Param("empId") Integer empId, @Param("month") Date month);
+
+    /**
+     * 根据员工id查询所有薪资
+     * @param empId
+     * @param index
+     * @param pageSize
+     * @return
+     */
+    public List<Salary> findSalaryByEmpId(@Param("empId") Integer empId, @Param("index") Integer index, @Param("pageSize") Integer pageSize);
 
 }

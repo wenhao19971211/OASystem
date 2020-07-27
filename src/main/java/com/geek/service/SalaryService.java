@@ -1,5 +1,6 @@
 package com.geek.service;
 
+import com.geek.bo.Salary_bo;
 import com.geek.dao.*;
 import com.geek.handler.TaskSendHandler;
 import com.geek.pojo.*;
@@ -267,6 +268,35 @@ public class SalaryService {
         return flag;
     }
 
+    /**
+     * 根据员工id查询所有月的薪资
+     * @param empId
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    public Salary_bo findSalaryByEmpId(Integer empId, Integer page, Integer pageSize)
+    {
+        //所有薪资
+        List<Salary> salaryByEmpIds = salaryDao.findSalaryByEmpId(empId, null, null);
+        Integer count = 0;
+        if (salaryByEmpIds != null && salaryByEmpIds.size() != 0)
+        {
+            count = salaryByEmpIds.size();
+        }
+        //当页数据
+        List<Salary> salaries = salaryDao.findSalaryByEmpId(empId, pageSize * (page - 1), pageSize);
+
+
+
+        Salary_bo salary_bo = new Salary_bo();
+        salary_bo.setEmpId(empId);
+        salary_bo.setSalaries(salaries);
+        salary_bo.setCount(count);
+
+        return salary_bo;
+
+    }
 
 
 
