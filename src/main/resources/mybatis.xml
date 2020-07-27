@@ -36,5 +36,6 @@
         <mapper resource="mapper/mapper-yearLeave.xml"></mapper>
         <mapper resource="mapper/mapper-contract.xml"></mapper>
         <mapper resource="mapper/mapper-checkWork.xml"></mapper>
+        <mapper resource="mapper/mapper-rimbursementissue.xml"></mapper>
     </mappers>
 </configuration>
