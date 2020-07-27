@@ -40,4 +40,12 @@ public interface WorkOnDao {
      */
     public void updateWorkOnByEmpId(@Param("empId") int empId,  @Param("workOutTime") Data workOutTime);
 
+    /**
+     * 根据员工和月份查询当月打卡记录
+     * @param empId
+     * @param start
+     * @param end
+     * @return
+     */
+    public List<WorkOn> findByIdAndMonth(@Param("empId") int empId,@Param("start") Date start,@Param("end") Date end);
 }

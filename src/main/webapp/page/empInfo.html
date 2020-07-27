@@ -78,6 +78,19 @@
             </tr>
         </table>
     </div>
+    <div id="prizeInfo" style="display: none">
+        <table id="prizeTable" border="1" style="border-collapse: collapse">
+            <tr>
+                <td>姓名</td>
+                <td>授予单位</td>
+                <td>奖惩区别</td>
+                <td>奖惩名目</td>
+                <td>日期</td>
+                <td>金额</td>
+            </tr>
+
+        </table>
+    </div>
 </div>
 </body>
 </html>
@@ -196,6 +209,65 @@
                     "<td>"+failureTime+"</td>" +
                     "<td>"+contractYear+"</td></tr>"
                 $("#contractTable").append(info);
+            }
+        })
+    })
+    /**
+     * 查看考勤记录
+     */
+    $("#workOn").click(function () {
+        $("#checkWorkInfo").show();
+        $("#info").hide();
+        $("#contractInfo").hide();
+        $("#contractTable tr:not(:first)").remove();
+        var timeStar = getFirstDay();
+        var timeEnd = getLastDay();
+        $.ajax({
+            url:"checkWork",
+            data:{"empId":5,"start":timeStar,"end":timeEnd},
+            dataType:"json",
+            type:"get",
+            success:function (data) {
+              for (var i = 0; i < data.list.length; i++){
+                  var today = parseDate(data.list[i].today);
+                  var workInTime = parseDate1(data.list[i].workInTime);
+                  var workOutTime = parseDate1(data.list[i].workOutTime);
+                  var checkWork = "<tr>" +
+                      "<td>"+today+"</td>" +
+                      "<td>"+workInTime+"</td>" +
+                      "<td>"+workOutTime+"</td>" +
+                      "<td>"+data.list[i].isLate+"</td></tr>"
+                  $("#checkWorkTable").append(checkWork);
+              }
+            }
+        })
+    })
+    /**
+     * 查看奖惩
+     */
+    $("#prize").click(function () {
+        $("#prizeInfo").show();
+        $("#checkWorkInfo").hide();
+        $("#info").hide();
+        $("#contractInfo").hide();
+        $("#contractTable tr:not(:first)").remove();
+        $.ajax({
+            url:"prize",
+            data:{"empId":1},
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+                for (var i = 0; i < data.list.length; i++){
+                    var today = parseDate(data.list[i].today);
+                    var workInTime = parseDate1(data.list[i].workInTime);
+                    var workOutTime = parseDate1(data.list[i].workOutTime);
+                    var checkWork = "<tr>" +
+                        "<td>"+today+"</td>" +
+                        "<td>"+workInTime+"</td>" +
+                        "<td>"+workOutTime+"</td>" +
+                        "<td>"+data.list[i].isLate+"</td></tr>"
+                    $("#checkWorkTable").append(checkWork);
+                }
             }
         })
     })
