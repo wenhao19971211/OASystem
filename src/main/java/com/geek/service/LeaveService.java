@@ -1,16 +1,18 @@
 package com.geek.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.geek.bo.Leave_bo;
 import com.geek.dao.*;
+import com.geek.dto.Result;
 import com.geek.pojo.*;
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * 请假相关
@@ -27,6 +29,8 @@ public class LeaveService {
     private YearLeaveDao yearLeaveDao;
     @Autowired
     private MessageDao messageDao;
+    @Autowired
+    private WorkOnDao workOnDao;
 
     /**
      * 请假选择
@@ -211,5 +215,126 @@ public class LeaveService {
 
         }
     }
+
+    /**
+     * 获取当前用户打卡的时间
+     * @param empId 用户id
+     * @param workInTime 打卡的时间
+     */
+    public Result insertWorkonFrequency(int empId, Date workInTime){
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH");
+        //获取当天打卡的时间并写入
+        Result result=new Result();
+        String calenda="";
+        //早上9点
+        Date date=changeDate(1);
+//        错误信息
+        String message="";
+        Map<String,String> map=new HashMap<>();
+        //当前时间的日期
+        Date today=getNowToday();
+        //旷工的时间限制
+        Date date2=changeDate(3);
+        //下班打卡的时间
+        Date date3=changeDate(2);
+        //date小于workInTime返回-1，date大于workInTime返回1，相等返回0如下
+        int compareTo= date.compareTo(workInTime);
+        int compareTo2=date2.compareTo(workInTime);
+        int compareTo3=date3.compareTo(workInTime);
+        if (compareTo==1&&compareTo==0){
+//            正常写入没有迟到
+        calenda=df.format(today);
+            map.put(calenda,"快点上班");
+        }else if(compareTo==-1){
+
+            if (compareTo2==-1){
+                //旷工
+                map.put(calenda,"已近旷工");
+            }else{
+                //迟到
+                map.put(calenda,"已经迟到");
+            }
+
+        }
+            workOnDao.insertWorkOnByEmpId(empId,today,workInTime);
+        JSONObject o = (JSONObject) JSONObject.toJSON(map);
+        String json = o.toJSONString();
+        result.setMessage("");
+        result.setCode(0);
+        result.setObject(json);
+            return result;
+    }
+    public Result updateWorkonFrequency(int empId, Date workOutTime){
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH");
+        Result result=new Result();
+        Date date=changeDate(2);
+        Date today=getNowToday();
+        int compareTo=date.compareTo(workOutTime);
+        String message="";
+        Map<String,String> map=new HashMap<>();
+        String calenda="";
+        calenda=df.format(today);
+        if (compareTo==-1){
+            //正常下班
+            map.put(calenda,"祝您晚餐愉快");
+        }else{
+            //早退
+            map.put(calenda,"莫要早退");
+
+        }
+        workOnDao.updateWorkOnByEmpId(empId,workOutTime);
+        JSONObject o = (JSONObject) JSONObject.toJSON(map);
+        String json = o.toJSONString();
+        result.setMessage("");
+        result.setCode(0);
+        result.setObject(json);
+        return result;
+    }
+    /**
+     * 获取当天上班的时间
+     * @return
+     */
+    public Date changeDate(int i){
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH");
+        Date date=new Date();
+        //将时间转换成字符串
+        String newDate=df.format(date);
+        StringBuilder strBuilder = new StringBuilder(newDate);
+        strBuilder.delete(11,13);
+        if (i==1){
+            strBuilder.insert(11,9);
+        }else if(i==2){
+            strBuilder.insert(11,17);
+        }else if(i==3){
+            strBuilder.insert(11,12);
+        }
+
+        newDate=strBuilder.toString();
+        try {
+            date=df.parse(newDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            System.out.println("时间转换错误");
+        }
+        System.out.println(date);
+
+        return date;
+    };
+
+    public Date getNowToday(){
+        Date date=new Date();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String newDate=df.format(date);
+        try {
+            date=df.parse(newDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            System.out.println("日期转换错误已2");
+        }
+
+        return date;
+    }
+
+
 
 }

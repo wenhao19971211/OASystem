@@ -30,7 +30,7 @@ public interface WorkOnDao {
      * @param workInTime 打卡时间
      * @return
      */
-    public void insertWorkOnByEmpId(@Param("empId") int empId, @Param("today") Date today, @Param("workInTime") Data workInTime);
+    public void insertWorkOnByEmpId(@Param("empId") int empId, @Param("today") Date today, @Param("workInTime") Date workInTime);
 
 
     /**
@@ -38,6 +38,6 @@ public interface WorkOnDao {
      * @param empId id
      * @param workOutTime 下半1打卡时间
      */
-    public void updateWorkOnByEmpId(@Param("empId") int empId,  @Param("workOutTime") Data workOutTime);
+    public void updateWorkOnByEmpId(@Param("empId") int empId,  @Param("workOutTime") Date workOutTime);
 
 }

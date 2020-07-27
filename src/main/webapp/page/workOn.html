@@ -108,26 +108,17 @@
         var emp = $(window.parent.document).find(":input#empId");
         var empId = emp.val();
         $.ajax({
-            url:"workOn/"+param["empId"],
+            url:"calendar/"+param["empId"],
             dataType:"json",
             type:"post",
             success:function (data) {
                 // 用于接收和改写mark数据将数据传递给新的日历
-                date=data;
+                date=data.object;
                 //leaveInfo/"+param["empId"]
             }
         })
     }
-    // $.ajax({
-    //     url:"empLogin",
-    //     dataType:"json",
-    //     type:"get",
-    //     success:function (data) {
-    //         $("#empId").val(data.object.empId);
-    //         $("#depId").val(data.object.dep.depId);
-    //     }
-    //
-    // });
+
 
 
 
