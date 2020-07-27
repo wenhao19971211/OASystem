@@ -1,5 +1,7 @@
+import com.geek.dao.CheckWorkDao;
 import com.geek.dao.DayOffDao;
 import com.geek.dao.MessageDao;
+import com.geek.dao.WorkOnDao;
 import com.geek.pojo.*;
 import com.geek.service.CheckWorkService;
 import com.geek.service.ContractService;
@@ -10,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -25,6 +30,10 @@ public class ServiceTest {
     DayOffDao dayOffDao;
     @Autowired
     CheckWorkService checkWorkService;
+    @Autowired
+    CheckWorkDao checkWorkDao;
+    @Autowired
+    WorkOnDao workOnDao;
     @Test
     public void test(){
 //        List<Message> list = messageDao.findAllById(1);
@@ -58,9 +67,24 @@ public class ServiceTest {
 //        for (DayOff dayOff : list) {
 //            System.out.println(dayOff.getStartTime()+"\t"+dayOff.getEndTime());
 //        }
-        List<CheckWork> list = checkWorkService.findById(5);
-        for (CheckWork checkWork : list) {
-            System.out.println(checkWork.getEmp().getEmpName()+"\t"+checkWork.getToday()+"\t"+checkWork.getIsLate());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date start = null;
+        Date end = null;
+        try {
+            start = sdf.parse("2020-07-01");
+            end = sdf.parse("2020-08-01");
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
+        List<CheckWork> list = checkWorkDao.findById(5,start,end);
+        List<WorkOn> workOnList = workOnDao.findByIdAndMonth(5,start,end);
+        System.out.println(workOnList.size());
+        for (CheckWork checkWork : list) {
+            for (WorkOn workOn : workOnList) {
+                System.out.println(workOn.getEmp().getEmpName()+"\t"+workOn.getToday());
+            }
+
+        }
+
     }
 }

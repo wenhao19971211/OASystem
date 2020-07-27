@@ -3,7 +3,22 @@
         PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         "http://ibatis.apache.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.geek.dao.ContractDao">
-
+    <resultMap id="contractMap" type="contract">
+        <id property="contractId" column="contractId"></id>
+        <result property="contractType" column="contractType"></result>
+        <result property="salary" column="salary"></result>
+        <result property="effectTime" column="effectTime"></result>
+        <result property="failureTime" column="failureTime"></result>
+        <result property="isTrainningContract" column="isTrainningContract"></result>
+        <association property="emp" javaType="emp">
+            <id property="empId" column="empId"></id>
+            <result property="empName" column="empName"></result>
+        </association>
+        <association property="checkEmp" javaType="emp">
+            <id property="empId" column="checkEmpId"></id>
+            <result property="checkEmpName" column="checkEmpName"></result>
+        </association>
+    </resultMap>
     <select id="findContractByEmpId" resultType="com.geek.pojo.Contract">
         select * from contract where empId = #{empId}
     </select>

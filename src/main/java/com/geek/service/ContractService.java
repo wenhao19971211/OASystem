@@ -16,6 +16,6 @@ public class ContractService {
      * @return
      */
     public Contract findContractByEmpId(int empId){
-        return contractDao.findByEmpId(empId);
+        return contractDao.findContractByEmpId(empId);
     }
 }
