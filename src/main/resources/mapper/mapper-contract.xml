@@ -26,6 +26,10 @@
     </select>
 
     <select id="findAll" resultMap="contractMap">
-        select * from contract inner join emp on contract.empId=emp.empId
+        select * from contract inner join emp on contract.empId=emp.empId limit #{start},#{end}
+    </select>
+
+    <select id="findCount" resultType="java.lang.Integer">
+        select count(*) from contract
     </select>
 </mapper>

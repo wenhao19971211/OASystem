@@ -2,6 +2,7 @@ package com.geek.handler;
 
 import com.alibaba.fastjson.JSONObject;
 import com.geek.bo.CheckWork_bo;
+import com.geek.bo.Contract_bo;
 import com.geek.bo.PersonnelInformation_bo;
 import com.geek.dto.Result;
 import com.geek.pojo.CheckWork;
@@ -68,8 +69,22 @@ public class PersonnelHandler {
         map.put("data",empList);
        JSONObject o = (JSONObject) JSONObject.toJSON(map);
       String json = o.toJSONString();
-        System.out.println(json);
        return json;
+    }
+    @GetMapping("personnelContract")
+    public String personnelContract(int page,int limit){
+        int count = contractService.findCount();
+        int start = limit*(page-1)+1;
+        int end = limit*page;
+        List<Contract_bo> list = contractService.findAll(start,end);
+        Map<String,Object> map=new HashMap<>();
+        map.put("code",0);
+        map.put("msg","");
+        map.put("count",count);
+        map.put("data",list);
+        JSONObject o = (JSONObject) JSONObject.toJSON(map);
+        String json = o.toJSONString();
+        return json;
     }
 
     /**
@@ -94,7 +109,6 @@ public class PersonnelHandler {
     public Result contractInfo(int empId){
         Result result = new Result();
         Contract contract = contractService.findContractByEmpId(empId);
-        System.out.println(contract.getContractId()+"\t"+contract.getEmp().getEmpName());
         result.setObject(contract);
         return result;
     }
@@ -125,7 +139,7 @@ public class PersonnelHandler {
         return result;
     }
     @GetMapping("prize")
-    public Result prize(int empId){
+    public Result prize(){
         Result result = new Result();
         return result;
     }

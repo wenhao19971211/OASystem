@@ -95,11 +95,13 @@
 </body>
 </html>
 <script>
-    // var param = parseUrl(location.href);
-    // var empId = param[empId];
+
+    var param = parseUrl(location.href);
+    var empId = param["empId"];
+    console.log(empId);
     $.ajax({
         url:"empInfo",
-        data:{"empId":1},
+        data:{"empId":empId},
         dataType:"json",
         type:"get",
         success:function (data) {
@@ -132,9 +134,10 @@
     $("#empInfo").click(function () {
         $("#info").show();
         $("#contractInfo").hide();
+        $("#checkWorkInfo").hide();
         $.ajax({
             url:"empInfo",
-            data:{"empId":1},
+            data:{"empId":empId},
             dataType:"json",
             type:"get",
             success:function (data) {
@@ -166,12 +169,13 @@
      * 合同信息
      */
     $("#contract").click(function () {
-        $("#info").hide();
         $("#contractInfo").show();
+        $("#info").hide();
+        $("#checkWorkInfo").hide();
         $("#contractTable tr:eq(1)").remove();
         $.ajax({
             url:"contractInfo",
-            data:{"empId":1},
+            data:{"empId":empId},
             type:"get",
             dataType:"json",
             success:function (data) {
@@ -224,7 +228,7 @@
         var timeEnd = getLastDay();
         $.ajax({
             url:"checkWork",
-            data:{"empId":5,"start":timeStar,"end":timeEnd},
+            data:{"empId":empId,"start":timeStar,"end":timeEnd},
             dataType:"json",
             type:"get",
             success:function (data) {
@@ -253,7 +257,7 @@
         $("#contractTable tr:not(:first)").remove();
         $.ajax({
             url:"prize",
-            data:{"empId":1},
+            data:{"empId":empId},
             type:"get",
             dataType:"json",
             success:function (data) {

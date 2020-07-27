@@ -21,6 +21,12 @@ public interface ContractDao {
      * 查询所有人事合同
      * @return
      */
-    public List<Contract> findAll();
+    public List<Contract> findAll(@Param("start") int start,@Param("end") int end);
+
+    /**
+     * 查询合同总数
+     * @return
+     */
+    public int findCount();
 
 }

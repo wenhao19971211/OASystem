@@ -67,24 +67,28 @@ public class ServiceTest {
 //        for (DayOff dayOff : list) {
 //            System.out.println(dayOff.getStartTime()+"\t"+dayOff.getEndTime());
 //        }
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date start = null;
-        Date end = null;
-        try {
-            start = sdf.parse("2020-07-01");
-            end = sdf.parse("2020-08-01");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        List<CheckWork> list = checkWorkDao.findById(5,start,end);
-        List<WorkOn> workOnList = workOnDao.findByIdAndMonth(5,start,end);
-        System.out.println(workOnList.size());
-        for (CheckWork checkWork : list) {
-            for (WorkOn workOn : workOnList) {
-                System.out.println(workOn.getEmp().getEmpName()+"\t"+workOn.getToday());
-            }
-
-        }
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        Date start = null;
+//        Date end = null;
+//        try {
+//            start = sdf.parse("2020-07-01");
+//            end = sdf.parse("2020-08-01");
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        List<CheckWork> list = checkWorkDao.findById(5,start,end);
+//        List<WorkOn> workOnList = workOnDao.findByIdAndMonth(5,start,end);
+//        System.out.println(workOnList.size());
+//        for (CheckWork checkWork : list) {
+//            for (WorkOn workOn : workOnList) {
+//                System.out.println(workOn.getEmp().getEmpName()+"\t"+workOn.getToday());
+//            }
+//
+//        }
+//        List<Contract> list = contractService.findAll();
+//        for (Contract contract : list) {
+//            System.out.println(contract.getContractId()+"\t"+contract.getEmp().getEmpName());
+//        }
 
     }
 }
