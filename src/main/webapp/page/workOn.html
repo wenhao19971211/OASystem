@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <base href="http://localhost:8080/OASystem_war_exploded/">
+    <link rel="stylesheet" href="js/dist/css/layui.css"  media="all">
+    <script src="js/dist/layui.js" charset="utf-8"></script>
+    <script src="js/jquery.js" ></script>
+    <title>Title</title>
+</head>
+
+<style>
+    #test-n1 .layui-laydate-main{width:100%; height: 50%;}
+    #test-n1 .layui-laydate-content td,#test-n1 .layui-laydate-content th{width:150px;height: 80px;}
+    .laydate-day-mark::after {
+        position: absolute;
+        content: '';
+        /*left: 48%;
+        top: 70%;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;*/
+        font-size: 150%;
+        background-color: orange; /*mark的颜色*/
+    }
+
+</style>
+<body style="background-image: url(../image/timg.jpg); ">
+<div class="layui-fluid" >
+    <div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
+        <button type="button" class="layui-btn layui-btn-lg layui-btn-primary layui-btn-radius" name="test2" id="test2" style="float: right;">大型加圆角</button>
+    </div>
+    <div class="layui-col-xs4 layui-col-sm4 layui-col-md4" style="width: 300px; height: 700px; font-size: 30px; text-align: center; " >
+
+    </div>
+    <div class="layui-col-xs8 layui-col-sm8 layui-col-md8 " id="dd" style="float: right">
+        <div class="layui-inline" id="test-n1" style="float: right; margin-left: 0px;"></div>
+    </div>
+</div>
+</body>
+</html>
+
+
+<script>
+    var ds={'0-0-12':'好肉粽'};
+    //		var date=null;
+    //		var dateTime=new Date();
+    //			$.ajax({
+    //				type:"get",
+    //				url:"wgg",
+    //				data:"dateTime",
+    //				async:true,
+    //				success:function(data){
+    //				date=data.result.newTime;
+    //
+    //				}
+    //			});
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#test-n1'
+            ,position: 'static'
+            ,calendar: true
+            ,type: 'datetime'
+            // ,format: 'yyyy年MM月dd日 HH时mm分ss秒'
+            ,value: dates
+            ,isInitValue: false
+            ,mark: {//标注重要日子--类型：Object，默认值：无
+                '0-0-14': '生日'
+                //这边传送一个data的json数组：表示所有的休息时间
+            }
+            ,done: function(value, date, endDate){//控件选择完毕后的回调---点击日期、清空、现在、确定均会触发。
+
+                // console.log(dates);
+                console.log(value); //得到日期生成的值，如：2017-08-18
+                console.log(date); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
+                console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
+            }
+        });
+
+        lay('#test2').on('click', function(e){ //假设 test1 是一个按钮
+            $("#test-n1").empty();
+            wgg();
+            laydate.render({
+                elem: '#test-n1'
+                ,position: 'static'
+                ,calendar: true
+                ,type: 'datetime'
+                ,value: dates
+                ,isInitValue: false
+                ,mark:ds
+                ,done: function(value, date, endDate){//控件选择完毕后的回调---点击日期、清空、现在、确定均会触发。
+
+                    // console.log(dates);
+                    console.log(value); //得到日期生成的值，如：2017-08-18
+                    console.log(date); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
+                    console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
+                }
+            });
+        });
+
+
+    });
+// 向后台传输数据将用户的id传入并且接收一个mark的json数据
+    function wgg(date){
+        var emp = $(window.parent.document).find(":input#empId");
+        var empId = emp.val();
+        $.ajax({
+            url:"workOn/"+param["empId"],
+            dataType:"json",
+            type:"post",
+            success:function (data) {
+                // 用于接收和改写mark数据将数据传递给新的日历
+                date=data;
+                //leaveInfo/"+param["empId"]
+            }
+        })
+    }
+    // $.ajax({
+    //     url:"empLogin",
+    //     dataType:"json",
+    //     type:"get",
+    //     success:function (data) {
+    //         $("#empId").val(data.object.empId);
+    //         $("#depId").val(data.object.dep.depId);
+    //     }
+    //
+    // });
+
+
+
+
+</script>

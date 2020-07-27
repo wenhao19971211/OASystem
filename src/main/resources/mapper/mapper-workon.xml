@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geek.dao.WorkOnDao">
+
+    <select id="findWorkOnsByEmpIdAndMonth" resultType="com.geek.pojo.WorkOn">
+        select * from workon where empId = #{empId} and workInTime between #{start} and #{end}
+    </select>
+    <!--上班打卡记录-->
+    <insert id="insertWorkOnByEmpId" parameterType="com.geek.pojo.WorkOn">
+        insert into workon value(#{empId},#{today},#{workInTime})
+    </insert>
+    <!--下班打卡记录-->
+    <update id="updateWorkOnByEmpId" parameterType="com.geek.pojo.WorkOn">
+        update workon set workOutTime=#{workOutTime} where empId=#{empId}
+    </update>
+
+</mapper>

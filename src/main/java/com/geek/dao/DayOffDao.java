@@ -48,6 +48,16 @@ public interface DayOffDao {
      */
     public void updatecheckStatusByDayOffId(@Param("state")int state,@Param("id") int id);
 
+    /**
+     * 根据empId和时间段查询该时间段内该员工的所有调休信息
+     * @param empId
+     * @param start
+     * @param end
+     * @return
+     */
+    public List<DayOff> findDayOffsByEmpIdAndStartAndEnd(@Param("empId") Integer empId,@Param("start") Date start,@Param("end") Date end);
+
+
 
 
 }

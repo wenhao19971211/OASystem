@@ -7,12 +7,47 @@ import java.util.Date;
  */
 public class Contract {
     private Integer contractId;
-    private Emp emp;
+    private Integer empId;
     private Integer contractType;
     private double salary;
     private Date effectTime;
     private Date failureTime;
     private Integer isTrainningContract;
+    private Emp checkEmp;
+
+    public Emp getCheckEmp() {
+        return checkEmp;
+    }
+
+    public void setCheckEmp(Emp checkEmp) {
+        this.checkEmp = checkEmp;
+    }
+
+    private Emp emp;
+
+    public Contract() {
+    }
+
+    public Contract(Integer contractId, Integer empId, Integer contractType, double salary, Date effectTime, Date failureTime, Integer isTrainningContract) {
+        this.contractId = contractId;
+        this.empId = empId;
+        this.contractType = contractType;
+        this.salary = salary;
+        this.effectTime = effectTime;
+        this.failureTime = failureTime;
+        this.isTrainningContract = isTrainningContract;
+    }
+
+    public Contract(Integer contractId, Integer empId, Integer contractType, double salary, Date effectTime, Date failureTime, Integer isTrainningContract, Emp emp) {
+        this.contractId = contractId;
+        this.empId = empId;
+        this.contractType = contractType;
+        this.salary = salary;
+        this.effectTime = effectTime;
+        this.failureTime = failureTime;
+        this.isTrainningContract = isTrainningContract;
+        this.emp = emp;
+    }
 
     public Integer getContractId() {
         return contractId;
@@ -64,11 +99,32 @@ public class Contract {
         this.isTrainningContract = isTrainningContract;
     }
 
+    public Integer getEmpId() {
+        return empId;
+    }
+
+    public void setEmpId(Integer empId) {
+        this.empId = empId;
+    }
+
     public Emp getEmp() {
         return emp;
     }
 
     public void setEmp(Emp emp) {
         this.emp = emp;
+    }
+
+    @Override
+    public String toString() {
+        return "Contract{" +
+                "contractId=" + contractId +
+                ", empId=" + empId +
+                ", contractType=" + contractType +
+                ", salary=" + salary +
+                ", effectTime=" + effectTime +
+                ", failureTime=" + failureTime +
+                ", isTrainningContract=" + isTrainningContract +
+                '}';
     }
 }

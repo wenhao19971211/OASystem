@@ -1,9 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <base href="http://localhost:8080/ssm_framework_war_exploded/">
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="js/jquery.js"></script>
+    <script src="js/common.js"></script>
+    <style>
+        .clear:after{
+            clear: both;
+            content: '';
+            display: block;
+        }
+        .left{
+            width: 200px;
+            height: 500px;
+            border: 1px solid #0C0C0C;
+            float: left;
+            margin-right: 100px;
+        }
+        .right{
+            width: 500px;
+            height: 500px;
+            border: 1px solid #0C0C0C;
+            float: left;
+
+        }
+    </style>
 </head>
 <body>
 <div class="left">
@@ -15,57 +38,165 @@
 <div class="right">
     <div id="info">
         <p>基本信息</p>
-        <div id="empId">工号：</div>
-        <div id="empName">姓名：</div>
-        <div id="card">身份证号：</div>
-        <div id="sex">性别：</div>
-        <div id="marriage">婚姻状况</div>
-        <div id="politic">政治面貌</div>
-        <div id="registratin">户口所在地：</div>
+        <div id="empId"></div>
+        <div id="empName"></div>
+        <div id="card"></div>
+        <div id="sex"></div>
+        <div id="marriage"></div>
+        <div id="politic"></div>
+        <div id="registratin"></div>
 
         <p>部门岗位</p>
         <div>公司：极客营</div>
-        <div id="depName">所在部门：</div>
-        <div id="position">职位：</div>
+        <div id="depName"></div>
+        <div id="position"></div>
         <p>学历信息</p>
-        <div id="education">最高学历</div>
-        <div id="school">毕业学校</div>
+        <div id="education"></div>
+        <div id="school"></div>
         <p>联络信息</p>
-        <div id="phone">电话：</div>
-        <div id="email">邮箱：</div>
+        <div id="phone"></div>
+        <div id="email"></div>
+    </div>
+    <div id="contractInfo" style="display: none">
+        <table id="contractTable" border="1" style="border-collapse: collapse">
+            <tr>
+                <td>合同编号</td>
+                <td>合同类型</td>
+                <td>生效日期</td>
+                <td>失效日期</td>
+                <td>合同年限</td>
+            </tr>
+        </table>
+    </div>
+    <div id="checkWorkInfo" style="display: none;">
+        <table id="checkWorkTable" border="1" style="border-collapse: collapse">
+            <tr>
+                <td>日期</td>
+                <td>签到时间</td>
+                <td>签退时间</td>
+                <td>状态</td>
+            </tr>
+        </table>
     </div>
 </div>
 </body>
 </html>
 <script>
-    var param = parseUrl(location.href);
-    var empId = param[empId];
+    // var param = parseUrl(location.href);
+    // var empId = param[empId];
     $.ajax({
         url:"empInfo",
-        data:{"empId":empId},
+        data:{"empId":1},
         dataType:"json",
         type:"get",
         success:function (data) {
+            console.log(data.object.dep.depName);
             var sex = "";
-            if (data.objcet.sex==1){
+            if (data.object.sex=="1"){
                 sex="男";
             }
             else{
                 sex="女";
             }
-            $("#empId").html(empId);
-            $("#empName").html(data.object.empName);
-            $("#card").html(data.object.card);
-            $("#sex").html(sex);
-            $("#marriage").html(data.object.marriage);
-            $("#politic").html(data.object.politic);
-            $("#registratin").html(data.object.registratin);
-            $("#depName").html(data.objcet.dep.depName);
-            $("#position").html(data.object.position);
-            $("#education").html(data.object.education);
-            $("#school").html(data.object.school);
-            $("#phone").html(data.object.phone);
-            $("#email").html(data.object.email);
+            $("#empId").html("工号："+data.object.empId);
+            $("#empName").html("姓名"+data.object.empName);
+            $("#card").html("身份证："+data.object.card);
+            $("#sex").html("性别："+sex);
+            $("#marriage").html("婚姻状况："+data.object.marriage);
+            $("#politic").html("政治面貌"+data.object.politic);
+            $("#registratin").html("户口所在地："+data.object.registratin);
+            $("#depName").html("所在部门："+data.object.dep.depName);
+            $("#position").html("职位："+data.object.position);
+            $("#education").html("最高学历："+data.object.education);
+            $("#school").html("毕业学校："+data.object.school);
+            $("#phone").html("手机："+data.object.phone);
+            $("#email").html("邮箱："+data.object.email);
         }
+    })
+    /**
+     * 个人信息
+     */
+    $("#empInfo").click(function () {
+        $("#info").show();
+        $("#contractInfo").hide();
+        $.ajax({
+            url:"empInfo",
+            data:{"empId":1},
+            dataType:"json",
+            type:"get",
+            success:function (data) {
+                console.log(data.object.dep.depName);
+                var sex = "";
+                if (data.object.sex=="1"){
+                    sex="男";
+                }
+                else{
+                    sex="女";
+                }
+                $("#empId").html("工号："+data.object.empId);
+                $("#empName").html("姓名"+data.object.empName);
+                $("#card").html("身份证："+data.object.card);
+                $("#sex").html("性别："+sex);
+                $("#marriage").html("婚姻状况："+data.object.marriage);
+                $("#politic").html("政治面貌"+data.object.politic);
+                $("#registratin").html("户口所在地："+data.object.registratin);
+                $("#depName").html("所在部门："+data.object.dep.depName);
+                $("#position").html("职位："+data.object.position);
+                $("#education").html("最高学历："+data.object.education);
+                $("#school").html("毕业学校："+data.object.school);
+                $("#phone").html("手机："+data.object.phone);
+                $("#email").html("邮箱："+data.object.email);
+            }
+        })
+    })
+    /**
+     * 合同信息
+     */
+    $("#contract").click(function () {
+        $("#info").hide();
+        $("#contractInfo").show();
+        $("#contractTable tr:eq(1)").remove();
+        $.ajax({
+            url:"contractInfo",
+            data:{"empId":1},
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+                var year = parseInt((data.object.failureTime-data.object.effectTime)/31536000000);
+                //合同年限
+                var contractYear = year+"年";
+                //生效时间
+                var effectTime = parseDate(data.object.effectTime);
+                //失效时间
+                var failureTime = parseDate(data.object.failureTime);
+                var contractType ="";
+                if (data.object.contractType == 1){
+                    contractType = "劳动合同";
+                }
+                else if (data.object.contractType == 2){
+                    contractType = "劳务合同";
+                }
+                else if (data.object.contractType == 3){
+                    contractType = "聘用合同";
+                }
+                else if (data.object.contractType == 4){
+                    contractType = "保密协议";
+                }
+                else if (data.object.contractType == 5){
+                    contractType = "竞业协议";
+                }
+                else if (data.object.contractType == 6){
+                    contractType = "培训合同";
+                }
+
+                var info = "<tr>" +
+                    "<td>"+data.object.contractId+"</td>" +
+                    "<td>"+contractType+"</td>" +
+                    "<td>"+effectTime+"</td>" +
+                    "<td>"+failureTime+"</td>" +
+                    "<td>"+contractYear+"</td></tr>"
+                $("#contractTable").append(info);
+            }
+        })
     })
 </script>

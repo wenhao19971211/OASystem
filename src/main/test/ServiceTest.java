@@ -1,9 +1,9 @@
-import com.geek.bo.Leave_bo;
+import com.geek.dao.DayOffDao;
 import com.geek.dao.MessageDao;
-import com.geek.pojo.Emp;
-import com.geek.pojo.Message;
+import com.geek.pojo.*;
+import com.geek.service.CheckWorkService;
+import com.geek.service.ContractService;
 import com.geek.service.EmpService;
-import com.geek.service.LeaveService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,11 @@ public class ServiceTest {
     @Autowired
     EmpService empService;
     @Autowired
-    LeaveService leaveService;
+    ContractService contractService;
+    @Autowired
+    DayOffDao dayOffDao;
+    @Autowired
+    CheckWorkService checkWorkService;
     @Test
     public void test(){
 //        List<Message> list = messageDao.findAllById(1);
@@ -44,11 +48,19 @@ public class ServiceTest {
 
 //        Emp emp = empService.findManagerBydepId(60);
 //        System.out.println(emp.getEmpName());
-
-//        List<Leave_bo>leave_bos=leaveService.findLeaveList(50,0,0,1);
-//        System.out.println("长度是"+leave_bos.size());
-//        for (Leave_bo leaveBo : leave_bos) {
-//            System.out.println(leaveBo.getType()+leaveBo.getSendTime()+leaveBo.getCause());
+//        List<Emp> list = empService.findAll(1);
+//        for (Emp emp : list) {
+//            System.out.println(emp.getEmpName()+"\t"+emp.getDep().getDepName());
 //        }
+//        Contract contract =  contractService.findContractByEmpId(2);
+//        System.out.println(contract.getContractId());
+//        List<DayOff> list = dayOffDao.findAllDayOffBydepIdAndempId(0,1,1);
+//        for (DayOff dayOff : list) {
+//            System.out.println(dayOff.getStartTime()+"\t"+dayOff.getEndTime());
+//        }
+        List<CheckWork> list = checkWorkService.findById(5);
+        for (CheckWork checkWork : list) {
+            System.out.println(checkWork.getEmp().getEmpName()+"\t"+checkWork.getToday()+"\t"+checkWork.getIsLate());
+        }
     }
 }

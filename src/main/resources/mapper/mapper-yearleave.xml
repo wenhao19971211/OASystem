@@ -2,15 +2,15 @@
 <!DOCTYPE mapper
         PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         "http://ibatis.apache.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.geek.dao.LeaveDao">
-    <!--1.事假申请-->
-    <insert id="addLeave" >
-        insert into `leave` values(null,#{id},#{cause},now(),#{start},#{end},#{auditorId},#{checkTime},#{state})
-    </insert>
+<mapper namespace="com.geek.dao.YearLeaveDao">
+    <!--1.年假申请-->
+  <insert id="addYearLeave" >
+       insert into yearleave values(null,#{id},#{cause},now(),#{start},#{end},#{auditorId},#{checkTime},#{state})
+  </insert>
     <!--2.查看请假 只写dep代表经理查询审批emp写0 反之-->
-    <resultMap id="leaveMap" type="com.geek.pojo.Leave">
-        <id property="leaveId" column="leaveId"></id>
-        <result property="leaveCause" column="leaveCause"></result>
+    <resultMap id="yearLeaveMap" type="com.geek.pojo.YearLeave">
+        <id property="yearLeaveId" column="yearLeaveId"></id>
+        <result property="yearLeaveCause" column="yearLeaveCause"></result>
         <result property="sendTime" column="sendTime"></result>
         <result property="startTime" column="startTime"></result>
         <result property="endTime" column="endTime"></result>
@@ -21,39 +21,28 @@
             <result property="empName" column="empName"></result>
         </association>
     </resultMap>
-    <select id="findAllLeave" resultMap="leaveMap">
-        select * from `leave` inner join emp on `leave`.applyEmpId=emp.empId where 1=1
+    <select id="findAllYearLeave" resultMap="yearLeaveMap">
+        select * from  yearleave inner join emp on  yearleave.applyEmpId=emp.empId where 1=1
         <if test="depId != 0">
             and emp.depId=#{depId}
         </if>
         <if test="empId != 0">
-            and `leave`.applyEmpId=#{empId}
+            and yearleave.applyEmpId=#{empId}
         </if>
         <if test="state != 0">
-            and `leave`.checkStatus=#{state}
+            and yearleave.checkStatus=#{state}
         </if>
         <if test="flag != 0">
-            and `leave`.checkStatus !=#{flag}
+            and yearleave.checkStatus !=#{flag}
         </if>
         order by sendTime desc
     </select>
-
-<select id="findLeavesByEmpIdAndStartAndEnd" resultType="com.geek.pojo.Leave">
-    select * from `leave`
-    where applyempId = #{empId}
-    AND checkstatus = 2
-    and (endTime BETWEEN #{start} AND #{end}
-    OR startTime BETWEEN #{start} AND #{end})
-</select>
-
-
-
     <!--3.修改审核的时间-->
-    <update id="updateCheckTimeByleaveId">
-        update `leave` set checkTime=#{date} where leaveId=#{id}
+    <update id="updateCheckTimeByYearLeaveId">
+        update yearleave set checkTime=#{date} where yearLeaveId=#{id}
     </update>
     <!--4.修改审核的状态-->
-    <update id="updateCheckStatusByleaveId">
-        update `leave` set checkStatus=#{state} where leaveId=#{id}
+    <update id="updateCheckStatusByYearLeaveId">
+        update yearleave set checkStatus=#{state} where yearLeaveId=#{id}
     </update>
 </mapper>
