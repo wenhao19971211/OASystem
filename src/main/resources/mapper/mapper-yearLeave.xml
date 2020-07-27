@@ -35,7 +35,7 @@
         <if test="flag != 0">
             and yearleave.checkStatus !=#{flag}
         </if>
-        order by sendTime
+        order by sendTime desc
     </select>
     <!--3.修改审核的时间-->
     <update id="updateCheckTimeByYearLeaveId">

@@ -26,5 +26,6 @@
         <mapper resource="mapper/mapper-emp.xml"></mapper>
         <mapper resource="mapper/mapper-leave.xml"></mapper>
         <mapper resource="mapper/mapper-yearLeave.xml"></mapper>
+        <mapper resource="mapper/mapper-email.xml"></mapper>
     </mappers>
 </configuration>

@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <title>请假</title>
 </head>
-<body>
+<body >
         <div>请假申请</div>
         <!--假期余额-->
         <div id="DaysBalance">
@@ -46,9 +46,7 @@
                     <td>请假原因</td>
                     <!--div中请假的内容-->
                     <td colspan="2">
-                        <div id="cause1" contenteditable="true" style="overflow: auto; height: 80px;width: 300px">
-
-                        </div>
+                        <div id="cause1" contenteditable="true" style="overflow: auto; height: 80px;width: 300px"></div>
                     </td>
                 </tr>
             </table>
@@ -59,15 +57,13 @@
 <script>
 
         $(function () {
+            var emp = $(window.parent.document).find(":input#empId");
+            var empId = emp.val();
 
-            var param=parseUrl(location.href);
-            console.log(param)
-            console.log(param["empId"])
-            // param["empId"]
             var a="";
             var b="";
             $.ajax({
-                url:"leaveInfo/"+param["empId"],
+                url:"leaveInfo/"+empId,
                 type:"get",
                 dataType:"json",
                 success:function (data) {
@@ -91,7 +87,8 @@
                 var type= $("#Type").val();
                 var startDate=$("#startTime").val();
                 var endDate=$("#endTime").val();
-                var cause1=$("#cause1").html();
+                var cause1=$("#cause1").html().trim();
+                console.log(cause1);
                 console.log(type+" , "+startDate+" , "+endDate+" , "+cause1);
                 //把时间替换成同一类型比较
                 var start=new Date(startDate.replace("-", "/").replace("-", "/"));
@@ -104,7 +101,6 @@
                 //可调休时间
                 var hasDays2=b;
                 // alert("天数是："+hasDays1+"  "+hasDays2);
-
                 if (type!=0){
                     if (startDate!=""){
                         if (endDate!=""){
@@ -132,10 +128,11 @@
                                             $.ajax({
                                                 url:"leave",
                                                 type:"post",
-                                                data:{"type":type,"startDate":startDate,"endDate":endDate,"cause":cause},
+                                                data:{"type":type,"startDate":startDate,"endDate":endDate,"cause":cause1},
                                                 success:function (data) {
                                                     if (data==1){
                                                         alert("请假申请已发送！");
+                                                        window.location.reload();
                                                     } else {
                                                         alert("请求失败");
                                                     }

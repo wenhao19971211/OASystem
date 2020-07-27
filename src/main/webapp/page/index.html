@@ -21,7 +21,7 @@
 		}
 	</style>
 
-	<body style="background-color:#393D49;" >
+	<body style="background-color:gainsboro;" >
 	<input type="hidden" id="empId">
 	<input type="hidden" id="depId">
    <div class="layui-row" >
@@ -45,8 +45,8 @@
 		 <li class="layui-nav-item"><a >我的薪资</a></li>
 		 <li class="layui-nav-item"><a >请假管理</a>
 		 <dl class="layui-nav-child">
-			 <dd id="qj"><a >请假</a></dd>
-			 <dd id="ckqj"><a >查看请假</a></dd>
+			 <dd ><a  onclick="load_home('qj')">请假</a></dd>
+			 <dd onclick="load_home('ckqj')"><a >查看请假</a></dd>
 		 </dl>
 		 </li>
 		 <li class="layui-nav-item"><a >报销管理</a></li>
@@ -84,13 +84,13 @@
 			<!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
 		<li class="layui-nav-item"><a >待我审批</a>
 			<dl class="layui-nav-child">
-				<dd id="spqj"><a>审批请假</a></dd>
+				<dd  onclick="load_home('spqj')"><a>审批请假</a></dd>
 				<dd><a>审批补卡</a></dd>
 			</dl>
 		</li>
 		<li class="layui-nav-item"><a >已审批</a>
             <dl class="layui-nav-child">
-                <dd id="spyqj"><a>已审批请假</a></dd>
+                <dd onclick="load_home('spyqj')"><a>已审批请假</a></dd>
                 <dd ><a>已审批补卡</a></dd>
             </dl>
         </li>
@@ -129,7 +129,7 @@
 
   	 	</div>
 			<!--//右边活动版块-->
-		 <div class="layui-col-xs8 layui-col-sm8 layui-col-md10 ss" style="margin-left:-30px;" id="d1">
+		 <div class="layui-col-xs8 layui-col-sm8 layui-col-md10 ss" style="margin-left:-30px;" >
 			  <div class="layui-row" style="width: 102%; height: 102%;">
 				<div class="layui-col-xs12 layui-col-sm12 layui-col-md12 imgss">
 
@@ -155,14 +155,22 @@
 	});
 
 	function load_home(data) {
-		 $("#d1").empty();
+		 $("#nr").empty();
 		   if (data==1){
 		    $("#d1").append("<iframe src='http://www.baidu.com' frameborder='0' scrolling='no' width='1200px' height='1200px'></iframe>");
 		     }else if (data==2){
 		    $("#d1").append("<iframe src='http://www.jd.com' frameborder='0' scrolling='no' width='1000px' height='1000px' ></iframe>");
 		   }else if(data==3){
                $("#d1").append("<iframe src='http://www.jd.com' frameborder='0' scrolling='no' width='1000px' height='1000px' ></iframe>");
-           }
+           }else if (data=='qj'){
+		   		$("#nr").append("<iframe src='page/leave.html' frameborder='0' scrolling='no' width='1000px' height='1000px' ></iframe>")
+		   }else if (data=='ckqj'){
+			   $("#nr").append("<iframe src='page/selectLeave.html' frameborder='0' scrolling='no' width='1000px' height='1000px' ></iframe>")
+		   }else if (data=='spyqj') {
+			   $("#nr").append("<iframe src='page/managerSelectLeave.html' frameborder='0' scrolling='no' width='1000px' height='1000px' ></iframe>")
+		   }else if (data=='spqj') {
+			   $("#nr").append("<iframe src='page/leaveAudit.html' frameborder='0' scrolling='no' width='1000px' height='1000px' ></iframe>")
+		   }
 	}
 
 	/**
@@ -179,19 +187,19 @@
 
 	})
 
-	$("#qj").click(function () {
-		alert("哈哈哈");
-		var empId=$("#empId").val();
-		$.ajax({
-			url:"page/leave.html",
-			data:{"empId":empId},
-			type:"get",
-			dataType:"html",
-			success:function (data) {
-				$("#nr").html(data);
-			}
-		})
-	})
+	// $("#qj").click(function () {
+	// 	alert("哈哈哈");
+	// 	var empId=$("#empId").val();
+	// 	$.ajax({
+	// 		url:"page/leave.html",
+	// 		data:{"empId":empId},
+	// 		type:"get",
+	// 		dataType:"html",
+	// 		success:function (data) {
+	// 			$("#nr").html(data);
+	// 		}
+	// 	})
+	// })
 
 
 	</script>
