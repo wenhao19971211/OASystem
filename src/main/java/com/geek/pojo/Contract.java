@@ -13,6 +13,15 @@ public class Contract {
     private Date effectTime;
     private Date failureTime;
     private Integer isTrainningContract;
+    private Emp checkEmp;
+
+    public Emp getCheckEmp() {
+        return checkEmp;
+    }
+
+    public void setCheckEmp(Emp checkEmp) {
+        this.checkEmp = checkEmp;
+    }
 
     private Emp emp;
 

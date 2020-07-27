@@ -4,35 +4,65 @@
     <base href="http://localhost:8080/OASystem_war_exploded/">
     <script src="js/jquery.js"></script>
     <script src="js/common.js"></script>
+    <link rel="stylesheet" href="js/dist/css/layui.css" />
     <meta charset="UTF-8">
     <title>查看请假</title>
 </head>
 <body>
-    <div>
-        <table id="tab1" border="1">
+
+    <div id="div1" style="display: none;margin-left: 300px">
+        <!--<table id="tab1" border="1">-->
+            <!--<thead>-->
+                <!--<td>序号</td>-->
+                <!--<td>假期类型</td>-->
+                <!--<td>请假原因</td>-->
+                <!--<td>申请时间</td>-->
+                <!--<td>起始时间</td>-->
+                <!--<td>截止时间</td>-->
+                <!--<td>审核状态</td>-->
+            <!--</thead>-->
+        <!--</table>-->
+        <h2 style="text-align: center">我的请假申请</h2>
+        <table class="layui-table">
+            <colgroup>
+                <col width="150">
+                <col width="200">
+                <col>
+            </colgroup>
             <thead>
-                <td>序号</td>
-                <td>假期类型</td>
-                <td>请假原因</td>
-                <td>申请时间</td>
-                <td>起始时间</td>
-                <td>截止时间</td>
-                <td>审核状态</td>
+            <tr>
+                <th>序号</th>
+                <th>假期类型</th>
+                <th>请假原因</th>
+                <th>申请时间</th>
+                <th>起始时间</th>
+                <th>截止时间</th>
+                <th>审核状态</th>
+            </tr>
             </thead>
         </table>
     </div>
+    <div id="zwsq" style="display:none">暂无请假申请</div>
 </body>
     <script>
-        var param=parseUrl(location.href);
-        //param["empId"]
+        setTimeout ( function(){ location.reload(); }, 10000 );
+        var emp = $(window.parent.document).find(":input#empId");
+        var empId = emp.val();
             $.ajax({
-                url:"leaveList/"+1,
+                url:"leaveList/"+empId,
                 type:"get",
                 dataType:"json",
                 success:function (data) {
                     console.log(data)
                     //请假消息的长度
                     var length=data.list.length;
+                    if (length!=0){
+                        $("#div1").show();
+                        $("#zwsq").hide();
+                    }else {
+                        $("#div1").hide();
+                        $("#zwsq").show();
+                    }
                     for (var i=0;i<length;i++){
                         var leaveList="";
                         leaveList+="<tr>" +
@@ -44,7 +74,8 @@
                             "<td>"+parseDate(data.list[i].endTime)+"</td>" +
                             "<td>"+data.list[i].checkStatus+"</td>" +
                             "</tr>";
-                        $("#tab1").append(leaveList);
+                        // $("#tab1").append(leaveList);
+                        $(".layui-table").append(leaveList);
                     }
                 }
             })

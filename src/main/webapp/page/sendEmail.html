@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="http://localhost:8080/OASystem_war_exploded/">
+    <script src="js/jquery.js"></script>
+    <script src="js/common.js"></script>
+    <link rel="stylesheet" href="js/dist/css/layui.css" />
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div  style="float: left">
+    <div><input type="button" value="发    送   邮    件" id="sendEmailBut"></div>
+    <div><input type="button" value="查看已发送记录" id="selectSendEmailBut"></div>
+</div>
+    <div style="float: left">
+        <div id="sendEmail">
+            <input type="text" placeholder="请输入邮件标题"  id="title">
+            <input type="button" value="选择联系人" id="choseEmp">
+            <div id="per" style="display: none"></div>
+            <div id="emp" style="display: none">
+                <table id="empTable">
+
+                </table>
+                <input type="buuton" value="确定" id="ceshi" style="width: 50px">
+            </div>
+
+            <div id="content" style="width: 400px;height: 150px;overflow: auto;
+            border:1px solid black;" contenteditable="true" ></div>
+            <div style="margin-left: 100px"><input type="button" value="添加附件" >
+                <input type="button" value="发送" id="fsButton" style="margin-left: 50px"></div>
+        </div>
+        <div id="selectSendEmail" style="display: none">
+           <!--<table id="emailS">-->
+               <h2 style="text-align: center">我的请假申请</h2>
+               <table class="layui-table" style="text-align: center">
+                   <colgroup>
+                       <col width="50">
+                       <col width="150">
+                       <col width="150">
+                       <col width="150">
+                       <col width="150">
+                   </colgroup>
+
+               </table>
+           <!--</table>-->
+        </div>
+    </div>
+
+
+</body>
+<script>
+    var empIdArrary;
+    var nameArrary=new Array();
+    console.log(empIdArrary);
+    console.log(nameArrary);
+    $(function () {
+        /**
+         * 选择联系人按钮
+         */
+        $("#choseEmp").click(function () {
+            $("#empTable").html(" ");
+            $("#emp").show();
+            $.ajax({
+                url:"findAllEmp",
+                type:"get",
+                dataType:"json",
+                success:function (data) {
+                    console.log(data.list.length)
+                    console.log(data);
+                    for (var i=0;i<data.list.length;i++){
+                        var emp="";
+                        emp+="<tr><td><input type='checkbox' name='emp' class='choseCheck' value='"+data.list[i].empId+"'  >"+data.list[i].empName+"</td></tr>";
+                        $("#empTable").append(emp);
+                        nameArrary.push(data.list[i].empName);
+
+                    }
+
+
+                }
+            })
+        })
+        //确认按钮点击事件
+        $("#ceshi").click(function () {
+            empIdArrary=new Array();
+            $("#per").html(" ");
+            var iArray=new Array();
+            $("#emp").hide();
+            var input= document.getElementsByTagName("input");
+            for(var i=0;i<input.length;i++) {
+                if (input[i].type == "checkbox" && input[i].checked) {//是否bai是checkbox且是选du中的
+                    // alert(input[i].value)//弹出zhi那么值dao
+                        empIdArrary.push(input[i].value);
+                    iArray[i]=i;
+                }
+
+            }
+            $("#per").html("<span>接收人为:</span>");
+            //显示选中的名字
+            for (var i=0;i<iArray.length;i++){
+                if (iArray[i]!=null){
+                    var empName="";
+                    empName+="<a>"+nameArrary[iArray[i]-4]+"、"+"</a>"
+                    $("#per").append(empName);
+                }
+            }
+            $("#per").show();
+            console.log(empIdArrary);
+            console.log(nameArrary);
+        })
+
+
+        //提交按钮点击事件
+        $("#fsButton").click(function () {
+
+            var title=$("#title").val();
+            var content=$("#content").text();
+            var arrary=empIdArrary;
+            // console.log("这里传递的长度是"+arrary.length);
+            if (title==""){
+                alert("标题不可为空");
+                return;
+            }
+            if (content==""){
+                alert("内容不可为空");
+                return;
+            }
+            if (arrary.length==0){
+                alert("请选择收件人");
+                return
+            }
+            $.ajax({
+                url:"sendEmail",
+                type:"post",
+                traditional:true,
+                data:{"empId":1,"type":1,"title":title,"content":content,"receive": arrary},
+                dataType:"json",
+                success:function (data) {
+                    if (data==1){
+                        alert("发送成功！")
+                        window.location.reload();
+                    }
+                }
+            })
+        })
+
+        /**
+         * 发送邮件按钮
+         */
+        $("#sendEmailBut").click(function () {
+            $("#sendEmail").show();
+            $("#selectSendEmail").hide();
+
+        })
+        /**
+         * 查看已发送邮件按钮
+         */
+        $("#selectSendEmailBut").click(function () {
+
+            $("#sendEmail").hide();
+            $("#selectSendEmail").show();
+            $.ajax({
+                url:"findEmail",
+                data:{"empId":1,"type":1,"readStatus":1,"receiveEmpId":0},
+                type:"get",
+                dataType:"json",
+                success:function (data) {
+                    console.log(data)
+                    $(".layui-table").html(" ");
+                    $(".layui-table").append("<thead><td>序号</td><td>标题</td><td>内容</td> <td>发送时间</td><td>接收人</td></thead>");
+                    for (var i=0;i<data.list.length;i++){
+                        var info=" ";
+                        info+="<tr><td>"+(i+1)+"</td><td>"+data.list[i].title.substr(0,6)+"</td><td>"+data.list[i].content.substr(0,10)+"</td><td>"+parseDate(data.list[i].time)+"</td><td>"+data.object[i]+"</td></tr>"
+                        console.log(data.list[i].title)
+                        // $("#emailS").append(info)
+                        $(".layui-table").append(info)
+                    }
+                }
+            })
+        })
+    })
+
+</script>
+</html>

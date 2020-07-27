@@ -8,35 +8,73 @@
     <title>流程管理中查看已批阅的请假申请</title>
 </head>
 <body>
-        <div>
-            <table id="tab1" border="1">
+        <div  id="div1" style="display: none;margin-left: 200px" >
+            <!--<table id="tab1" border="1">-->
+                <!--<thead>-->
+                <!--<td>序号</td>-->
+                <!--<td>员工姓名</td>-->
+                <!--<td>假期类型</td>-->
+                <!--<td>请假原因</td>-->
+                <!--<td>申请时间</td>-->
+                <!--<td>起始时间</td>-->
+                <!--<td>截止时间</td>-->
+                <!--<td>请假天数(天)</td>-->
+                <!--<td>审核状态</td>-->
+                <!--<td>审核时间</td>-->
+                <!--</thead>-->
+            <!--</table>-->
+            <h2 style="text-align: center">我的请假申请</h2>
+            <table class="layui-table" style="text-align: center;border-collapse: collapse" border="1px soild gary">
+                <colgroup >
+                    <col width="100">
+                    <col width="150">
+                    <col width="150">
+                    <col width="100">
+                    <col width="180">
+                    <col width="180">
+                    <col width="180">
+                    <col width="150">
+                    <col width="180">
+                    <col width="200">
+                </colgroup>
                 <thead>
-                <td>序号</td>
-                <td>员工姓名</td>
-                <td>假期类型</td>
-                <td>请假原因</td>
-                <td>申请时间</td>
-                <td>起始时间</td>
-                <td>截止时间</td>
-                <td>请假天数(天)</td>
-                <td>审核状态</td>
-                <td>审核时间</td>
+                <tr style="background-color: #8D8D8D">
+                    <th>序号</th>
+                    <th>员工姓名</th>
+                    <th>假期类型</th>
+                    <th>请假原因</th>
+                    <th>申请时间</th>
+                    <th>起始时间</th>
+                    <th>截止时间</th>
+                    <th>请假天数(天)</th>
+                    <th>审核状态</th>
+                    <th>审核时间</th>
+                </tr>
                 </thead>
             </table>
         </div>
+        <div id="zwsq" style="display:none">暂无请假申请</div>
 </body>
 <script>
     $(function () {
-        var param=parseUrl(location.href);
-        //param["depId"]
+        setTimeout ( function(){ location.reload(); }, 10000 );
+        var dep = $(window.parent.document).find(":input#depId");
+        var depId = dep.val();
         $.ajax({
-            url:"managerLeave/"+50,
+            url:"managerLeave/"+depId,
             type:"get",
             dataType:"json",
             success:function (data) {
                 console.log(data)
                 //请假消息的长度
                 var length=data.list.length;
+                if (length!=0){
+                    $("#div1").show();
+                    $("#zwsq").hide();
+                }else {
+                    $("#div1").hide();
+                    $("#zwsq").show();
+                }
                 for (var i=0;i<length;i++){
                     var leaveList="";
                     //   data.list[i].intType,data.list[i].applyId,3
@@ -50,7 +88,8 @@
                         "<td>"+data.list[i].checkStatus+"</td>" +
                         "<td>"+parseDate(data.list[i].checkTime)+"</td></tr>";
 
-                    $("#tab1").append(leaveList);
+                    // $("#tab1").append(leaveList);
+                    $(".layui-table").append(leaveList);
 
 
                 }

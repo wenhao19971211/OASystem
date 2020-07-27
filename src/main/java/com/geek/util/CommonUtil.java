@@ -53,10 +53,8 @@ public class CommonUtil {
         Date date = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
         return date;
     }
-/*
-
-    */
-/**
+    /**
+     *
      * 判断输入的日期是否为节假日，
      * 参数httpArg:  20200724  格式
      * 返回值： 0上班  1周末  2节假日
@@ -91,8 +89,6 @@ public class CommonUtil {
         return result;
     }
 
-*/
-/*
 
     public static int request( String httpArg) {
         String httpUrl = "http://api.goseek.cn/Tools/holiday";
@@ -130,12 +126,6 @@ public class CommonUtil {
         return d;
     }
 
-*/
-
-
-
-
-/*
     *//**
      * 根据传入的日期，返回该月有多少天工作日
      * @param date
@@ -245,7 +235,7 @@ public class CommonUtil {
 //            System.out.println(k);
 //            return k;
 //        } catch ( Exception e) {
-//            // TODO: handle exception
+//             TODO: handle exception
 //            System.out.println(e.getClass());
 //            e.printStackTrace();
 //        }
