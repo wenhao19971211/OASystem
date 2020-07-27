@@ -1,12 +1,15 @@
-import com.geek.bo.TaskReceive_bo;
-import com.geek.bo.TaskSend_bo;
+import com.geek.bo.*;
 import com.geek.dao.*;
+import com.geek.handler.RimbursementIssueHandler;
+import com.geek.handler.SalaryHandler;
+import com.geek.handler.SalaryIssueHandler;
 import com.geek.handler.TaskSendHandler;
 import com.geek.pojo.*;
 import com.geek.service.SalaryService;
 import com.geek.util.CommonUtil;
 import com.sun.corba.se.impl.presentation.rmi.IDLNameTranslatorImpl;
 import org.junit.runner.RunWith;
+import org.omg.CORBA.PRIVATE_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -32,6 +35,12 @@ public class Test {
     private SalaryService salaryService;
     @Autowired
     private ContractDao contractDao;
+    @Autowired
+    private SalaryHandler salaryHandler;
+    @Autowired
+    private SalaryIssueHandler salaryIssueHandler;
+    @Autowired
+    private RimbursementIssueHandler rimbursementIssueHandler;
 
     @org.junit.Test
     public void test1()
@@ -147,8 +156,46 @@ public class Test {
         boolean b = salaryService.updateLastMonthSalary(time);
         System.out.println(b);
     }
-
-
-
+    @org.junit.Test
+    public void test10()
+    {
+        Salary_bo salary_bo = salaryHandler.findSalaryByEmpId(1, 1, 1);
+        System.out.println("empId:"+salary_bo.getEmpId());
+        System.out.println("count:"+salary_bo.getCount());
+        for (Salary salary : salary_bo.getSalaries()) {
+            System.out.println(salary);
+        }
+    }
+    @org.junit.Test
+    public void test11()
+    {
+        SalaryIssue_bo salaryIssue_bo = salaryIssueHandler.findSalaryIssueByStatus(1, 1, 3);
+        System.out.println("status:"+salaryIssue_bo.getStatus());
+        System.out.println("count:"+salaryIssue_bo.getCount());
+        for (SalaryIssue salaryIssue : salaryIssue_bo.getSalaryIssues()) {
+            System.out.println(salaryIssue);
+        }
+    }
+    @org.junit.Test
+    public  void test12()
+    {
+        RimbursementIssue_bo rimbursementIssue_bo = rimbursementIssueHandler.findRimbursementByStatus(2, 1, 3);
+        System.out.println("count:"+rimbursementIssue_bo.getCount());
+        for (Rimbursement rimbursement : rimbursementIssue_bo.getRimbursements()) {
+            System.out.println(rimbursement);
+        }
+    }
+    @org.junit.Test
+    public void test13()
+    {
+        String flag = rimbursementIssueHandler.updateRimbursementIssueStatusByRimbursementIssueId(6, 2);
+        System.out.println("flag:"+flag);
+    }
+    @org.junit.Test
+    public  void test14()
+    {
+        String flag = salaryIssueHandler.updateSalaryIssueStatusBySalaryIssueId(19, 1);
+        System.out.println("flag:"+flag);
+    }
 
 }

@@ -12,4 +12,11 @@
         select * from salary where empId = #{empId} and month = #{month}
     </select>
 
+    <select id="findSalaryByEmpId" resultType="com.geek.pojo.Salary">
+        select * from salary where empId = #{empId} order by month desc
+        <if test="index != null and pageSize != null">
+            limit #{index},#{pageSize}
+        </if>
+    </select>
+
 </mapper>
