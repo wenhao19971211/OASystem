@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geek.dao.EmailDao">
+  <!--1.发送邮件或回复-->
+    <insert id="addSendEmail" >
+        insert into email values(null,#{id},now(),#{title},#{content},#{emailType},1,1,null,#{receiveEmpId})
+    </insert>
+  <!--2.查看邮件-->
+    <select id="selectEmail" resultType="com.geek.pojo.Email">
+        select * from email where 1=1
+        <if test="id != 0">
+            and empId=#{id}
+        </if>
+       <if test="type != 0">
+           and emailType=#{type}
+       </if>
+        <if test="readStatus != 0">
+            and readStatus=#{readStatus}
+        </if>
+        <if test="receiveEmpId != 0 ">
+            and receiveEmpId=#{receiveEmpId}
+        </if>
+        order by time desc
+    </select>
+</mapper>

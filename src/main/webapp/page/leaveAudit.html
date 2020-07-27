@@ -4,42 +4,83 @@
     <base href="http://localhost:8080/OASystem_war_exploded/">
     <script src="js/jquery.js"></script>
     <script src="js/common.js"></script>
+    <!--<link rel="stylesheet" href="js/dist/css/layui.css" />-->
     <meta charset="UTF-8">
     <title>请假审核</title>
 </head>
 <body>
-        <div>
-            <table id="tab1" border="1">
+        <div id="div1" style="display: none;margin-left: 150px">
+            <!--<table id="tab1" border="1">-->
+                <!--<thead>-->
+                <!--<td>序号</td>-->
+                <!--<td>员工姓名</td>-->
+                <!--<td>假期类型</td>-->
+                <!--<td>请假原因</td>-->
+                <!--<td>申请时间</td>-->
+                <!--<td>起始时间</td>-->
+                <!--<td>截止时间</td>-->
+                <!--<td>请假天数(天)</td>-->
+                <!--<td>审核状态</td>-->
+                <!--<td></td>-->
+                <!--</thead>-->
+            <!--</table>-->
+            <h2 style="text-align: center">审核请假申请</h2>
+            <table class="layui-table" style="text-align: center;border-collapse: collapse" border="1px soild gary">
+                <colgroup >
+                    <col width="100">
+                    <col width="150">
+                    <col width="150">
+                    <col width="100">
+                    <col width="170">
+                    <col width="170">
+                    <col width="170">
+                    <col width="150">
+                    <col width="150">
+                    <col width="200">
+                </colgroup>
                 <thead>
-                <td>序号</td>
-                <td>员工姓名</td>
-                <td>假期类型</td>
-                <td>请假原因</td>
-                <td>申请时间</td>
-                <td>起始时间</td>
-                <td>截止时间</td>
-                <td>请假天数(天)</td>
-                <td>审核状态</td>
-                <td></td>
+                <tr style="background-color: #8D8D8D">
+                    <th>序号</th>
+                    <th>员工姓名</th>
+                    <th>假期类型</th>
+                    <th>请假原因</th>
+                    <th>申请时间</th>
+                    <th>起始时间</th>
+                    <th>截止时间</th>
+                    <th>请假天数(天)</th>
+                    <th>审核状态</th>
+                    <th>意见</th>
+                </tr>
                 </thead>
             </table>
         </div>
+<div id="zwsq" style="display:none">暂无请假申请</div>
 
 </body>
 <script>
-    $(function () {
 
-        var param=parseUrl(location.href);
-        //param["depId"]
+    $(function () {
+        setTimeout ( function(){ location.reload(); }, 10000 );
+        var dep = $(window.parent.document).find(":input#depId");
+        var depId = dep.val();
         $.ajax({
-            url:"leaveAudit/"+50,
+            url:"leaveAudit/"+depId,
             type:"get",
             dataType:"json",
             success:function (data) {
+
                 console.log(data)
                 //请假消息的长度
                 var length=data.list.length;
-                for (var i=0;i<length;i++){
+                console.log("长度"+length)
+                if (length!=0){
+                    $("#div1").show();
+                    $("#zwsq").hide();
+                }else {
+                    $("#div1").hide();
+                    $("#zwsq").show();
+                }
+                    for (var i=0;i<length;i++){
                     var leaveList="";
                     //   data.list[i].intType,data.list[i].applyId,3
                     leaveList+="<tr><td>"+(i+1)+"</td><td>"+data.list[i].emp.empName+"</td>" +
@@ -48,20 +89,18 @@
                         "<td>"+parseDate(data.list[i].sendTime)+"</td>" +
                         "<td>"+ parseDate(data.list[i].startTime)+"</td>" +
                         "<td>"+parseDate(data.list[i].endTime)+"</td>" +
-                        "<td>"+data.list[i].days+"</td>" +
-                        "<td>"+data.list[i].checkStatus+"</td><td>" +
-                        "<input type='button' value='同意'  class='but1"+i+"' LeaveType='"+data.list[i].intType+"'  applyId='"+data.list[i].applyId+"' opinion='2' day='"+data.list[i].days+"' empId='"+data.list[i].emp.empId+"'>" +
-                        "<input type='button' value='不同意' class='but1"+i+"' LeaveType='"+data.list[i].intType+"'  applyId='"+data.list[i].applyId+"' opinion='3' day='"+data.list[i].days+"' empId='"+data.list[i].emp.empId+"'>" +
-                        "</td></tr>";
+                        "<td>"+data.list[i].days+"</td><td>"+data.list[i].checkStatus+"</td><td><input type='button' value='同意'  class='but1"+i+"' LeaveType='"+data.list[i].intType+"'  applyId='"+data.list[i].applyId+"' opinion='2' day='"+data.list[i].days+"' empId='"+data.list[i].emp.empId+"'><input type='button' value='不同意' class='but1"+i+"' LeaveType='"+data.list[i].intType+"'  applyId='"+data.list[i].applyId+"' opinion='3' day='"+data.list[i].days+"' empId='"+data.list[i].emp.empId+"'></td></tr>";
+                    //
+                    console.log("类别是"+data.list[i].intType);
                     //type='"+data.list[i].intType+"' applyId='"+data.list[i].applyId+"' opinion='3' day='"+data.list[i].days+"'
-                    $("#tab1").append(leaveList);
+                    // $("#tab1").append(leaveList);
+                        $(".layui-table").append(leaveList);
                     $(".but1"+i).click(function () {
                         var Type=$(this).attr("LeaveType");
                         var applyId=$(this).attr("applyId");
                         var opinion=$(this).attr("opinion");
                         var days=$(this).attr("day");
                         var empId=$(this).attr("empId");
-                        // alert(Type);
                         // alert(applyId);
                         // alert(days);
                         // alert(empId);
@@ -72,10 +111,14 @@
                             type:"put",
                             dataType:"json",
                             success:function (data) {
-                                //整合需要修改
+                                window.location.reload();
+                                // //整合需要修改
                                 // location.href("leaveAudit.html");
+
                             }
                         })
+
+
                     })
 
                 }

@@ -102,7 +102,9 @@ public class LeaveService {
                 leave_bo.setDays(days);
                 leave_bo.setCheckTime(dayOff.getCheckTime());
                 leave_bo.setApplyId(dayOff.getDayOffId());
-                leave_bo.setIntType(dayOff.getCheckStatus());
+
+                leave_bo.setIntType(1);
+
                 leave_bo.setEmp(dayOff.getEmp());
                 leave_bo.setCause(dayOff.getDayOffCause());
                 leave_bo.setSendTime(dayOff.getSendTime());
@@ -112,9 +114,9 @@ public class LeaveService {
                 if (dayOff.getCheckStatus()==1){
                     leave_bo.setCheckStatus("未审核");
                 }else if (dayOff.getCheckStatus()==2){
-                    leave_bo.setCheckStatus("审核通过");
+                    leave_bo.setCheckStatus("通过");
                 }else {
-                    leave_bo.setCheckStatus("审核未通过");
+                    leave_bo.setCheckStatus("未通过");
                 }
                 list.add(leave_bo);
             }
@@ -127,7 +129,8 @@ public class LeaveService {
                 leave_bo.setCheckTime(leave.getCheckTime());
                 leave_bo.setApplyId(leave.getLeaveId());
                 leave_bo.setDays(days);
-                leave_bo.setIntType(leave.getCheckStatus());
+                leave_bo.setIntType(2);
+
                 leave_bo.setEmp(leave.getEmp());
                 leave_bo.setCause(leave.getLeaveCause());
                 leave_bo.setEndTime(leave.getEndTime());
@@ -137,9 +140,9 @@ public class LeaveService {
                 if (leave.getCheckStatus()==1){
                     leave_bo.setCheckStatus("未审核");
                 }else if (leave.getCheckStatus()==2){
-                    leave_bo.setCheckStatus("审核通过");
+                    leave_bo.setCheckStatus("通过");
                 }else {
-                    leave_bo.setCheckStatus("审核未通过");
+                    leave_bo.setCheckStatus("未通过");
                 }
                 list.add(leave_bo);
             }
@@ -154,7 +157,7 @@ public class LeaveService {
                 leave_bo.setApplyId(yearLeave.getYearLeaveId());
                 leave_bo.setDays(days);
                 leave_bo.setCheckTime(yearLeave.getCheckTime());
-                leave_bo.setIntType(yearLeave.getCheckStatus());
+                leave_bo.setIntType(3);
                 leave_bo.setEmp(yearLeave.getEmp());
                 leave_bo.setSendTime(yearLeave.getSendTime());
                 leave_bo.setCause(yearLeave.getYearLeaveCause());
@@ -164,9 +167,9 @@ public class LeaveService {
                 if (yearLeave.getCheckStatus()==1){
                     leave_bo.setCheckStatus("未审核");
                 }else if (yearLeave.getCheckStatus()==2){
-                    leave_bo.setCheckStatus("审核通过");
+                    leave_bo.setCheckStatus("通过");
                 }else {
-                    leave_bo.setCheckStatus("审核未通过");
+                    leave_bo.setCheckStatus("未通过");
                 }
                 list.add(leave_bo);
             }
@@ -185,6 +188,7 @@ public class LeaveService {
     @Transactional
     public void updateStateAndTime(int type,int leaveId,int opinion,int days,int empId){
         if (type==1){
+            System.out.println("进入调休");
             if (opinion==2){
                 int time=days*8;
                 System.out.println("time"+time);
@@ -197,9 +201,11 @@ public class LeaveService {
             }
 
         }else if (type==2){
+            System.out.println("J进入事假");
             leaveDao.updateCheckStatusByleaveId(opinion,leaveId);
             leaveDao.updateCheckTimeByleaveId(new Date(),leaveId);
         }else {
+            System.out.println("进入年价");
             if (opinion==2){
                 yearLeaveDao.updateCheckStatusByYearLeaveId(opinion,leaveId);
                 yearLeaveDao.updateCheckTimeByYearLeaveId(new Date(),leaveId);
