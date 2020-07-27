@@ -121,4 +121,17 @@ public class SalaryIssue {
     public void setEmpId(Integer empId) {
         this.empId = empId;
     }
+
+
+    @Override
+    public String toString() {
+        return "SalaryIssue{" +
+                "salaryIssueId=" + salaryIssueId +
+                ", salaryId=" + salaryId +
+                ", issueMoney=" + issueMoney +
+                ", issueTime=" + issueTime +
+                ", empId=" + empId +
+                ", status=" + status +
+                '}';
+    }
 }

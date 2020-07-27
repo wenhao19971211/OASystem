@@ -28,6 +28,15 @@ function parseDate(time) {
 
 }
 
+function parseDate1(time) {
+    var date = new Date(time);
+    var hireDate="";
+    H = date.getHours();
+    m = date.getMinutes();
+    s = date.getSeconds();
+    hireDate = H+":"+m+":"+s;
+    return hireDate;
+}
 
 
 function getNowFormatDate() {
@@ -44,4 +53,30 @@ function getNowFormatDate() {
     }
     var currentdate = year + seperator1 + month + seperator1 + strDate;
     return currentdate;
+}
+
+/**
+ * 获取本月第一天
+ */
+function getFirstDay() {
+    var now = new Date(); //当前日期
+    var nowMonth = now.getMonth(); //当前月
+    var nowYear = now.getFullYear(); //当前年
+    //本月的开始时间
+    var monthStartDate = new Date(nowYear, nowMonth, 1);
+    var timeStar=Date.parse(monthStartDate);//s
+    return timeStar;
+}
+
+/**
+ * 获取本月最后一天
+ */
+function getLastDay() {
+    var now = new Date(); //当前日期
+    var nowMonth = now.getMonth(); //当前月
+    var nowYear = now.getFullYear(); //当前年
+    //本月的结束时间
+    var monthEndDate = new Date(nowYear, nowMonth+2, 1);
+    var timeEnd=Date.parse(monthEndDate);//s
+    return timeEnd;
 }

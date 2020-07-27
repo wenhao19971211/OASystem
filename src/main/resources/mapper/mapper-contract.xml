@@ -3,6 +3,7 @@
         PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         "http://ibatis.apache.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.geek.dao.ContractDao">
+
     <resultMap id="contractMap" type="contract">
         <id property="contractId" column="contractId"></id>
         <result property="contractType" column="contractType"></result>
@@ -20,7 +21,11 @@
         </association>
     </resultMap>
 
-    <select id="findByEmpId" resultMap="contractMap">
+    <select id="findContractByEmpId" resultMap="contractMap">
         select * from contract inner join emp on contract.empId=emp.empId where contract.empId=#{empId}
+    </select>
+
+    <select id="findAll" resultMap="contractMap">
+        select * from contract inner join emp on contract.empId=emp.empId
     </select>
 </mapper>

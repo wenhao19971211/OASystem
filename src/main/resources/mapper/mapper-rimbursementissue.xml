@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geek.dao.RimbursementIssueDao">
+
+    <select id="findRimbursementByStatus" resultType="com.geek.pojo.Rimbursement">
+        select * from rimbursement where status = #{status} order by issueTime
+        <if test="index != null and pageSize != null">
+            limit #{index},#{pageSize}
+        </if>
+    </select>
+
+    <update id="updateRimbursementIssueStatusByRimbursementIsuueId" >
+        update rimbursement set status = #{status} where rimbursementIssueId = #{id}
+    </update>
+
+
+</mapper>

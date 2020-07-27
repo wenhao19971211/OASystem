@@ -3,7 +3,15 @@
         PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         "http://ibatis.apache.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.geek.dao.WorkOnDao">
-
+    <resultMap id="workOnMap" type="workOn">
+        <result property="today" column="today"></result>
+        <result property="workInTime" column="workInTime"></result>
+        <result property="workOutTime" column="workOutTime"></result>
+        <association property="emp" javaType="emp">
+            <id property="empId" column="empId"></id>
+            <result property="empName" column="empName"></result>
+        </association>
+    </resultMap>
     <select id="findWorkOnsByEmpIdAndMonth" resultType="com.geek.pojo.WorkOn">
         select * from workon where empId = #{empId} and workInTime between #{start} and #{end}
     </select>
@@ -15,5 +23,8 @@
     <update id="updateWorkOnByEmpId" parameterType="com.geek.pojo.WorkOn">
         update workon set workOutTime=#{workOutTime} where empId=#{empId}
     </update>
-
+    <!--查询当月打卡记录-->
+    <select id="findByIdAndMonth" resultMap="workOnMap">
+        select * from workon inner join emp on workon.empId=emp.empId where emp.empId = #{empId} and today between #{start} and #{end}
+    </select>
 </mapper>

@@ -8,4 +8,16 @@
         insert into salaryIssue values (null,#{salaryId},#{issueMoney},#{issueTime},#{empId},#{status})
     </insert>
 
+    <select id="findSalaryIssueByStatus" resultType="com.geek.pojo.SalaryIssue">
+        select * from salaryIssue where status = #{status} order by issueTime
+        <if test="index != null and pageSize != null">
+            limit #{index},#{pageSize}
+        </if>
+    </select>
+
+    <update id="updateSalaryIssueStatusBySalaryIssueId">
+        update salaryissue set status = #{status} where salaryIssueId = #{id}
+    </update>
+
+
 </mapper>

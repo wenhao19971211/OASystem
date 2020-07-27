@@ -35,7 +35,7 @@
         <if test="flag != 0">
             and `leave`.checkStatus !=#{flag}
         </if>
-        order by sendTime
+        order by sendTime desc
     </select>
 
 <select id="findLeavesByEmpIdAndStartAndEnd" resultType="com.geek.pojo.Leave">
