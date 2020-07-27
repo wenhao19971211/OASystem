@@ -6,11 +6,40 @@ import java.util.Date;
  * 扣薪
  */
 public class DockPay {
-    private Emp emp;
+    private Integer empId;
     private Date dockPayDay;
     private Integer dockPayType;
     private double dockPayMoney;
     private String dockPayTime;
+    private Emp emp;
+
+    public DockPay() {
+    }
+
+    public DockPay(Integer empId, Date dockPayDay, Integer dockPayType, double dockPayMoney, String dockPayTime) {
+        this.empId = empId;
+        this.dockPayDay = dockPayDay;
+        this.dockPayType = dockPayType;
+        this.dockPayMoney = dockPayMoney;
+        this.dockPayTime = dockPayTime;
+    }
+
+    public DockPay(Integer empId, Date dockPayDay, Integer dockPayType, double dockPayMoney, String dockPayTime, Emp emp) {
+        this.empId = empId;
+        this.dockPayDay = dockPayDay;
+        this.dockPayType = dockPayType;
+        this.dockPayMoney = dockPayMoney;
+        this.dockPayTime = dockPayTime;
+        this.emp = emp;
+    }
+
+    public Integer getEmpId() {
+        return empId;
+    }
+
+    public void setEmpId(Integer empId) {
+        this.empId = empId;
+    }
 
     public Emp getEmp() {
         return emp;
