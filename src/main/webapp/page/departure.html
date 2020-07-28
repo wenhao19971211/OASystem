@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="http://localhost:8080/ssm_framework_war_exploded/">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery.js"></script>
+    <script src="js/common.js"></script>
+    <style>
+        #reason{
+            width: 500px;
+            height: 200px;
+            border: 1px solid #0C0C0C;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+<form id="info">
+    <input type="hidden" id="depId">
+    <input type="hidden" id="checkEmpId" value="3">
+    工号：<span id="empId"></span><br>
+    姓名：<span id="empName"></span><br>
+    所在部门：<span id="depName"></span><br>
+    岗位：<span id="position"></span><br>
+    离职时间：<input type="date" id="departureTime"><br>
+    <p>离职原因：</p>
+    <div id="reason" contenteditable="true"></div>
+    <input type="button" value="提交" id="btn">
+</form>
+</body>
+</html>
+<script>
+    $(function () {
+        var emp = $(window.parent.document).find(":input#empId");
+        var empId = emp.val();
+        $.ajax({
+            url:"empInfo",
+            data:{"empId":empId},
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+                $("#depId").val(data.object.dep.depId);
+                $("#empId").html(data.object.empId);
+                $("#empName").html(data.object.empName);
+                $("#depName").html(data.object.dep.depName);
+                $("#position").html(data.object.position);
+            }
+        })
+    });
+    /**
+     * 提交
+     */
+    $("#btn").click(function () {
+        var empId = $("#empId").html();
+        var depId = $("#depId").val();
+        var position = $("#position").html();
+        var departureTime = $("#departureTime").val();
+        var reason = $("#reason").html();
+        var checkEmpId = $("#checkEmpId").val();
+        $.ajax({
+            url:"sendDeparture",
+            data:{"empId":empId,"depId":depId,"position":position,"departureTime":departureTime,"reason":reason,"checkEmpId":checkEmpId},
+            dataType: "json",
+            type:"post",
+            success:function (data) {
+                if (data.code == 1){
+                    alert("提交成功");
+                }
+            }
+        })
+    })
+</script>

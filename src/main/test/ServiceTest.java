@@ -1,7 +1,4 @@
-import com.geek.dao.CheckWorkDao;
-import com.geek.dao.DayOffDao;
-import com.geek.dao.MessageDao;
-import com.geek.dao.WorkOnDao;
+import com.geek.dao.*;
 import com.geek.pojo.*;
 import com.geek.service.CheckWorkService;
 import com.geek.service.ContractService;
@@ -34,6 +31,10 @@ public class ServiceTest {
     CheckWorkDao checkWorkDao;
     @Autowired
     WorkOnDao workOnDao;
+    @Autowired
+    ContractDao contractDao;
+    @Autowired
+    DepartureDao departureDao;
     @Test
     public void test(){
 //        List<Message> list = messageDao.findAllById(1);
@@ -89,6 +90,25 @@ public class ServiceTest {
 //        for (Contract contract : list) {
 //            System.out.println(contract.getContractId()+"\t"+contract.getEmp().getEmpName());
 //        }
-
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        String start = "2020-07-28";
+//        String end = "2025-07-28";
+//        Date startTime = null;
+//        Date endTime = null;
+//        try {
+//            startTime = sdf.parse(start);
+//            endTime = sdf.parse(end);
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        contractService.updateById(1,15000,startTime,endTime,1);
+//        List<Departure> list = departureDao.findDeparture(0,5);
+//        for (Departure departure : list) {
+//            System.out.println(departure.getReason());
+//        }
+//        List<Departure> list = departureDao.findDepartures(0,5);
+//        for (Departure departure : list) {
+//            System.out.println(departure.getReason());
+//        }
     }
 }

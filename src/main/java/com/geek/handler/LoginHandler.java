@@ -76,7 +76,6 @@ public class LoginHandler {
     @ResponseBody
     public Result findLoginEmp(HttpSession session){
         Emp emp = (Emp) session.getAttribute(SessionNameUtil.Login_User);
-        System.out.println(emp.getEmpName());
         Result result = new Result();
         result.setObject(emp);
         return result;

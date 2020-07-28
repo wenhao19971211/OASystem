@@ -91,6 +91,9 @@
 
         </table>
     </div>
+    <div id="departureInfo">
+
+    </div>
 </div>
 </body>
 </html>
@@ -98,7 +101,6 @@
 
     var param = parseUrl(location.href);
     var empId = param["empId"];
-    console.log(empId);
     $.ajax({
         url:"empInfo",
         data:{"empId":empId},
@@ -274,5 +276,6 @@
                 }
             }
         })
-    })
+    });
+
 </script>

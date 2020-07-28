@@ -56,4 +56,12 @@ public interface EmpDao {
      * @return
      */
     public int findCount();
+
+    public List<Emp> findDeparture(@Param("start")int start,@Param("end")int end);
+
+    /**
+     * 修改离职状态
+     * @param empId
+     */
+    public void updateDeparture(int empId);
 }

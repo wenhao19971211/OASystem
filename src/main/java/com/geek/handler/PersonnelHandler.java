@@ -14,6 +14,7 @@ import com.geek.service.ContractService;
 import com.geek.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,7 +35,7 @@ public class PersonnelHandler {
     private CheckWorkService checkWorkService;
 
     /**
-     * 人事合同（集合）
+     * 人事信息（集合）
      * @param page
      * @param limit
      * @return
@@ -71,6 +72,13 @@ public class PersonnelHandler {
       String json = o.toJSONString();
        return json;
     }
+
+    /**
+     * 人事合同
+     * @param page
+     * @param limit
+     * @return
+     */
     @GetMapping("personnelContract")
     public String personnelContract(int page,int limit){
         int count = contractService.findCount();
@@ -109,6 +117,9 @@ public class PersonnelHandler {
     public Result contractInfo(int empId){
         Result result = new Result();
         Contract contract = contractService.findContractByEmpId(empId);
+        Emp emp =  empService.findEmpById(contract.getCheckEmp().getEmpId());
+        contract.setCheckEmp(emp);
+        System.out.println(emp.getEmpName());
         result.setObject(contract);
         return result;
     }
@@ -138,9 +149,31 @@ public class PersonnelHandler {
         result.setList(list);
         return result;
     }
+    @PutMapping("updateContract")
+    public Result updateContract(int empId,int contractType,double salary,String start,String end){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date startTime = null;
+        Date endTime = null;
+        try {
+            startTime = sdf.parse(start);
+            endTime = sdf.parse(end);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        contractService.updateById(empId,salary,startTime,endTime,contractType);
+
+        Result result = new Result();
+        result.setCode(1);
+        return result;
+    }
+    /**
+     * 查看奖惩
+     * @return
+     */
     @GetMapping("prize")
     public Result prize(){
         Result result = new Result();
         return result;
     }
+
 }

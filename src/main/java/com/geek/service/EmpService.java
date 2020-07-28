@@ -1,5 +1,6 @@
 package com.geek.service;
 
+import com.geek.bo.Departure_bo;
 import com.geek.bo.PersonnelInformation_bo;
 import com.geek.dao.EmpDao;
 import com.geek.pojo.Emp;
@@ -8,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -58,5 +62,24 @@ public class EmpService {
     public int findCount(){
         return empDao.findCount();
     }
+
+    public List<Departure_bo> findDeparture(int start,int end){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        List<Departure_bo> list = new ArrayList<>();
+        List<Emp> empList = empDao.findDeparture(start,end);
+        for (Emp emp : empList) {
+            Departure_bo departure_bo = new Departure_bo();
+            departure_bo.setEmpId(emp.getEmpId());
+            departure_bo.setEmpName(emp.getEmpName());
+            departure_bo.setDepName(emp.getDep().getDepName());
+            departure_bo.setPosition(emp.getPosition());
+            departure_bo.setCheckEmpName("李浩");
+            departure_bo.setLastTime(sdf.format(new Date()));
+
+        }
+        return list;
+    }
+
 
 }

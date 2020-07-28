@@ -2,16 +2,18 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=GBK">
 		<base href="http://localhost:8080/ssm_framework_war_exploded/">
  		<link rel="stylesheet" href="js/dist/css/layui.css"  media="all">
  		<!--<link rel="stylesheet" href="page/success.html" />-->
  		<link rel="stylesheet" href="page/leave.html" />
 	 	<script src="js/dist/layui.js" charset="utf-8"></script>
 	  	<script src="js/jquery.js" ></script>
+
 	</head>
 	<style>
 		.dd{
-			margin-left: -20px;
+			margin-left: -20px; 
 			margin-top: -12px;
 			height: 1000px;
 		}
@@ -24,9 +26,12 @@
 	<input type="hidden" id="empId">
 	<input type="hidden" id="depId">
    <div class="layui-row" >
+
 	<div class="layui-tab layui-tab-brief " lay-filter="docDemoTabBrief">
-	  <ul class="layui-tab-title layui-col-xs12 layui-col-sm12 layui-col-md12" style="background-color: #393D49; color: #F3F3F3;">
-<li><a href="asd.html" style="color: #000000;">首页</a></li>
+		<ul class="layui-col-xs2 layui-col-sm2 layui-col-md2" style="height: 40px; text-align: center;">首页</ul>
+	  <ul class="layui-tab-title layui-col-xs10 layui-col-sm10 layui-col-md10" style="background-color: #393D49; color: #F3F3F3; float: right">
+<!--<a href="http://www.baidu.com" style="color: #000000;" target="dd">首页</a>-->
+
 	    <li class="layui-this">个人办公</li>
 	    <li>流程管理</li>
 	    <li>任务管理</li>
@@ -34,64 +39,71 @@
 	    <li>财务管理</li>
 	  </ul>
   <div class="layui-tab-content layui-col-xs4 layui-col-sm4 layui-col-md2" >
-	  	<!--一号选项卡-->
+	  	<!--&lt;!&ndash;一号选项卡&ndash;&gt;-->
 	 <ul class="layui-nav layui-nav-tree layui-tab-item layui-show layui-col-xs6 layui-col-sm6 layui-col-md3 dd"  lay-filter="test">
 	<!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
 		 <li class="layui-nav-item " >
-			<a onclick="load_home(1)">消息提醒</a>
+			<a  href="page/message.html" target="dd" >消息提醒</a>
 		 </li>
-		 <li class="layui-nav-item"><a onclick="load_home(2)">个人考勤</a></li>
-		 <li class="layui-nav-item"><a >我的薪资</a></li>
-		 <li class="layui-nav-item"><a >请假管理</a>
+		 <li class="layui-nav-item" ><a href="http://www.asd.com" target="dd" >个人考勤</a></li>
+		 <li class="layui-nav-item"><a href="http://www.dsa.com" target="dd" >我的薪资</a></li>
+		 <li class="layui-nav-item"><a href="http://www.wff.com" target="dd" >请假管理</a>
 		 <dl class="layui-nav-child">
-			 <dd><a >请假</a></dd>
-			 <dd><a >查看请假</a></dd>
+			 <dd id="qj"><a >请假</a></dd>
+			 <dd id="ckqj"><a >查看请假</a></dd>
 		 </dl>
 		 </li>
 		 <li class="layui-nav-item"><a >报销管理</a></li>
-	  	 <li class="layui-nav-item"><a >邮件管理</a></li>
+	  	 <li class="layui-nav-item"><a >邮件管理</a>
+			 <dl class="layui-nav-child">
+				 <dd id="fsyj"><a >发送邮件</a></dd>
+				 <dd id="chyj"><a >查看邮件</a></dd>
+			 </dl>
+		 </li>
 		 <li class="layui-nav-item"><a >通讯录</a></li>
 		 <li class="layui-nav-item"><a >个人信息</a></li>
+		 <li class="layui-nav-item"><a href="page/departure.html" target="dd">离职</a></li>
 	</ul>
 		  	<!--三号选项2卡-->
-	<ul class="layui-nav layui-nav-tree layui-tab-item layui-col-xs6 layui-col-sm6 layui-col-md3 dd" lay-filter="test">
-		<!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
-		<li class="layui-nav-item ">
-		    <a >消息提醒</a>
-		</li>
-		<li class="layui-nav-item"><a>个人考勤</a></li>
-		<li class="layui-nav-item"><a>我的薪资</a></li>
-		<li class="layui-nav-item"><a>请假管理</a>
-			<dl class="layui-nav-child">
-				<dd><a >请假</a></dd>
-				<dd><a >查看请假</a></dd>
-			</dl>
-		</li>
-		<li class="layui-nav-item"><a>报销管理</a></li>
-		<li class="layui-nav-item"><a>邮件管理</a></li>
-		<li class="layui-nav-item"><a>通讯录</a></li>
-		<li class="layui-nav-item"><a>个人信息</a></li>
-		</ul>
-
+	<!--<ul class="layui-nav layui-show  layui-nav-tree layui-tab-item layui-col-xs6 layui-col-sm6 layui-col-md3 dd" lay-filter="test">-->
+		<!--&lt;!&ndash; 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> &ndash;&gt;-->
+		<!--<li class="layui-nav-item ">-->
+		    <!--<a >消息提醒</a>-->
+		<!--</li>-->
+		<!--<li class="layui-nav-item"><a href="http://www.asd.com" target="dd">个人考勤</a></li>-->
+		<!--<li class="layui-nav-item"><a href="http://www.dsa.com" target="dd">我的薪资</a></li>-->
+		<!--<li class="layui-nav-item"><a href="http://www.wff.com" target="dd">请假管理</a>-->
+			<!--<dl class="layui-nav-child">-->
+				<!--<dd><a >请假</a></dd>-->
+				<!--<dd><a >查看请假</a></dd>-->
+			<!--</dl>-->
+		<!--</li>-->
+		<!--<li class="layui-nav-item"><a>报销管理</a></li>-->
+		<!--<li class="layui-nav-item"><a>邮件管理</a></li>-->
+		<!--<li class="layui-nav-item"><a>通讯录</a></li>-->
+		<!--<li class="layui-nav-item"><a>个人信息</a></li>-->
+		<!--</ul>-->
+  	<!---->
 			  	  	<!--四号选项2卡-->
 	<ul class="layui-nav layui-nav-tree layui-tab-item layui-col-xs6 layui-col-sm6 layui-col-md3 dd" lay-filter="test">
 			<!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
 		<li class="layui-nav-item"><a >待我审批</a>
 			<dl class="layui-nav-child">
-				<dd><a>审批请假</a></dd>
+				<dd id="spqj"><a>审批请假</a></dd>
 				<dd><a>审批补卡</a></dd>
+				<dd><a href="page/departureList.html" target="dd">离职审批</a></dd>
 			</dl>
 		</li>
 		<li class="layui-nav-item"><a >已审批</a>
             <dl class="layui-nav-child">
-                <dd><a>已审批请假</a></dd>
-                <dd><a>已审批补卡</a></dd>
+                <dd id="spyqj"><a>已审批请假</a></dd>
+                <dd ><a>已审批补卡</a></dd>
             </dl>
         </li>
 		<li class="layui-nav-item"><a >信息发布</a></li>
 
 	</ul>
-
+  	
   	  	<!--5号选项2卡-->
 	<ul class="layui-nav layui-nav-tree layui-tab-item layui-col-xs6 layui-col-sm6 layui-col-md3 dd" lay-filter="test">
 		<!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
@@ -104,11 +116,9 @@
 	  	  	<!--六号选项2卡-->
 	<ul class="layui-nav layui-nav-tree layui-tab-item layui-col-xs6 layui-col-sm6 layui-col-md3 dd" lay-filter="test">
 	<!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
-	  	<li class="layui-nav-item ">
-	    <a >人事信息</a>
-	  	</li>
-		<li class="layui-nav-item"><a >人事合同</a></li>
-		<li class="layui-nav-item"><a >离职信息</a></li>
+	  	<li class="layui-nav-item "><a href="page/personnelInformation.html" target="dd">人事信息</a></li>
+		<li class="layui-nav-item"><a href="page/personnelContract.html" target="dd">人事合同</a></li>
+		<li class="layui-nav-item"><a href="page/departureInformation.html" target="dd">离职信息</a></li>
 		<li class="layui-nav-item"><a >奖惩信息</a></li>
 
 	</ul>
@@ -128,14 +138,16 @@
 				<div class="layui-col-xs12 layui-col-sm12 layui-col-md12 imgss">
 
 				</div>
-				<div class="layui-col-xs12 layui-col-sm12 layui-col-md12" >
-				  <div class="grid-demo layui-bg-blue"></div>
+				<div class="layui-col-xs12 layui-col-sm12 layui-col-md12" id="nr" >
+
+					<iframe src='http://www.baidu.com' frameborder='0' name="dd" scrolling='no' width='1000px' height='1000px'></iframe>
+				  <!--<div class="grid-demo layui-bg-blue"></div>-->
 				</div>
 
 			  </div>
 		</div>
 
- </div>
+ </div>      
 </div>
 </body>
 </html>
@@ -146,16 +158,14 @@
 	  var element = layui.element;
 	});
 
-	function load_home(data) {
-		 $("#d1").empty();
-		   if (data==1){
-		    $("#d1").append("<iframe src='http://www.baidu.com' frameborder='0' scrolling='no' width='1200px' height='1200px'></iframe>");
-		     }else if (data==2){
-		    $("#d1").append("<iframe src='http://www.jd.com' frameborder='0' scrolling='no' width='1000px' height='1000px' ></iframe>");
-		   }else if(data==3){
-               $("#d1").append("<iframe src='http://www.jd.com' frameborder='0' scrolling='no' width='1000px' height='1000px' ></iframe>");
-           }
-	}
+		function load_home() {
+			// $("#nr").empty();
+			var address =$(this).attr("data-src");
+			$("iframe").attr("src",address);
+		}
+
+
+
 
 	/**
 	 * 获取登录人信息
@@ -169,5 +179,21 @@
 			$("#depId").val(data.object.dep.depId);
 		}
 
+	});
+
+	$("#qj").click(function () {
+		var empId=$("#empId").val();
+		$.ajax({
+			url:"page/leave.html",
+			data:{"empId":empId},
+			type:"get",
+			dataType:"html",
+			success:function (data) {
+				$("#nr").html(data);
+			}
+		})
 	})
+
+
+
 	</script>

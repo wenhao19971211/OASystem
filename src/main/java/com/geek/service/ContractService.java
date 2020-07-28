@@ -79,4 +79,15 @@ public class ContractService {
         }
         return list;
     }
+
+    /**
+     * 修改合同
+     * @param empId
+     * @param salary
+     * @param effectTime
+     * @param failureTime
+     */
+    public void updateById(int empId,double salary,Date effectTime,Date failureTime,int contractType){
+        contractDao.updateById(empId,salary,effectTime,failureTime,contractType);
+    }
 }

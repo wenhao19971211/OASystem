@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geek.dao.DepartureDao">
+   <insert id="addDeparture" parameterType="departure">
+       insert into departure values(#{empId},#{depId},#{position},#{departureTime},#{reason},#{checkEmpId},#{handleTime})
+   </insert>
+
+    <select id="findDeparture" resultType="departure">
+        select * from departure where handleTime is null limit #{start},#{end}
+    </select>
+
+    <select id="findCount" resultType="java.lang.Integer">
+        select count(*) from departure
+    </select>
+
+    <update id="updateDepartureById">
+        update departure set handleTime= now() where empId=#{empId}
+    </update>
+
+    <select id="findDepartures" resultType="departure">
+        select * from departure where handleTime is not null limit #{start},#{end}
+    </select>
+</mapper>

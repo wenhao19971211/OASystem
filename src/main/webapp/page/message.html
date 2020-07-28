@@ -66,8 +66,11 @@
                     else if (data.list[i].messageType == 4){
                         type = "补录";
                     }
-                    else{
+                    else if (data.list[i].messageType == 5) {
                         type = "加班";
+                    }
+                    else{
+                        type = "离职";
                     }
                     var readStatus = "";
                     if (data.list[i].readStatus ==1){

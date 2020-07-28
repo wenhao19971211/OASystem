@@ -55,4 +55,12 @@
     <select id="findCount" resultType="java.lang.Integer">
         select count(*) from emp
     </select>
+
+    <select id="findDeparture" resultMap="empMap">
+        select * from emp inner join dep on emp.depId=dep.depId limit #{start},#{end} where isDeparture=1
+    </select>
+
+    <update id="updateDeparture">
+        update emp set isDeparture=1 where empId=#{empId}
+    </update>
 </mapper>

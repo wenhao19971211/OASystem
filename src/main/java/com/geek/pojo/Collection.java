@@ -15,6 +15,7 @@ public class Collection {
     private Date checkTime;
     private Integer checkStatus;
 
+
     public Integer getCollectionId() {
         return collectionId;
     }
@@ -79,4 +80,5 @@ public class Collection {
     public void setCheckStatus(Integer checkStatus) {
         this.checkStatus = checkStatus;
     }
+
 }
