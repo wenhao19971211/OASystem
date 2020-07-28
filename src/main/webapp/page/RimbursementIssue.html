@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <base href="http://localhost:8081/OASystem_war_exploded/">
+    <link rel="stylesheet" href="js/dist/css/layui.css">
+    <script src="js/dist/layui.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/dist/lay/modules/layer.js"></script>
+</head>
+<body  style="background-color:#F1F1F1">
+<!--//表头工具栏标签-->
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="add">获取选中行数据</button>
+        <button class="layui-btn layui-btn-sm" lay-event="all">获取选中数目</button>
+        <button class="layui-btn layui-btn-sm" lay-event="is">发放</button>
+    </div>
+</script>
+<!--表格主体-->
+<table  class="layui-hide" id="demo" lay-filter="text"></table>
+<!--表内行工具栏-->
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">金额发放</a>
+</script>
+</body>
+</html>
+
+
+
+<script>
+    var date=null;
+    layui.use('table', function(){
+        var table = layui.table;
+        //第一个实例
+        table.render({
+            elem: '#demo'
+            ,height: 500
+            ,url:'findRimbursementByStatus2'
+            //,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+            ,type:'checkbox'
+            ,page:true //分页按问好那个改
+            ,parseData:function(data){//res 即为原始返回的数据
+                        data =$.parseJSON(data);
+                        return data;
+                        }
+            ,cols: [[ //表头
+                //{type: 'checkbox', fixed: 'left'}// 开启多选框
+                {field: 'rimbursementIssueId', title: '报销发放编号', width:130,edit: 'text', del:'test', fixed: 'left'}
+                ,{field: 'applyEmpName', title: '报销接收人',edit: 'text', width:100}
+                ,{field: 'applyDepName', title: '接收人所在部门', width:150,edit: 'text',  }
+                ,{field: 'sum', title: '报销金额', width:100}
+                ,{field: 'factMoney', title: '发放金额', width: 100}
+                ,{field: 'issueTime', title: '发放时间', width: 160, sort: true,}
+                ,{field: 'issueStatus', title: '是否发放', width: 90}
+                //,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:200}// 操作的工具栏
+            ]]
+
+        });
+
+        //表头工具事件工具栏的点击
+        table.on('toolbar(text)',function(obj){
+            var checkStatus = table.checkStatus('id'); //id 即为基础参数 id 对应的值也就是确定当前多选框的id
+
+            console.log(checkStatus.data) //获取选中行的数据
+            console.log(checkStatus.data.length) //获取选中行数量，可作为是否有选中行的条件
+            console.log(checkStatus.isAll ) //表格是否全选
+            switch (obj.event){
+                case add:
+                    add(checkStatus);// 引用的faunction事件
+                    break;
+                case all:
+                    all();
+                    break;
+
+                default:
+                    console.log("fafang");
+                    mmp();
+                    break;
+            }
+        });
+
+        //监听行点击事件
+
+        //行工具栏的点击
+        table.on('tool(text)',function(obj){
+            var data = obj.data; //获得当前行数据
+            var event = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
+            if(event=='del'){
+                obj.del(tr);
+            }else if(event='edit'){
+
+            } else {
+                layer.msg("查看的数据"+data.id);
+            }
+
+
+        })
+
+//  });
+
+    });
+
+    //表头工具栏的事件数据能通过前面传统
+    function add(){
+        alert(1);
+    };
+    function all(){
+        alert("asdasdas");
+    };
+    function mmp(){
+        alert("fafang");
+    };
+
+
+
+</script>
