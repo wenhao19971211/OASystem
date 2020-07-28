@@ -38,7 +38,7 @@
         table.render({
             elem: '#demo'
             ,height: 500
-            ,url:'findSalaryIssueByStatus1'
+            ,url:'findTaskByStatus1'
             ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
             ,type:'checkbox'
             ,page:true
@@ -48,13 +48,14 @@
             }
             ,cols: [[ //表头
                 {type: 'checkbox', fixed: 'left'}// 开启多选框
-                ,{field: 'salaryIssueId', title: '薪资发放编号', width:130,edit: 'text', del:'test', fixed: 'left'}
-                ,{field: 'salaryReceiveEmpName', title: '接收人姓名',edit: 'text', width:100}
-                ,{field: 'salaryReceiveDepName', title: '接收人所在部门', width:150,edit: 'text',  }
-                ,{field: 'issueMoney', title: '发放金额', width:100}
-                ,{field: 'issueEmpName', title: '发放负责人', width: 100}
-                ,{field: 'issueTime', title: '发放时间', width: 160, sort: true,}
-                ,{field: 'status', title: '是否发放'}
+                ,{field: 'taskSendId', title: '任务发布编号', width:100,edit: 'text', del:'test', fixed: 'left'}
+                ,{field: 'title', title: '任务标题',edit: 'text', width:100}
+                ,{field: 'startTime', title: '开始时间', width:100,edit: 'text', sort: true, }
+                ,{field: 'finishTime', title: '规定完成时间', width:100, sort: true,}
+                ,{field: 'factFinishTime', title: '实际完成时间', width: 100, sort: true,}
+                ,{field: 'taskSendEmpName', title: '任务发布人', width: 100}
+                ,{field: 'status', title: '任务完成状态', width: 100}
+                ,{field: 'content', title: '任务内容'}
                 //,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:200}// 操作的工具栏
             ]]
 

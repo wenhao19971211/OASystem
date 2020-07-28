@@ -2,9 +2,11 @@ package com.geek.service;
 
 import com.geek.bo.TaskReceive_bo;
 import com.geek.bo.TaskSend_bo;
+import com.geek.dao.EmpDao;
 import com.geek.dao.MessageDao;
 import com.geek.dao.TaskReceiveDao;
 import com.geek.dao.TaskSendDao;
+import com.geek.pojo.Emp;
 import com.geek.pojo.Message;
 import com.geek.pojo.TaskReceive;
 import com.geek.pojo.TaskSend;
@@ -29,6 +31,8 @@ public class TaskSendService {
     private TaskReceiveDao taskReceiveDao;
     @Autowired
     private MessageDao messageDao;
+    @Autowired
+    private EmpDao empDao;
 
     /**
      * 添加任务
@@ -135,24 +139,23 @@ public class TaskSendService {
     public TaskReceive_bo findTaskReceivesByStatus(Integer status,Integer empId,Integer page,Integer pageSize)
     {
 
-        int index = 1;
-        if(page != null)
-        {
-            //每页显示多少条数据
-            pageSize = CommonUtil.getPageSize();
-            //该页显示的初始索引
-            index = pageSize * (page - 1) ;
-        }
+        int index = 0;
+
+
+        //该页显示的初始索引
+        index = pageSize * (page - 1) ;
+
 
         List<TaskReceive> taskReceivesByStatusAndEmpId = taskReceiveDao.findTaskReceivesByStatusAndEmpId(status, empId, null, null);
+        //System.out.println("service:size:"+taskReceivesByStatusAndEmpId.size());
         //总页码
         int total = 0;
-
+        int size = 0;
         if (taskReceivesByStatusAndEmpId != null && taskReceivesByStatusAndEmpId.size() != 0)
         {
             //数据总条数
-            int size = taskReceivesByStatusAndEmpId.size();
-            total = (int)Math.ceil((double) size/(double) CommonUtil.getPageSize());
+            size = taskReceivesByStatusAndEmpId.size();
+            total = (int)Math.ceil((double) size/(double)pageSize);
         }
 
 
@@ -162,7 +165,14 @@ public class TaskSendService {
         if (taskReceives != null && taskReceives.size() != 0)
         {
             for (TaskReceive taskReceive : taskReceives) {
+                //添加任务接收人
+                Emp receEmp = empDao.findEmpById(taskReceive.getEmpId());
+                taskReceive.setEmp(receEmp);
+                //添加任务发布的内容
                 TaskSend taskSend = taskSendDao.findTaskSendByTaskSendId(taskReceive.getTaskSendId());
+                //添加任务发送人
+                Emp emp = empDao.findEmpById(taskSend.getEmpId());
+                taskSend.setEmp(emp);
                 taskReceive.setTaskSend(taskSend);
             }
         }
@@ -172,7 +182,7 @@ public class TaskSendService {
         taskReceive_bo.setTotal(total);
         taskReceive_bo.setCount(CommonUtil.getPageSize());
         taskReceive_bo.setPage(page);
-
+        taskReceive_bo.setNum(size);
 
         return taskReceive_bo;
     }

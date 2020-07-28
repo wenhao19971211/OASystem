@@ -8,6 +8,7 @@ import com.geek.pojo.*;
 import com.geek.service.RimbursementIssueService;
 import com.geek.service.SalaryIssueService;
 import com.geek.service.SalaryService;
+import com.geek.service.TaskSendService;
 import com.geek.util.CommonUtil;
 import com.sun.corba.se.impl.presentation.rmi.IDLNameTranslatorImpl;
 import org.junit.runner.RunWith;
@@ -47,6 +48,9 @@ public class Test {
     private  SalaryDao salaryDao;
     @Autowired
     private SalaryIssueService salaryIssueService;
+    @Autowired
+    private TaskSendService taskSendService;
+
 
     @org.junit.Test
     public void test1()
@@ -245,5 +249,11 @@ public class Test {
         }
 
     }
+    @org.junit.Test
+    public void test18()
+    {
+
+    }
+
 
 }

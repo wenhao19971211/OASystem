@@ -4,19 +4,20 @@ package com.geek.handler;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.geek.bo.TaskReceive_bo;
+import com.geek.bo.TaskReceive_detail_bo;
 import com.geek.bo.TaskSend_bo;
 import com.geek.pojo.Emp;
 import com.geek.pojo.Message;
 import com.geek.pojo.TaskReceive;
 import com.geek.pojo.TaskSend;
 import com.geek.service.TaskSendService;
+import com.geek.util.CommonUtil;
 import org.omg.PortableInterceptor.INACTIVE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class TaskSendHandler {
@@ -85,17 +86,17 @@ public class TaskSendHandler {
 
 
     /**
-     * 根据状态和登录人id查询接收任务的详情（显示任务发布表中的数据），任务完成情况显示自己的任务完成情况
+     * 根据状态和登录人id查询接收任务的详情（显示任务发布表中的数据），任务完成情况显示自己的任务完成情况（进行中）
      * @param loginEmp
      * @param status
      * @return
      */
-    @GetMapping("findTaskByStatus")
+    @GetMapping("findTaskByStatus1")
     @ResponseBody
-    public TaskReceive_bo findTaskByStatus(@SessionAttribute("loginEmp") Emp loginEmp,Integer status,Integer page,Integer limit )
+    public String findTaskByStatus1(@SessionAttribute("loginEmp") Emp loginEmp,Integer status,Integer page,Integer limit )
     {
         //需要从session中获取当前用户
-
+        status = 1;
         if (page == null)
         {
             page = 1;
@@ -103,9 +104,111 @@ public class TaskSendHandler {
 
         //需要从session中获取当前用户
         TaskReceive_bo taskReceive_bo = taskSendService.findTaskReceivesByStatus(status, loginEmp.getEmpId(), page,limit);
+        //return taskReceive_bo;
 
-        return taskReceive_bo;
+        List<TaskReceive_detail_bo> taskReceive_detail_bos = new ArrayList<TaskReceive_detail_bo>();
+        if (taskReceive_bo.getTaskReceives() != null && taskReceive_bo.getTaskReceives().size() != 0)
+        {
+            for (TaskReceive taskReceive : taskReceive_bo.getTaskReceives()) {
+                TaskReceive_detail_bo taskReceive_detail_bo = new TaskReceive_detail_bo();
+                taskReceive_detail_bo.setTaskSendId(taskReceive.getTaskSendId());
+                taskReceive_detail_bo.setTaskSendEmpName(taskReceive.getTaskSend().getEmp().getEmpName());
+                taskReceive_detail_bo.setTitle(taskReceive.getTaskSend().getTitle());
+                taskReceive_detail_bo.setContent(taskReceive.getTaskSend().getContent());
+                taskReceive_detail_bo.setStartTime(CommonUtil.dateToString(taskReceive.getTaskSend().getStartTime()));
+                taskReceive_detail_bo.setFinishTime(CommonUtil.dateToString(taskReceive.getTaskSend().getFinishTime()));
+                taskReceive_detail_bo.setFactFinishTime(CommonUtil.dateToString(taskReceive.getFinishTime()));
+                if(taskReceive.getStatus() == 1)
+                {
+                    taskReceive_detail_bo.setStatus("进行中");
+                }
+                else
+                {
+                    taskReceive_detail_bo.setStatus("完成");
+                }
+                taskReceive_detail_bos.add(taskReceive_detail_bo);
+
+            }
+        }
+
+
+        Map<String,Object> map=new HashMap<>();
+        map.put("code",0);
+        map.put("msg","");
+        map.put("count",taskReceive_bo.getNum());
+        map.put("data",taskReceive_detail_bos);
+        JSONObject o = (JSONObject) JSONObject.toJSON(map);
+        String json = o.toJSONString();
+        //System.out.println(json);
+        return json;
+
     }
+    /**
+     * 根据状态和登录人id查询接收任务的详情（显示任务发布表中的数据），任务完成情况显示自己的任务完成情况（完成）
+     * @param loginEmp
+     * @param status
+     * @return
+     */
+    @GetMapping("findTaskByStatus2")
+    @ResponseBody
+    public String findTaskByStatus2(@SessionAttribute("loginEmp") Emp loginEmp,Integer status,Integer page,Integer limit )
+    {
+        //需要从session中获取当前用户
+        status = 2;
+        if (page == null)
+        {
+            page = 1;
+        }
+
+        //需要从session中获取当前用户
+        TaskReceive_bo taskReceive_bo = taskSendService.findTaskReceivesByStatus(status, loginEmp.getEmpId(), page,limit);
+        //return taskReceive_bo;
+
+        List<TaskReceive_detail_bo> taskReceive_detail_bos = new ArrayList<TaskReceive_detail_bo>();
+        if (taskReceive_bo.getTaskReceives() != null && taskReceive_bo.getTaskReceives().size() != 0)
+        {
+            for (TaskReceive taskReceive : taskReceive_bo.getTaskReceives()) {
+                TaskReceive_detail_bo taskReceive_detail_bo = new TaskReceive_detail_bo();
+                taskReceive_detail_bo.setTaskSendId(taskReceive.getTaskSendId());
+                taskReceive_detail_bo.setTaskSendEmpName(taskReceive.getTaskSend().getEmp().getEmpName());
+                taskReceive_detail_bo.setTitle(taskReceive.getTaskSend().getTitle());
+                taskReceive_detail_bo.setContent(taskReceive.getTaskSend().getContent());
+                taskReceive_detail_bo.setStartTime(CommonUtil.dateToString(taskReceive.getTaskSend().getStartTime()));
+                taskReceive_detail_bo.setFinishTime(CommonUtil.dateToString(taskReceive.getTaskSend().getFinishTime()));
+                taskReceive_detail_bo.setFactFinishTime(CommonUtil.dateToString(taskReceive.getFinishTime()));
+                if(taskReceive.getStatus() == 1)
+                {
+                    taskReceive_detail_bo.setStatus("进行中");
+                }
+                else
+                {
+                    taskReceive_detail_bo.setStatus("完成");
+                }
+                taskReceive_detail_bos.add(taskReceive_detail_bo);
+
+            }
+        }
+
+
+        Map<String,Object> map=new HashMap<>();
+        map.put("code",0);
+        map.put("msg","");
+        map.put("count",taskReceive_bo.getNum());
+        map.put("data",taskReceive_detail_bos);
+        JSONObject o = (JSONObject) JSONObject.toJSON(map);
+        String json = o.toJSONString();
+        //System.out.println(json);
+        return json;
+
+    }
+
+
+
+
+
+
+
+
 
     /**
      * 根据登陆人id查询所发布的任务
