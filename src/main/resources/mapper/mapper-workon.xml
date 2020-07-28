@@ -17,7 +17,7 @@
     </select>
     <!--上班打卡记录-->
     <insert id="insertWorkOnByEmpId" parameterType="com.geek.pojo.WorkOn">
-        insert into workon value(#{empId},#{today},#{workInTime})
+        insert into workon value(#{empId},#{today},#{workInTime},null)
     </insert>
     <!--下班打卡记录-->
     <update id="updateWorkOnByEmpId" parameterType="com.geek.pojo.WorkOn">

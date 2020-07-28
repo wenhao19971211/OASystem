@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -228,7 +229,8 @@ public class LeaveService {
      * @param workInTime 打卡的时间
      */
     public Result insertWorkonFrequency(int empId, Date workInTime){
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date nowDay=new Date();
         //获取当天打卡的时间并写入
         Result result=new Result();
         String calenda="";
@@ -236,64 +238,62 @@ public class LeaveService {
         Date date=changeDate(1);
 //        错误信息
         String message="";
-        Map<String,String> map=new HashMap<>();
+
         //当前时间的日期
         Date today=getNowToday();
         //旷工的时间限制
         Date date2=changeDate(3);
         //下班打卡的时间
         Date date3=changeDate(2);
+        sdf=new SimpleDateFormat("yyyy-MM-dd");
+        String ss=sdf.format(nowDay);
         //date小于workInTime返回-1，date大于workInTime返回1，相等返回0如下
         int compareTo= date.compareTo(workInTime);
         int compareTo2=date2.compareTo(workInTime);
         int compareTo3=date3.compareTo(workInTime);
+        String tips="";
         if (compareTo==1&&compareTo==0){
 //            正常写入没有迟到
-        calenda=df.format(today);
-            map.put(calenda,"快点上班");
-        }else if(compareTo==-1){
-
+            tips="早安！";
+        }else {
             if (compareTo2==-1){
                 //旷工
-                map.put(calenda,"已近旷工");
+                tips="！您已矿工";
             }else{
                 //迟到
-                map.put(calenda,"已经迟到");
-            }
+                tips="！您已迟到";
 
+            }
         }
             workOnDao.insertWorkOnByEmpId(empId,today,workInTime);
-        JSONObject o = (JSONObject) JSONObject.toJSON(map);
-        String json = o.toJSONString();
-        result.setMessage("");
+        result.setMessage(ss);
         result.setCode(0);
-        result.setObject(json);
+        result.setObject(tips);
             return result;
     }
     public Result updateWorkonFrequency(int empId, Date workOutTime){
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Date nowDay=new Date();
         Result result=new Result();
         Date date=changeDate(2);
         Date today=getNowToday();
         int compareTo=date.compareTo(workOutTime);
         String message="";
-        Map<String,String> map=new HashMap<>();
-        String calenda="";
-        calenda=df.format(today);
+        String calenda=df.format(today);
+        calenda=df.format(nowDay);
+        String tips="";
         if (compareTo==-1){
             //正常下班
-            map.put(calenda,"祝您晚餐愉快");
+            tips="祝您晚餐愉快！";
         }else{
             //早退
-            map.put(calenda,"莫要早退");
+            tips="请按时下班";
 
         }
         workOnDao.updateWorkOnByEmpId(empId,workOutTime);
-        JSONObject o = (JSONObject) JSONObject.toJSON(map);
-        String json = o.toJSONString();
-        result.setMessage("");
+        result.setMessage(calenda);
         result.setCode(0);
-        result.setObject(json);
+        result.setObject(tips);
         return result;
     }
     /**
@@ -328,15 +328,9 @@ public class LeaveService {
     };
 
     public Date getNowToday(){
-        Date date=new Date();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        String newDate=df.format(date);
-        try {
-            date=df.parse(newDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            System.out.println("日期转换错误已2");
-        }
+
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
         return date;
     }
