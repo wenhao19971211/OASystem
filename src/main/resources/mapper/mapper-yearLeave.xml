@@ -45,4 +45,13 @@
     <update id="updateCheckStatusByYearLeaveId">
         update yearleave set checkStatus=#{state} where yearLeaveId=#{id}
     </update>
+    <select id="findYearLeavesByEmpIdAndStartAndEnd" resultType="com.geek.pojo.YearLeave">
+        select * from yearleave
+        where applyempId = #{empId}
+        AND checkstatus = 2
+        and (endTime BETWEEN #{start} AND #{end}
+        OR startTime BETWEEN #{start} AND #{end})
+    </select>
+
+
 </mapper>
