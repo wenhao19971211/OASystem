@@ -22,7 +22,7 @@
 
 
     <select id="findSalaryBySalaryId" resultType="com.geek.pojo.Salary">
-        select * from salary where slaryId = #{slaryId}
+        select * from salary where salaryId = #{salaryId}
     </select>
 
 

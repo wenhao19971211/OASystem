@@ -132,9 +132,9 @@ public class TaskSendService {
      * @param empId
      * @return
      */
-    public TaskReceive_bo findTaskReceivesByStatus(Integer status,Integer empId,Integer page)
+    public TaskReceive_bo findTaskReceivesByStatus(Integer status,Integer empId,Integer page,Integer pageSize)
     {
-        Integer pageSize = 5;
+
         int index = 1;
         if(page != null)
         {
@@ -182,10 +182,10 @@ public class TaskSendService {
      * @param empId
      * @return
      */
-    public TaskSend_bo findTaskSendByEmpId(Integer empId,Integer page)
+    public TaskSend_bo findTaskSendByEmpId(Integer empId,Integer page,Integer pageSize)
     {
         //该页起始数据的索引
-        int index = CommonUtil.getPageSize() * (page - 1) ;
+        int index = pageSize * (page - 1) ;
         //总页码
         int total = 0;
         List<TaskSend> taskSendByEmpId = taskSendDao.findTaskSendByEmpId(empId, null, null);
@@ -222,10 +222,10 @@ public class TaskSendService {
      * @param page
      * @return
      */
-    public TaskSend_bo findTaskSendByTitle(Integer empId,String title,Integer page)
+    public TaskSend_bo findTaskSendByTitle(Integer empId,String title,Integer page,Integer pageSize)
     {
         //该页起始数据的索引
-        int index = CommonUtil.getPageSize() * (page - 1) ;
+        int index = pageSize * (page - 1) ;
         //总页码
         int total = 0;
         List<TaskSend> taskSendList = taskSendDao.findTaskSendByTitleAndReEmpIdAndSeEmpId(empId,"%"+ title+"%", null, null);

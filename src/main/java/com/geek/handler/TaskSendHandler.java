@@ -26,7 +26,7 @@ public class TaskSendHandler {
 
     /**
      * 新增任务
-     * @param loginEmpId
+     * @param loginEmp
      * @param title
      * @param content
      * @param startTime
@@ -36,7 +36,7 @@ public class TaskSendHandler {
      */
     @PostMapping("addTask")
     @ResponseBody
-    public String addTask( Integer loginEmpId, String title, String content, Date startTime, Date finishTime, Integer[] receiveEmpIds)
+    public String addTask( @SessionAttribute("loginEmp") Emp loginEmp, String title, String content, Date startTime, Date finishTime, Integer[] receiveEmpIds)
     {
         //需要从session中获取当前用户
 
@@ -46,7 +46,7 @@ public class TaskSendHandler {
         //创建任务发放
         Date today = new Date();
         TaskSend taskSend = new TaskSend();
-        taskSend.setEmpId(loginEmpId);
+        taskSend.setEmpId(loginEmp.getEmpId());
         taskSend.setToday(today);
         taskSend.setTitle(title);
         taskSend.setContent(content);
@@ -86,13 +86,13 @@ public class TaskSendHandler {
 
     /**
      * 根据状态和登录人id查询接收任务的详情（显示任务发布表中的数据），任务完成情况显示自己的任务完成情况
-     * @param loginEmpId
+     * @param loginEmp
      * @param status
      * @return
      */
     @GetMapping("findTaskByStatus")
     @ResponseBody
-    public TaskReceive_bo findTaskByStatus(Integer loginEmpId,Integer status,Integer page )
+    public TaskReceive_bo findTaskByStatus(@SessionAttribute("loginEmp") Emp loginEmp,Integer status,Integer page,Integer limit )
     {
         //需要从session中获取当前用户
 
@@ -102,47 +102,47 @@ public class TaskSendHandler {
         }
 
         //需要从session中获取当前用户
-        TaskReceive_bo taskReceive_bo = taskSendService.findTaskReceivesByStatus(status, loginEmpId, page);
+        TaskReceive_bo taskReceive_bo = taskSendService.findTaskReceivesByStatus(status, loginEmp.getEmpId(), page,limit);
 
         return taskReceive_bo;
     }
 
     /**
      * 根据登陆人id查询所发布的任务
-     * @param loginEmpId
+     * @param loginEmp
      * @return
      */
     @GetMapping("findTaskByempId")
     @ResponseBody
-    public TaskSend_bo findTaskByempId(Integer loginEmpId, Integer page)
+    public TaskSend_bo findTaskByempId(@SessionAttribute("loginEmp") Emp loginEmp, Integer page,Integer limit)
     {
         //需要从session中获取当前用户
         if (page == null)
         {
             page = 1;
         }
-        TaskSend_bo taskSend_bo = taskSendService.findTaskSendByEmpId(loginEmpId, page);
+        TaskSend_bo taskSend_bo = taskSendService.findTaskSendByEmpId(loginEmp.getEmpId(), page,limit);
 
         return taskSend_bo;
     }
 
     /**
      * 根据当前登陆人模糊查询标题（包括发放人、接收人）
-     * @param loginEmpId
+     * @param loginEmp
      * @param title
      * @param page
      * @return
      */
     @GetMapping("findTaskByTitle")
     @ResponseBody
-    public TaskSend_bo findTaskByTitle(Integer loginEmpId,String title,Integer page)
+    public TaskSend_bo findTaskByTitle(@SessionAttribute("loginEmp") Emp loginEmp,String title,Integer page,Integer limit)
     {
         //需要从session中获取当前用户
         if (page == null)
         {
             page = 1;
         }
-        TaskSend_bo taskSend_bo = taskSendService.findTaskSendByTitle(loginEmpId, title, page);
+        TaskSend_bo taskSend_bo = taskSendService.findTaskSendByTitle(loginEmp.getEmpId(), title, page,limit);
         return taskSend_bo;
     }
 

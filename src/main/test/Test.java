@@ -6,6 +6,7 @@ import com.geek.handler.SalaryIssueHandler;
 import com.geek.handler.TaskSendHandler;
 import com.geek.pojo.*;
 import com.geek.service.RimbursementIssueService;
+import com.geek.service.SalaryIssueService;
 import com.geek.service.SalaryService;
 import com.geek.util.CommonUtil;
 import com.sun.corba.se.impl.presentation.rmi.IDLNameTranslatorImpl;
@@ -44,49 +45,52 @@ public class Test {
     private RimbursementIssueHandler rimbursementIssueHandler;
     @Autowired
     private  SalaryDao salaryDao;
+    @Autowired
+    private SalaryIssueService salaryIssueService;
+
     @org.junit.Test
     public void test1()
     {
         Integer[] receiveEmpIds = new Integer[]{2,3};
-        String flag = taskSendHandler.addTask(1, "ceshi", "ceshi", new Date(), new Date(), receiveEmpIds);
-        System.out.println("flag:"+flag);
+        //String flag = taskSendHandler.addTask(1, "ceshi", "ceshi", new Date(), new Date(), receiveEmpIds);
+        //System.out.println("flag:"+flag);
     }
 
     @org.junit.Test
     public void test2()
     {
-        TaskReceive_bo task = taskSendHandler.findTaskByStatus(6, 1, 2);
-        for (TaskReceive taskReceive : task.getTaskReceives()) {
-            System.out.println("taskReceive:"+taskReceive);
-            System.out.println("taskReceive.getTaskSend():"+taskReceive.getTaskSend());
-        }
-        System.out.println(task.getTotal());
+        //TaskReceive_bo task = taskSendHandler.findTaskByStatus(6, 1, 2);
+        //for (TaskReceive taskReceive : task.getTaskReceives()) {
+        //    System.out.println("taskReceive:"+taskReceive);
+        //    System.out.println("taskReceive.getTaskSend():"+taskReceive.getTaskSend());
+        //}
+        //System.out.println(task.getTotal());
     }
     @org.junit.Test
     public void test3()
     {
-        TaskSend_bo taskSend_bo = taskSendHandler.findTaskByempId(1, 1);
-        for (TaskSend taskSend : taskSend_bo.getTaskSends()) {
-            System.out.println("taskSend"+taskSend);
-            for (TaskReceive taskReceive : taskSend.getTaskReceives()) {
-                System.out.println("taskReceive"+taskReceive);
-            }
-
-        }
-        System.out.println(taskSend_bo.getTotal());
+//        TaskSend_bo taskSend_bo = taskSendHandler.findTaskByempId(1, 1);
+//        for (TaskSend taskSend : taskSend_bo.getTaskSends()) {
+//            System.out.println("taskSend"+taskSend);
+//            for (TaskReceive taskReceive : taskSend.getTaskReceives()) {
+//                System.out.println("taskReceive"+taskReceive);
+//            }
+//
+//        }
+//        System.out.println(taskSend_bo.getTotal());
     }
     @org.junit.Test
     public void test4()
     {
         System.out.println("test4");
-        TaskSend_bo taskSend_bo = taskSendHandler.findTaskByTitle(1, "c", 1);
-        System.out.println("size()"+taskSend_bo.getTaskSends().size());
-        for (TaskSend taskSend : taskSend_bo.getTaskSends()) {
-            System.out.println("taskSend:"+taskSend);
-            for (TaskReceive taskReceive : taskSend.getTaskReceives()) {
-                System.out.println("taskReceive"+taskReceive);
-            }
-        }
+//        TaskSend_bo taskSend_bo = taskSendHandler.findTaskByTitle(1, "c", 1);
+//        System.out.println("size()"+taskSend_bo.getTaskSends().size());
+//        for (TaskSend taskSend : taskSend_bo.getTaskSends()) {
+//            System.out.println("taskSend:"+taskSend);
+//            for (TaskReceive taskReceive : taskSend.getTaskReceives()) {
+//                System.out.println("taskReceive"+taskReceive);
+//            }
+//        }
     }
     @org.junit.Test
     public void test5()
@@ -229,6 +233,16 @@ public class Test {
     @org.junit.Test
     public void test17()
     {
+        //Salary salary = salaryDao.findSalaryBySalaryId(1);
+        //System.out.println(salary);
+        SalaryIssue_bo salaryIssue_bo = salaryIssueService.findSalaryIssueByStatus(2, 1, 10);
+        System.out.println("size:"+salaryIssue_bo.getSalaryIssues().size());
+        for (SalaryIssue salaryIssue : salaryIssue_bo.getSalaryIssues())
+        {
+            System.out.println("empName:"+salaryIssue.getEmp().getEmpName());
+            System.out.println("reempName:"+salaryIssue.getSalary().getEmp().getEmpName());
+            System.out.println("redepName:"+salaryIssue.getSalary().getEmp().getDep().getDepName());
+        }
 
     }
 
