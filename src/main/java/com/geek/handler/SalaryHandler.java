@@ -111,7 +111,7 @@ public class SalaryHandler {
         map.put("data",salary_detail_bos);
         JSONObject o = (JSONObject) JSONObject.toJSON(map);
         String json = o.toJSONString();
-        System.out.println(json);
+        //System.out.println(json);
         return json;
     }
 

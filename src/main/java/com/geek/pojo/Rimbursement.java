@@ -13,6 +13,7 @@ public class Rimbursement {
     private Integer empId;
     private Integer status;
     private Emp emp;
+    private Reimbursement reimbursement;
 
     public Rimbursement() {
     }
@@ -57,7 +58,7 @@ public class Rimbursement {
         this.reimbursement = reimbursement;
     }
 
-    private Reimbursement reimbursement;
+
 
     public Integer getRimbursementIssue() {
         return rimbursementIssue;
