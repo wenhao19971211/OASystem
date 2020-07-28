@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geek.dao.DockPayDao">
+
+    <insert id="addDockPay">
+        insert into dockPay values (#{empId},#{dockPayDay},#{dockPayType},#{dockPayMoney},#{dockPayTime})
+    </insert>
+
+    <select id="findDockPayByEmpIdAndStartAndEnd" resultType="com.geek.pojo.DockPay">
+        select * from dockPay where empId = #{empId} and (dockPayDay between #{start} and #{end} )
+    </select>
+
+</mapper>

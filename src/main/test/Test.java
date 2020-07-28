@@ -159,12 +159,13 @@ public class Test {
     @org.junit.Test
     public void test10()
     {
+       /*
         Salary_bo salary_bo = salaryHandler.findSalaryByEmpId(1, 1, 1);
         System.out.println("empId:"+salary_bo.getEmpId());
         System.out.println("count:"+salary_bo.getCount());
         for (Salary salary : salary_bo.getSalaries()) {
             System.out.println(salary);
-        }
+        }*/
     }
     @org.junit.Test
     public void test11()
@@ -197,6 +198,15 @@ public class Test {
         String flag = salaryIssueHandler.updateSalaryIssueStatusBySalaryIssueId(19, 1);
         System.out.println("flag:"+flag);
     }
+    @Autowired
+    private DockPayDao dockPayDao;
 
+    @org.junit.Test
+    public void test15()
+    {
+        DockPay dockPay = new DockPay(1,new Date(),1,100.00,"迟到");
+        int count = dockPayDao.addDockPay(dockPay);
+        System.out.println("count:"+count);
+    }
 
 }

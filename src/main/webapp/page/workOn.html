@@ -25,24 +25,41 @@
     }
 
 </style>
-<body style="background-image: url(../image/timg.jpg); ">
+<body style="background-color: #1E9FFF; ">
 <div class="layui-fluid" >
-    <div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
-        <button type="button" class="layui-btn layui-btn-lg layui-btn-primary layui-btn-radius" name="test2" id="test2" style="float: right;">大型加圆角</button>
+    <div class="layui-col-xs12 layui-col-sm12 layui-col-md12 site-demo-button" id="layerDemo" style="margin-bottom: 0;">>
+        <button type="button" data-method="confirmTrans" class="layui-btn layui-btn-lg layui-btn-primary layui-btn-radius" name="test2" id="test2" style="float: right;">大型加圆角</button>
     </div>
     <div class="layui-col-xs4 layui-col-sm4 layui-col-md4" style="width: 300px; height: 700px; font-size: 30px; text-align: center; " >
-
     </div>
     <div class="layui-col-xs8 layui-col-sm8 layui-col-md8 " id="dd" style="float: right">
         <div class="layui-inline" id="test-n1" style="float: right; margin-left: 0px;"></div>
     </div>
 </div>
+
+<!--<div class="site-demo-button" id="layerDemo" style="margin-bottom: 0;">-->
+    <!--<blockquote class="layui-elem-quote layui-quote-nm">-->
+        <!--Tips：为了更清晰演示，每触发下述一个例子之前，都会关闭所有已经演示的层-->
+    <!--</blockquote>-->
+    <!--<button data-method="setTop" class="layui-btn">多窗口模式，层叠置顶</button>-->
+    <!--<button data-method="confirmTrans" class="layui-btn">配置一个透明的询问框</button>-->
+    <!--<button data-method="notice" class="layui-btn">示范一个公告层</button>-->
+    <!--<button data-method="offset" data-type="t" class="layui-btn layui-btn-normal">上弹出</button>-->
+    <!--<button data-method="offset" data-type="r" class="layui-btn layui-btn-normal">右弹出</button>-->
+    <!--<button data-method="offset" data-type="b" class="layui-btn layui-btn-normal">下弹出</button>-->
+    <!--<button data-method="offset" data-type="l" class="layui-btn layui-btn-normal">左弹出</button>-->
+    <!--<button data-method="offset" data-type="lt" class="layui-btn layui-btn-normal">左上弹出</button>-->
+    <!--<button data-method="offset" data-type="lb" class="layui-btn layui-btn-normal">左下弹出</button>-->
+    <!--<button data-method="offset" data-type="rt" class="layui-btn layui-btn-normal">右上弹出</button>-->
+    <!--<button data-method="offset" data-type="rb" class="layui-btn layui-btn-normal">右下弹出</button>-->
+    <!--<button data-method="offset" data-type="auto" class="layui-btn layui-btn-normal">居中弹出</button>-->
+<!--</div>-->
 </body>
 </html>
 
 
 <script>
-    var ds={'0-0-12':'好肉粽'};
+    var ds=null;
     //		var date=null;
     //		var dateTime=new Date();
     //			$.ajax({
@@ -55,23 +72,25 @@
     //
     //				}
     //			});
-    layui.use('laydate', function(){
+    layui.use(['laydate','layer'], function() {
+        var $ = layui.$;
         var laydate = layui.laydate;
-
+        var $ = layui.jquery,layer = layui.layer;
+        var dates = new Date();
         //执行一个laydate实例
         laydate.render({
             elem: '#test-n1'
-            ,position: 'static'
-            ,calendar: true
-            ,type: 'datetime'
+            , position: 'static'
+            , calendar: true
+            , type: 'datetime'
             // ,format: 'yyyy年MM月dd日 HH时mm分ss秒'
-            ,value: dates
-            ,isInitValue: false
-            ,mark: {//标注重要日子--类型：Object，默认值：无
-                '0-0-14': '生日'
+            , value: dates
+            , isInitValue: false
+            , mark: {//标注重要日子--类型：Object，默认值：无
+                "0-0-14": "生日"
                 //这边传送一个data的json数组：表示所有的休息时间
             }
-            ,done: function(value, date, endDate){//控件选择完毕后的回调---点击日期、清空、现在、确定均会触发。
+            , done: function (value, date, endDate) {//控件选择完毕后的回调---点击日期、清空、现在、确定均会触发。
 
                 // console.log(dates);
                 console.log(value); //得到日期生成的值，如：2017-08-18
@@ -79,55 +98,56 @@
                 console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
             }
         });
-
-        lay('#test2').on('click', function(e){ //假设 test1 是一个按钮
+        lay('#test2').on('click', function (e) { //假设 test1 是一个按钮
             $("#test-n1").empty();
-            wgg();
-            laydate.render({
-                elem: '#test-n1'
-                ,position: 'static'
-                ,calendar: true
-                ,type: 'datetime'
-                ,value: dates
-                ,isInitValue: false
-                ,mark:ds
-                ,done: function(value, date, endDate){//控件选择完毕后的回调---点击日期、清空、现在、确定均会触发。
+            var ds;
+            var emp = $(window.parent.document).find(":input#empId");
+            console.log(emp);
+            var empId = emp.val();
+            console.log(empId);
+            $.ajax({
+                url:"calendar/"+empId,
+                dataType:"json",
+                type:"post",
+                success:function (data) {
+                    console.log(data.object);
+                    ds=data.object;
+                    console.log();
+                    var dk=data.message;
+                    layer.msg('<a style="background-color: #C9C9C9">今天的日期是'+ds+'</a><br>' +
+                        '<a style="background-color: #C9C9C9">您好'+dk+'</a><br>', {
+                        time: 20000, //20s后自动关闭
+                        btn: ['明白了', '知道了', '哦']
+                    });
+                    var ss=laydate.render({
+                        elem: '#test-n1'
+                        , position: 'static'
+                        , calendar: true
+                        , type: 'datetime'
+                        , value: dates
+                        , isInitValue: false
+                        , done: function (value, date, endDate) {
+                            console.log(ds);
+                        }
+                    });
 
-                    // console.log(dates);
-                    console.log(value); //得到日期生成的值，如：2017-08-18
-                    console.log(date); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
-                    console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
                 }
             });
+
+            //配置一个透明的询问框
+
+
         });
 
 
-    });
-// 向后台传输数据将用户的id传入并且接收一个mark的json数据
-    function wgg(date){
-        var emp = $(window.parent.document).find(":input#empId");
-        var empId = emp.val();
-        $.ajax({
-            url:"workOn/"+param["empId"],
-            dataType:"json",
-            type:"post",
-            success:function (data) {
-                // 用于接收和改写mark数据将数据传递给新的日历
-                date=data;
-                //leaveInfo/"+param["empId"]
-            }
-        })
-    }
-    // $.ajax({
-    //     url:"empLogin",
-    //     dataType:"json",
-    //     type:"get",
-    //     success:function (data) {
-    //         $("#empId").val(data.object.empId);
-    //         $("#depId").val(data.object.dep.depId);
-    //     }
-    //
-    // });
+    })
+
+
+
+
+
+
+
 
 
 

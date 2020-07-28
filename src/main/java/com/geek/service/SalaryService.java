@@ -7,6 +7,7 @@ import com.geek.pojo.*;
 import com.geek.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -32,12 +33,14 @@ public class SalaryService {
     private SalaryDao salaryDao;
     @Autowired
     private SalaryIssueDao salaryIssueDao;
-
+    @Autowired
+    private DockPayDao dockPayDao;
 
     /**
      * 计算所有员工上个月的薪资
      * @return
      */
+    @Transactional
     public boolean updateLastMonthSalary(Date date)
     {
         boolean flag = true;
@@ -148,6 +151,7 @@ public class SalaryService {
                         //扣200
                         lateArrivalMoney+=200;
                     }
+
                 }
                 //查询事假表
                 List<Leave> leaves = leaveDao.findLeavesByEmpIdAndStartAndEnd(standardSalary.getEmpId(), start, end);
@@ -204,6 +208,9 @@ public class SalaryService {
 
                 //扣除事假、旷工、早退迟到，最后薪资情况
                 double punishMoney = absenteeismMoney + leaveMoney + lateArrivalMoney;
+
+
+
                 //具体薪资
                 if(punishMoney>perSalary)
                 {
@@ -218,16 +225,87 @@ public class SalaryService {
                 {
                     perSalary = perSalary - punishMoney;
                 }
-                //扣除社保
+                //扣除个人所得税和社保
+                double socialSecurityMoney = (perSalary + baseSalary) * 0.11;
+                //个人所得税
+                double individualIncomeTax = 0;
                 if((perSalary+baseSalary)>5000 && (perSalary+baseSalary)<=10000)
                 {
-                    perSalary = perSalary - (perSalary + baseSalary) * (0.11+0.03);
+                    individualIncomeTax = (perSalary + baseSalary) * 0.03;
                 }
                 else if ((perSalary+baseSalary)>10000)
                 {
-                    perSalary = perSalary - (perSalary + baseSalary) * (0.11+0.1);
+                    individualIncomeTax = (perSalary + baseSalary) *0.1;
+                }
+                //先扣绩效，再扣基本薪资
+                if (perSalary>individualIncomeTax)
+                {
+                    perSalary = perSalary - individualIncomeTax;
+                }
+                else if (baseSalary > individualIncomeTax)
+                {
+                    perSalary = 0;
+                    baseSalary -= individualIncomeTax;
+                }
+                else
+                {
+                    perSalary = 0;
+                    baseSalary = 0;
                 }
 
+
+
+                //添加扣薪表
+                if (absenteeismMoney > 0)
+                {
+                    //旷工扣薪
+                    DockPay dockPay = new DockPay(standardSalary.getEmpId(),start,2,absenteeismMoney,"旷工"+absenteeismDay+"天");
+                    int count = dockPayDao.addDockPay(dockPay);
+                    if (count<=0)
+                    {
+                        flag = false;
+                    }
+                }
+                if (leaveMoney > 0)
+                {
+                    //事假扣薪
+                    DockPay dockPay = new DockPay(standardSalary.getEmpId(),start,3,leaveMoney,"事假"+leaveDay+"天");
+                    int count = dockPayDao.addDockPay(dockPay);
+                    if (count<=0)
+                    {
+                        flag = false;
+                    }
+                }
+                if (lateArrivalMoney > 0)
+                {
+                    //迟到早退扣薪
+                    DockPay dockPay = new DockPay(standardSalary.getEmpId(),start,1,lateArrivalMoney,"迟到早退");
+                    int count = dockPayDao.addDockPay(dockPay);
+                    if (count<=0)
+                    {
+                        flag = false;
+                    }
+                }
+                if (socialSecurityMoney > 0)
+                {
+                    //五险一金
+                    DockPay dockPay = new DockPay(standardSalary.getEmpId(),start,4,socialSecurityMoney,"社保");
+                    int count = dockPayDao.addDockPay(dockPay);
+                    if (count<=0)
+                    {
+                        flag = false;
+                    }
+                }
+                if (individualIncomeTax > 0)
+                {
+                    //个人所得税
+                    DockPay dockPay = new DockPay(standardSalary.getEmpId(),start,5,individualIncomeTax,"个人所得税");
+                    int count = dockPayDao.addDockPay(dockPay);
+                    if (count<=0)
+                    {
+                        flag = false;
+                    }
+                }
 
                 //添加到薪酬表
                 Salary salary = new Salary();
@@ -254,7 +332,7 @@ public class SalaryService {
                 salaryIssue.setStatus(1);
                 //添加薪资发放表
                 int count2 = salaryIssueDao.addSalaryIssue(salaryIssue);
-                if (count2<0)
+                if (count2<=0)
                 {
                     flag = false;
                 }
@@ -279,6 +357,8 @@ public class SalaryService {
     {
         //所有薪资
         List<Salary> salaryByEmpIds = salaryDao.findSalaryByEmpId(empId, null, null);
+
+
         Integer count = 0;
         if (salaryByEmpIds != null && salaryByEmpIds.size() != 0)
         {
@@ -286,7 +366,9 @@ public class SalaryService {
         }
         //当页数据
         List<Salary> salaries = salaryDao.findSalaryByEmpId(empId, pageSize * (page - 1), pageSize);
-
+       /* for (Salary salary : salaries) {
+            System.out.println("service:"+salary.getMonth());
+        }*/
 
 
         Salary_bo salary_bo = new Salary_bo();
