@@ -35,6 +35,8 @@ public class SalaryIssueHandler {
     {
         status = 1;
         SalaryIssue_bo salaryIssue_bo = salaryIssueService.findSalaryIssueByStatus(status, page, limit);
+
+
         //return salaryIssue_bo;
         Map<String,Object> map=new HashMap<>();
         map.put("code",0);

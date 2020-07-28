@@ -42,7 +42,8 @@ public class Test {
     private SalaryIssueHandler salaryIssueHandler;
     @Autowired
     private RimbursementIssueHandler rimbursementIssueHandler;
-
+    @Autowired
+    private  SalaryDao salaryDao;
     @org.junit.Test
     public void test1()
     {
@@ -223,6 +224,12 @@ public class Test {
 
         RimbursementIssue_bo rimbursementIssue_bo = rimbursementIssueService.findRimbursementByStatus(null, 1, 5);
         System.out.println("size"+rimbursementIssue_bo.getRimbursements().size());
+    }
+
+    @org.junit.Test
+    public void test17()
+    {
+
     }
 
 }
