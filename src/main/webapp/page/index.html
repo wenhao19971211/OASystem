@@ -125,10 +125,18 @@
 	  <!--七号-->
 	  <ul class="layui-nav layui-nav-tree layui-tab-item layui-col-xs6 layui-col-sm6 layui-col-md3 dd" lay-filter="test">
 		  <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
-		  <li class="layui-nav-item ">
-			  <a >报销管理</a>
+		  <li class="layui-nav-item"><a >报销发放</a>
+			  <dl class="layui-nav-child">
+				  <dd id="bxyff"><a href="page/RimbursementIssue.html" target="dd">已发放</a></dd>
+				  <dd ><a href="page/RimbursementNotIssue.html" target="dd">未发放</a></dd>
+			  </dl>
 		  </li>
-		  <li class="layui-nav-item"><a >薪资管理</a></li>
+		  <li class="layui-nav-item"><a >薪资发放</a>
+			  <dl class="layui-nav-child">
+				  <dd id="xzff"><a href="page/SalaryIssue.html" target="dd">已发放</a></dd>
+				  <dd ><a href="page/SalaryNotIssue.html" target="dd">未发放</a></dd>
+			  </dl>
+		  </li>
 	  </ul>
 
   	 	</div>
