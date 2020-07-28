@@ -161,7 +161,7 @@
             $("#selectSendEmail").show();
             $.ajax({
                 url:"findEmail",
-                data:{"empId":1,"type":1,"readStatus":1,"receiveEmpId":0},
+                data:{"emailId":0,"empId":1,"type":1,"readStatus":1,"receiveEmpId":0},
                 type:"get",
                 dataType:"json",
                 success:function (data) {
