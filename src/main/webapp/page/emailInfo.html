@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="http://localhost:8080/OASystem_war_exploded/">
+    <script src="js/jquery.js"></script>
+    <script src="js/common.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body >
+        <div style="margin-left: 200px;float:left;" id="yjContent">
+            <table border="1" style="border-collapse: collapse;width: 500px;height: 350px;text-align: center;border-color:lightgray" >
+                <tr style="height: 10%">
+                    <td colspan="3" id="title"></td>
+                </tr>
+                <tr style="height: 8%">
+                    <td colspan="3">
+                        <div  style="float: left;margin-left: 10px;height:30px;">
+                            <div style="float: left;font-weight:bold;" >发送人:</div><div id="sendEmpName" style="float: left"></div>
+                        </div>
+                        <div  style="float: left;margin-left:336px;margin-top:-30px;height:30px;">
+                            <div style="float: left;font-weight:bold;" >接收时间:</div><div id="time" style="float: left"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr >
+                    <td  colspan="3">
+                        <div id="content" style="width: 500px;height:278px;"></div>
+                    </td>
+                </tr>
+            </table>
+            <input type="button" value="返回" id="fhButton" style="margin-left: 200px"><input type="button" value="回复" id="hfButton">
+        </div>
+        <!--回复文本框-->
+        <div id="hfContent" style="float:left;display: none;">
+            <table style="border-collapse: collapse;width: 500px;height: 350px;text-align: center;border-color:lightgray;" border="1">
+                <tr style="height: 10px">
+                    <td >
+                        <div>
+                            回复给:<a id="hfName"></a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="hf" style="width: 500px;height: 323px;" contenteditable="true" ></div>
+                    </td>
+                </tr>
+            </table>
+            <input type="button" value="提交" id="tjButton" style="margin-left: 230px">
+        </div>
+
+
+
+
+
+</body>
+<script>
+    $(function () {
+        //获取数据
+        var param=parseUrl(location.href);
+        var emailId=param["emailId"];
+        //一开始发送者的id
+        var empId=param["empId"];
+        //一开始接收人的id
+        var receiveId=param["receiveId"];
+        console.log(emailId,empId,receiveId);
+        $.ajax({
+            url:"findEmail",
+            type:"get",
+            data:{"emailId":emailId,"empId":0,"type":0,"readStatus":0,"receiveEmpId":0},
+            dataType:"json",
+            success:function (data) {
+                console.log(data)
+                $("#title").text(data.list[0].title)
+                $("#sendEmpName").text(data.object[0])
+                $("#time").text(parseDate(data.list[0].time))
+                $("#content").text(data.list[0].content)
+                //回复的界面填入数据
+                $("#hfName").text(data.object[0])
+            }
+
+        })
+
+        //返回按钮点击事件
+        $("#fhButton").click(function () {
+            location.href="page/selectEmail.html";
+        })
+
+        //回复按钮点击事件
+        $("#hfButton").click(function () {
+            $("#hfContent").show();
+            // $("#yjContent").hide();
+        })
+        //回复提交按钮点击事件
+        $("#tjButton").click(function () {
+            var content=$("#hf").text();
+            var arrary=new Array();
+            arrary.push(empId);
+            if (content==""){
+                alert("回复内容不能为空");
+                return;
+            }
+            $.ajax({
+                url:"sendEmail",
+                type:"post",
+                traditional:true,
+                data:{"empId":receiveId,"type":3,"title":null,"content":content,"receive": arrary},
+                dataType:"json",
+                success:function (data) {
+                    if (data==1){
+                        alert("发送成功！")
+                        location.href="page/selectEmail.html";
+                    }
+                }
+            })
+
+        })
+
+    })
+
+
+</script>
+</html>
