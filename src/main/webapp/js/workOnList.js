@@ -8,7 +8,7 @@ layui.use(['form','layer','table','laytpl'],function(){
     //用户列表
     var tableIns = table.render({
         elem: '#userList',
-        url : 'changeStatue',
+        url : 'daKa',
         cellMinWidth : 95,
         page : true,
         height : "full-125",
@@ -21,13 +21,10 @@ layui.use(['form','layer','table','laytpl'],function(){
         id : "userListTable",
         cols : [[
             {type: "checkbox", fixed:"left", width:50},
-            {field: 'reimbursementId ', title: '申请编号', minWidth:100, align:"center"},
-            {field: 'empId', title: '申请人Id', minWidth:100, align:"center"},
-            {field: 'sendId', title: '发送的事件', minWidth:100, align:"center"},
-            {field: 'sendTime', title: '发送申请的时间', minWidth:100, align:"center"},
-            {field: 'sum', title: '总价', align:'center'},
-            {field: 'type', title: '报销的类型', align:'center',minWidth:150},
-            {field: 'detail', title: '报销的具体原因', align:'center',minWidth:150},
+            {field: 'empId', title: '用户Id', minWidth:100, align:"center"},
+            {field: 'today ', title: '打卡的日期', minWidth:100, align:"center"},
+            {field: 'workInTime ', title: '上班打卡时间', minWidth:100, align:"center"},
+            {field: 'workOutTime ', title: '下班打卡的时间', align:'center'},
             {title: '操作', minWidth:175, templet:'#userListBar',fixed:"right",align:"center"}
         ]]
     });

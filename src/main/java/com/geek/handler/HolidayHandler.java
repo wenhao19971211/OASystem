@@ -6,6 +6,7 @@ import com.geek.dto.Result;
 import com.geek.pojo.DayOff;
 import com.geek.pojo.Dominant;
 import com.geek.pojo.Emp;
+import com.geek.pojo.WorkOn;
 import com.geek.service.EmpService;
 import com.geek.service.LeaveService;
 import com.geek.util.SessionNameUtil;
@@ -30,6 +31,9 @@ public class HolidayHandler {
     LeaveService leaveService;
     @Autowired
     EmpService empService;
+
+
+
     @PostMapping("leave")
     public Integer addLeaveAndAddMessage(int type, String startDate, String endDate, String cause, HttpSession session){
 //        时间转化,字符转转date
@@ -150,6 +154,28 @@ public class HolidayHandler {
             result=leaveService.updateWorkonFrequency(depId,date);
         }
         return result;
+    }
+
+    /**
+     * 打卡记录
+     */
+    @GetMapping("daKa")
+    public String findAllByEmpId(@PathVariable("empId") int empId){
+
+        Result result=new Result();
+        List<WorkOn> list =leaveService.findByEmpIdS(1);
+
+        Map<String,Object> map=new HashMap<>();
+        map.put("code",0);
+        map.put("msg","");
+        map.put("count",100);
+        map.put("data",list);
+        JSONObject o = (JSONObject) JSONObject.toJSON(map);
+        String json = o.toJSONString();
+
+
+
+        return json;
     }
 
 

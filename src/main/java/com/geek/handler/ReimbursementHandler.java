@@ -53,7 +53,7 @@ public class ReimbursementHandler {
      *             public Integer type;
      *             public String detail;
      *             public String typeStatue;
-     * @param statue
+     * @param
      * @return
      */
     @GetMapping("changeStatue")
@@ -73,12 +73,14 @@ public class ReimbursementHandler {
         System.out.println(json);
         return json;
     }
-//    @GetMapping()
-//    public Result updateByStatue(int statue,int empId,int reimbursementId ){
-//        Result result=new Result();
-//        reimbursementService.updateByEmpId(statue,empId);
-//        return result;
-//    }
+    @GetMapping("detail")
+    public Result updateByStatue(int type,int reimbursementId ){
+        Result result=new Result();
+        System.out.println(type);
+        System.out.println(reimbursementId);
+        reimbursementService.updateByEmpId(type,reimbursementId);
+        return result;
+    }
 
 }
 

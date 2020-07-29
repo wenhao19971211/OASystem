@@ -25,5 +25,5 @@ public interface ReimbursementDao {
 
 
     @Transactional
-    public void updateSomeStatues(@Param("statue") int statue,@Param("empId") int empId);
+    public void updateSomeStatues(@Param("statue") int statue,@Param("reimbursementId") int reimbursementId);
 }

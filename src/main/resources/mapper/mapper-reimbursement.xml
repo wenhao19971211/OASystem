@@ -41,8 +41,8 @@
     </insert>
 
 
-    <!--<update id="updateSomeStatues">-->
-        <!--update Reimbursement set checkStatus=#{statue} where empId=#{empId}-->
-    <!--</update>-->
+    <update id="updateSomeStatues">
+        update Reimbursement set checkStatus=#{statue} where reimbursementId=#{reimbursementId}
+    </update>
 
 </mapper>

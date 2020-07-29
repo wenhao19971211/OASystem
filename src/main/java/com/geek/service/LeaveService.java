@@ -352,4 +352,14 @@ public class LeaveService {
         checkWorkDao.insertByEmpStatus(empId,date,mess);
     }
 
+    @Transactional
+    public List<WorkOn> findByEmpIdS(int empId){
+        List<WorkOn> list1=new ArrayList<>();
+        list1=workOnDao.finByEmpId(empId);
+
+        return list1;
+
+    }
+
+
 }

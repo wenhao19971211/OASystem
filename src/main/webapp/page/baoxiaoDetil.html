@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<title>文章列表--layui后台管理模板 2.0</title>
 	<meta name="renderer" content="webkit">
-	<base href="http://localhost:8081/OASystem_war_exploded/">
+	<base href="http://localhost:8080/OASystem_war_exploded/">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -17,32 +17,42 @@
 </head>
 <body class="childrenBody">
 <form class="layui-form" style="width:80%;">
-	<div class="layui-form-item layui-row layui-col-xs12">
-		<label class="layui-form-label">用户id:</label>
+	<div class="layui-form-item layui-row layui-col-xs6">
+		<label class="layui-form-label">报销编号:</label>
 		<div class="layui-input-block">
-	<p style="line-height: 40px;" class=" " >
-		<input type="text" class="empId" value="2" hidden="hidden">
-		2
-	</p>
+			<input type="text" class="layui-input reimbursementId" lay-verify="required" placeholder="">
 		</div>
 	</div>
-	<div class="layui-form-item layui-row layui-col-xs12">
+	<div class="layui-form-item layui-row layui-col-xs6">
+		<label class="layui-form-label">用户:</label>
+		<div class="layui-input-block">
+			<input type="text" class="layui-input empId" lay-verify="required" placeholder="">
+		</div>
+	</div>
+	<div class="layui-form-item layui-row layui-col-xs6">
 		<label class="layui-form-label">任务编号:</label>
 		<div class="layui-input-block">
-			<input type="text" class="layui-input taskSendId" lay-verify="required" placeholder="请输入任务编号">
+			<input type="text" class="layui-input sendId" lay-verify="required" placeholder="">
+		</div>
+	</div>
+	<div class="layui-form-item layui-row layui-col-xs6">
+		<label class="layui-form-label">申请发送时间:</label>
+		<div class="layui-input-block">
+			<input type="text" class="layui-input sendTime" lay-verify="required" placeholder="">
 		</div>
 	</div>
 	<div class="layui-form-item layui-row layui-col-xs12">
-		<label class="layui-form-label">报销金额:</label>
+		<label class="layui-form-label">总价格:</label>
 		<div class="layui-input-block">
-			<input type="text" class="layui-input sum" lay-verify="required" placeholder="请输入提交的金额">
+			<input type="text" class="layui-input sum" lay-verify="required" placeholder="">
 		</div>
 	</div>
+
 	<div class="layui-row">
 		<div class="magb15 layui-col-md4 layui-col-xs12">
 			<label class="layui-form-label">报销类型:</label>
 			<div class="layui-input-block">
-				<select name="userGrade" class="userGrade" lay-filter="userGrade">
+				<select name="userGrade" class="type" lay-filter="userGrade">
 					<option value="1">差旅报销</option>
 					<option value="2">商务报销</option>
 					<option value="3">办公报销</option>
@@ -56,7 +66,7 @@
 	<div class="layui-form-item layui-row layui-col-xs12">
 		<label class="layui-form-label">报销明细:</label>
 		<div class="layui-input-block">
-			<textarea placeholder="请输入报销原因" class="layui-textarea userDesc"></textarea>
+			<textarea placeholder="" class="layui-textarea detail"></textarea>
 		</div>
 	</div>
 	<div class="layui-form-item layui-row layui-col-xs12">
@@ -66,7 +76,14 @@
 		</div>
 	</div>
  </form>
-
+<!--body.find(".reimbursementId").val(edit.reimbursementId);  //登录名-->
+<!--body.find(".empId").val(edit.empId);  //邮箱-->
+<!--body.find(".sendId").val(edit.sendId);  //邮箱-->
+<!--body.find(".sendTime").val(edit.sendTime);  //邮箱-->
+<!--body.find(".sum").val(edit.sum);  //邮箱-->
+<!--// body.find(".userSex input[value="+edit.userSex+"]").prop("checked","checked");  //性别-->
+<!--body.find(".type").val(edit.type);  //会员等级-->
+<!--body.find(".detail").val(edit.detail);    //用户状态-->
 </body>
 </html>
 <script>
@@ -78,32 +95,25 @@
 		form.on("submit(addUser)",function(data){
 			//弹出loading
 			var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
-			console.log($(".empId").val()+"这是empId");
-			console.log($(".taskSendId").val());
+			console.log($(".reimbursementId").val()+"这是empId");
+			console.log($(".empId").val());
+			console.log($(".sendId").val());
+			console.log($(".sendTime").val());
 			console.log($(".sum").val());
-			console.log(data.field.userGrade);
-			console.log($(".userDesc").val());
+			console.log($(".type").val());
+			console.log($(".detail").text());
 			var empId=$(".empId").val();
-			var taskSendId=$(".taskSendId").val();
-			var sum=$(".sum").val();
-			var type=data.field.userGrade;
-			var detail=$(".userDesc").text();
-			// $.ajax({
-			// 	url:"rmMessage"
-			// 	,type:"GET",
-			// 	date:{"empId":$(".empId").val(),"taskSendId":$(".taskSendId").val(),"sum":$(".sum").val(),"type":data.field.userGrade,"detail":$(".userDesc").text()},
-			// 	dataType:"json",
-			// 	success:function(date){
-			// 		console.log(date.message);
-			// 	}
-			// });
+			var empId=$(".sendId").val();
+			var empId=$(".sendTime").val();
+			var empId=$(".sum").val();
+			var empId=$(".type").val();
+			var empId=$(".detail").text();
+
         // 实际使用时的提交信息
-			$.get("rmMessage",{
-				empId: $(".empId").val(),  //用户Id
-				taskSendId: $(".taskSendId").val(),  //任务id
-				sum : $(".sum").val(),  //报销金额
+			$.get("wggs",{
+
 				type : data.field.userGrade,  //报销类型
-				detail : $(".userDesc").text(),    //申请详情
+				reimbursementId : $(".reimbursementId").val(),    //申请详情
 			},function(res){
 			});
 			setTimeout(function(){
@@ -116,17 +126,17 @@
 			return false;
 		})
 
-//  //格式化时间
-//  function filterTime(val){
-//      if(val < 10){
-//          return "0" + val;
-//      }else{
-//          return val;
-//      }
-//  }
-//  //定时发布
-//  var time = new Date();
-//  var submitTime = time.getFullYear()+'-'+filterTime(time.getMonth()+1)+'-'+filterTime(time.getDate())+' '+filterTime(time.getHours())+':'+filterTime(time.getMinutes())+':'+filterTime(time.getSeconds());
+ //格式化时间
+ function filterTime(val){
+     if(val < 10){
+         return "0" + val;
+     }else{
+         return val;
+     }
+ }
+ //定时发布
+ var time = new Date();
+ var submitTime = time.getFullYear()+'-'+filterTime(time.getMonth()+1)+'-'+filterTime(time.getDate())+' '+filterTime(time.getHours())+':'+filterTime(time.getMinutes())+':'+filterTime(time.getSeconds());
 
 	})
 

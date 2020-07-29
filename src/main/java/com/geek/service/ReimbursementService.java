@@ -46,7 +46,7 @@ public class ReimbursementService {
     }
 
 
-    public void updateByEmpId(int statue,int empId){
-        reimbursementDao.updateSomeStatues(statue,empId);
+    public void updateByEmpId(int statue,int reimbursementId){
+        reimbursementDao.updateSomeStatues(statue,reimbursementId);
     }
 }
