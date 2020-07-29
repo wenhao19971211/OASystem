@@ -5,7 +5,7 @@ layui.use(['form','layer','table','laytpl'],function(){
         laytpl = layui.laytpl,
         table = layui.table;
 
-    //用户列表
+    //任务列表
     var tableIns = table.render({
         elem: '#userList',
         url : 'findTaskByTitle',
@@ -51,10 +51,10 @@ layui.use(['form','layer','table','laytpl'],function(){
         }
     });
 
-    //添加用户
+    //任务发布
     function addUser(edit){
         var index = layui.layer.open({
-            title : "添加用户",
+            title : "任务发布",
             type : 2,
             content : "page/TaskAdd.html",
             success : function(layero, index){

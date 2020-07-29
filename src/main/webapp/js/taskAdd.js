@@ -52,7 +52,7 @@ layui.use(['form','layer','laydate'],function(){
         elem: '#finishTime'
         ,type: 'datetime'
         ,min: -7 //7天前
-        ,max: 7 //7天后
+
     });
 
 
@@ -61,7 +61,7 @@ layui.use(['form','layer','laydate'],function(){
         elem: '#startTime'
         ,type: 'datetime'
         ,min: -7 //7天前
-        ,max: 7 //7天后
+
     });
 
 
