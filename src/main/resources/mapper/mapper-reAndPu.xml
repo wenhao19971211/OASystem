@@ -18,4 +18,8 @@
     <select id="findById" resultMap="reAndPuMap">
        select * from reAndPu inner join emp on reAndPu.empId=emp.empId where emp.empId=#{empId}
     </select>
+
+    <select id="findAll" resultMap="reAndPuMap">
+        select * from reAndPu inner join emp on reAndPu.empId=emp.empId limit #{start},#{end}
+    </select>
 </mapper>

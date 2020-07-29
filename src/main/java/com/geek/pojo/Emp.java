@@ -223,4 +223,29 @@ public class Emp {
     public void setIsDeparture(String isDeparture) {
         this.isDeparture = isDeparture;
     }
+
+    @Override
+    public String toString() {
+        return "Emp{" +
+                "empId=" + empId +
+                ", account='" + account + '\'' +
+                ", password='" + password + '\'' +
+                ", empName='" + empName + '\'' +
+                ", sex=" + sex +
+                ", depId=" + depId +
+                ", hireDate=" + hireDate +
+                ", head='" + head + '\'' +
+                ", education='" + education + '\'' +
+                ", card='" + card + '\'' +
+                ", politic='" + politic + '\'' +
+                ", school='" + school + '\'' +
+                ", marriage='" + marriage + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", registratin='" + registratin + '\'' +
+                ", position='" + position + '\'' +
+                ", isDeparture='" + isDeparture + '\'' +
+
+                '}';
+    }
 }

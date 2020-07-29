@@ -1,10 +1,7 @@
 import com.geek.bo.CheckWork_bo;
 import com.geek.dao.*;
 import com.geek.pojo.*;
-import com.geek.service.CheckWorkService;
-import com.geek.service.ContractService;
-import com.geek.service.EmpService;
-import com.geek.service.ReAndPuService;
+import com.geek.service.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +36,8 @@ public class ServiceTest {
     DepartureDao departureDao;
     @Autowired
     ReAndPuService reAndPuService;
+    @Autowired
+    DepartureService departureService;
     @Test
     public void test(){
 //        List<Message> list = messageDao.findAllById(1);
@@ -125,5 +124,11 @@ public class ServiceTest {
 //        }
 //        Departure departure = new Departure(5,50,"qwe",new Date(),"qwe",1);
 //        departureDao.addDeparture(departure);
+//        List<Departure> list =  departureService.findDeparture(1,0,5);
+//        System.out.println(list.size());
+//          List<ReAndPu> list = reAndPuService.findAll();
+//        for (ReAndPu reAndPu : list) {
+//            System.out.println(reAndPu.getEmp().getEmpName());
+//        }
     }
 }

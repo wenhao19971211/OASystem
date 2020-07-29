@@ -12,7 +12,7 @@ public class TaskSend {
     private Date today;
     private String title;
     private String content;
-    private Date startTime;
+    private Date startTime;//任务开始时间
     private Date finishTime;
     private Integer status;
     private Emp emp;

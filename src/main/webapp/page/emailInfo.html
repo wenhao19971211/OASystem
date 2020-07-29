@@ -31,8 +31,8 @@
                 </tr>
             </table>
 
-            <input type="button" value="返回" id="fhButton" style="margin-left: 200px" class="layui-btn layui-btn-sm">
-            <input type="button" value="回复" id="hfButton" class="layui-btn layui-btn-sm">
+
+            <input type="button" value="回复" id="hfButton" class="layui-btn layui-btn-sm" style="margin-left: 240px">
         </div>
         <!--回复文本框-->
         <div id="hfContent" style="float:left;display: none;">
@@ -83,11 +83,6 @@
                 $("#hfName").text(data.object[0])
             }
 
-        })
-
-        //返回按钮点击事件
-        $("#fhButton").click(function () {
-            location.href="page/selectEmail.html";
         })
 
         //回复按钮点击事件

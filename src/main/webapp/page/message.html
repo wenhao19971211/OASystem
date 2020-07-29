@@ -45,6 +45,7 @@
             dataType:"json",
             success:function (data) {
                 for (var i = 0; i < data.list.length; i++){
+                    console.log(data.list[i].messageType);
                     var type = "";
                     if (data.list[i].messageType == 1){
                         type = "任务";

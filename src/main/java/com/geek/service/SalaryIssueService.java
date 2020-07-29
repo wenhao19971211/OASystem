@@ -5,10 +5,12 @@ import com.geek.dao.EmpDao;
 import com.geek.dao.SalaryDao;
 import com.geek.dao.SalaryIssueDao;
 import com.geek.pojo.Emp;
+import com.geek.pojo.Salary;
 import com.geek.pojo.SalaryIssue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -38,14 +40,24 @@ public class SalaryIssueService {
         }
         //当页数据
         List<SalaryIssue> salaryIssues = salaryIssueDao.findSalaryIssueByStatus(status, pageSize * (page - 1), pageSize);
+        //System.out.println("salaryIssues.size:"+salaryIssues.size());
         if (salaryIssues != null && salaryIssues.size() != 0)
         {
+            //System.out.println("salaryIssues.size:"+salaryIssues.size());
             for (SalaryIssue salaryIssue : salaryIssues) {
                 //添加负责人信息
                 Emp emp = empDao.findEmpById(salaryIssue.getEmpId());
+                //System.out.println("service："+emp);
                 salaryIssue.setEmp(emp);
+                //System.out.println("service:salaryIssue.getEmp():"+salaryIssue.getEmp());
                 //添加薪资信息
-
+                Salary salary = salaryDao.findSalaryBySalaryId(salaryIssue.getSalaryId());
+                //System.out.println("salary:"+salary);
+                //添加该薪资的员工信息
+                Emp receiveEmp = empDao.findEmpById(salary.getEmpId());
+                //System.out.println("receiveEmp"+receiveEmp);
+                salary.setEmp(receiveEmp);
+                salaryIssue.setSalary(salary);
 
             }
         }
@@ -66,7 +78,7 @@ public class SalaryIssueService {
      */
     public boolean updateSalaryIssueStatusBySalaryIssueId(Integer salaryIssueId,Integer status)
     {
-        int count = salaryIssueDao.updateSalaryIssueStatusBySalaryIssueId(salaryIssueId, status);
+        int count = salaryIssueDao.updateSalaryIssueStatusBySalaryIssueId(salaryIssueId, status,new Date());
         return count>0;
     }
 

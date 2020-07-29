@@ -18,6 +18,15 @@ public class ReAndPuService {
      * @return
      */
     public List<ReAndPu> findById(int empId){
+
         return reAndPuDao.findById(empId);
+    }
+
+    /**
+     * 查询所有奖惩信息
+     * @return
+     */
+    public List<ReAndPu> findAll(int start,int end){
+        return reAndPuDao.findAll(start,end);
     }
 }

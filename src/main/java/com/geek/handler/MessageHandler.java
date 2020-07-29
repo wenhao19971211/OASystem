@@ -108,9 +108,10 @@ public class MessageHandler {
     @GetMapping("seeDeparture")
     public String seeDeparture(int checkEmpId,int page,int limit){
         int count = departureService.findCount();
-        int start = limit*(page-1)+1;
+        int start = limit*(page-1);
         int end = limit*page;
         List<Departure> departures = departureService.findDeparture(checkEmpId,start,end);
+        System.out.println(departures.size());
         List<Departure_bo> list = new ArrayList<>();
         for (Departure departure : departures) {
             Departure_bo departure_bo = new Departure_bo();
@@ -141,7 +142,7 @@ public class MessageHandler {
     @GetMapping("findDeparture")
     public String seeDepartureList(int page,int limit){
         int count = departureService.findCount();
-        int start = limit*(page-1)+1;
+        int start = limit*(page-1);
         int end = limit*page;
         List<Departure> departures = departureService.findDepartures(start,end);
         List<Departure_bo> list = new ArrayList<>();

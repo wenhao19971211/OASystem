@@ -49,17 +49,17 @@
 			<a  href="page/message.html" target="dd" >消息提醒</a>
 		 </li>
 		 <li class="layui-nav-item" ><a href="http://www.asd.com" target="dd" >个人考勤</a></li>
-		 <li class="layui-nav-item"><a href="http://www.dsa.com" target="dd" >我的薪资</a></li>
+		 <li class="layui-nav-item"><a href="page/MySalary.html" target="dd" >我的薪资</a></li>
 		 <li class="layui-nav-item"><a >请假管理</a>
 		 <dl class="layui-nav-child">
 			 <dd id="qj"><a >请假</a></dd>
-			 <dd id="ckqj"><a href="page/selectLeave.html" target="dd">查看请假</a><span class="layui-badge" style="margin-left: 150px">99+</span></dd>
+			 <dd id="ckqj"><a href="page/selectLeave.html" target="dd">查看请假</a></dd>
 		 </dl>
 		 </li>
 		 <li class="layui-nav-item"><a >报销管理</a></li>
 	  	 <li class="layui-nav-item"><a >邮件管理</a>
 			 <dl class="layui-nav-child">
-				 <dd id="fsyj"><a href="page/sendEmail.html" target="dd">发送邮件</a></dd>
+				 <dd id="fsyj"><a>发送邮件</a></dd>
 				 <dd id="chyj"><a href="page/selectEmail.html" target="dd">查看邮件</a></dd>
 			 </dl>
 		 </li>
@@ -76,8 +76,8 @@
 		<li class="layui-nav-item"><a >待我审批</a>
 			<dl class="layui-nav-child">
 				<dd id="spqj"><a href="page/leaveAudit.html" target="dd">审批请假</a></dd>
+				<dd><a href="page/departureList.html" target="dd">审批离职</a></dd>
 				<dd><a>审批补卡</a></dd>
-				<dd><a href="page/departureList.html" target="dd">离职审批</a></dd>
 			</dl>
 		</li>
 		<li class="layui-nav-item"><a >已审批</a>
@@ -86,7 +86,7 @@
                 <dd ><a>已审批补卡</a></dd>
             </dl>
         </li>
-		<li class="layui-nav-item"><a >信息发布</a></li>
+		<li class="layui-nav-item"><a href="page/InfoAdd.html" target="dd">信息发布</a></li>
 
 	</ul>
   	
@@ -94,7 +94,16 @@
 	<ul class="layui-nav layui-nav-tree layui-tab-item layui-col-xs6 layui-col-sm6 layui-col-md3 dd" lay-filter="test">
 		<!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
 		<li class="layui-nav-item ">
-		    <a >我的任务</a>
+		    <a href="page/MyTask.html" target="dd">我的任务</a>
+		</li>
+		<li class="layui-nav-item">
+			<a href="page/TaskSearch.html" target="dd">发布任务</a>
+		</li>
+		<li class="layui-nav-item">
+			<a href="page/TaskFinish.html" target="dd">已完成的任务</a>
+		</li>
+		<li class="layui-nav-item">
+			<a href="page/TaskNotFinish.html" target="dd">待完成的任务</a>
 		</li>
 		<li class="layui-nav-item"><a >发布任务</a></li>
 	</ul>
@@ -105,12 +114,7 @@
 	  	<li class="layui-nav-item "><a href="page/personnelInformation.html" target="dd">人事信息</a></li>
 		<li class="layui-nav-item"><a href="page/personnelContract.html" target="dd">人事合同</a></li>
 		<li class="layui-nav-item"><a href="page/departureInformation.html" target="dd">离职信息</a></li>
-		<li class="layui-nav-item"><a >奖惩管理</a>
-			<dl class="layui-nav-child">
-				<dd><a href="page/managerSelectLeave.html" target="dd"></a></dd>
-				<dd><a>已审批补卡</a></dd>
-			</dl>
-		</li>
+		<li class="layui-nav-item"><a HREF="page/prize.html" target="dd">奖惩管理</a></li>
 
 	</ul>
 	  <!--七号-->
@@ -182,7 +186,7 @@
 		}
 
 	});
-
+	//请假
 	$("#qj").click(function () {
 		layer.open({
 			area: ['700px', '400px'],
@@ -197,7 +201,14 @@
 			area: ['800px', '600px'],
 			type: 2,
 			content: ['page/departure.html?empId='+empId, 'no']
-
 		});
 	})
+	//	发送邮件
+	$("#fsyj").click(function () {
+		layer.open({
+			area: ['1000px', '440px'],
+			type: 2,
+			content: ['page/sendEmail.html', 'no']
+		});
+	});
 	</script>

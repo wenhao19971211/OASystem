@@ -82,4 +82,15 @@ public class EmpService {
     }
 
 
+    /**
+     * 根据员工id查询该员工所在部门所有员工
+     * @param empId
+     * @return
+     */
+    public List<Emp> findOneDepAllEmpsByDepId(Integer empId)
+    {
+        List<Emp> emps = empDao.findOneDepAllEmpsByEmpId(empId);
+        return emps;
+    }
+
 }

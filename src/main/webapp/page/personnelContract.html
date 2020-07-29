@@ -57,19 +57,19 @@
             var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
             if(event=='detail'){
                 layer.open({
-                    area: ['800px', '500px'],
+                    area: ['850px', '500px'],
                     type: 2,
-                    content: ['page/contractInfo.html?empId='+data.empId, 'no']
-
+                    content: ['page/contractInfo.html?empId='+data.empId, 'no'],
+                    offset:'auto'
                 });
                // addUser(data.empId)
             }
             else {
                 layer.open({
-                    area: ['800px', '500px'],
+                    area: ['850px', '500px'],
                     type: 2,
-                    content: ['page/contractChange.html?empId='+data.empId, 'no']
-
+                    content: ['page/contractChange.html?empId='+data.empId, 'no'],
+                    offset:'auto'
                 });
             }
         });

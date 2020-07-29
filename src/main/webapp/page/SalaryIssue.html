@@ -39,8 +39,9 @@
         table.render({
             elem: '#demo'
             ,height: 500
-            ,url:'findRimbursementByStatus2'
+            ,url:'findSalaryIssueByStatus2'
             //,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+            ,toolbar:true
             ,type:'checkbox'
             ,page:true //分页按问好那个改
             ,parseData:function(data){//res 即为原始返回的数据
@@ -48,14 +49,14 @@
                         return data;
                         }
             ,cols: [[ //表头
-                {type: 'checkbox', fixed: 'left'}// 开启多选框
-                ,{field: 'rimbursementIssueId', title: '报销发放编号', width:130,edit: 'text', del:'test', fixed: 'left'}
-                ,{field: 'applyEmpName', title: '报销接收人',edit: 'text', width:100}
-                ,{field: 'applyDepName', title: '接收人所在部门', width:150,edit: 'text',  }
-                ,{field: 'sum', title: '报销金额', width:100}
-                ,{field: 'factMoney', title: '发放金额', width: 100}
+                //{type: 'checkbox', fixed: 'left'}// 开启多选框
+                {field: 'salaryIssueId', title: '薪资发放编号', width:130,edit: 'text', del:'test', fixed: 'left'}
+                ,{field: 'salaryReceiveEmpName', title: '接收人姓名',edit: 'text', width:100}
+                ,{field: 'salaryReceiveDepName', title: '接收人所在部门', width:150,edit: 'text',  }
+                ,{field: 'issueMoney', title: '发放金额', width:100}
+                ,{field: 'issueEmpName', title: '发放负责人', width: 100}
                 ,{field: 'issueTime', title: '发放时间', width: 160, sort: true,}
-                ,{field: 'issueStatus', title: '是否发放', width: 90}
+                ,{field: 'status', title: '是否发放'}
                 //,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:200}// 操作的工具栏
             ]]
 

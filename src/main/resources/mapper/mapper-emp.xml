@@ -64,4 +64,10 @@
     <update id="updateDeparture">
         update emp set isDeparture=1 where empId=#{empId}
     </update>
+
+    <select id="findOneDepAllEmpsByEmpId" resultType="com.geek.pojo.Emp">
+        select * from emp where depId = (select depId from emp where empId = #{empId})
+    </select>
+
+
 </mapper>

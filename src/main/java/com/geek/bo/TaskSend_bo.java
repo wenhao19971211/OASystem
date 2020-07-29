@@ -12,6 +12,7 @@ public class TaskSend_bo {
     private Integer total;//总页码
     private Integer page;//当前页码
     private Integer count;//每页显示多少条数据
+    private Integer num;//总共多少条数据
 
     public TaskSend_bo() {
     }
@@ -27,6 +28,14 @@ public class TaskSend_bo {
         this.total = total;
         this.page = page;
         this.count = count;
+    }
+
+    public TaskSend_bo(List<TaskSend> taskSends, Integer total, Integer page, Integer count, Integer num) {
+        this.taskSends = taskSends;
+        this.total = total;
+        this.page = page;
+        this.count = count;
+        this.num = num;
     }
 
     public List<TaskSend> getTaskSends() {
@@ -59,5 +68,13 @@ public class TaskSend_bo {
 
     public void setCount(Integer count) {
         this.count = count;
+    }
+
+    public Integer getNum() {
+        return num;
+    }
+
+    public void setNum(Integer num) {
+        this.num = num;
     }
 }

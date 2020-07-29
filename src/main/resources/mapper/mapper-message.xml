@@ -41,4 +41,9 @@
     <select id="findEmpByEmpName" resultType="emp">
         select * from emp where empName=#{empName}
     </select>
+
+    <insert id="addInfo">
+        insert into releasetabe values (null,#{releaseTitle},#{releaseContent},#{releaseTime})
+    </insert>
+
 </mapper>
