@@ -2,12 +2,15 @@ package com.geek.bo;
 
 import com.geek.pojo.Emp;
 
+import javax.swing.text.html.parser.Entity;
 import java.util.Date;
 
 /**
  * 请假
  */
 public class Leave_bo {
+
+
     //数字类型
     private int intType;
     //申请编号
@@ -118,4 +121,16 @@ public class Leave_bo {
     public void setCheckStatus(String checkStatus) {
         this.checkStatus = checkStatus;
     }
+
+//    @Override
+//    public int compareTo(Leave_bo o) {
+//        if (this.getSendTime().getTime()>o.getSendTime().getTime()){
+//            return 1;
+//        }else if (this.getSendTime().getTime()<o.getSendTime().getTime()){
+//            return -1;
+//        }else {
+//            return 0;
+//        }
+//
+//    }
 }
