@@ -49,6 +49,9 @@ public class Test {
     private TaskSendService taskSendService;
     @Autowired
     private ReleaseInfoHandler releaseInfoHandler;
+    @Autowired
+    private MessageHandler messageHandler;
+
 
     @org.junit.Test
     public void test1()
@@ -264,6 +267,20 @@ public class Test {
     {
         String releaseInfo = releaseInfoHandler.findReleaseInfo();
         System.out.println(releaseInfo);
+    }
+    @org.junit.Test
+    public void test20()
+    {
+        String allById = messageHandler.findAllById(1, 1, 5);
+        System.out.println(allById);
+        String examineById = messageHandler.findExamineById(1, 1, 5);
+        System.out.println(examineById);
+        String noExamineById = messageHandler.findNoExamineById(1, 1, 5);
+        System.out.println(noExamineById);
+        String noReadById = messageHandler.findNoReadById(1, 1, 5);
+        System.out.println(noReadById);
+        String readById = messageHandler.findReadById(1, 1, 5);
+        System.out.println(readById);
     }
 
 
