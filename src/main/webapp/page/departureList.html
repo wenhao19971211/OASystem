@@ -17,6 +17,9 @@
 </body>
 </html>
 <script>
+    var emp = $(window.parent.document).find(":input#empId");
+    var empId = emp.val();
+    console.log(empId);
     layui.use('table', function(){
         var table = layui.table;
         // console.log(data);
@@ -24,7 +27,7 @@
         //第一个实例
         table.render({
             elem: '#content'
-            ,url:'seeDeparture'
+            ,url:'seeDeparture?checkEmpId='+empId
             ,parseData:function(data){//res 即为原始返回的数据
                 data =$.parseJSON(data);
                 return data;
@@ -60,7 +63,7 @@
                 obj.del(tr);
             }
             else{
-
+                obj.del(tr);
             }
 
 
@@ -70,6 +73,17 @@ function agree(empId) {
     $.ajax({
         url:"agreeDeparture?empId="+empId,
         type:"put",
+        dataType:"json",
+        success:function (data) {
+
+        }
+
+    })
+}
+function not(empId) {
+    $.ajax({
+        url:"notDeparture?empId="+empId,
+        type:"delete",
         dataType:"json",
         success:function (data) {
 

@@ -4,54 +4,64 @@
     <base href="http://localhost:8080/ssm_framework_war_exploded/">
     <script src="js/jquery.js"></script>
     <script src="js/common.js"></script>
+    <script src="js/dist/layui.js"></script>
+    <script src="js/dist/lay/modules/layer.js"></script>
     <link rel="stylesheet" href="js/dist/css/layui.css" />
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<div  style="float: left">
-    <div><input type="button" value="发    送   邮    件" id="sendEmailBut"></div>
-    <div><input type="button" value="查看已发送记录" id="selectSendEmailBut"></div>
-</div>
-    <div style="float: left">
-        <div id="sendEmail">
-            <input type="text" placeholder="请输入邮件标题"  id="title">
-            <input type="button" value="选择联系人" id="choseEmp">
-            <div id="per" style="display: none"></div>
-            <div id="emp" style="display: none">
-                <table id="empTable">
+<div  style="float: left;margin-left: 45px;margin-top: 80px;"  >
+    <button class="layui-btn" lay-active="e1" style="opacity:1">发送邮件</button><br>
+    <button class="layui-btn" lay-active="e2" style="margin-top: 50px;opacity:1">已发邮件</button>
 
+    <!--<div><input type="button" value="发    送   邮    件" id="sendEmailBut"></div>-->
+    <!--<div><input type="button" value="查看已发送记录" id="selectSendEmailBut"></div>-->
+</div>
+    <div style="width:1000px;height:500px;float: left;margin-top:-150px;margin-left: 200px;">
+        <div id="sendEmail" style="margin-left:100px;margin-top: 15px">
+            <input type="button" value="选择联系人" id="choseEmp" class="layui-btn layui-btn-xs" >
+            <input type="button" value="确认联系人" style="display: none" id="ceshi" class="layui-btn layui-btn-xs" >
+            <input type="button" value="添加附件" class="layui-btn layui-btn-xs" id="tjfj">
+            <input type="button" value="提交" class="layui-btn layui-btn-xs" id="fsButton">
+            <input type="text" placeholder="请输入邮件标题"  id="title" style="margin-left: 70px;margin-top:10px;width: 250px;height: 30px;text-align: center">
+            <br>
+
+
+            <div id="per" style="display: none;width: 1000px"></div>
+            <div id="emp" style="display: none">
+                <table id="empTable" style="background-color: #85C998" >
                 </table>
-                <input type="buuton" value="确定" id="ceshi" style="width: 50px">
+
             </div>
 
-            <div id="content" style="width: 400px;height: 150px;overflow: auto;
-            border:1px solid black;" contenteditable="true" ></div>
-            <div style="margin-left: 100px"><input type="button" value="添加附件" >
-                <input type="button" value="发送" id="fsButton" style="margin-left: 50px"></div>
+            <div id="content" style="width: 800px;height: 250px;overflow: auto;
+            border:1px solid black;margin-top: 5px" contenteditable="true" ></div>
+            <!--<div style="margin-left: 100px">-->
+                <!--<input type="button" value="发送" id="fsButton" class="layui-btn layui-btn-sm" style="margin-left: 50px" ></div>-->
         </div>
         <div id="selectSendEmail" style="display: none">
-           <!--<table id="emailS">-->
-               <h2 style="text-align: center">我的请假申请</h2>
-               <table class="layui-table" style="text-align: center">
-                   <colgroup>
-                       <col width="50">
-                       <col width="150">
-                       <col width="150">
-                       <col width="150">
-                       <col width="150">
-                   </colgroup>
 
-               </table>
-           <!--</table>-->
+            <h2 style="margin-left: 380px">已发邮件</h2>
+            <table class="layui-table" style="text-align: center;width: 800px">
+                <colgroup>
+                </colgroup>
+                <thead>
+
+                </thead>
+            </table>
+
         </div>
     </div>
 
 
 </body>
 <script>
+
+    var emp = $(window.parent.document).find(":input#empId");
+    var empId = emp.val();
     var empIdArrary;
-    var nameArrary=new Array();
+    var nameArrary;
     console.log(empIdArrary);
     console.log(nameArrary);
     $(function () {
@@ -59,8 +69,10 @@
          * 选择联系人按钮
          */
         $("#choseEmp").click(function () {
+            nameArrary=new Array();
             $("#empTable").html(" ");
             $("#emp").show();
+            $("#ceshi").show();
             $.ajax({
                 url:"findAllEmp",
                 type:"get",
@@ -70,9 +82,15 @@
                     console.log(data);
                     for (var i=0;i<data.list.length;i++){
                         var emp="";
-                        emp+="<tr><td><input type='checkbox' name='emp' class='choseCheck' value='"+data.list[i].empId+"'  >"+data.list[i].empName+"</td></tr>";
-                        $("#empTable").append(emp);
+                        // emp+="<tr><td><input type='checkbox' name='emp' class='choseCheck' value='"+data.list[i].empId+"'  >"+data.list[i].empName+"</td></tr>";
+                         emp+="<span style='margin-left: 10px'><input type='checkbox' name='emp' class='choseCheck' value='"+data.list[i].empId+"'  >"+data.list[i].empName+"</span></t>";
                         nameArrary.push(data.list[i].empName);
+                        $("#empTable").append(emp);
+                        if ((i+1)==5){
+                            $("#empTable").append("<br>")
+                        }
+
+
 
                     }
 
@@ -91,7 +109,7 @@
                 if (input[i].type == "checkbox" && input[i].checked) {//是否bai是checkbox且是选du中的
                     // alert(input[i].value)//弹出zhi那么值dao
                         empIdArrary.push(input[i].value);
-                    iArray[i]=i;
+                    iArray.push(i);
                 }
 
             }
@@ -100,11 +118,12 @@
             for (var i=0;i<iArray.length;i++){
                 if (iArray[i]!=null){
                     var empName="";
-                    empName+="<a>"+nameArrary[iArray[i]-4]+"、"+"</a>"
+                    empName+="<a>"+nameArrary[iArray[i]-5]+"、"+"</a>"
                     $("#per").append(empName);
                 }
             }
             $("#per").show();
+            $("#ceshi").hide();
             console.log(empIdArrary);
             console.log(nameArrary);
         })
@@ -133,7 +152,7 @@
                 url:"sendEmail",
                 type:"post",
                 traditional:true,
-                data:{"empId":1,"type":1,"title":title,"content":content,"receive": arrary},
+                data:{"empId":empId,"type":1,"title":title,"content":content,"receive": arrary},
                 dataType:"json",
                 success:function (data) {
                     if (data==1){
@@ -143,41 +162,81 @@
                 }
             })
         })
+        //两个按钮点击事件
+        layui.use('util', function(){
+            var util = layui.util;
 
-        /**
-         * 发送邮件按钮
-         */
-        $("#sendEmailBut").click(function () {
-            $("#sendEmail").show();
-            $("#selectSendEmail").hide();
-
-        })
-        /**
-         * 查看已发送邮件按钮
-         */
-        $("#selectSendEmailBut").click(function () {
-
-            $("#sendEmail").hide();
-            $("#selectSendEmail").show();
-            $.ajax({
-                url:"findEmail",
-                data:{"emailId":0,"empId":1,"type":1,"readStatus":1,"receiveEmpId":0},
-                type:"get",
-                dataType:"json",
-                success:function (data) {
-                    console.log(data)
-                    $(".layui-table").html(" ");
-                    $(".layui-table").append("<thead><td>序号</td><td>标题</td><td>内容</td> <td>发送时间</td><td>接收人</td></thead>");
-                    for (var i=0;i<data.list.length;i++){
-                        var info=" ";
-                        info+="<tr><td>"+(i+1)+"</td><td>"+data.list[i].title.substr(0,6)+"</td><td>"+data.list[i].content.substr(0,10)+"</td><td>"+parseDate(data.list[i].time)+"</td><td>"+data.object[i]+"</td></tr>"
-                        console.log(data.list[i].title)
-                        // $("#emailS").append(info)
-                        $(".layui-table").append(info)
-                    }
+            //处理属性 为 lay-active 的所有元素事件
+            util.event('lay-active', {
+                e1: function(){
+                    // alert('触发了事件1');
+                    $("#sendEmail").show();
+                    $("#selectSendEmail").hide();
                 }
-            })
+                ,e2: function(){
+                    // alert('触发了事件2');
+                    $("#sendEmail").hide();
+                    $("#selectSendEmail").show();
+                    $.ajax({
+                        url:"findEmail",
+                        data:{"emailId":0,"empId":empId,"type":1,"readStatus":1,"receiveEmpId":0},
+                        type:"get",
+                        dataType:"json",
+                        success:function (data) {
+                            console.log(data)
+                            $(".layui-table").html(" ");
+                            $(".layui-table").append("<thead><td>序号</td><td>标题</td><td>内容</td> <td>发送时间</td><td>接收人</td></thead>");
+                            for (var i=0;i<data.list.length;i++){
+                                var info=" ";
+                                info+="<tr><td>"+(i+1)+"</td><td>"+(data.list[i].title).substr(0,6)+"</td><td>"+(data.list[i].content).substr(0,10)+"</td><td>"+parseDate(data.list[i].time)+"</td><td>"+data.object[i]+"</td></tr>"
+                                console.log(data.list[i].title)
+                                // $("#emailS").append(info)
+                                $(".layui-table").append(info)
+                            }
+                        }
+                    })
+                }
+            });
+        });
+        $("#tjfj").click(function () {
+            alert("此功能暂未开放")
         })
+
+
+        // /**
+        //  * 发送邮件按钮
+        //  */
+        // $("#sendEmailBut").click(function () {
+        //     // $("#sendEmail").show();
+        //     // $("#selectSendEmail").hide();
+        //
+        // })
+        // /**
+        //  * 查看已发送邮件按钮
+        //  */
+        // $("#selectSendEmailBut").click(function () {
+        //
+        //     // $("#sendEmail").hide();
+        //     // $("#selectSendEmail").show();
+        //     // $.ajax({
+        //     //     url:"findEmail",
+        //     //     data:{"emailId":0,"empId":empId,"type":1,"readStatus":1,"receiveEmpId":0},
+        //     //     type:"get",
+        //     //     dataType:"json",
+        //     //     success:function (data) {
+        //     //         console.log(data)
+        //     //         $(".layui-table").html(" ");
+        //     //         $(".layui-table").append("<thead><td>序号</td><td>标题</td><td>内容</td> <td>发送时间</td><td>接收人</td></thead>");
+        //     //         for (var i=0;i<data.list.length;i++){
+        //     //             var info=" ";
+        //     //             info+="<tr><td>"+(i+1)+"</td><td>"+data.list[i].title.substr(0,6)+"</td><td>"+data.list[i].content.substr(0,10)+"</td><td>"+parseDate(data.list[i].time)+"</td><td>"+data.object[i]+"</td></tr>"
+        //     //             console.log(data.list[i].title)
+        //     //             // $("#emailS").append(info)
+        //     //             $(".layui-table").append(info)
+        //     //         }
+        //     //     }
+        //     // })
+        // })
     })
 
 </script>

@@ -4,11 +4,11 @@
         "http://ibatis.apache.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.geek.dao.DepartureDao">
    <insert id="addDeparture" parameterType="departure">
-       insert into departure values(#{empId},#{depId},#{position},#{departureTime},#{reason},#{checkEmpId},#{handleTime})
+       insert into departure values(#{empId},#{depId},#{position},#{departureTime},#{reason},#{checkEmpId},null)
    </insert>
 
     <select id="findDeparture" resultType="departure">
-        select * from departure where handleTime is null limit #{start},#{end}
+        select * from departure where handleTime is null and checkEmpId=#{checkEmpId} limit #{start},#{end}
     </select>
 
     <select id="findCount" resultType="java.lang.Integer">
@@ -22,4 +22,8 @@
     <select id="findDepartures" resultType="departure">
         select * from departure where handleTime is not null limit #{start},#{end}
     </select>
+
+    <delete id="delDepartureById">
+        delete form departure where empId=#{empId}
+    </delete>
 </mapper>

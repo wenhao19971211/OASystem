@@ -10,7 +10,7 @@
 </head>
 <body>
 
-    <div id="div1" style="display: none;margin-left: 300px">
+    <div id="div1" style="display: none;margin-left:50px">
         <!--<table id="tab1" border="1">-->
             <!--<thead>-->
                 <!--<td>序号</td>-->
@@ -23,7 +23,7 @@
             <!--</thead>-->
         <!--</table>-->
         <h2 style="text-align: center">我的请假申请</h2>
-        <table class="layui-table" style="text-align: center">
+        <table class="layui-table" style="text-align: center;width: 1150px">
             <colgroup>
                 <col width="50">
                 <col width="100">
@@ -72,11 +72,11 @@
                         leaveList+="<tr>" +
                             "<td>"+(i+1)+"</td>" +
                             "<td>"+data.list[i].type+"</td>" +
-                            "<td>"+data.list[i].cause.substr(0,6)+"</td>" +
+                            "<td>"+data.list[i].cause.substr(0,10)+"</td>" +
                             "<td>"+parseDate(data.list[i].sendTime)+"</td>" +
                             "<td>"+ parseDate(data.list[i].startTime)+"</td>" +
                             "<td>"+parseDate(data.list[i].endTime)+"</td>" +
-                            "<td>"+data.list[i].checkStatus+"</td>" +
+                            "<td style='color: red'>"+data.list[i].checkStatus+"</td>" +
                             "</tr>";
                         // $("#tab1").append(leaveList);
                         $(".layui-table").append(leaveList);

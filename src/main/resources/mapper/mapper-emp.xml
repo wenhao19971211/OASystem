@@ -24,6 +24,7 @@
         <association property="dep" javaType="dep">
             <id property="depId" column="depId"></id>
             <result property="depName" column="depName"></result>
+            <result property="manager" column="manager"></result>
         </association>
     </resultMap>
 
@@ -49,7 +50,7 @@
     </select>
 
     <select id="findAll" resultMap="empMap">
-        select * from emp inner join dep on emp.depId=dep.depId limit #{start},#{end}
+        select * from emp inner join dep on emp.depId=dep.depId where isDeparture=0 limit #{start},#{end}
     </select>
 
     <select id="findCount" resultType="java.lang.Integer">

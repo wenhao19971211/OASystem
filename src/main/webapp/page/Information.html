@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="css/information.css" type="text/css">
 </head>
 <body>
-<input type="hidden" id="emp" value="1">
 <input class="btn" type="button" value="保存" id="save">
 <input class="btn" type="button" value="返回" id="return"><br>
 <h3>个人资料</h3>
@@ -30,7 +29,8 @@
 </body>
 </html>
 <script>
-    var empId = $("#emp").val();
+    var emp = $(window.parent.document).find(":input#empId");
+    var empId = emp.val();
     $.ajax({
         url:"information",
         data:{"empId":empId},

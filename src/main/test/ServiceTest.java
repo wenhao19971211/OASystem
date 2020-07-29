@@ -72,15 +72,15 @@ public class ServiceTest {
 //        for (DayOff dayOff : list) {
 //            System.out.println(dayOff.getStartTime()+"\t"+dayOff.getEndTime());
 //        }
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date start = null;
-        Date end = null;
-        try {
-            start = sdf.parse("2020-07-01");
-            end = sdf.parse("2020-08-01");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        Date start = null;
+//        Date end = null;
+//        try {
+//            start = sdf.parse("2020-07-01");
+//            end = sdf.parse("2020-08-01");
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
 //        List<CheckWork> list = checkWorkDao.findById(5,start,end);
 //        List<WorkOn> workOnList = workOnDao.findByIdAndMonth(5,start,end);
 //        System.out.println(workOnList.size());
@@ -90,10 +90,10 @@ public class ServiceTest {
 //            }
 //
 //        }
-        List<CheckWork_bo> list = checkWorkService.findById(1,start,end);
-        for (CheckWork_bo checkWork_bo : list) {
-            System.out.println(checkWork_bo.getToday()+"\t"+checkWork_bo.getWorkInTime()+"\t"+checkWork_bo.getWorkOutTime()+"\t"+checkWork_bo.getIsLate());
-        }
+//        List<CheckWork_bo> list = checkWorkService.findById(1,start,end);
+//        for (CheckWork_bo checkWork_bo : list) {
+//            System.out.println(checkWork_bo.getToday()+"\t"+checkWork_bo.getWorkInTime()+"\t"+checkWork_bo.getWorkOutTime()+"\t"+checkWork_bo.getIsLate());
+//        }
 
 //        List<Contract> list = contractService.findAll();
 //        for (Contract contract : list) {
@@ -123,5 +123,7 @@ public class ServiceTest {
 //        for (ReAndPu reAndPu : list) {
 //            System.out.println(reAndPu.getEmp().getEmpName()+"\t"+reAndPu.getMoney()+"\t"+reAndPu.getCause()+"\t"+reAndPu.getType()+"\t"+reAndPu.getItem());
 //        }
+//        Departure departure = new Departure(5,50,"qwe",new Date(),"qwe",1);
+//        departureDao.addDeparture(departure);
     }
 }

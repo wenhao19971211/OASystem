@@ -16,7 +16,7 @@ public interface DepartureDao {
      * @param
      * @return
      */
-    public List<Departure> findDeparture(@Param("start") int start,@Param("end") int end);
+    public List<Departure> findDeparture(@Param("checkEmpId")int checkEmpId,@Param("start") int start,@Param("end") int end);
 
     public int findCount();
 
@@ -33,4 +33,10 @@ public interface DepartureDao {
      * @return
      */
     public List<Departure> findDepartures(@Param("start") int start,@Param("end") int end);
+
+    /**
+     * 删除离职信息
+     * @param empId
+     */
+    public void delDepartureById(int empId);
 }

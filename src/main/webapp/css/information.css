@@ -1,6 +1,6 @@
 
 h3{
-    color: #1E9FFF;
+    color: #009688;
     font-size: 20px;
     font-weight: 400;
 }
@@ -9,14 +9,17 @@ h3{
     height: 30px;
     border-radius: 15px;
     background-color: white;
-    border: 1px solid #1E9FFF;
-    color: #1E9FFF;
+    border: 1px solid #009688;
+    color: #009688;
     margin: 10px 10px;
     cursor: pointer;
 
 }
+.btn:focus{
+    outline: none;
+}
 hr{
-    color: #1E9FFF;
+    color: #009688;
     filter: alpha(opacity=100,finishopacity=0,style=3);
 }
 .empInfo{

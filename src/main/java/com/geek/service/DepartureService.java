@@ -27,9 +27,9 @@ public class DepartureService {
      * 查询离职信息
      * @return
      */
-    public List<Departure> findDeparture(int start,int end){
+    public List<Departure> findDeparture(int checkEmpId,int start,int end){
 
-        return departureDao.findDeparture(start,end);
+        return departureDao.findDeparture(checkEmpId,start,end);
     }
 
     /**
@@ -56,6 +56,15 @@ public class DepartureService {
      * @return
      */
     public List<Departure> findDepartures(int start,int end){
+
         return departureDao.findDepartures(start,end);
+    }
+
+    /**
+     * 删除离职信息
+     * @param empId
+     */
+    public void delDepartureById(int empId){
+        departureDao.delDepartureById(empId);
     }
 }

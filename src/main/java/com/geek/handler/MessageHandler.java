@@ -14,10 +14,7 @@ import com.geek.service.MessageService;
 import com.geek.util.CommonUtil;
 import com.geek.util.SessionNameUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -109,11 +106,11 @@ public class MessageHandler {
      * @return
      */
     @GetMapping("seeDeparture")
-    public String seeDeparture(int page,int limit){
+    public String seeDeparture(int checkEmpId,int page,int limit){
         int count = departureService.findCount();
         int start = limit*(page-1)+1;
         int end = limit*page;
-        List<Departure> departures = departureService.findDeparture(start,end);
+        List<Departure> departures = departureService.findDeparture(checkEmpId,start,end);
         List<Departure_bo> list = new ArrayList<>();
         for (Departure departure : departures) {
             Departure_bo departure_bo = new Departure_bo();
@@ -169,10 +166,23 @@ public class MessageHandler {
         String json = o.toJSONString();
         return json;
     }
+
+    /**
+     * 同意离职
+     * @param empId
+     * @return
+     */
     @PutMapping("agreeDeparture")
     public Result agreeDeparture(int empId){
         Result result = new Result();
         departureService.updateDeparture(empId);
+        result.setCode(1);
+        return result;
+    }
+    @DeleteMapping("notDeparture")
+    public Result notDeparture(int empId){
+        Result result = new Result();
+        departureService.delDepartureById(empId);
         result.setCode(1);
         return result;
     }

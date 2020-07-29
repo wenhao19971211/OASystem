@@ -5,21 +5,26 @@
     <script src="js/jquery.js"></script>
     <script src="js/common.js"></script>
     <link rel="stylesheet" href="js/dist/css/layui.css" />
+    <link rel="stylesheet" href="js/dist/css/modules/layer/default/layer.css" />
+    <script src="js/dist/lay/modules/layer.js"></script>
+
     <meta charset="UTF-8">
-    <title>查看请假</title>
+    <title>查看邮件</title>
 </head>
 <body>
-        <div>
-            <div style="float: left">
-                <input type="button" value="全部" id="qbButton"><br>
-                <input type="button" value="未读" id="wdButton"><br>
-                <input type="button" value="已读" id="ydButton">
-            </div>
-            <div style="float: left">
+<div>
+        <div style="float: left;margin-top: 80px;margin-left: 40px">
+        <input type="button" value="全部" id="qbButton"  class="layui-btn layui-btn-radius"><br>
+        <input type="button" value="未读" id="wdButton" style="margin-top: 40px" class="layui-btn layui-btn-radius"><br>
+        <input type="button" value="已读" id="ydButton" style="margin-top: 40px" class="layui-btn layui-btn-radius">
+        </div>
+        <div style="width: 1280px;float: left;height: 500px;margin-left:70px;margin-top:50px;width: 1000px;">
+
+            <div style="float: left;">
                 <!--全部-->
                 <div id="content" >
                         <div id="title" style="text-align:center"></div>
-                    <table class="layui-table" style="text-align: center" id="table1">
+                    <table class="layui-table"  id="table1" style="width: 700px">
 
                     </table>
                 </div>
@@ -27,9 +32,12 @@
 
             </div>
         </div>
+</div>
 </body>
 <script>
     $(function () {
+        var emp = $(window.parent.document).find(":input#empId");
+        var empId = emp.val();
         // 进入页面时
         $("#title").html(" ");
         $(".layui-table").html(" ");
@@ -39,13 +47,13 @@
             url:"findEmail",
             type:"get",
             //这里的receiveEmpId值登录人的id
-            data:{"emailId":0,"empId":0,"type":2,"readStatus":0,"receiveEmpId":6},
+            data:{"emailId":0,"empId":0,"type":2,"readStatus":0,"receiveEmpId":empId},
             dataType:"json",
             success:function (data) {
                 console.log(data);
                 for (var i=0;i<data.list.length;i++){
                     var info=" ";
-                    info+="<tr emailId='"+data.list[i].emailId+"' empId='"+data.list[i].empId+"' name='"+data.object[i]+"' receiveId='"+data.list[i].receiveEmpId+"'><td>"+(i+1)+"</td><td>"+data.list[i].title.substr(0,6)+"</td><td>"+data.list[i].content.substr(0,10)+"</td><td>"+parseDate(data.list[i].time)+"</td><td>"+data.object[i]+"</td></tr>";
+                    info+="<tr emailId='"+data.list[i].emailId+"' empId='"+data.list[i].empId+"' name='"+data.object[i]+"' receiveId='"+data.list[i].receiveEmpId+"'><td>"+(i+1)+"</td><td>"+data.list[i].title+"</td><td>"+(data.list[i].content).substr(0,6)+"</td><td>"+parseDate(data.list[i].time)+"</td><td>"+data.object[i]+"</td></tr>";
                     $(".layui-table").append(info);
                 }
             }
@@ -55,17 +63,17 @@
             $("#title").html(" ");
             $(".layui-table").html(" ");
             $("#title").html("<h2 style='text-align: center'>全部邮件</h2> ");
-            $(".layui-table").html(" <colgroup><col width="+50+"> <col width="+100+"><col width="+100+"><col width="+100+"><col width="+100+"></colgroup><thead> <tr><th>序号</th><th>标题</th> <th>内容</th><th>接收时间</th> <th>发送人</th></tr></thead>");
+            $(".layui-table").html(" <colgroup> </colgroup><thead> <tr><th>序号</th><th>标题</th> <th>内容</th><th>接收时间</th> <th>发送人</th></tr></thead>");
             $.ajax({
                 url:"findEmail",
                 type:"get",
-                data:{"emailId":0,"empId":0,"type":2,"readStatus":0,"receiveEmpId":6},
+                data:{"emailId":0,"empId":0,"type":2,"readStatus":0,"receiveEmpId":empId},
                 dataType:"json",
                 success:function (data) {
                     console.log(data);
                     for (var i=0;i<data.list.length;i++){
                         var info=" ";
-                        info+="<tr emailId='"+data.list[i].emailId+"' empId='"+data.list[i].empId+"' name='"+data.object[i]+"'  receiveId='"+data.list[i].receiveEmpId+"'><td>"+(i+1)+"</td><td>"+data.list[i].title.substr(0,6)+"</td><td>"+data.list[i].content.substr(0,10)+"</td><td>"+parseDate(data.list[i].time)+"</td><td>"+data.object[i]+"</td></tr>";
+                        info+="<tr emailId='"+data.list[i].emailId+"' empId='"+data.list[i].empId+"' name='"+data.object[i]+"'  receiveId='"+data.list[i].receiveEmpId+"'><td>"+(i+1)+"</td><td>"+data.list[i].title+"</td><td>"+(data.list[i].content).substr(0,6)+"</td><td>"+parseDate(data.list[i].time)+"</td><td>"+data.object[i]+"</td></tr>";
                         $(".layui-table").append(info);
                     }
                 }
@@ -78,7 +86,7 @@
             $.ajax({
                 url:"findEmail",
                 type:"get",
-                data:{"emailId":0,"empId":0,"type":2,"readStatus":1,"receiveEmpId":6},
+                data:{"emailId":0,"empId":0,"type":2,"readStatus":1,"receiveEmpId":empId},
                 dataType:"json",
                 success:function (data) {
                     $("#title").html(" ");
@@ -88,7 +96,7 @@
                     console.log(data);
                     for (var i=0;i<data.list.length;i++){
                         var info=" ";
-                        info+="<tr emailId='"+data.list[i].emailId+"' empId='"+data.list[i].empId+"' name='"+data.object[i]+"'  receiveId='"+data.list[i].receiveEmpId+"'><td>"+(i+1)+"</td><td>"+data.list[i].title.substr(0,6)+"</td><td>"+data.list[i].content.substr(0,10)+"</td><td>"+parseDate(data.list[i].time)+"</td><td>"+data.object[i]+"</td></tr>";
+                        info+="<tr emailId='"+data.list[i].emailId+"' empId='"+data.list[i].empId+"' name='"+data.object[i]+"'  receiveId='"+data.list[i].receiveEmpId+"'><td>"+(i+1)+"</td><td>"+data.list[i].title+"</td><td>"+(data.list[i].content).substr(0,6)+"</td><td>"+parseDate(data.list[i].time)+"</td><td>"+data.object[i]+"</td></tr>";
                         $(".layui-table").append(info);
                     }
                 }
@@ -100,7 +108,7 @@
             $.ajax({
                 url:"findEmail",
                 type:"get",
-                data:{"emailId":0,"empId":0,"type":2,"readStatus":2,"receiveEmpId":6},
+                data:{"emailId":0,"empId":0,"type":2,"readStatus":2,"receiveEmpId":empId},
                 dataType:"json",
                 success:function (data) {
                     $("#title").html(" ");
@@ -110,7 +118,7 @@
                     console.log(data);
                     for (var i=0;i<data.list.length;i++){
                         var info=" ";
-                        info+="<tr emailId='"+data.list[i].emailId+"' empId='"+data.list[i].empId+"' name='"+data.object[i]+"'  receiveId='"+data.list[i].receiveEmpId+"'><td>"+(i+1)+"</td><td>"+data.list[i].title.substr(0,6)+"</td><td>"+data.list[i].content.substr(0,10)+"</td><td>"+parseDate(data.list[i].time)+"</td><td>"+data.object[i]+"</td></tr>";
+                        info+="<tr emailId='"+data.list[i].emailId+"' empId='"+data.list[i].empId+"' name='"+data.object[i]+"'  receiveId='"+data.list[i].receiveEmpId+"'><td>"+(i+1)+"</td><td>"+data.list[i].title+"</td><td>"+(data.list[i].content).substr(0,6)+"</td><td>"+parseDate(data.list[i].time)+"</td><td>"+data.object[i]+"</td></tr>";
                         $(".layui-table").append(info);
                     }
                 }
@@ -127,15 +135,20 @@
         $('#table1').on('click','tr', function() {
             //邮件id
             var emailId=$(this).attr("emailId");
-            var empId=$(this).attr("empId");
+            var empId1=$(this).attr("empId");
             var receiveId=$(this).attr("receiveId");
-            // alert(name);
+            layer.open({
+                area: ['1050px', '500px'],
+                type: 2,
+                content: ["page/emailInfo.html?emailId="+emailId+"&empId="+empId1+"&receiveId="+receiveId,'no']
+            });
 
-                //跳转页面
-                location.href="page/emailInfo.html?emailId="+emailId+"&empId="+empId+"&receiveId="+receiveId;
+                // //跳转页面
+                // location.href="page/emailInfo.html?emailId="+emailId+"&empId="+empId1+"&receiveId="+receiveId;
 
 
         });
+
 
 
     })

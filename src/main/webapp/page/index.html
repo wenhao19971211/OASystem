@@ -7,8 +7,10 @@
  		<link rel="stylesheet" href="js/dist/css/layui.css"  media="all">
  		<!--<link rel="stylesheet" href="page/success.html" />-->
  		<link rel="stylesheet" href="page/leave.html" />
+		<link rel="stylesheet" href="js/dist/css/modules/layer/default/layer.css" />
 	 	<script src="js/dist/layui.js" charset="utf-8"></script>
 	  	<script src="js/jquery.js" ></script>
+		<script src="js/dist/lay/modules/layer.js"></script>
 
 	</head>
 	<style>
@@ -28,7 +30,8 @@
    <div class="layui-row" >
 
 	<div class="layui-tab layui-tab-brief " lay-filter="docDemoTabBrief">
-		<ul class="layui-col-xs2 layui-col-sm2 layui-col-md2" style="height: 40px; text-align: center; width: 40px;" >首页</ul>
+		<ul class="layui-col-xs2 layui-col-sm2 layui-col-md2" style="height: 40px; text-align: center; width: 40px;" >
+			<img src="" class="head"><span class="empName" style="float: left;"></span></ul>
 	  <ul class="layui-tab-title layui-col-xs10 layui-col-sm10 layui-col-md10" style="background-color: #393D49; color: #F3F3F3; float: right; width: 90%;height: 40px; margin-top:-10px; ">
 <!--<a href="http://www.baidu.com" style="color: #000000;" target="dd">首页</a>-->
 
@@ -49,43 +52,24 @@
 		 <li class="layui-nav-item"><a href="http://www.dsa.com" target="dd" >我的薪资</a></li>
 		 <li class="layui-nav-item"><a >请假管理</a>
 		 <dl class="layui-nav-child">
-			 <dd id="qj"><a href="page/leave.html" target="dd">请假</a></dd>
-			 <dd id="ckqj"><a href="page/selectLeave.html" target="dd">查看请假</a></dd>
+			 <dd id="qj"><a >请假</a></dd>
+			 <dd id="ckqj"><a href="page/selectLeave.html" target="dd">查看请假</a><span class="layui-badge" style="margin-left: 150px">99+</span></dd>
 		 </dl>
 		 </li>
 		 <li class="layui-nav-item"><a >报销管理</a></li>
 	  	 <li class="layui-nav-item"><a >邮件管理</a>
 			 <dl class="layui-nav-child">
-				 <dd id="fsyj"><a >发送邮件</a></dd>
-				 <dd id="chyj"><a >查看邮件</a></dd>
+				 <dd id="fsyj"><a href="page/sendEmail.html" target="dd">发送邮件</a></dd>
+				 <dd id="chyj"><a href="page/selectEmail.html" target="dd">查看邮件</a></dd>
 			 </dl>
 		 </li>
 		 <li class="layui-nav-item"><a >通讯录</a></li>
 		 <li class="layui-nav-item"><a href="page/Information.html" target="dd">个人信息</a></li>
 		 <li class="layui-nav-item"><a href="page/workOn.html" target="dd">打卡</a></li>
 
-		 <li class="layui-nav-item"><a href="page/departure.html" target="dd">离职</a></li>
+		 <li class="layui-nav-item"><a id="departure">离职</a></li>
 	</ul>
-		  	<!--三号选项2卡-->
-	<!--<ul class="layui-nav layui-show  layui-nav-tree layui-tab-item layui-col-xs6 layui-col-sm6 layui-col-md3 dd" lay-filter="test">-->
-		<!--&lt;!&ndash; 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> &ndash;&gt;-->
-		<!--<li class="layui-nav-item ">-->
-		    <!--<a ></a>-->
-		<!--</li>-->
-		<!--<li class="layui-nav-item"><a href="http://www.asd.com" target="dd">个人考勤</a></li>-->
-		<!--<li class="layui-nav-item"><a href="http://www.dsa.com" target="dd">我的薪资</a></li>-->
-		<!--<li class="layui-nav-item"><a href="http://www.wff.com" target="dd">请假管理</a>-->
-			<!--<dl class="layui-nav-child">-->
-				<!--<dd><a >请假</a></dd>-->
-				<!--<dd><a >查看请假</a></dd>-->
-			<!--</dl>-->
-		<!--</li>-->
-		<!--<li class="layui-nav-item"><a>报销管理</a></li>-->
-		<!--<li class="layui-nav-item"><a>邮件管理</a></li>-->
-		<!--<li class="layui-nav-item"><a>通讯录</a></li>-->
-		<!--<li class="layui-nav-item"><a>个人信息</a></li>-->
-		<!--</ul>-->
-  	<!---->
+
 			  	  	<!--四号选项2卡-->
 	<ul class="layui-nav layui-nav-tree layui-tab-item layui-col-xs6 layui-col-sm6 layui-col-md3 dd" lay-filter="test">
 			<!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
@@ -155,6 +139,7 @@
 				</div>
 				<div class="layui-col-xs12 layui-col-sm12 layui-col-md12" id="nr" >
 
+					<iframe src='' frameborder='0' name="dd" scrolling='no' width='1250px' height='1000px' style="background-color: white"></iframe>
 					<iframe src='' frameborder='0' name="dd" scrolling='no' width='1250px' height='1000px' ></iframe>
 				  <!--<div class="grid-demo layui-bg-blue"></div>-->
 				</div>
@@ -192,11 +177,27 @@
 		success:function (data) {
 			$("#empId").val(data.object.empId);
 			$("#depId").val(data.object.dep.depId);
+			$(".head").attr("src","img/"+data.object.head);
+			$(".empName").html(data.object.empName);
 		}
 
 	});
 
+	$("#qj").click(function () {
+		layer.open({
+			area: ['700px', '400px'],
+			type: 2,
+			content: ['page/leave.html', 'no']
+		});
+	})
 
+	$("#departure").click(function () {
+		var empId = $("#empId").val();
+		layer.open({
+			area: ['800px', '600px'],
+			type: 2,
+			content: ['page/departure.html?empId='+empId, 'no']
 
-
+		});
+	})
 	</script>
