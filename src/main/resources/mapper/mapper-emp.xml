@@ -24,6 +24,7 @@
         <association property="dep" javaType="dep">
             <id property="depId" column="depId"></id>
             <result property="depName" column="depName"></result>
+            <result property="manager" column="manager"></result>
         </association>
     </resultMap>
 
@@ -49,12 +50,20 @@
     </select>
 
     <select id="findAll" resultMap="empMap">
-        select * from emp inner join dep on emp.depId=dep.depId limit #{start},#{end}
+        select * from emp inner join dep on emp.depId=dep.depId where isDeparture=0 limit #{start},#{end}
     </select>
 
     <select id="findCount" resultType="java.lang.Integer">
         select count(*) from emp
     </select>
+
+    <select id="findDeparture" resultMap="empMap">
+        select * from emp inner join dep on emp.depId=dep.depId limit #{start},#{end} where isDeparture=1
+    </select>
+
+    <update id="updateDeparture">
+        update emp set isDeparture=1 where empId=#{empId}
+    </update>
 
     <select id="findOneDepAllEmpsByEmpId" resultType="com.geek.pojo.Emp">
         select * from emp where depId = (select depId from emp where empId = #{empId})

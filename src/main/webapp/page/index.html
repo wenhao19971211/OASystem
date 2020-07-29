@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta http-equiv="Content-Type" content="text/html; charset=GBK">
-		<base href="http://localhost:8080/OASystem_war_exploded/">
+		<base href="http://localhost:8080/ssm_framework_war_exploded/">
  		<link rel="stylesheet" href="js/dist/css/layui.css"  media="all">
  		<!--<link rel="stylesheet" href="page/success.html" />-->
  		<link rel="stylesheet" href="page/leave.html" />
@@ -76,14 +76,6 @@
 	    <li>任务管理</li>
 	    <li>人事管理</li>
 	    <li>财务管理</li>
-
-		  <li style="float: right">
-			  <i class="layui-icon layui-icon-home" style="font-size: 30px; color: #1E9FFF;"></i>
-		  </li>
-		  <li >
-			  <i class="layui-icon layui-icon-logout" style="font-size: 30px; color: #C9C9C9; width: 30px;height: 40px;"></i>
-		  </li>
-
 	  </ul>
 
   <div class="layui-tab-content layui-col-xs4 layui-col-sm4 layui-col-md2"  >
@@ -91,7 +83,7 @@
 	 <ul class="layui-nav layui-nav-tree layui-tab-item layui-show layui-col-xs2 layui-col-sm2 layui-col-md2 dd"  lay-filter="test">
 	<!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
 		 <li class="layui-nav-item " >
-			<a  href="http://www.jd.com" target="dd" >消息dd提醒</a>
+			<a  href="page/message.html" target="dd" >消息提醒</a>
 		 </li>
 		 <li class="layui-nav-item" ><a href="http://www.asd.com" target="dd" >个人考勤</a></li>
 		 <li class="layui-nav-item"><a href="page/MySalary.html" target="dd" >我的薪资</a></li>
@@ -117,6 +109,7 @@
 		 <li class="layui-nav-item"><a >个人信息</a></li>
 		 <li class="layui-nav-item"><a href="page/workOn.html" target="dd">打卡</a></li>
 
+		 <li class="layui-nav-item"><a id="departure">离职</a></li>
 	</ul>
 
 			  	  	<!--四号选项2卡-->
@@ -125,6 +118,7 @@
 		<li class="layui-nav-item"><a >待我审批</a>
 			<dl class="layui-nav-child">
 				<dd id="spqj"><a href="page/leaveAudit.html" target="dd">审批请假</a></dd>
+				<dd><a href="page/departureList.html" target="dd">审批离职</a></dd>
 				<dd><a>审批补卡</a></dd>
 			</dl>
 		</li>
@@ -153,17 +147,16 @@
 		<li class="layui-nav-item">
 			<a href="page/TaskNotFinish.html" target="dd">待完成的任务</a>
 		</li>
+		<li class="layui-nav-item"><a >发布任务</a></li>
 	</ul>
 
 	  	  	<!--六号选项2卡-->
 	<ul class="layui-nav layui-nav-tree layui-tab-item layui-col-xs2 layui-col-sm2 layui-col-md2 dd" lay-filter="test">
 	<!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
-	  	<li class="layui-nav-item ">
-	    <a >人事信息</a>
-	  	</li>
-		<li class="layui-nav-item"><a >人事合同</a></li>
-		<li class="layui-nav-item"><a >离职信息</a></li>
-		<li class="layui-nav-item"><a >奖惩信息</a></li>
+	  	<li class="layui-nav-item "><a href="page/personnelInformation.html" target="dd">人事信息</a></li>
+		<li class="layui-nav-item"><a href="page/personnelContract.html" target="dd">人事合同</a></li>
+		<li class="layui-nav-item"><a href="page/departureInformation.html" target="dd">离职信息</a></li>
+		<li class="layui-nav-item"><a HREF="page/prize.html" target="dd">奖惩管理</a></li>
 
 	</ul>
 	  <!--七号-->
@@ -188,9 +181,12 @@
 
 				<div class="layui-col-xs12 layui-col-sm12 layui-col-md12" id="nr" >
 					<iframe src='' frameborder='0' name="dd" scrolling='no' width='1250px' height='694px' style="background-color: white; margin-left: 14px;"></iframe>
+
+					<iframe src='' frameborder='0' name="dd" scrolling='no' width='1250px' height='1000px' style="background-color: white"></iframe>
+					<iframe src='' frameborder='0' name="dd" scrolling='no' width='1250px' height='1000px' ></iframe>
 				  <!--<div class="grid-demo layui-bg-blue"></div>-->
 				</div>
-
+				  <!--style="background-color: #1E9FFF"-->
 			  </div>
 		</div>
 
@@ -224,6 +220,8 @@
 		success:function (data) {
 			$("#empId").val(data.object.empId);
 			$("#depId").val(data.object.dep.depId);
+			$(".head").attr("src","img/"+data.object.head);
+			$(".empName").html(data.object.empName);
 		}
 
 	});
@@ -235,13 +233,21 @@
 			content: ['page/leave.html', 'no']
 		});
 	})
-	//	发送邮件
-		$("#fsyj").click(function () {
-			layer.open({
-				area: ['1000px', '440px'],
-				type: 2,
-				content: ['page/sendEmail.html', 'no']
-			});
-		})
 
+	$("#departure").click(function () {
+		var empId = $("#empId").val();
+		layer.open({
+			area: ['800px', '600px'],
+			type: 2,
+			content: ['page/departure.html?empId='+empId, 'no']
+		});
+	})
+	//	发送邮件
+	$("#fsyj").click(function () {
+		layer.open({
+			area: ['1000px', '440px'],
+			type: 2,
+			content: ['page/sendEmail.html', 'no']
+		});
+	});
 	</script>

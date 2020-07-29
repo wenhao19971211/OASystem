@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="http://localhost:8080/ssm_framework_war_exploded/">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/contract.css" type="text/css">
+    <script src="js/jquery.js"></script>
+    <script src="js/common.js"></script>
+    <link rel="stylesheet" href="js/dist/css/layui.css" />
+    <link rel="stylesheet" href="css/message.css" type="text/css">
+</head>
+<body>
+<h3>合同信息</h3>
+<p>&nbsp;&nbsp;基本信息</p>
+<hr>
+<div class="info" id="empId"></div>
+<div class="info" id="empName"></div>
+<div class="info" id="contractId"></div>
+<div class="info" id="contractType"></div>
+<div class="info" id="isTrainningContract"></div>
+<div class="info" id="salary"></div>
+<p>&nbsp;&nbsp;续签记录</p>
+<hr>
+<table class="layui-table" style="width: 100%; text-align: center;" id="contractTable"></table>
+</body>
+</html>
+<script>
+    var param = parseUrl(location.href);
+    var empId = param["empId"];
+    $(".layui-table").html(" <colgroup><col width="+250+"><col width="+250+"><col width=\"+100+\"><col width=\"+100+\"></colgroup>" +
+        "<thead ><td>生效期</td>" +
+        "<td>失效期</td>" +
+        "<td>负责人</td>" +
+        "<td>最后变更日期</td>" +
+        "</thead>");
+    $.ajax({
+        url:"contractInfo",
+        data:{"empId":empId},
+        dataType:"json",
+        type:"get",
+        success:function (data) {
+            var effectTime = parseDate(data.object.effectTime);
+            var failureTime = parseDate(data.object.failureTime);
+            var modifyTime = parseDate(data.object.modifyTime);
+            var contractType ="";
+            if (data.object.contractType == 1){
+                contractType = "劳动合同";
+            }
+            else if (data.object.contractType == 2){
+                contractType = "劳务合同";
+            }
+            else if (data.object.contractType == 3){
+                contractType = "聘用合同";
+            }
+            else if (data.object.contractType == 4){
+                contractType = "保密协议";
+            }
+            else if (data.object.contractType == 5){
+                contractType = "竞业协议";
+            }
+            else if (data.object.contractType == 6){
+                contractType = "培训合同";
+            }
+            var trainning = "";
+            if (data.object.isTrainningContract == 0){
+                trainning = "否";
+            }
+            else{
+                trainning = "是";
+            }
+            $("#empId").html("工号："+data.object.emp.empId);
+            $("#empName").html("姓名："+data.object.emp.empName);
+            $("#contractId").html("合同编号："+data.object.contractId);
+            $("#contractType").html("合同类型："+contractType);
+            $("#isTrainningContract").html("签订培训协议："+trainning);
+            $("#salary").html("薪资："+data.object.salary);
+            var contract = "<tr>" +
+                "<td>"+effectTime+"</td>" +
+                "<td>"+failureTime+"</td>" +
+                "<td>"+data.object.checkEmp.empName+"</td>" +
+                "<td>"+modifyTime+"</td></tr>"
+            $("#contractTable").append(contract);
+        }
+    })
+</script>

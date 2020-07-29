@@ -11,13 +11,14 @@
         <result property="effectTime" column="effectTime"></result>
         <result property="failureTime" column="failureTime"></result>
         <result property="isTrainningContract" column="isTrainningContract"></result>
+        <result property="modifyTime" column="modifyTime"></result>
         <association property="emp" javaType="emp">
             <id property="empId" column="empId"></id>
             <result property="empName" column="empName"></result>
         </association>
         <association property="checkEmp" javaType="emp">
             <id property="empId" column="checkEmpId"></id>
-            <result property="checkEmpName" column="checkEmpName"></result>
+            <result property="empName" column="empName"></result>
         </association>
     </resultMap>
 
@@ -26,6 +27,14 @@
     </select>
 
     <select id="findAll" resultMap="contractMap">
-        select * from contract inner join emp on contract.empId=emp.empId
+        select * from contract inner join emp on contract.empId=emp.empId where emp.isDeparture=0 limit #{start},#{end}
     </select>
+
+    <select id="findCount" resultType="java.lang.Integer">
+        select count(*) from contract
+    </select>
+
+    <update id="updateById">
+        update contract set contractType=#{contractType},salary=#{salary},effectTime=#{effectTime},failureTime=#{failureTime},modifyTime=now() where empId=#{empId}
+    </update>
 </mapper>

@@ -7,6 +7,15 @@ public class Dep {
     private Integer depId;
     private String depName;
     private Emp emp;
+    private Integer manager;
+
+    public Integer getManager() {
+        return manager;
+    }
+
+    public void setManager(Integer manager) {
+        this.manager = manager;
+    }
 
     public Integer getDepId() {
         return depId;

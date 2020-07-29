@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>奖惩登记</h3>
+<hr>
+奖惩类型
+<input type="radio" name="prize" value="1">奖励
+<input type="radio" name="prize" value="2">惩罚
+指定职员 <input type="button" id="choseEmp">
+<div>授予单位 &nbsp;&nbsp;&nbsp;极客营</div>
+<div>奖惩名目
+    <select id="item">
+        <option value="0"></option>
+        <option value="1">季度之星</option>
+        <option value="2">优秀员工</option>
+        <option value="3">优秀团队</option>
+        <option value="4">警告</option>
+        <option value="5">严重警告</option>
+    </select>
+</div>
+<div>奖惩日期 <input type="date"></div>
+<div>奖惩金额 <input type="text" id="money"></div>
+<span>奖惩原因</span>
+<div id="cause"></div>
+</body>
+</html>
+<script>
+    /**
+     * 选择联系人按钮
+     */
+    $("#choseEmp").click(function () {
+        nameArrary=new Array();
+        $("#empTable").html(" ");
+        $("#emp").show();
+        $("#ceshi").show();
+        $.ajax({
+            url:"findAllEmp",
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+                console.log(data.list.length)
+                console.log(data);
+                for (var i=0;i<data.list.length;i++){
+                    var emp="";
+                    // emp+="<tr><td><input type='checkbox' name='emp' class='choseCheck' value='"+data.list[i].empId+"'  >"+data.list[i].empName+"</td></tr>";
+                    emp+="<span style='margin-left: 10px'><input type='checkbox' name='emp' class='choseCheck' value='"+data.list[i].empId+"'  >"+data.list[i].empName+"</span></t>";
+                    nameArrary.push(data.list[i].empName);
+                    $("#empTable").append(emp);
+                    if ((i+1)==5){
+                        $("#empTable").append("<br>")
+                    }
+
+
+
+                }
+
+
+            }
+        })
+    })
+</script>

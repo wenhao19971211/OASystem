@@ -3,6 +3,7 @@ package com.geek.dao;
 import com.geek.pojo.Contract;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,6 +22,18 @@ public interface ContractDao {
      * 查询所有人事合同
      * @return
      */
-    public List<Contract> findAll();
+    public List<Contract> findAll(@Param("start") int start,@Param("end") int end);
+
+    /**
+     * 查询合同总数
+     * @return
+     */
+    public int findCount();
+
+    /**
+     * 修改合同
+     * @param empId
+     */
+    public void updateById(@Param("empId") int empId, @Param("salary") double salary, @Param("effectTime")Date effectTime,@Param("failureTime") Date failureTime,@Param("contractType") int contractType);
 
 }

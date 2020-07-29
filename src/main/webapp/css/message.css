@@ -1,0 +1,33 @@
+body{
+    text-align: center;
+}
+.clear:after{
+    clear: both;
+    content: "";
+    display: block;
+}
+#btn{
+    width: 150px;
+    height: 650px;
+    float: left;
+}
+#btn input{
+    width: 80px;
+    height: 30px;
+    border-radius: 15px;
+    background-color: white;
+    border: 1px solid #009688;
+    color: #009688;
+    margin: 30px 35px;
+    cursor: pointer;
+}
+#messageContent{
+    width: 1200px ;
+    height: 650px;
+}
+
+h3{
+    color: #009688;
+    font-size: 24px;
+    margin: 15px auto;
+}

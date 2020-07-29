@@ -1,0 +1,51 @@
+
+h3{
+    color: #009688;
+    font-size: 20px;
+    font-weight: 400;
+}
+.btn{
+    width: 80px;
+    height: 30px;
+    border-radius: 15px;
+    background-color: white;
+    border: 1px solid #009688;
+    color: #009688;
+    margin: 10px 10px;
+    cursor: pointer;
+
+}
+.btn:focus{
+    outline: none;
+}
+hr{
+    color: #009688;
+    filter: alpha(opacity=100,finishopacity=0,style=3);
+}
+.empInfo{
+    width: 400px;
+    height: 500px;
+    margin: auto;
+}
+.info{
+    height: 50px;
+    margin-left: 15px;
+    margin-top: 10px;
+    color: #999;
+
+}
+.contact{
+    width: 200px;
+    height: 25px;
+    border-radius: 100px;
+    border: 1px solid #dedede;
+    color: #666;
+    padding-left: 8px;
+}
+.head{
+    width: 75px;
+    height: 75px;
+    border-radius: 75px;
+    border: 1px solid #B2B2B2;
+    margin: auto;
+}

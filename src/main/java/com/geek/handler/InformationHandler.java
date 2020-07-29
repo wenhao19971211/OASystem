@@ -1,17 +1,24 @@
 package com.geek.handler;
 
 import com.geek.dto.Result;
+import com.geek.pojo.Departure;
 import com.geek.pojo.Emp;
+import com.geek.service.DepartureService;
 import com.geek.service.EmpService;
+import com.geek.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Date;
 
 @RestController
 public class InformationHandler {
     @Autowired
     private EmpService empService;
+
     @GetMapping("information")
     public Result findInformation(int empId){
         Result result = new Result();
@@ -27,4 +34,5 @@ public class InformationHandler {
         result.setCode(1);
         return result;
     }
+
 }

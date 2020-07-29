@@ -54,7 +54,31 @@ public class CommonUtil {
         return date;
     }
 
+    /**
+     * 字符串转换时间(年月日)
+     * @param str
+     * @return
+     */
+    public static Date getTime(String str){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date time = null;
+        try {
+            time = sdf.parse(str);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return time;
+    }
 
+    /**
+     * 时间转换字符串
+     * @param str
+     * @return
+     */
+    public static String parseString(Date str){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(str);
+    }
     /**
      *
      * 判断输入的日期是否为节假日，

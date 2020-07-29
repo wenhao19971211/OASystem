@@ -14,7 +14,7 @@ public class Contract {
     private Date failureTime;
     private Integer isTrainningContract;
     private Emp checkEmp;
-
+    private Date modifyTime;
     public Emp getCheckEmp() {
         return checkEmp;
     }
@@ -113,6 +113,14 @@ public class Contract {
 
     public void setEmp(Emp emp) {
         this.emp = emp;
+    }
+
+    public Date getModifyTime() {
+        return modifyTime;
+    }
+
+    public void setModifyTime(Date modifyTime) {
+        this.modifyTime = modifyTime;
     }
 
     @Override
