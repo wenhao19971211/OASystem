@@ -5,7 +5,10 @@ import com.geek.handler.SalaryHandler;
 import com.geek.handler.SalaryIssueHandler;
 import com.geek.handler.TaskSendHandler;
 import com.geek.pojo.*;
+import com.geek.service.RimbursementIssueService;
+import com.geek.service.SalaryIssueService;
 import com.geek.service.SalaryService;
+import com.geek.service.TaskSendService;
 import com.geek.util.CommonUtil;
 import com.sun.corba.se.impl.presentation.rmi.IDLNameTranslatorImpl;
 import org.junit.runner.RunWith;
@@ -41,56 +44,63 @@ public class Test {
     private SalaryIssueHandler salaryIssueHandler;
     @Autowired
     private RimbursementIssueHandler rimbursementIssueHandler;
+    @Autowired
+    private  SalaryDao salaryDao;
+    @Autowired
+    private SalaryIssueService salaryIssueService;
+    @Autowired
+    private TaskSendService taskSendService;
+
 
     @org.junit.Test
     public void test1()
     {
         Integer[] receiveEmpIds = new Integer[]{2,3};
-        String flag = taskSendHandler.addTask(1, "ceshi", "ceshi", new Date(), new Date(), receiveEmpIds);
-        System.out.println("flag:"+flag);
+        //String flag = taskSendHandler.addTask(1, "ceshi", "ceshi", new Date(), new Date(), receiveEmpIds);
+        //System.out.println("flag:"+flag);
     }
 
     @org.junit.Test
     public void test2()
     {
-        TaskReceive_bo task = taskSendHandler.findTaskByStatus(6, 1, 2);
-        for (TaskReceive taskReceive : task.getTaskReceives()) {
-            System.out.println("taskReceive:"+taskReceive);
-            System.out.println("taskReceive.getTaskSend():"+taskReceive.getTaskSend());
-        }
-        System.out.println(task.getTotal());
+        //TaskReceive_bo task = taskSendHandler.findTaskByStatus(6, 1, 2);
+        //for (TaskReceive taskReceive : task.getTaskReceives()) {
+        //    System.out.println("taskReceive:"+taskReceive);
+        //    System.out.println("taskReceive.getTaskSend():"+taskReceive.getTaskSend());
+        //}
+        //System.out.println(task.getTotal());
     }
     @org.junit.Test
     public void test3()
     {
-        TaskSend_bo taskSend_bo = taskSendHandler.findTaskByempId(1, 1);
-        for (TaskSend taskSend : taskSend_bo.getTaskSends()) {
-            System.out.println("taskSend"+taskSend);
-            for (TaskReceive taskReceive : taskSend.getTaskReceives()) {
-                System.out.println("taskReceive"+taskReceive);
-            }
-
-        }
-        System.out.println(taskSend_bo.getTotal());
+//        TaskSend_bo taskSend_bo = taskSendHandler.findTaskByempId(1, 1);
+//        for (TaskSend taskSend : taskSend_bo.getTaskSends()) {
+//            System.out.println("taskSend"+taskSend);
+//            for (TaskReceive taskReceive : taskSend.getTaskReceives()) {
+//                System.out.println("taskReceive"+taskReceive);
+//            }
+//
+//        }
+//        System.out.println(taskSend_bo.getTotal());
     }
     @org.junit.Test
     public void test4()
     {
         System.out.println("test4");
-        TaskSend_bo taskSend_bo = taskSendHandler.findTaskByTitle(1, "c", 1);
-        System.out.println("size()"+taskSend_bo.getTaskSends().size());
-        for (TaskSend taskSend : taskSend_bo.getTaskSends()) {
-            System.out.println("taskSend:"+taskSend);
-            for (TaskReceive taskReceive : taskSend.getTaskReceives()) {
-                System.out.println("taskReceive"+taskReceive);
-            }
-        }
+//        TaskSend_bo taskSend_bo = taskSendHandler.findTaskByTitle(1, "c", 1);
+//        System.out.println("size()"+taskSend_bo.getTaskSends().size());
+//        for (TaskSend taskSend : taskSend_bo.getTaskSends()) {
+//            System.out.println("taskSend:"+taskSend);
+//            for (TaskReceive taskReceive : taskSend.getTaskReceives()) {
+//                System.out.println("taskReceive"+taskReceive);
+//            }
+//        }
     }
     @org.junit.Test
     public void test5()
     {
-        String flag = taskSendHandler.finishTask(28);
-        System.out.println("flag:"+flag);
+        //String flag = taskSendHandler.finishTask(28);
+        //System.out.println("flag:"+flag);
     }
 
     @org.junit.Test
@@ -170,21 +180,21 @@ public class Test {
     @org.junit.Test
     public void test11()
     {
-        SalaryIssue_bo salaryIssue_bo = salaryIssueHandler.findSalaryIssueByStatus(1, 1, 3);
+        /*SalaryIssue_bo salaryIssue_bo = salaryIssueHandler.findSalaryIssueByStatus(1, 1, 3);
         System.out.println("status:"+salaryIssue_bo.getStatus());
         System.out.println("count:"+salaryIssue_bo.getCount());
         for (SalaryIssue salaryIssue : salaryIssue_bo.getSalaryIssues()) {
             System.out.println(salaryIssue);
-        }
+        }*/
     }
     @org.junit.Test
     public  void test12()
     {
-        RimbursementIssue_bo rimbursementIssue_bo = rimbursementIssueHandler.findRimbursementByStatus(2, 1, 3);
+      /*  RimbursementIssue_bo rimbursementIssue_bo = rimbursementIssueHandler.findRimbursementByStatus(2, 1, 3);
         System.out.println("count:"+rimbursementIssue_bo.getCount());
         for (Rimbursement rimbursement : rimbursementIssue_bo.getRimbursements()) {
             System.out.println(rimbursement);
-        }
+        }*/
     }
     @org.junit.Test
     public void test13()
@@ -195,8 +205,8 @@ public class Test {
     @org.junit.Test
     public  void test14()
     {
-        String flag = salaryIssueHandler.updateSalaryIssueStatusBySalaryIssueId(19, 1);
-        System.out.println("flag:"+flag);
+        /*String flag = salaryIssueHandler.updateSalaryIssueStatusBySalaryIssueId(19, 1);
+        System.out.println("flag:"+flag);*/
     }
     @Autowired
     private DockPayDao dockPayDao;
@@ -208,5 +218,48 @@ public class Test {
         int count = dockPayDao.addDockPay(dockPay);
         System.out.println("count:"+count);
     }
+    @Autowired
+    private RimbursementIssueDao rimbursementIssueDao;
+    @Autowired
+    private RimbursementIssueService rimbursementIssueService;
+    @org.junit.Test
+    public void test16()
+    {
+        Reimbursement reimbursement = rimbursementIssueDao.findReimbursementByReimbursementId(1);
+        System.out.println("reimbursement"+reimbursement);
+        System.out.println(reimbursement.getEmp().getEmpName());
+        System.out.println(reimbursement.getDep().getDepName());
+
+        RimbursementIssue_bo rimbursementIssue_bo = rimbursementIssueService.findRimbursementByStatus(null, 1, 5);
+        System.out.println("size"+rimbursementIssue_bo.getRimbursements().size());
+    }
+
+    @org.junit.Test
+    public void test17()
+    {
+        //Salary salary = salaryDao.findSalaryBySalaryId(1);
+        //System.out.println(salary);
+        SalaryIssue_bo salaryIssue_bo = salaryIssueService.findSalaryIssueByStatus(2, 1, 10);
+        System.out.println("size:"+salaryIssue_bo.getSalaryIssues().size());
+        for (SalaryIssue salaryIssue : salaryIssue_bo.getSalaryIssues())
+        {
+            System.out.println("empName:"+salaryIssue.getEmp().getEmpName());
+            System.out.println("reempName:"+salaryIssue.getSalary().getEmp().getEmpName());
+            System.out.println("redepName:"+salaryIssue.getSalary().getEmp().getDep().getDepName());
+        }
+
+    }
+    @org.junit.Test
+    public void test18()
+    {
+        Emp emp = new Emp();
+        emp.setDepId(50);
+        List<Emp> emps = taskSendHandler.findfindOneDepAllEmpsByLoginEmp(emp);
+        for (Emp emp1 : emps) {
+            System.out.println(emp1);
+        }
+
+    }
+
 
 }

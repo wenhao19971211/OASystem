@@ -19,4 +19,11 @@
         </if>
     </select>
 
+
+
+    <select id="findSalaryBySalaryId" resultType="com.geek.pojo.Salary">
+        select * from salary where salaryId = #{salaryId}
+    </select>
+
+
 </mapper>

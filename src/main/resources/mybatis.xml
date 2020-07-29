@@ -36,6 +36,7 @@
         <mapper resource="mapper/mapper-checkWork.xml"></mapper>
         <mapper resource="mapper/mapper-rimbursementissue.xml"></mapper>
         <mapper resource="mapper/mapper-yearLeave.xml"></mapper>
+        <mapper resource="mapper/mapper-email.xml"></mapper>
         <mapper resource="mapper/mapper-dockpay.xml"></mapper>
         <mapper resource="mapper/mapper-reimbursement.xml"></mapper>
         <mapper resource="mapper/mapper-reimbursementDetail.xml"></mapper>

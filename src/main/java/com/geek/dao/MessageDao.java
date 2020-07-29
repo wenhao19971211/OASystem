@@ -1,6 +1,7 @@
 package com.geek.dao;
 
 import com.geek.pojo.Message;
+import com.geek.pojo.ReleaseTabe;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -53,4 +54,10 @@ public interface MessageDao {
      * @return
      */
     public List<Message> findReadById(int empId);
+
+    /**
+     * 添加信息公告
+     */
+    public int addInfo(ReleaseTabe releaseTabe);
+
 }

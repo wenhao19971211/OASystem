@@ -3,12 +3,14 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta http-equiv="Content-Type" content="text/html; charset=GBK">
-		<base href="http://localhost:8080/OASystem_war_exploded/">
+		<base href="http://localhost:8081/OASystem_war_exploded/">
  		<link rel="stylesheet" href="js/dist/css/layui.css"  media="all">
  		<!--<link rel="stylesheet" href="page/success.html" />-->
  		<link rel="stylesheet" href="page/leave.html" />
+		<link rel="stylesheet" href="js/dist/css/modules/layer/default/layer.css" />
 	 	<script src="js/dist/layui.js" charset="utf-8"></script>
 	  	<script src="js/jquery.js" ></script>
+		<script src="js/dist/lay/modules/layer.js"></script>
 
 	</head>
 	<style>
@@ -20,20 +22,16 @@
 		a{
 			cursor:pointer;
 		}
-		.ds{
-			width: 100%;
-			height: 1000px;
-		}
 	</style>
 
-	<body style="background-color:#393D49" class="ds">
+	<body style="background-color:darkgrey" >
 	<input type="hidden" id="empId">
 	<input type="hidden" id="depId">
-   <div class="layui-row" style="width: 100%; height: 100%" >
+   <div class="layui-row" >
 
 	<div class="layui-tab layui-tab-brief " lay-filter="docDemoTabBrief">
-		<ul class="layui-col-xs1 layui-col-sm1 layui-col-md1" style="height: 40px; text-align: center; margin-top: -10px; width:132px;line-height: 40px " >首页</ul>
-	  <ul class="layui-tab-title layui-col-xs11 layui-col-sm11 layui-col-md11" style="background-color: #393D49; color: #F3F3F3; float: right; width: 89%;height: 40px; margin-top:-10px; ">
+		<ul class="layui-col-xs2 layui-col-sm2 layui-col-md2" style="height: 40px; text-align: center; width: 40px;" >首页</ul>
+	  <ul class="layui-tab-title layui-col-xs10 layui-col-sm10 layui-col-md10" style="background-color: #393D49; color: #F3F3F3; float: right; width: 90%;height: 40px; margin-top:-10px; ">
 <!--<a href="http://www.baidu.com" style="color: #000000;" target="dd">首页</a>-->
 
 	    <li class="layui-this">个人办公</li>
@@ -42,26 +40,26 @@
 	    <li>人事管理</li>
 	    <li>财务管理</li>
 	  </ul>
-  <div class="layui-tab-content layui-col-xs4 layui-col-sm4 layui-col-md2" style="margin-left: 10px" >
+  <div class="layui-tab-content layui-col-xs4 layui-col-sm4 layui-col-md2" style="margin-left: -30px" >
 	  	<!--&lt;!&ndash;一号选项卡&ndash;&gt;-->
-	 <ul class="layui-nav layui-nav-tree layui-tab-item layui-show layui-col-xs6 layui-col-sm6 layui-col-md3 dd" style="width: 200px"  lay-filter="test">
+	 <ul class="layui-nav layui-nav-tree layui-tab-item layui-show layui-col-xs6 layui-col-sm6 layui-col-md3 dd"  lay-filter="test">
 	<!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
 		 <li class="layui-nav-item " >
 			<a  href="http://www.jd.com" target="dd" >消息dd提醒</a>
 		 </li>
 		 <li class="layui-nav-item" ><a href="http://www.asd.com" target="dd" >个人考勤</a></li>
-		 <li class="layui-nav-item"><a href="http://www.dsa.com" target="dd" >我的薪资</a></li>
+		 <li class="layui-nav-item"><a href="page/MySalary.html" target="dd" >我的薪资</a></li>
 		 <li class="layui-nav-item"><a >请假管理</a>
 		 <dl class="layui-nav-child">
-			 <dd id="qj"><a href="page/leave.html" target="dd">请假</a></dd>
+			 <dd id="qj"><a >请假</a></dd>
 			 <dd id="ckqj"><a href="page/selectLeave.html" target="dd">查看请假</a></dd>
 		 </dl>
 		 </li>
 		 <li class="layui-nav-item"><a >报销管理</a></li>
 	  	 <li class="layui-nav-item"><a >邮件管理</a>
 			 <dl class="layui-nav-child">
-				 <dd id="fsyj"><a >发送邮件</a></dd>
-				 <dd id="chyj"><a >查看邮件</a></dd>
+				 <dd id="fsyj"><a>发送邮件</a></dd>
+				 <dd id="chyj"><a href="page/selectEmail.html" target="dd">查看邮件</a></dd>
 			 </dl>
 		 </li>
 		 <li class="layui-nav-item"><a >通讯录</a></li>
@@ -104,7 +102,7 @@
                 <dd ><a>已审批补卡</a></dd>
             </dl>
         </li>
-		<li class="layui-nav-item"><a >信息发布</a></li>
+		<li class="layui-nav-item"><a href="page/InfoAdd.html" target="dd">信息发布</a></li>
 
 	</ul>
   	
@@ -112,9 +110,17 @@
 	<ul class="layui-nav layui-nav-tree layui-tab-item layui-col-xs6 layui-col-sm6 layui-col-md3 dd" lay-filter="test">
 		<!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
 		<li class="layui-nav-item ">
-		    <a >我的任务</a>
+		    <a href="page/MyTask.html" target="dd">我的任务</a>
 		</li>
-		<li class="layui-nav-item"><a >发布任务</a></li>
+		<li class="layui-nav-item">
+			<a href="page/TaskSearch.html" target="dd">发布任务</a>
+		</li>
+		<li class="layui-nav-item">
+			<a href="page/TaskFinish.html" target="dd">已完成的任务</a>
+		</li>
+		<li class="layui-nav-item">
+			<a href="page/TaskNotFinish.html" target="dd">待完成的任务</a>
+		</li>
 	</ul>
 
 	  	  	<!--六号选项2卡-->
@@ -131,22 +137,30 @@
 	  <!--七号-->
 	  <ul class="layui-nav layui-nav-tree layui-tab-item layui-col-xs6 layui-col-sm6 layui-col-md3 dd" lay-filter="test">
 		  <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
-		  <li class="layui-nav-item ">
-			  <a >报销管理</a>
+		  <li class="layui-nav-item"><a >报销发放</a>
+			  <dl class="layui-nav-child">
+				  <dd id="bxyff"><a href="page/RimbursementIssue.html" target="dd">已发放</a></dd>
+				  <dd ><a href="page/RimbursementNotIssue.html" target="dd">未发放</a></dd>
+			  </dl>
 		  </li>
-		  <li class="layui-nav-item"><a >信息管理</a></li>
+		  <li class="layui-nav-item"><a >薪资发放</a>
+			  <dl class="layui-nav-child">
+				  <dd id="xzff"><a href="page/SalaryIssue.html" target="dd">已发放</a></dd>
+				  <dd ><a href="page/SalaryNotIssue.html" target="dd">未发放</a></dd>
+			  </dl>
+		  </li>
 	  </ul>
 
   	 	</div>
 			<!--//右边活动版块-->
-		 <div class="layui-col-xs10 layui-col-sm10 layui-col-md10 ss" style="margin-left:-50px; width: 80%;height: 100%;" id="d1">
-			  <div class="layui-row" style="width: 100%; height: 100%;">
+		 <div class="layui-col-xs8 layui-col-sm8 layui-col-md10 ss" style="margin-left:-50px; " id="d1">
+			  <div class="layui-row" style="width: 110%; height: 102%;">
 				<div class="layui-col-xs12 layui-col-sm12 layui-col-md12 imgss">
 
 				</div>
 				<div class="layui-col-xs12 layui-col-sm12 layui-col-md12" id="nr" >
 
-					<iframe src='' frameborder='0' name="dd" scrolling='no' width='107%' height='1000px' style="background-color: #1E9FFF; padding:0;"></iframe>
+					<iframe src='' frameborder='0' name="dd" scrolling='no' width='1250px' height='1000px' style="background-color: white"></iframe>
 				  <!--<div class="grid-demo layui-bg-blue"></div>-->
 				</div>
 
@@ -157,6 +171,7 @@
 </div>
 </body>
 </html>
+
 	<script type="text/javascript">
 	//注意：选项卡 依赖 element 模块，否则无法进行功能性操作
 	layui.use('element', function(){
@@ -185,8 +200,21 @@
 		}
 
 	});
-
-
-
+	//请假
+	$("#qj").click(function () {
+		layer.open({
+			area: ['700px', '400px'],
+			type: 2,
+			content: ['page/leave.html', 'no']
+		});
+	})
+	//	发送邮件
+		$("#fsyj").click(function () {
+			layer.open({
+				area: ['1000px', '440px'],
+				type: 2,
+				content: ['page/sendEmail.html', 'no']
+			});
+		})
 
 	</script>

@@ -1,8 +1,10 @@
 package com.geek.dao;
 
+import com.geek.pojo.Reimbursement;
 import com.geek.pojo.Rimbursement;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,7 +27,21 @@ public interface RimbursementIssueDao {
      * @param status
      * @return
      */
-    public int updateRimbursementIssueStatusByRimbursementIsuueId(@Param("id") Integer id,@Param("status") Integer status);
+    public int updateRimbursementIssueStatusByRimbursementIsuueId(@Param("id") Integer id,@Param("status") Integer status, @Param("issueTime") Date issueTime);
+
+    /**
+     * 根据报销id，查询报销表
+     * @param reimbursementId
+     * @return
+     */
+    public Reimbursement findReimbursementByReimbursementId(@Param("reimbursementId") Integer reimbursementId);
+
+    /**
+     * 根据id
+     * @param reimbursementId
+     * @return
+     */
+    public int updateReimbursementStatus4ByReimbursementId(@Param("reimbursementId") Integer reimbursementId, @Param("status") Integer status);
 
 
 }

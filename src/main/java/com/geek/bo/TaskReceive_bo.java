@@ -12,6 +12,7 @@ public class TaskReceive_bo {
     private Integer total;//总页码
     private Integer page;//当前页码
     private Integer count;//每页显示多少条数据
+    private Integer num;//总共有多少条
 
     public TaskReceive_bo() {
     }
@@ -27,6 +28,14 @@ public class TaskReceive_bo {
         this.total = total;
         this.page = page;
         this.count = count;
+    }
+
+    public TaskReceive_bo(List<TaskReceive> taskReceives, Integer total, Integer page, Integer count, Integer num) {
+        this.taskReceives = taskReceives;
+        this.total = total;
+        this.page = page;
+        this.count = count;
+        this.num = num;
     }
 
     public List<TaskReceive> getTaskReceives() {
@@ -59,5 +68,13 @@ public class TaskReceive_bo {
 
     public void setCount(Integer count) {
         this.count = count;
+    }
+
+    public Integer getNum() {
+        return num;
+    }
+
+    public void setNum(Integer num) {
+        this.num = num;
     }
 }

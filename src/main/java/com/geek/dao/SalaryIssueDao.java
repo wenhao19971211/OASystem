@@ -3,6 +3,7 @@ package com.geek.dao;
 import com.geek.pojo.SalaryIssue;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,6 +33,6 @@ public interface SalaryIssueDao {
      * @param status
      * @return
      */
-    public int updateSalaryIssueStatusBySalaryIssueId(@Param("id") Integer id,@Param("status") Integer status);
+    public int updateSalaryIssueStatusBySalaryIssueId(@Param("id") Integer id, @Param("status") Integer status, @Param("issueTime") Date issueTime);
 
 }

@@ -11,6 +11,16 @@ public class ReleaseTabe {
     private String releaseContent;
     private Date releaseTime;
 
+    public ReleaseTabe() {
+    }
+
+    public ReleaseTabe(Integer releaseId, String releaseTitle, String releaseContent, Date releaseTime) {
+        this.releaseId = releaseId;
+        this.releaseTitle = releaseTitle;
+        this.releaseContent = releaseContent;
+        this.releaseTime = releaseTime;
+    }
+
     public Integer getReleaseId() {
         return releaseId;
     }
