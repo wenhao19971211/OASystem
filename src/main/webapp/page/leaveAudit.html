@@ -4,12 +4,12 @@
     <base href="http://localhost:8080/OASystem_war_exploded/">
     <script src="js/jquery.js"></script>
     <script src="js/common.js"></script>
-    <!--<link rel="stylesheet" href="js/dist/css/layui.css" />-->
+    <link rel="stylesheet" href="js/dist/css/layui.css" />
     <meta charset="UTF-8">
     <title>请假审核</title>
 </head>
 <body>
-        <div id="div1" style="display: none;margin-left: 150px">
+        <div id="div1" style="display: none;margin-left:100px;text-align: center;">
             <!--<table id="tab1" border="1">-->
                 <!--<thead>-->
                 <!--<td>序号</td>-->
@@ -25,21 +25,12 @@
                 <!--</thead>-->
             <!--</table>-->
             <h2 style="text-align: center">审核请假申请</h2>
-            <table class="layui-table" style="text-align: center;border-collapse: collapse" border="1px soild gary">
+            <table class="layui-table"  style="width: 1000px">
                 <colgroup >
-                    <col width="100">
-                    <col width="150">
-                    <col width="150">
-                    <col width="100">
-                    <col width="170">
-                    <col width="170">
-                    <col width="170">
-                    <col width="150">
-                    <col width="150">
-                    <col width="200">
+
                 </colgroup>
                 <thead>
-                <tr style="background-color: #8D8D8D">
+                <tr >
                     <th>序号</th>
                     <th>员工姓名</th>
                     <th>假期类型</th>
@@ -89,7 +80,10 @@
                         "<td>"+parseDate(data.list[i].sendTime)+"</td>" +
                         "<td>"+ parseDate(data.list[i].startTime)+"</td>" +
                         "<td>"+parseDate(data.list[i].endTime)+"</td>" +
-                        "<td>"+data.list[i].days+"</td><td>"+data.list[i].checkStatus+"</td><td><input type='button' value='同意'  class='but1"+i+"' LeaveType='"+data.list[i].intType+"'  applyId='"+data.list[i].applyId+"' opinion='2' day='"+data.list[i].days+"' empId='"+data.list[i].emp.empId+"'><input type='button' value='不同意' class='but1"+i+"' LeaveType='"+data.list[i].intType+"'  applyId='"+data.list[i].applyId+"' opinion='3' day='"+data.list[i].days+"' empId='"+data.list[i].emp.empId+"'></td></tr>";
+                        "<td>"+data.list[i].days+"</td>" +
+                        "<td>"+data.list[i].checkStatus+"</td>" +
+                        "<td><input type='button' value='同意'  class='but1"+i+"' LeaveType='"+data.list[i].intType+"'  applyId='"+data.list[i].applyId+"' opinion='2' day='"+data.list[i].days+"' empId='"+data.list[i].emp.empId+"' style='border: none;background-color: #009688;color: white;border-radius: 5px;width: 40px;cursor:pointer'>" +
+                        "<input type='button' value='不同意' class='but1"+i+"' LeaveType='"+data.list[i].intType+"'  applyId='"+data.list[i].applyId+"' opinion='3' day='"+data.list[i].days+"' empId='"+data.list[i].emp.empId+"' style='border: none;background-color: #009688;color: white;border-radius: 5px;margin-left: 5px;width: 50px;cursor:pointer'></td></tr>";
                     //
                     console.log("类别是"+data.list[i].intType);
                     //type='"+data.list[i].intType+"' applyId='"+data.list[i].applyId+"' opinion='3' day='"+data.list[i].days+"'

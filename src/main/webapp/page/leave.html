@@ -4,53 +4,65 @@
     <base href="http://localhost:8080/OASystem_war_exploded/">
     <script src="js/jquery.js"></script>
     <script src="js/common.js"></script>
+    <link rel="stylesheet" href="js/dist/css/layui.css" />
+    <link rel="stylesheet" href="js/dist/css/modules/layer/default/layer.css" />
+    <script src="js/dist/layui.js"></script>
+    <script src="js/dist/lay/modules/layer.js"></script>
     <meta charset="UTF-8">
     <title>请假</title>
 </head>
 <body >
-        <div>请假申请</div>
+        <div style="margin-left: 100px">
         <!--假期余额-->
-        <div id="DaysBalance">
-            <table border="1"  style="border-collapse: collapse ">
-                <tr><td colspan="2">您的假期结余</td></tr>
-                <tr>
-                    <td>年假剩余天数:<span id="YearDays"></span></td>
-                    <td>可调休天数:<span id="leaveDays"></span></td>
-                </tr>
-            </table>
+        <div id="DaysBalance" style="font-size: 19px;">
+            <div style="float: left;margin-top: 15px">
+                <span style="margin-left: 10px">年假剩余天数:</span><span id="YearDays" style="font-weight: bold;"></span>
+            </div>
+            <div style="float: left;margin-left: 160px;margin-top:15px" >
+                <span >可调休天数:</span> <span id="leaveDays" style="font-weight: bold"></span>
+            </div>
         </div>
-        <div id="leave">
-            <table border="1" style="border-collapse: collapse ">
+        <div id="leave" style="margin-top:30px;width: 500px;height: 300px;">
+            <table border="1" style="border-collapse: collapse;width: 500px;height: 200px;margin-top: 40px ;text-align: center;border-color: gray">
                 <thead>
                 <td>假期类型</td>
                 <td>开始时间</td>
                 <td>结束时间</td>
                 </thead>
-                <tr>
-                    <td>
-                        <select id="Type">
-                        <option value="0">请选择</option>
-                        <option value="1">调休</option>
-                        <option value="2">事假</option>
-                        <option value="3">年假</option>
+                <tr style="height:20%">
+                    <td >
+                        <select name="city" lay-verify="" style="height: 100%;width: 98%;border: none;" id="Type">
+                            <option value="0" >选择请假类型</option>
+                            <option value="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;调&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;休</option>
+                            <option value="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;事&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;假</option>
+                            <option value="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;假</option>
                         </select>
+                        <!--<select id="Type">-->
+                        <!--<option value="0">请选择</option>-->
+                        <!--<option value="1">调休</option>-->
+                        <!--<option value="2">事假</option>-->
+                        <!--<option value="3">年假</option>-->
+                        <!--</select>-->
                     </td>
                     <td>
-                        <input type="date" id="startTime">
+
+                        <input type="date" id="startTime" style="text-align: center;height: 100%;width: 98%;border: none">
                     </td>
                     <td>
-                        <input type="date" id="endTime">
+
+                        <input type="date" id="endTime" style="text-align: center;height: 100%;width: 98%;border: none">
                     </td>
                 </tr>
                 <tr>
                     <td>请假原因</td>
                     <!--div中请假的内容-->
                     <td colspan="2">
-                        <div id="cause1" contenteditable="true" style="overflow: auto; height: 80px;width: 300px"></div>
+                        <div id="cause1" contenteditable="true" style="overflow: auto; height:100%;width: 100%"></div>
                     </td>
                 </tr>
             </table>
-            <input type="button" value="提交" id="subButton">
+            <input type="button" value="提交" id="subButton" 	class="layui-btn layui-btn-sm" style="margin-left: 230px;margin-top:5px">
+        </div>
         </div>
 
 </body>
@@ -82,8 +94,8 @@
 
 
 
-
             $("#subButton").click(function () {
+
                 var type= $("#Type").val();
                 var startDate=$("#startTime").val();
                 var endDate=$("#endTime").val();
