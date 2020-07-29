@@ -4,11 +4,12 @@
     <base href="http://localhost:8080/OASystem_war_exploded/">
     <script src="js/jquery.js"></script>
     <script src="js/common.js"></script>
+    <link rel="stylesheet" href="js/dist/css/layui.css" />
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body >
-        <div style="margin-left: 200px;float:left;" id="yjContent">
+        <div style="margin-left: 10px;float:left;" id="yjContent">
             <table border="1" style="border-collapse: collapse;width: 500px;height: 350px;text-align: center;border-color:lightgray" >
                 <tr style="height: 10%">
                     <td colspan="3" id="title"></td>
@@ -29,7 +30,9 @@
                     </td>
                 </tr>
             </table>
-            <input type="button" value="返回" id="fhButton" style="margin-left: 200px"><input type="button" value="回复" id="hfButton">
+
+            <input type="button" value="返回" id="fhButton" style="margin-left: 200px" class="layui-btn layui-btn-sm">
+            <input type="button" value="回复" id="hfButton" class="layui-btn layui-btn-sm">
         </div>
         <!--回复文本框-->
         <div id="hfContent" style="float:left;display: none;">
@@ -47,7 +50,7 @@
                     </td>
                 </tr>
             </table>
-            <input type="button" value="提交" id="tjButton" style="margin-left: 230px">
+            <input type="button" value="提交" id="tjButton" style="margin-left: 230px" class="layui-btn layui-btn-sm">
         </div>
 
 
