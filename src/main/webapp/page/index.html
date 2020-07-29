@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta http-equiv="Content-Type" content="text/html; charset=GBK">
-		<base href="http://localhost:8081/OASystem_war_exploded/">
+		<base href="http://localhost:8080/OASystem_war_exploded/">
  		<link rel="stylesheet" href="js/dist/css/layui.css"  media="all">
  		<!--<link rel="stylesheet" href="page/success.html" />-->
  		<link rel="stylesheet" href="page/leave.html" />
@@ -17,32 +17,60 @@
 		.dd{
 			margin-left: -20px; 
 			margin-top: -12px;
-			height: 1000px;
+			height: 694px;
 		}
 		a{
 			cursor:pointer;
 		}
+
+		.layui-tab-title .layui-this:after {
+			position: absolute;
+			left: 0;
+			top: 0;
+			content: '';
+			width: 100%;
+			height: 55px;
+			border-width: 1px;
+			border-style: solid;
+			border-bottom-color: #fff;
+			border-radius: 2px 2px 0 0;
+			box-sizing: border-box;
+			pointer-events: none;
+		}
+		.layui-tab-title li {
+			display: inline-block;
+			*display: inline;
+			*zoom: 1;
+			vertical-align: middle;
+			font-size: 14px;
+			transition: all .2s;
+			-webkit-transition: all .2s;
+			position: relative;
+			line-height: 58px;
+			min-width: 124px;
+			padding: 0 15px;
+			text-align: center;
+			cursor: pointer;
+		}
 	</style>
 
-	<body style="background-color:darkgrey" >
+	<body style="background-color: #393D49; width: 100%;height: 694px;" >
 	<input type="hidden" id="empId">
 	<input type="hidden" id="depId">
    <div class="layui-row" >
 
 	<div class="layui-tab layui-tab-brief " lay-filter="docDemoTabBrief">
-		<ul class="layui-col-xs2 layui-col-sm2 layui-col-md2" style="height: 40px; text-align: center; width: 40px;" >首页</ul>
-	  <ul class="layui-tab-title layui-col-xs10 layui-col-sm10 layui-col-md10" style="background-color: #393D49; color: #F3F3F3; float: right; width: 90%;height: 40px; margin-top:-10px; ">
-<!--<a href="http://www.baidu.com" style="color: #000000;" target="dd">首页</a>-->
-
+		<ul class="layui-col-xs2 layui-col-sm2 layui-col-md2" style="height: 60px; text-align: center; width: 13%;margin-top: -10px;line-height: 60px; text-align: center;" >首页</ul>
+	  <ul class="layui-tab-title layui-col-xs10 layui-col-sm10 layui-col-md10" style="background-color: #393D49; color: #F3F3F3; float: right; width: 87%;height: 60px; margin-top:-10px; ">
 	    <li class="layui-this">个人办公</li>
 	    <li>流程管理</li>
 	    <li>任务管理</li>
 	    <li>人事管理</li>
 	    <li>财务管理</li>
 	  </ul>
-  <div class="layui-tab-content layui-col-xs4 layui-col-sm4 layui-col-md2" style="margin-left: -30px" >
+  <div class="layui-tab-content layui-col-xs4 layui-col-sm4 layui-col-md2"  >
 	  	<!--&lt;!&ndash;一号选项卡&ndash;&gt;-->
-	 <ul class="layui-nav layui-nav-tree layui-tab-item layui-show layui-col-xs6 layui-col-sm6 layui-col-md3 dd"  lay-filter="test">
+	 <ul class="layui-nav layui-nav-tree layui-tab-item layui-show layui-col-xs2 layui-col-sm2 layui-col-md2 dd"  lay-filter="test">
 	<!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
 		 <li class="layui-nav-item " >
 			<a  href="http://www.jd.com" target="dd" >消息dd提醒</a>
@@ -67,28 +95,9 @@
 		 <li class="layui-nav-item"><a href="page/workOn.html" target="dd">打卡</a></li>
 
 	</ul>
-		  	<!--三号选项2卡-->
-	<!--<ul class="layui-nav layui-show  layui-nav-tree layui-tab-item layui-col-xs6 layui-col-sm6 layui-col-md3 dd" lay-filter="test">-->
-		<!--&lt;!&ndash; 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> &ndash;&gt;-->
-		<!--<li class="layui-nav-item ">-->
-		    <!--<a ></a>-->
-		<!--</li>-->
-		<!--<li class="layui-nav-item"><a href="http://www.asd.com" target="dd">个人考勤</a></li>-->
-		<!--<li class="layui-nav-item"><a href="http://www.dsa.com" target="dd">我的薪资</a></li>-->
-		<!--<li class="layui-nav-item"><a href="http://www.wff.com" target="dd">请假管理</a>-->
-			<!--<dl class="layui-nav-child">-->
-				<!--<dd><a >请假</a></dd>-->
-				<!--<dd><a >查看请假</a></dd>-->
-			<!--</dl>-->
-		<!--</li>-->
-		<!--<li class="layui-nav-item"><a>报销管理</a></li>-->
-		<!--<li class="layui-nav-item"><a>邮件管理</a></li>-->
-		<!--<li class="layui-nav-item"><a>通讯录</a></li>-->
-		<!--<li class="layui-nav-item"><a>个人信息</a></li>-->
-		<!--</ul>-->
-  	<!---->
+
 			  	  	<!--四号选项2卡-->
-	<ul class="layui-nav layui-nav-tree layui-tab-item layui-col-xs6 layui-col-sm6 layui-col-md3 dd" lay-filter="test">
+	<ul class="layui-nav layui-nav-tree layui-tab-item layui-col-xs2 layui-col-sm2 layui-col-md2 dd" lay-filter="test">
 			<!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
 		<li class="layui-nav-item"><a >待我审批</a>
 			<dl class="layui-nav-child">
@@ -107,7 +116,7 @@
 	</ul>
   	
   	  	<!--5号选项2卡-->
-	<ul class="layui-nav layui-nav-tree layui-tab-item layui-col-xs6 layui-col-sm6 layui-col-md3 dd" lay-filter="test">
+	<ul class="layui-nav layui-nav-tree layui-tab-item layui-col-xs2 layui-col-sm2 layui-col-md2 dd" lay-filter="test">
 		<!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
 		<li class="layui-nav-item ">
 		    <a href="page/MyTask.html" target="dd">我的任务</a>
@@ -124,7 +133,7 @@
 	</ul>
 
 	  	  	<!--六号选项2卡-->
-	<ul class="layui-nav layui-nav-tree layui-tab-item layui-col-xs6 layui-col-sm6 layui-col-md3 dd" lay-filter="test">
+	<ul class="layui-nav layui-nav-tree layui-tab-item layui-col-xs2 layui-col-sm2 layui-col-md2 dd" lay-filter="test">
 	<!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
 	  	<li class="layui-nav-item ">
 	    <a >人事信息</a>
@@ -135,7 +144,7 @@
 
 	</ul>
 	  <!--七号-->
-	  <ul class="layui-nav layui-nav-tree layui-tab-item layui-col-xs6 layui-col-sm6 layui-col-md3 dd" lay-filter="test">
+	  <ul class="layui-nav layui-nav-tree layui-tab-item layui-col-xs2 layui-col-sm2 layui-col-md2 dd" lay-filter="test">
 		  <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
 		  <li class="layui-nav-item"><a >报销发放</a>
 			  <dl class="layui-nav-child">
@@ -153,14 +162,10 @@
 
   	 	</div>
 			<!--//右边活动版块-->
-		 <div class="layui-col-xs8 layui-col-sm8 layui-col-md10 ss" style="margin-left:-50px; " id="d1">
-			  <div class="layui-row" style="width: 110%; height: 102%;">
-				<div class="layui-col-xs12 layui-col-sm12 layui-col-md12 imgss">
+		 <div class="layui-col-xs10 layui-col-sm10 layui-col-md10 ss" style="margin-left:-50px; " id="d1">
 
-				</div>
 				<div class="layui-col-xs12 layui-col-sm12 layui-col-md12" id="nr" >
-
-					<iframe src='' frameborder='0' name="dd" scrolling='no' width='1250px' height='1000px' style="background-color: white"></iframe>
+					<iframe src='' frameborder='0' name="dd" scrolling='no' width='1250px' height='694px' style="background-color: white; margin-left: 14px;"></iframe>
 				  <!--<div class="grid-demo layui-bg-blue"></div>-->
 				</div>
 
