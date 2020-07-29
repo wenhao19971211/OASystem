@@ -32,6 +32,8 @@ public class LeaveService {
     private MessageDao messageDao;
     @Autowired
     private WorkOnDao workOnDao;
+    @Autowired
+    private  CheckWorkDao checkWorkDao;
 
     /**
      * 请假选择
@@ -228,6 +230,7 @@ public class LeaveService {
      * @param empId 用户id
      * @param workInTime 打卡的时间
      */
+    @Transactional
     public Result insertWorkonFrequency(int empId, Date workInTime){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date nowDay=new Date();
@@ -258,10 +261,12 @@ public class LeaveService {
         }else {
             if (compareTo2==-1){
                 //旷工
-                tips="！您已矿工";
+                tips="您已矿工！";
+                insertMessageToCheckWork("矿工",today,empId);
             }else{
                 //迟到
-                tips="！您已迟到";
+                tips="您已迟到！";
+                insertMessageToCheckWork("迟到",today,empId);
 
             }
         }
@@ -271,6 +276,7 @@ public class LeaveService {
         result.setObject(tips);
             return result;
     }
+    @Transactional
     public Result updateWorkonFrequency(int empId, Date workOutTime){
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date nowDay=new Date();
@@ -288,6 +294,7 @@ public class LeaveService {
         }else{
             //早退
             tips="请按时下班";
+            insertMessageToCheckWork("早退",today,empId);
 
         }
         workOnDao.updateWorkOnByEmpId(empId,workOutTime);
@@ -300,6 +307,7 @@ public class LeaveService {
      * 获取当天上班的时间
      * @return
      */
+    @Transactional
     public Date changeDate(int i){
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH");
         Date date=new Date();
@@ -327,6 +335,11 @@ public class LeaveService {
         return date;
     };
 
+    /**
+     * 获取当天的日期
+     * @return
+     */
+    @Transactional
     public Date getNowToday(){
 
         Date date = new Date();
@@ -334,7 +347,9 @@ public class LeaveService {
 
         return date;
     }
-
-
+    @Transactional
+    public void insertMessageToCheckWork(String mess,Date date, int empId){
+        checkWorkDao.insertByEmpStatus(empId,date,mess);
+    }
 
 }

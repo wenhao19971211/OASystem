@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geek.dao.ReimbursementDao">
+  <!--报销表的方法-->
+    <!--<resultMap id="ReimbursementMap" type="com.geek.pojo.Reimbursement">-->
+        <!--<result property="ReimbursementId" column="ReimbursementId"></result>-->
+        <!--<result property="sendTime" column="sendTime"></result>-->
+        <!--<result property="sum" column="sum"></result>-->
+        <!--<result property="checkTime" column="checkTime"></result>-->
+        <!--<result property="checkStatus" column="checkStatus"></result>-->
+        <!--<association property="emp" javaType="emp">-->
+            <!--<id property="empId" column="empId"></id>-->
+        <!--</association>-->
+        <!--<association property="taskSend" javaType="com.geek.pojo.TaskSend">-->
+            <!--<id property="tasksendId" column="TasksendId"></id>-->
+        <!--</association>-->
+    <!--</resultMap>-->
+
+    <resultMap id="ReimbursementMap2" type="com.geek.bo.ReimbursementAll_bo">
+        <id property="reimbursementId " column="reimbursementId "></id>
+        <result property="empId" column="applyEmpId"></result>
+        <result property="sendId" column="taskSendId"></result>
+        <result property="sendTime" column="sendTime"></result>
+        <result property="checkTime" column="checkTime"></result>
+        <result property="sum" column="sum"></result>
+        <result property="checkEmpId " column="checkEmpId "></result>
+        <result property="checkTime " column="checkTime "></result>
+        <result property="checkStatus" column="checkStatus"></result>
+        <association property="reimbursementDetail" javaType="com.geek.pojo.ReimbursementDetail">
+            <id property="ReimbursementDetailId " column="ReimbursementDetailId "></id>
+            <result property="type" column="type"></result>
+            <result property="detail " column="detail "></result>
+            <result property="money  " column="money "></result>
+        </association>
+    </resultMap>
+
+    <insert id="insertReimbursement" >
+        insert into Reimbursement values(#{reimbursementId},#{empId},#{taskSendId},#{sendTime},#{sum},1,#{date},1)
+    </insert>
+
+
+    <!--<update id="updateSomeStatues">-->
+        <!--update Reimbursement set checkStatus=#{statue} where empId=#{empId}-->
+    <!--</update>-->
+
+</mapper>
