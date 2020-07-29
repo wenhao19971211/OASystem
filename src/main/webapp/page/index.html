@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta http-equiv="Content-Type" content="text/html; charset=GBK">
-		<base href="http://localhost:8080/OASystem_war_exploded/">
+		<base href="http://localhost:8081/OASystem_war_exploded/">
  		<link rel="stylesheet" href="js/dist/css/layui.css"  media="all">
  		<!--<link rel="stylesheet" href="page/success.html" />-->
  		<link rel="stylesheet" href="page/leave.html" />
@@ -24,7 +24,7 @@
 		}
 	</style>
 
-	<body style="background-color:#393D49" >
+	<body style="background-color:darkgrey" >
 	<input type="hidden" id="empId">
 	<input type="hidden" id="depId">
    <div class="layui-row" >
@@ -129,10 +129,18 @@
 	  <!--七号-->
 	  <ul class="layui-nav layui-nav-tree layui-tab-item layui-col-xs6 layui-col-sm6 layui-col-md3 dd" lay-filter="test">
 		  <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
-		  <li class="layui-nav-item ">
-			  <a >报销管理</a>
+		  <li class="layui-nav-item"><a >报销发放</a>
+			  <dl class="layui-nav-child">
+				  <dd id="bxyff"><a href="page/RimbursementIssue.html" target="dd">已发放</a></dd>
+				  <dd ><a href="page/RimbursementNotIssue.html" target="dd">未发放</a></dd>
+			  </dl>
 		  </li>
-		  <li class="layui-nav-item"><a >信息管理</a></li>
+		  <li class="layui-nav-item"><a >薪资发放</a>
+			  <dl class="layui-nav-child">
+				  <dd id="xzff"><a href="page/SalaryIssue.html" target="dd">已发放</a></dd>
+				  <dd ><a href="page/SalaryNotIssue.html" target="dd">未发放</a></dd>
+			  </dl>
+		  </li>
 	  </ul>
 
   	 	</div>

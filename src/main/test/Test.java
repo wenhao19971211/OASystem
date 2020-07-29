@@ -5,6 +5,7 @@ import com.geek.handler.SalaryHandler;
 import com.geek.handler.SalaryIssueHandler;
 import com.geek.handler.TaskSendHandler;
 import com.geek.pojo.*;
+import com.geek.service.RimbursementIssueService;
 import com.geek.service.SalaryService;
 import com.geek.util.CommonUtil;
 import com.sun.corba.se.impl.presentation.rmi.IDLNameTranslatorImpl;
@@ -41,7 +42,8 @@ public class Test {
     private SalaryIssueHandler salaryIssueHandler;
     @Autowired
     private RimbursementIssueHandler rimbursementIssueHandler;
-
+    @Autowired
+    private  SalaryDao salaryDao;
     @org.junit.Test
     public void test1()
     {
@@ -170,21 +172,21 @@ public class Test {
     @org.junit.Test
     public void test11()
     {
-        SalaryIssue_bo salaryIssue_bo = salaryIssueHandler.findSalaryIssueByStatus(1, 1, 3);
+        /*SalaryIssue_bo salaryIssue_bo = salaryIssueHandler.findSalaryIssueByStatus(1, 1, 3);
         System.out.println("status:"+salaryIssue_bo.getStatus());
         System.out.println("count:"+salaryIssue_bo.getCount());
         for (SalaryIssue salaryIssue : salaryIssue_bo.getSalaryIssues()) {
             System.out.println(salaryIssue);
-        }
+        }*/
     }
     @org.junit.Test
     public  void test12()
     {
-        RimbursementIssue_bo rimbursementIssue_bo = rimbursementIssueHandler.findRimbursementByStatus(2, 1, 3);
+      /*  RimbursementIssue_bo rimbursementIssue_bo = rimbursementIssueHandler.findRimbursementByStatus(2, 1, 3);
         System.out.println("count:"+rimbursementIssue_bo.getCount());
         for (Rimbursement rimbursement : rimbursementIssue_bo.getRimbursements()) {
             System.out.println(rimbursement);
-        }
+        }*/
     }
     @org.junit.Test
     public void test13()
@@ -195,8 +197,8 @@ public class Test {
     @org.junit.Test
     public  void test14()
     {
-        String flag = salaryIssueHandler.updateSalaryIssueStatusBySalaryIssueId(19, 1);
-        System.out.println("flag:"+flag);
+        /*String flag = salaryIssueHandler.updateSalaryIssueStatusBySalaryIssueId(19, 1);
+        System.out.println("flag:"+flag);*/
     }
     @Autowired
     private DockPayDao dockPayDao;
@@ -207,6 +209,27 @@ public class Test {
         DockPay dockPay = new DockPay(1,new Date(),1,100.00,"迟到");
         int count = dockPayDao.addDockPay(dockPay);
         System.out.println("count:"+count);
+    }
+    @Autowired
+    private RimbursementIssueDao rimbursementIssueDao;
+    @Autowired
+    private RimbursementIssueService rimbursementIssueService;
+    @org.junit.Test
+    public void test16()
+    {
+        Reimbursement reimbursement = rimbursementIssueDao.findReimbursementByReimbursementId(1);
+        System.out.println("reimbursement"+reimbursement);
+        System.out.println(reimbursement.getEmp().getEmpName());
+        System.out.println(reimbursement.getDep().getDepName());
+
+        RimbursementIssue_bo rimbursementIssue_bo = rimbursementIssueService.findRimbursementByStatus(null, 1, 5);
+        System.out.println("size"+rimbursementIssue_bo.getRimbursements().size());
+    }
+
+    @org.junit.Test
+    public void test17()
+    {
+
     }
 
 }

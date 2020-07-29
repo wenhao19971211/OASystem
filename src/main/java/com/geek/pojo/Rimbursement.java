@@ -6,7 +6,7 @@ import java.util.Date;
  * 报销发放
  */
 public class Rimbursement {
-    private Integer rimbursementIssue;
+    private Integer rimbursementIssueId;
     private Integer rimbursementId;
     private double factMoney;
     private Date issueTime;
@@ -18,8 +18,8 @@ public class Rimbursement {
     public Rimbursement() {
     }
 
-    public Rimbursement(Integer rimbursementIssue, Integer rimbursementId, double factMoney, Date issueTime, Integer empId, Integer status) {
-        this.rimbursementIssue = rimbursementIssue;
+    public Rimbursement(Integer rimbursementIssueId, Integer rimbursementId, double factMoney, Date issueTime, Integer empId, Integer status) {
+        this.rimbursementIssueId = rimbursementIssueId;
         this.rimbursementId = rimbursementId;
         this.factMoney = factMoney;
         this.issueTime = issueTime;
@@ -27,8 +27,8 @@ public class Rimbursement {
         this.status = status;
     }
 
-    public Rimbursement(Integer rimbursementIssue, Integer rimbursementId, double factMoney, Date issueTime, Integer empId, Integer status, Emp emp) {
-        this.rimbursementIssue = rimbursementIssue;
+    public Rimbursement(Integer rimbursementIssueId, Integer rimbursementId, double factMoney, Date issueTime, Integer empId, Integer status, Emp emp) {
+        this.rimbursementIssueId = rimbursementIssueId;
         this.rimbursementId = rimbursementId;
         this.factMoney = factMoney;
         this.issueTime = issueTime;
@@ -37,8 +37,8 @@ public class Rimbursement {
         this.emp = emp;
     }
 
-    public Rimbursement(Integer rimbursementIssue, Integer rimbursementId, double factMoney, Date issueTime, Integer empId, Integer status, Reimbursement reimbursement) {
-        this.rimbursementIssue = rimbursementIssue;
+    public Rimbursement(Integer rimbursementIssueId, Integer rimbursementId, double factMoney, Date issueTime, Integer empId, Integer status, Reimbursement reimbursement) {
+        this.rimbursementIssueId = rimbursementIssueId;
         this.rimbursementId = rimbursementId;
         this.factMoney = factMoney;
         this.issueTime = issueTime;
@@ -47,8 +47,8 @@ public class Rimbursement {
         this.reimbursement = reimbursement;
     }
 
-    public Rimbursement(Integer rimbursementIssue, Integer rimbursementId, double factMoney, Date issueTime, Integer empId, Integer status, Emp emp, Reimbursement reimbursement) {
-        this.rimbursementIssue = rimbursementIssue;
+    public Rimbursement(Integer rimbursementIssueId, Integer rimbursementId, double factMoney, Date issueTime, Integer empId, Integer status, Emp emp, Reimbursement reimbursement) {
+        this.rimbursementIssueId = rimbursementIssueId;
         this.rimbursementId = rimbursementId;
         this.factMoney = factMoney;
         this.issueTime = issueTime;
@@ -61,11 +61,11 @@ public class Rimbursement {
 
 
     public Integer getRimbursementIssue() {
-        return rimbursementIssue;
+        return rimbursementIssueId;
     }
 
-    public void setRimbursementIssue(Integer rimbursementIssue) {
-        this.rimbursementIssue = rimbursementIssue;
+    public void setRimbursementIssue(Integer rimbursementIssueId) {
+        this.rimbursementIssueId = rimbursementIssueId;
     }
 
     public Reimbursement getReimbursement() {
@@ -127,7 +127,7 @@ public class Rimbursement {
     @Override
     public String toString() {
         return "Rimbursement{" +
-                "rimbursementIssue=" + rimbursementIssue +
+                "rimbursementIssueId=" + rimbursementIssueId +
                 ", rimbursementId=" + rimbursementId +
                 ", factMoney=" + factMoney +
                 ", issueTime=" + issueTime +
