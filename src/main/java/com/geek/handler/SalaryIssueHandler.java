@@ -29,7 +29,7 @@ public class SalaryIssueHandler {
      * @param limit
      * @return
      */
-    @GetMapping("findSalaryIssueByStatus")
+    @GetMapping("findSalaryIssueByStatus1")
     @ResponseBody
     public String findSalaryIssueByStatus1(Integer status,Integer page,Integer limit)
     {

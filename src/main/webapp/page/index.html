@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta http-equiv="Content-Type" content="text/html; charset=GBK">
-		<base href="http://localhost:8081/OASystem_war_exploded/">
+		<base href="http://localhost:8080/OASystem_war_exploded/">
  		<link rel="stylesheet" href="js/dist/css/layui.css"  media="all">
  		<!--<link rel="stylesheet" href="page/success.html" />-->
  		<link rel="stylesheet" href="page/leave.html" />
@@ -52,13 +52,13 @@
 		 <li class="layui-nav-item"><a >请假管理</a>
 		 <dl class="layui-nav-child">
 			 <dd id="qj"><a >请假</a></dd>
-			 <dd id="ckqj"><a href="page/selectLeave.html" target="dd">查看请假</a><span class="layui-badge" style="margin-left: 150px">99+</span></dd>
+			 <dd id="ckqj"><a href="page/selectLeave.html" target="dd">查看请假</a></dd>
 		 </dl>
 		 </li>
 		 <li class="layui-nav-item"><a >报销管理</a></li>
 	  	 <li class="layui-nav-item"><a >邮件管理</a>
 			 <dl class="layui-nav-child">
-				 <dd id="fsyj"><a href="page/sendEmail.html" target="dd">发送邮件</a></dd>
+				 <dd id="fsyj"><a>发送邮件</a></dd>
 				 <dd id="chyj"><a href="page/selectEmail.html" target="dd">查看邮件</a></dd>
 			 </dl>
 		 </li>
@@ -192,7 +192,7 @@
 		}
 
 	});
-
+	//请假
 	$("#qj").click(function () {
 		layer.open({
 			area: ['700px', '400px'],
@@ -200,6 +200,13 @@
 			content: ['page/leave.html', 'no']
 		});
 	})
-
+	//	发送邮件
+		$("#fsyj").click(function () {
+			layer.open({
+				area: ['1000px', '440px'],
+				type: 2,
+				content: ['page/sendEmail.html', 'no']
+			});
+		})
 
 	</script>
