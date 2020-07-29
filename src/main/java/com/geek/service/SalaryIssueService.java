@@ -2,6 +2,7 @@ package com.geek.service;
 
 import com.geek.bo.SalaryIssue_bo;
 import com.geek.dao.EmpDao;
+import com.geek.dao.SalaryDao;
 import com.geek.dao.SalaryIssueDao;
 import com.geek.pojo.Emp;
 import com.geek.pojo.SalaryIssue;
@@ -14,6 +15,8 @@ import java.util.List;
 public class SalaryIssueService {
     @Autowired
     private SalaryIssueDao salaryIssueDao;
+    @Autowired
+    private SalaryDao salaryDao;
     @Autowired
     private EmpDao empDao;
 
@@ -41,6 +44,9 @@ public class SalaryIssueService {
                 //添加负责人信息
                 Emp emp = empDao.findEmpById(salaryIssue.getEmpId());
                 salaryIssue.setEmp(emp);
+                //添加薪资信息
+
+
             }
         }
 

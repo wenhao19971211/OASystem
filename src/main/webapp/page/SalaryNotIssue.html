@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <base href="http://localhost:8080/ssm_framework_war_exploded/">
+    <link rel="stylesheet" href="js/dist/css/layui.css">
+    <script src="js/dist/layui.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/dist/lay/modules/layer.js"></script>
+</head>
+<body>
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="add">发放</button>
+        <!-- <button class="layui-btn layui-btn-sm" lay-event="all">获取选中数目</button>
+         <button class="layui-btn layui-btn-sm" lay-event="is">验证是否全选</button>-->
+    </div>
+</script>
+<table  class="layui-hide" id="demo" lay-filter="text" lay-data="{id: 'idTest'}"></table>
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+
+</body>
+</html>
+<script>
+    var date=null;
+    layui.use('table', function(){
+        var table = layui.table;
+        //第一个实例
+        table.render({
+            elem: '#demo'
+            ,height: 312
+            ,url:'findRimbursementByStatus1'
+            ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+            ,type:'checkbox'
+            ,page:true
+            ,parseData:function(data){//res 即为原始返回的数据
+                data =$.parseJSON(data);
+                return data;
+            }
+            ,cols: [[ //表头
+                {type: 'checkbox', fixed: 'left'}// 开启多选框
+                ,{field: 'rimbursementIssueId', title: '报销发放编号', width:130,edit: 'text', del:'test', fixed: 'left'}
+                ,{field: 'applyEmpName', title: '报销接收人',edit: 'text', width:100}
+                ,{field: 'applyDepName', title: '接收人所在部门', width:150,edit: 'text',  }
+                ,{field: 'sum', title: '报销金额', width:100}
+                ,{field: 'factMoney', title: '发放金额', width: 100}
+                ,{field: 'issueTime', title: '发放时间', width: 160, sort: true,}
+                ,{field: 'issueStatus', title: '是否发放', width: 90}
+                //,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:200}// 操作的工具栏
+            ]]
+
+        });
+//       table.on('checkbox(demo)', function(obj){
+//  		console.log(obj)
+//			});
+//     //工具栏的点击
+//      table.on('toolbar(text)',function(obj){
+//      	var checkStatus = table.checkStatus('idTest'); //idTest 即为基础参数 id 对应的值
+//
+//			console.log(checkStatus.data) //获取选中行的数据
+//			console.log(checkStatus.data.length) //获取选中行数量，可作为是否有选中行的条件
+//			console.log(checkStatus.isAll ) //表格是否全选
+//      	switch (obj.event){
+//      		case add:
+////      			 add(checkStatus);
+//      			break;
+//      		case all:
+//      			all();
+//      		break;
+//      		default:
+//      		mmp();
+//      			break;
+//      	}
+//      });
+
+        //监听行点击事件
+        //头工具栏事件
+        table.on('toolbar(text)', function(obj){
+            var checkStatus = table.checkStatus(obj.config.id); //获取选中行状态
+
+            switch(obj.event){
+                case 'add':
+                    var data = checkStatus.data;  //获取选中行数据
+                    for (var i in data)
+                    {
+                        //layer.alert(JSON.stringify(data[i]));
+                        console.log(JSON.stringify(data[i].rimbursementIssueId))
+                        issue(data[i].rimbursementIssueId);
+                    }
+
+                    break;
+            };
+        });
+
+
+        //工具栏的点击
+        table.on('tool(text)',function(obj){
+            var data = obj.data; //获得当前行数据
+            var event = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
+            if(event=='del'){
+                obj.del(tr);//在页面上删除该行
+            }else if(event='edit'){
+
+            } else {
+                layer.msg("查看的数据"+data.id);
+            }
+
+
+        })
+
+//  });
+
+    });
+
+    function add(){
+        alert(1);
+    };
+    function all(){
+        alert("asdasdas");
+    };
+    function mmp(){
+        alert("wgg");
+    };
+
+    function issue(id) {
+        $.ajax({
+            url:"updateRimbursementIssueStatusByRimbursementIssueId?rimbursementIssueId="+id+"&status=2",
+            type:"PUT",
+            //data:{"rimbursementIssueId":id,"status":2},
+            success:function (result) {
+                console.log(result);
+
+                window.location.href="page/test.html";
+
+            },
+            error:function () {
+                confirm("error");
+            }
+        })
+
+
+    }
+
+
+</script>

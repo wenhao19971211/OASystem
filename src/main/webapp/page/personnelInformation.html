@@ -5,8 +5,11 @@
     <title></title>
     <base href="http://localhost:8080/ssm_framework_war_exploded/">
     <link rel="stylesheet" href="js/dist/css/layui.css">
+    <link rel="stylesheet" href="css/public.css" type="text/css">
     <script src="js/dist/layui.js"></script>
     <script src="js/jquery.js"></script>
+    <script src="js/userAdd.js"></script>
+    <script src="js/userList.js"></script>
 </head>
 <body>
 <script type="text/html" id="barDemo">
@@ -59,11 +62,29 @@
             console.log(event);
             console.log(tr);
             if(event=='detail'){
-             location.href = "page/empInfo.html?empId="+data.empId;
+                addUser(data.empId);
+             //location.href = "page/empInfo.html?empId="+data.empId;
             }
 
 
         });
+        function addUser(empId){
+            var index = layui.layer.open({
+                title : "详细信息",
+                type : 2,
+                content : "page/empInfo.html?empId="+empId,
+                success : function(layero, index){
+                    var body = layui.layer.getChildFrame('body', index);
+
+                }
+            })
+            layui.layer.full(index);
+            window.sessionStorage.setItem("index",index);
+            //改变窗口大小时，重置弹窗的宽高，防止超出可视区域（如F12调出debug的操作）
+            $(window).on("resize",function(){
+                layui.layer.full(window.sessionStorage.getItem("index"));
+            })
+        }
     })
 
 

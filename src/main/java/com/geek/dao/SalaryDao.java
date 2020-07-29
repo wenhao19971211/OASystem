@@ -35,4 +35,11 @@ public interface SalaryDao {
      */
     public List<Salary> findSalaryByEmpId(@Param("empId") Integer empId, @Param("index") Integer index, @Param("pageSize") Integer pageSize);
 
+    /**
+     * 根据salaryId查询薪资表
+     * @param slaryId
+     * @return
+     */
+    public Salary findSalaryBySalaryId(@Param("salaryId") Integer slaryId);
+
 }

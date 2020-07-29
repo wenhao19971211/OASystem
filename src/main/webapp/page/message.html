@@ -4,54 +4,46 @@
     <base href="http://localhost:8080/ssm_framework_war_exploded/">
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="js/dist/layui.js"></script>
     <script src="js/jquery.js"></script>
     <script src="js/common.js"></script>
-    <style>
-        #btn{
-            width: 200px;
-            height: 500px;
-            float: left;
-        }
-        #message{
-            width: 500px;
-            height: 500px;
-            border: 1px solid #ddd;
-            float: left;
-        }
-        .clear:after{
-            clear: both;
-            content: '';
-            display: block;
-        }
-    </style>
+    <script src="js/index.js"></script>
+    <link rel="stylesheet" href="js/dist/css/layui.css" />
+    <link rel="stylesheet" href="css/message.css" type="text/css">
 </head>
 <body>
 <div class="clear">
+    <h3>消息提醒</h3>
     <div id="btn">
-        <input type="button" value="全部" id="all"><br>
-        <input type="button" value="待审" id="noExamine"><br>
-        <input type="button" value="已审" id="examine"><br>
-        <input type="button" value="待阅" id="noRead"><br>
-        <input type="button" value="已阅" id="read"><br>
+        <input type="button" value="全部" id="all" class="btn"><br>
+        <input type="button" value="待审" id="noExamine" class="btn"><br>
+        <input type="button" value="已审" id="examine" class="btn"><br>
+        <input type="button" value="待阅" id="noRead" class="btn"><br>
+        <input type="button" value="已阅" id="read" class="btn"><br>
     </div>
-    <div id="messageContent"></div>
+    <div id="messageContent">
+        <table class="layui-table" style="width: 87%; text-align: center;" id="table1"></table>
+    </div>
 </div>
 </body>
 </html>
 <script>
-    /**
-     * 全部
-     */
-    $("#all").click(function () {
+    layui.use('table', function() {
+        var table = layui.table;
+        // console.log(data);
+        // data =$.parseJSON(data);
+        //第一个实例
+    });
+    $(function () {
         var emp = $(window.parent.document).find(":input#empId");
         var empId = emp.val();
+        $(".layui-table").html(" <colgroup><col width="+100+"><col width="+100+"><col width="+100+"></colgroup><thead ><td>类型</td><td>内容</td><td>状态</td> </thead>");
         $.ajax({
             url:"findAll",
             type:"get",
             data:{"empId":empId},
             dataType:"json",
             success:function (data) {
-                $("#messageContent").html("");
                 for (var i = 0; i < data.list.length; i++){
                     var type = "";
                     if (data.list[i].messageType == 1){
@@ -79,187 +71,250 @@
                     else{
                         readStatus = "已阅";
                     }
-                    var message = "<input type='text' value='"+type+"'> " +
-                        "<input type='text' value='"+data.list[i].messageContent+"'>" +
-                        " <input type='text' value='"+readStatus+"'><br>";
-                    $("#messageContent").append(message);
+                    // var message = "<tr type='text' value='"+type+"'> " +
+                    //     "<input type='text' value='"+data.list[i].messageContent+"'>" +
+                    //     " <input type='text' value='"+readStatus+"'><br>";
+                    var message = "<tr>" +
+                        "<td>"+type+"</td>" +
+                        "<td>"+data.list[i].messageContent+"</td>" +
+                        "<td>"+readStatus+"</td>" +
+                        "</tr>"
+                    $("#table1").append(message);
                 }
 
             }
         })
-    })
-    /**
-     * 待审
-     */
-    $("#noExamine").click(function () {
-        var emp = $(window.parent.document).find(":input#empId");
-        var empId = emp.val();
-        $("#messageContent").html("");
-        $.ajax({
-            url:"findNoExamine",
-            data:{"empId":empId},
-            type:"get",
-            dataType:"json",
-            success:function (data) {
-                for (var i = 0; i < data.list.length; i++){
-                    var type = "";
-                    if (data.list[i].messageType == 1){
-                        type = "任务";
-                    }
-                    else if (data.list[i].messageType == 2){
-                        type = "请假";
-                    }
-                    else if (data.list[i].messageType == 3){
-                        type = "报销";
-                    }
-                    else if (data.list[i].messageType == 4){
-                        type = "补录";
-                    }
-                    else{
-                        type = "加班";
-                    }
-                    var readStatus = "";
-                    if (data.list[i].readStatus ==1){
-                        readStatus = "待阅";
-                    }
-                    else{
-                        readStatus = "已阅";
-                    }
-                    var message = "<input type='text' value='"+type+"'> " +
-                        "<input type='text' value='"+data.list[i].messageContent+"'>" +
-                        " <input type='text' value='"+readStatus+"'><br>";
-                    $("#messageContent").append(message);
-                }
-            }
-        })
-    })
+        /**
+         * 全部
+         */
+        $("#all").click(function () {
 
-    /**
-     * 已审
-     */
-    $("#examine").click(function () {
-        var emp = $(window.parent.document).find(":input#empId");
-        var empId = emp.val();
-        $("#messageContent").html("");
-        $.ajax({
-            url:"examine",
-            data:{"empId":empId},
-            dataType:"json",
-            success:function (data) {
-                for (var i = 0; i < data.list.length; i++){
-                    var type = "";
-                    if (data.list[i].messageType == 1){
-                        type = "任务";
+            $.ajax({
+                url:"findAll",
+                type:"get",
+                data:{"empId":empId},
+                dataType:"json",
+                success:function (data) {
+                    $("#table1 tr:not(:first)").remove();
+                    for (var i = 0; i < data.list.length; i++){
+                        var type = "";
+                        if (data.list[i].messageType == 1){
+                            type = "任务";
+                        }
+                        else if (data.list[i].messageType == 2){
+                            type = "请假";
+                        }
+                        else if (data.list[i].messageType == 3){
+                            type = "报销";
+                        }
+                        else if (data.list[i].messageType == 4){
+                            type = "补录";
+                        }
+                        else if (data.list[i].messageType == 5) {
+                            type = "加班";
+                        }
+                        else{
+                            type = "离职";
+                        }
+                        var readStatus = "";
+                        if (data.list[i].readStatus ==1){
+                            readStatus = "待阅";
+                        }
+                        else{
+                            readStatus = "已阅";
+                        }
+                        var message = "<tr>" +
+                            "<td>"+type+"</td>" +
+                            "<td>"+data.list[i].messageContent+"</td>" +
+                            "<td>"+readStatus+"</td>" +
+                            "</tr>"
+                        $("#table1").append(message);
                     }
-                    else if (data.list[i].messageType == 2){
-                        type = "请假";
-                    }
-                    else if (data.list[i].messageType == 3){
-                        type = "报销";
-                    }
-                    else if (data.list[i].messageType == 4){
-                        type = "补录";
-                    }
-                    else{
-                        type = "加班";
-                    }
-                    var readStatus = "";
-                    if (data.list[i].readStatus ==1){
-                        readStatus = "待阅";
-                    }
-                    else{
-                        readStatus = "已阅";
-                    }
-                    var message = "<input type='text' value='"+type+"'> " +
-                        "<input type='text' value='"+data.list[i].messageContent+"'>" +
-                        " <input type='text' value='"+readStatus+"'><br>";
-                    $("#messageContent").append(message);
-                }
-            }
-        })
-    })
 
-    /**
-     * 待阅
-     */
-    $("#noRead").click(function () {
-        var emp = $(window.parent.document).find(":input#empId");
-        var empId = emp.val();
-        $("#messageContent").html("");
-        $.ajax({
-            url:"noRead",
-            data:{"empId":empId},
-            dataType:"json",
-            success:function (data) {
-                for (var i = 0; i < data.list.length; i++){
-                    var type = "";
-                    if (data.list[i].messageType == 1){
-                        type = "任务";
-                    }
-                    else if (data.list[i].messageType == 2){
-                        type = "请假";
-                    }
-                    else if (data.list[i].messageType == 3){
-                        type = "报销";
-                    }
-                    else if (data.list[i].messageType == 4){
-                        type = "补录";
-                    }
-                    else{
-                        type = "加班";
-                    }
-                    var readStatus = "";
-                    if (data.list[i].readStatus ==1){
-                        readStatus = "待阅";
-                    }
-                    var message = "<input type='text' value='"+type+"'> " +
-                        "<input type='text' value='"+data.list[i].messageContent+"'>" +
-                        " <input type='text' value='"+readStatus+"'><br>";
-                    $("#messageContent").append(message);
                 }
-            }
+            })
         })
-    })
-
-    /**
-     * 已阅
-     */
-    $("#read").click(function () {
-        var emp = $(window.parent.document).find(":input#empId");
-        var empId = emp.val();
-        $("#messageContent").html("");
-        $.ajax({
-            url:"read",
-            data:{"empId":empId},
-            dataType:"json",
-            success:function (data) {
-                for (var i = 0; i < data.list.length; i++){
-                    var type = "";
-                    if (data.list[i].messageType == 1){
-                        type = "任务";
+        /**
+         * 待审
+         */
+        $("#noExamine").click(function () {
+            var emp = $(window.parent.document).find(":input#empId");
+            var empId = emp.val();
+            $("#table1 tr:not(:first)").remove();
+            $.ajax({
+                url:"findNoExamine",
+                data:{"empId":empId},
+                type:"get",
+                dataType:"json",
+                success:function (data) {
+                    for (var i = 0; i < data.list.length; i++){
+                        var type = "";
+                        if (data.list[i].messageType == 1){
+                            type = "任务";
+                        }
+                        else if (data.list[i].messageType == 2){
+                            type = "请假";
+                        }
+                        else if (data.list[i].messageType == 3){
+                            type = "报销";
+                        }
+                        else if (data.list[i].messageType == 4){
+                            type = "补录";
+                        }
+                        else{
+                            type = "加班";
+                        }
+                        var readStatus = "";
+                        if (data.list[i].readStatus ==1){
+                            readStatus = "待阅";
+                        }
+                        else{
+                            readStatus = "已阅";
+                        }
+                        var message = "<tr>" +
+                            "<td>"+type+"</td>" +
+                            "<td>"+data.list[i].messageContent+"</td>" +
+                            "<td>"+readStatus+"</td>" +
+                            "</tr>"
+                        $("#table1").append(message);
                     }
-                    else if (data.list[i].messageType == 2){
-                        type = "请假";
-                    }
-                    else if (data.list[i].messageType == 3){
-                        type = "报销";
-                    }
-                    else if (data.list[i].messageType == 4){
-                        type = "补录";
-                    }
-                    else{
-                        type = "加班";
-                    }
-                    var readStatus = "";
-                    if (data.list[i].readStatus ==2){
-                        readStatus = "已阅";
-                    }
-                    var message = "<input type='text' value='"+type+"'> " +
-                        "<input type='text' value='"+data.list[i].messageContent+"'>" +
-                        " <input type='text' value='"+readStatus+"'><br>";
-                    $("#messageContent").append(message);
                 }
-            }
+            })
+        })
+
+        /**
+         * 已审
+         */
+        $("#examine").click(function () {
+            var emp = $(window.parent.document).find(":input#empId");
+            var empId = emp.val();
+            $("#table1 tr:not(:first)").remove();
+            $.ajax({
+                url:"examine",
+                data:{"empId":empId},
+                dataType:"json",
+                success:function (data) {
+                    for (var i = 0; i < data.list.length; i++){
+                        var type = "";
+                        if (data.list[i].messageType == 1){
+                            type = "任务";
+                        }
+                        else if (data.list[i].messageType == 2){
+                            type = "请假";
+                        }
+                        else if (data.list[i].messageType == 3){
+                            type = "报销";
+                        }
+                        else if (data.list[i].messageType == 4){
+                            type = "补录";
+                        }
+                        else{
+                            type = "加班";
+                        }
+                        var readStatus = "";
+                        if (data.list[i].readStatus ==1){
+                            readStatus = "待阅";
+                        }
+                        else{
+                            readStatus = "已阅";
+                        }
+                        var message = "<tr>" +
+                            "<td>"+type+"</td>" +
+                            "<td>"+data.list[i].messageContent+"</td>" +
+                            "<td>"+readStatus+"</td>" +
+                            "</tr>"
+                        $("#table1").append(message);
+                    }
+                }
+            })
+        })
+
+        /**
+         * 待阅
+         */
+        $("#noRead").click(function () {
+            var emp = $(window.parent.document).find(":input#empId");
+            var empId = emp.val();
+            $("#table1 tr:not(:first)").remove();
+            $.ajax({
+                url:"noRead",
+                data:{"empId":empId},
+                dataType:"json",
+                success:function (data) {
+                    for (var i = 0; i < data.list.length; i++){
+                        var type = "";
+                        if (data.list[i].messageType == 1){
+                            type = "任务";
+                        }
+                        else if (data.list[i].messageType == 2){
+                            type = "请假";
+                        }
+                        else if (data.list[i].messageType == 3){
+                            type = "报销";
+                        }
+                        else if (data.list[i].messageType == 4){
+                            type = "补录";
+                        }
+                        else{
+                            type = "加班";
+                        }
+                        var readStatus = "";
+                        if (data.list[i].readStatus ==1){
+                            readStatus = "待阅";
+                        }
+                        var message = "<tr>" +
+                            "<td>"+type+"</td>" +
+                            "<td>"+data.list[i].messageContent+"</td>" +
+                            "<td>"+readStatus+"</td>" +
+                            "</tr>"
+                        $("#table1").append(message);
+                    }
+                }
+            })
+        })
+
+        /**
+         * 已阅
+         */
+        $("#read").click(function () {
+            var emp = $(window.parent.document).find(":input#empId");
+            var empId = emp.val();
+            $("#table1 tr:not(:first)").remove();
+            $.ajax({
+                url:"read",
+                data:{"empId":empId},
+                dataType:"json",
+                success:function (data) {
+                    for (var i = 0; i < data.list.length; i++){
+                        var type = "";
+                        if (data.list[i].messageType == 1){
+                            type = "任务";
+                        }
+                        else if (data.list[i].messageType == 2){
+                            type = "请假";
+                        }
+                        else if (data.list[i].messageType == 3){
+                            type = "报销";
+                        }
+                        else if (data.list[i].messageType == 4){
+                            type = "补录";
+                        }
+                        else{
+                            type = "加班";
+                        }
+                        var readStatus = "";
+                        if (data.list[i].readStatus ==2){
+                            readStatus = "已阅";
+                        }
+                        var message = "<tr>" +
+                            "<td>"+type+"</td>" +
+                            "<td>"+data.list[i].messageContent+"</td>" +
+                            "<td>"+readStatus+"</td>" +
+                            "</tr>"
+                        $("#table1").append(message);
+                    }
+                }
+            })
         })
     })
 

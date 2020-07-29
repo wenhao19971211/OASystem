@@ -1,0 +1,38 @@
+h3{
+    color: #1E9FFF;
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: 15px;
+
+}
+p{
+    width: 500px;
+    height: 30px;
+    font-size: 16px;
+    color: #1E9FFF;
+    text-align: left;
+    margin-bottom: 10px;
+    float: left;
+}
+hr{
+    color: #999999;
+}
+.info{
+    width: 400px;
+    height: 35px;
+    margin-left: 15px;
+    margin-top: 5px;
+    color: #999;
+    float: left;
+}
+.btn{
+    width: 80px;
+    height: 30px;
+    border-radius: 15px;
+    background-color: white;
+    border: 1px solid #1E9FFF;
+    color: #1E9FFF;
+    margin: 10px 10px;
+    cursor: pointer;
+
+}

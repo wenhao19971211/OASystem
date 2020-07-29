@@ -55,14 +55,22 @@
             var data = obj.data; //获得当前行数据
             var event = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
-            console.log(data);
-            console.log(event);
-            console.log(tr);
             if(event=='detail'){
-                location.href = "page/contractInfo.html?empId="+data.empId;
+                layer.open({
+                    area: ['1000px', '600px'],
+                    type: 2,
+                    content: ['page/contractInfo.html?empId='+data.empId, 'no']
+
+                });
+               // addUser(data.empId)
             }
             else {
-                location.href = "page/contractChange.html?empId="+data.empId;
+                layer.open({
+                    area: ['1000px', '600px'],
+                    type: 2,
+                    content: ['page/contractChange.html?empId='+data.empId, 'no']
+
+                });
             }
         });
     })

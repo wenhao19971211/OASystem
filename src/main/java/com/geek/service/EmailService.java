@@ -47,7 +47,17 @@ public class EmailService {
      * @return
      */
     @Transactional
-    public List<Email> findEmail(int empId, int emailType, int readStatus, int receiveEmpId){
-        return emailDao.selectEmail(empId,emailType,readStatus,receiveEmpId);
+    public List<Email> findEmail(int emailId,int empId, int emailType, int readStatus, int receiveEmpId){
+        return emailDao.selectEmail(emailId,empId,emailType,readStatus,receiveEmpId);
+    }
+
+    /**
+     * 修改邮件阅读状态
+     * @param readStatus
+     * @param emailId
+     */
+    @Transactional
+    public void updateReadStatusByEmailId(int readStatus,int emailId){
+        emailDao.updateReadStatusByEmailId(readStatus,emailId);
     }
 }

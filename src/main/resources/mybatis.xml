@@ -19,6 +19,7 @@
         <typeAlias type="com.geek.pojo.CheckWork" alias="checkWork"></typeAlias>
         <typeAlias type="com.geek.pojo.WorkOn" alias="workOn"></typeAlias>
         <typeAlias type="com.geek.pojo.Departure" alias="departure"></typeAlias>
+        <typeAlias type="com.geek.pojo.ReAndPu" alias="reAndPu"></typeAlias>
     </typeAliases>
     <!--配置dao文件-->
     <mappers>
@@ -37,6 +38,9 @@
         <mapper resource="mapper/mapper-checkWork.xml"></mapper>
         <mapper resource="mapper/mapper-rimbursementissue.xml"></mapper>
         <mapper resource="mapper/mapper-yearLeave.xml"></mapper>
+        <mapper resource="mapper/mapper-email.xml"></mapper>
+        <mapper resource="mapper/mapper-dockpay.xml"></mapper>
         <mapper resource="mapper/mapper-departure.xml"></mapper>
+        <mapper resource="mapper/mapper-reAndPu.xml"></mapper>
     </mappers>
 </configuration>

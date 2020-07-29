@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="http://localhost:8080/ssm_framework_war_exploded/">
+    <script src="js/jquery.js"></script>
+    <script src="js/common.js"></script>
+    <link rel="stylesheet" href="js/dist/css/layui.css" />
+    <meta charset="UTF-8">
+    <title>查看请假</title>
+</head>
+<body>
+        <div>
+            <div style="float: left">
+                <input type="button" value="全部" id="qbButton"><br>
+                <input type="button" value="未读" id="wdButton"><br>
+                <input type="button" value="已读" id="ydButton">
+            </div>
+            <div style="float: left">
+                <!--全部-->
+                <div id="content" >
+                        <div id="title" style="text-align:center"></div>
+                    <table class="layui-table" style="text-align: center" id="table1">
+
+                    </table>
+                </div>
+                
+
+            </div>
+        </div>
+</body>
+<script>
+    $(function () {
+        // 进入页面时
+        $("#title").html(" ");
+        $(".layui-table").html(" ");
+        $("#title").html("<h2 style='text-align: center'>全部邮件</h2> ");
+        $(".layui-table").html(" <colgroup><col width="+50+"> <col width="+100+"><col width="+100+"><col width="+100+"><col width="+100+"></colgroup><thead ><td>序号</td><td>标题</td> <td>内容</td><td>接收时间</td> <td>发送人</td></thead>");
+        $.ajax({
+            url:"findEmail",
+            type:"get",
+            //这里的receiveEmpId值登录人的id
+            data:{"emailId":0,"empId":0,"type":2,"readStatus":0,"receiveEmpId":6},
+            dataType:"json",
+            success:function (data) {
+                console.log(data);
+                for (var i=0;i<data.list.length;i++){
+                    var info=" ";
+                    info+="<tr emailId='"+data.list[i].emailId+"' empId='"+data.list[i].empId+"' name='"+data.object[i]+"' receiveId='"+data.list[i].receiveEmpId+"'><td>"+(i+1)+"</td><td>"+data.list[i].title.substr(0,6)+"</td><td>"+data.list[i].content.substr(0,10)+"</td><td>"+parseDate(data.list[i].time)+"</td><td>"+data.object[i]+"</td></tr>";
+                    $(".layui-table").append(info);
+                }
+            }
+        })
+        //全部
+        $("#qbButton").click(function () {
+            $("#title").html(" ");
+            $(".layui-table").html(" ");
+            $("#title").html("<h2 style='text-align: center'>全部邮件</h2> ");
+            $(".layui-table").html(" <colgroup><col width="+50+"> <col width="+100+"><col width="+100+"><col width="+100+"><col width="+100+"></colgroup><thead> <tr><th>序号</th><th>标题</th> <th>内容</th><th>接收时间</th> <th>发送人</th></tr></thead>");
+            $.ajax({
+                url:"findEmail",
+                type:"get",
+                data:{"emailId":0,"empId":0,"type":2,"readStatus":0,"receiveEmpId":6},
+                dataType:"json",
+                success:function (data) {
+                    console.log(data);
+                    for (var i=0;i<data.list.length;i++){
+                        var info=" ";
+                        info+="<tr emailId='"+data.list[i].emailId+"' empId='"+data.list[i].empId+"' name='"+data.object[i]+"'  receiveId='"+data.list[i].receiveEmpId+"'><td>"+(i+1)+"</td><td>"+data.list[i].title.substr(0,6)+"</td><td>"+data.list[i].content.substr(0,10)+"</td><td>"+parseDate(data.list[i].time)+"</td><td>"+data.object[i]+"</td></tr>";
+                        $(".layui-table").append(info);
+                    }
+                }
+            })
+        })
+
+        //未读点击事件
+        $("#wdButton").click(function () {
+
+            $.ajax({
+                url:"findEmail",
+                type:"get",
+                data:{"emailId":0,"empId":0,"type":2,"readStatus":1,"receiveEmpId":6},
+                dataType:"json",
+                success:function (data) {
+                    $("#title").html(" ");
+                    $(".layui-table").html(" ");
+                    $("#title").html("<h2 style='text-align: center'>未读邮件</h2> ");
+                    $(".layui-table").html(" <colgroup><col width="+50+"> <col width="+100+"><col width="+100+"><col width="+100+"><col width="+100+"></colgroup><thead> <tr><th>序号</th><th>标题</th> <th>内容</th><th>接收时间</th> <th>发送人</th></tr></thead>");
+                    console.log(data);
+                    for (var i=0;i<data.list.length;i++){
+                        var info=" ";
+                        info+="<tr emailId='"+data.list[i].emailId+"' empId='"+data.list[i].empId+"' name='"+data.object[i]+"'  receiveId='"+data.list[i].receiveEmpId+"'><td>"+(i+1)+"</td><td>"+data.list[i].title.substr(0,6)+"</td><td>"+data.list[i].content.substr(0,10)+"</td><td>"+parseDate(data.list[i].time)+"</td><td>"+data.object[i]+"</td></tr>";
+                        $(".layui-table").append(info);
+                    }
+                }
+            })
+
+        })
+        //已读点击事件
+        $("#ydButton").click(function () {
+            $.ajax({
+                url:"findEmail",
+                type:"get",
+                data:{"emailId":0,"empId":0,"type":2,"readStatus":2,"receiveEmpId":6},
+                dataType:"json",
+                success:function (data) {
+                    $("#title").html(" ");
+                    $(".layui-table").html(" ");
+                    $("#title").html("<h2 style='text-align: center'>已读邮件</h2> ");
+                    $(".layui-table").html(" <colgroup><col width="+50+"> <col width="+100+"><col width="+100+"><col width="+100+"><col width="+100+"></colgroup><thead> <tr><th>序号</th><th>标题</th> <th>内容</th><th>接收时间</th> <th>发送人</th></tr></thead>");
+                    console.log(data);
+                    for (var i=0;i<data.list.length;i++){
+                        var info=" ";
+                        info+="<tr emailId='"+data.list[i].emailId+"' empId='"+data.list[i].empId+"' name='"+data.object[i]+"'  receiveId='"+data.list[i].receiveEmpId+"'><td>"+(i+1)+"</td><td>"+data.list[i].title.substr(0,6)+"</td><td>"+data.list[i].content.substr(0,10)+"</td><td>"+parseDate(data.list[i].time)+"</td><td>"+data.object[i]+"</td></tr>";
+                        $(".layui-table").append(info);
+                    }
+                }
+            })
+        })
+
+
+
+        // $("#table1>tr").click(function () {
+        //     var emailId=$(this).attr("emailId");
+        //     alert(emailId);
+        // })
+
+        $('#table1').on('click','tr', function() {
+            //邮件id
+            var emailId=$(this).attr("emailId");
+            var empId=$(this).attr("empId");
+            var receiveId=$(this).attr("receiveId");
+            // alert(name);
+
+                //跳转页面
+                location.href="page/emailInfo.html?emailId="+emailId+"&empId="+empId+"&receiveId="+receiveId;
+
+
+        });
+
+
+    })
+
+
+</script>
+</html>
+

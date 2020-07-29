@@ -10,6 +10,9 @@
   <!--2.查看邮件-->
     <select id="selectEmail" resultType="com.geek.pojo.Email">
         select * from email where 1=1
+        <if test="emailId != 0">
+            and emailId=#{emailId}
+        </if>
         <if test="id != 0">
             and empId=#{id}
         </if>
@@ -24,4 +27,8 @@
         </if>
         order by time desc
     </select>
+        <!--修改邮件阅读状态-->
+    <update id="updateReadStatusByEmailId">
+        update email set readStatus=#{readStatus} where emailId=#{emailId}
+    </update>
 </mapper>

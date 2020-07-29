@@ -4,92 +4,58 @@
     <base href="http://localhost:8080/ssm_framework_war_exploded/">
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="css/empInfo.css" type="text/css">
     <script src="js/jquery.js"></script>
     <script src="js/common.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/dist/layui.js"></script>
+    <link rel="stylesheet" href="js/dist/css/layui.css" />
+    <link rel="stylesheet" href="css/message.css" type="text/css">
     <style>
-        .clear:after{
-            clear: both;
-            content: '';
-            display: block;
-        }
-        .left{
-            width: 200px;
-            height: 500px;
-            border: 1px solid #0C0C0C;
-            float: left;
-            margin-right: 100px;
-        }
-        .right{
-            width: 500px;
-            height: 500px;
-            border: 1px solid #0C0C0C;
-            float: left;
 
-        }
     </style>
 </head>
 <body>
 <div class="left">
-    <div id="empInfo">基本信息</div>
-    <div id="contract">合同信息</div>
-    <div id="workOn">考勤记录</div>
-    <div id="prize">奖惩记录</div>
+    <div class="btn" id="empInfo">基本信息</div>
+    <div class="btn" id="contract">合同信息</div>
+    <div class="btn" id="workOn">考勤记录</div>
+    <div class="btn" id="prize">奖惩记录</div>
 </div>
+<div class="sx"></div>
 <div class="right">
     <div id="info">
-        <p>基本信息</p>
-        <div id="empId"></div>
-        <div id="empName"></div>
-        <div id="card"></div>
-        <div id="sex"></div>
-        <div id="marriage"></div>
-        <div id="politic"></div>
-        <div id="registratin"></div>
-
-        <p>部门岗位</p>
-        <div>公司：极客营</div>
-        <div id="depName"></div>
-        <div id="position"></div>
-        <p>学历信息</p>
-        <div id="education"></div>
-        <div id="school"></div>
-        <p>联络信息</p>
-        <div id="phone"></div>
-        <div id="email"></div>
+        <p>丨基本信息</p>
+        <hr>
+        <div class="info" id="empId"></div>
+        <div class="info" id="empName"></div>
+        <div class="info" id="card"></div>
+        <div class="info" id="sex"></div>
+        <div class="info" id="marriage"></div>
+        <div class="info" id="politic"></div>
+        <div class="info" id="registratin"></div>
+        <p>丨部门岗位</p>
+        <hr>
+        <div class="info">公司：极客营</div>
+        <div class="info" id="depName"></div>
+        <div class="info" id="position"></div>
+        <p>丨学历信息</p>
+        <hr>
+        <div class="info" id="education"></div>
+        <div class="info" id="school"></div>
+        <p>丨联络信息</p>
+        <hr>
+        <div class="info" id="phone"></div>
+        <div class="info" id="email"></div>
     </div>
     <div id="contractInfo" style="display: none">
-        <table id="contractTable" border="1" style="border-collapse: collapse">
-            <tr>
-                <td>合同编号</td>
-                <td>合同类型</td>
-                <td>生效日期</td>
-                <td>失效日期</td>
-                <td>合同年限</td>
-            </tr>
-        </table>
+        <table class="layui-table" style="width: 87%; text-align: center;" id="contractTable"></table>
     </div>
     <div id="checkWorkInfo" style="display: none;">
-        <table id="checkWorkTable" border="1" style="border-collapse: collapse">
-            <tr>
-                <td>日期</td>
-                <td>签到时间</td>
-                <td>签退时间</td>
-                <td>状态</td>
-            </tr>
-        </table>
+        <table class="layui-table" style="width: 87%; text-align: center;" id="checkWorkTable"></table>
     </div>
     <div id="prizeInfo" style="display: none">
-        <table id="prizeTable" border="1" style="border-collapse: collapse">
-            <tr>
-                <td>姓名</td>
-                <td>授予单位</td>
-                <td>奖惩区别</td>
-                <td>奖惩名目</td>
-                <td>日期</td>
-                <td>金额</td>
-            </tr>
-
-        </table>
+        <table class="layui-table" style="width: 87%; text-align: center;" id="prizeTable"></table>
     </div>
     <div id="departureInfo">
 
@@ -116,7 +82,7 @@
                 sex="女";
             }
             $("#empId").html("工号："+data.object.empId);
-            $("#empName").html("姓名"+data.object.empName);
+            $("#empName").html("姓名："+data.object.empName);
             $("#card").html("身份证："+data.object.card);
             $("#sex").html("性别："+sex);
             $("#marriage").html("婚姻状况："+data.object.marriage);
@@ -152,7 +118,7 @@
                     sex="女";
                 }
                 $("#empId").html("工号："+data.object.empId);
-                $("#empName").html("姓名"+data.object.empName);
+                $("#empName").html("姓名："+data.object.empName);
                 $("#card").html("身份证："+data.object.card);
                 $("#sex").html("性别："+sex);
                 $("#marriage").html("婚姻状况："+data.object.marriage);
@@ -171,9 +137,16 @@
      * 合同信息
      */
     $("#contract").click(function () {
+        $(".layui-table").html(" <colgroup><col width="+100+"><col width="+100+"><col width="+200+"><col width="+100+"><col width="+100+"><col width=\"+100+\"><col width=\"+100+\"></colgroup>" +
+            "<thead ><td>合同编号</td>" +
+            "<td>合同类型</td>" +
+            "<td>生效日期</td>" +
+            "<td>失效日期</td>" +
+            "<td>合同年限</td> </thead>");
         $("#contractInfo").show();
         $("#info").hide();
         $("#checkWorkInfo").hide();
+        $("#prizeInfo").hide();
         $("#contractTable tr:eq(1)").remove();
         $.ajax({
             url:"contractInfo",
@@ -225,7 +198,12 @@
         $("#checkWorkInfo").show();
         $("#info").hide();
         $("#contractInfo").hide();
-        $("#contractTable tr:not(:first)").remove();
+        $("#prizeInfo").hide();
+        $(".layui-table").html(" <colgroup><col width="+200+"><col width="+200+"><col width="+200+"><col width="+200+"></colgroup>" +
+            "<thead ><td>日期</td>" +
+            "<td>签到时间</td>" +
+            "<td>签退时间</td>" +
+            "<td>状态</td></thead>");
         var timeStar = getFirstDay();
         var timeEnd = getLastDay();
         $.ajax({
@@ -236,8 +214,21 @@
             success:function (data) {
               for (var i = 0; i < data.list.length; i++){
                   var today = parseDate(data.list[i].today);
-                  var workInTime = parseDate1(data.list[i].workInTime);
-                  var workOutTime = parseDate1(data.list[i].workOutTime);
+                  var workInTime = "";
+                  var workOutTime = "";
+                  if (data.list[i].workInTime == null){
+                      workInTime = "";
+                  }
+                  else{
+                      workInTime = parseDate1(data.list[i].workInTime);
+                  }
+                  if (data.list[i].workOutTime == null){
+                      workOutTime = "";
+                  }
+                  else{
+                      workOutTime = parseDate1(data.list[i].workOutTime);
+                  }
+
                   var checkWork = "<tr>" +
                       "<td>"+today+"</td>" +
                       "<td>"+workInTime+"</td>" +
@@ -256,7 +247,13 @@
         $("#checkWorkInfo").hide();
         $("#info").hide();
         $("#contractInfo").hide();
-        $("#contractTable tr:not(:first)").remove();
+        $(".layui-table").html(" <colgroup><col width="+200+"><col width="+100+"><col width="+100+"><col width="+150+"></colgroup>" +
+            "<thead >" +
+            "<td>授予单位</td>" +
+            "<td>奖惩类型</td>" +
+            "<td>奖惩名目</td>" +
+            "<td>日期</td>" +
+            "<td>金额</td></thead>");
         $.ajax({
             url:"prize",
             data:{"empId":empId},
@@ -264,15 +261,37 @@
             dataType:"json",
             success:function (data) {
                 for (var i = 0; i < data.list.length; i++){
-                    var today = parseDate(data.list[i].today);
-                    var workInTime = parseDate1(data.list[i].workInTime);
-                    var workOutTime = parseDate1(data.list[i].workOutTime);
-                    var checkWork = "<tr>" +
-                        "<td>"+today+"</td>" +
-                        "<td>"+workInTime+"</td>" +
-                        "<td>"+workOutTime+"</td>" +
-                        "<td>"+data.list[i].isLate+"</td></tr>"
-                    $("#checkWorkTable").append(checkWork);
+                    var type = "";
+                    var item ="";
+                    var reAndPuTime = parseDate(data.list[i].reAndPuTime);
+                    if (data.list[i].type == 1){
+                        type = "奖励";
+                    }
+                    else{
+                        type = "惩罚";
+                    }
+                    if (data.list[i].item == 1){
+                        item = "季度之星";
+                    }
+                    else if (data.list[i].item == 2){
+                        item = "优秀员工";
+                    }
+                    else if (data.list[i].item == 3){
+                        item = "优秀团队";
+                    }
+                    else if (data.list[i].item == 4){
+                        item = "警告";
+                    }
+                    else{
+                        item = "严重警告";
+                    }
+                    var prize = "<tr>" +
+                        "<td>极客营</td>" +
+                        "<td>"+type+"</td>" +
+                        "<td>"+item+"</td>" +
+                        "<td>"+reAndPuTime+"</td>" +
+                        "<td>"+data.list[i].money+"</td></tr>"
+                    $("#prizeTable").append(prize);
                 }
             }
         })

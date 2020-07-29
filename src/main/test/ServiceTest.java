@@ -1,8 +1,10 @@
+import com.geek.bo.CheckWork_bo;
 import com.geek.dao.*;
 import com.geek.pojo.*;
 import com.geek.service.CheckWorkService;
 import com.geek.service.ContractService;
 import com.geek.service.EmpService;
+import com.geek.service.ReAndPuService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,8 @@ public class ServiceTest {
     ContractDao contractDao;
     @Autowired
     DepartureDao departureDao;
+    @Autowired
+    ReAndPuService reAndPuService;
     @Test
     public void test(){
 //        List<Message> list = messageDao.findAllById(1);
@@ -68,15 +72,15 @@ public class ServiceTest {
 //        for (DayOff dayOff : list) {
 //            System.out.println(dayOff.getStartTime()+"\t"+dayOff.getEndTime());
 //        }
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//        Date start = null;
-//        Date end = null;
-//        try {
-//            start = sdf.parse("2020-07-01");
-//            end = sdf.parse("2020-08-01");
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date start = null;
+        Date end = null;
+        try {
+            start = sdf.parse("2020-07-01");
+            end = sdf.parse("2020-08-01");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 //        List<CheckWork> list = checkWorkDao.findById(5,start,end);
 //        List<WorkOn> workOnList = workOnDao.findByIdAndMonth(5,start,end);
 //        System.out.println(workOnList.size());
@@ -86,6 +90,11 @@ public class ServiceTest {
 //            }
 //
 //        }
+        List<CheckWork_bo> list = checkWorkService.findById(1,start,end);
+        for (CheckWork_bo checkWork_bo : list) {
+            System.out.println(checkWork_bo.getToday()+"\t"+checkWork_bo.getWorkInTime()+"\t"+checkWork_bo.getWorkOutTime()+"\t"+checkWork_bo.getIsLate());
+        }
+
 //        List<Contract> list = contractService.findAll();
 //        for (Contract contract : list) {
 //            System.out.println(contract.getContractId()+"\t"+contract.getEmp().getEmpName());
@@ -109,6 +118,10 @@ public class ServiceTest {
 //        List<Departure> list = departureDao.findDepartures(0,5);
 //        for (Departure departure : list) {
 //            System.out.println(departure.getReason());
+//        }
+//        List<ReAndPu> list = reAndPuService.findById(1);
+//        for (ReAndPu reAndPu : list) {
+//            System.out.println(reAndPu.getEmp().getEmpName()+"\t"+reAndPu.getMoney()+"\t"+reAndPu.getCause()+"\t"+reAndPu.getType()+"\t"+reAndPu.getItem());
 //        }
     }
 }

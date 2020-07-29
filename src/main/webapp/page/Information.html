@@ -5,26 +5,28 @@
     <meta charset="UTF-8">
     <title>个人信息</title>
     <script src="js/jquery.js"></script>
-    <style>
-
-    </style>
+    <script src="js/index.js"></script>
+    <link rel="stylesheet" href="css/information.css" type="text/css">
 </head>
 <body>
-<h3>个人资料</h3>
 <input type="hidden" id="emp" value="1">
-<input type="button" value="保存" id="save"><input type="button" value="返回"><br>
-<div>
-    <div id="empId">工号：</div>
-    <div id="empName">姓名：</div>
-    <div id="sex">性别：</div>
-    <div id="depName">所在部门：</div>
-    <div id="position">职位：</div>
-    <div id="password">密码：</div>
-    <div>电话：<input type="text" id="phone"></div>
-    <div>邮箱：<input type="text" id="email"></div>
+<input class="btn" type="button" value="保存" id="save">
+<input class="btn" type="button" value="返回" id="return"><br>
+<h3>个人资料</h3>
+<hr>
+    <div class="empInfo">
+        <div class="head"><img src="" alt="" id="head"></div>
+        <div class="info" id="empId">工号：</div>
+        <div class="info" id="empName">姓名：</div>
+        <div class="info" id="sex">性别：</div>
+        <div class="info" id="depName">所在部门：</div>
+        <div class="info" id="position">职位：</div>
+        <div class="info">电话：<input type="text" id="phone" class="contact"></div>
+        <div class="info">邮箱：<input type="text" id="email" class="contact"></div>
 
-</div>
-<div><img src="" alt="" id="head"></div>
+    </div>
+
+
 </body>
 </html>
 <script>
@@ -48,7 +50,6 @@
             $("#sex").append(sex);
             $("#depName").append(data.object.dep.depName);
             $("#position").append(data.object.position);
-            $("#password").append(data.object.password);
             $("#phone").val(data.object.phone);
             $("#email").val(data.object.email);
             $("#head").attr("src","img/"+data.object.head);
@@ -70,7 +71,6 @@
                     alert("保存成功");
                     location.href = "page/index.html";
                 }
-
             }
         })
     })

@@ -6,27 +6,23 @@
     <title>Title</title>
     <script src="js/jquery.js"></script>
     <script src="js/common.js"></script>
-    <style>
-        #reason{
-            width: 500px;
-            height: 200px;
-            border: 1px solid #0C0C0C;
-            overflow: auto;
-        }
-    </style>
+    <script src="js/index.js"></script>
+    <link rel="stylesheet" href="css/departure.css" type="text/css">
 </head>
 <body>
+<h1>离职申请单</h1>
+<hr size="1">
 <form id="info">
     <input type="hidden" id="depId">
-    <input type="hidden" id="checkEmpId" value="3">
-    工号：<span id="empId"></span><br>
-    姓名：<span id="empName"></span><br>
-    所在部门：<span id="depName"></span><br>
-    岗位：<span id="position"></span><br>
-    离职时间：<input type="date" id="departureTime"><br>
-    <p>离职原因：</p>
+    <input type="hidden" id="checkEmpId">
+    <div class="info">工号：<span id="empId"></span></div>
+    <div class="info">姓名：<span id="empName"></span></div>
+    <div class="info">所在部门：<span id="depName"></span></div>
+    <div class="info">岗位：<span id="position"></span></div>
+    <div class="info">离职时间：<input type="date" id="departureTime"></div>
+    <div class="info"><p>离职原因：</p></div>
     <div id="reason" contenteditable="true"></div>
-    <input type="button" value="提交" id="btn">
+    <div class="btn1"><input type="button" value="提交" id="btn" class="btn"></div>
 </form>
 </body>
 </html>
@@ -45,6 +41,7 @@
                 $("#empName").html(data.object.empName);
                 $("#depName").html(data.object.dep.depName);
                 $("#position").html(data.object.position);
+                $("#checkEmpId").val(data.object.dep.marage);
             }
         })
     });

@@ -32,8 +32,8 @@ function parseDate1(time) {
     var date = new Date(time);
     var hireDate="";
     H = date.getHours();
-    m = date.getMinutes();
-    s = date.getSeconds();
+    m = (date.getMinutes() <10 ? '0'+(date.getMinutes()):date.getMinutes());
+    s = (date.getSeconds() <10 ? '0'+(date.getSeconds()):date.getSeconds());
     hireDate = H+":"+m+":"+s;
     return hireDate;
 }

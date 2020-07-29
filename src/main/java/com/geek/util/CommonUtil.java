@@ -390,6 +390,21 @@ public class CommonUtil {
 
     }
 
-
-
+    /**
+     * date转 string
+     * @param date
+     * @return
+     */
+    public static String dateToString(Date date)
+    {
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String format = sf.format(date);
+        return format;
+    }
+    public static String dateToMonthString(Date date)
+    {
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM");
+        String format = sf.format(date);
+        return format;
+    }
 }

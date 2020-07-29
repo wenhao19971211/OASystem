@@ -5,7 +5,11 @@
 <mapper namespace="com.geek.dao.RimbursementIssueDao">
 
     <select id="findRimbursementByStatus" resultType="com.geek.pojo.Rimbursement">
-        select * from rimbursement where status = #{status} order by issueTime
+        select * from rimbursement
+        <if test="status != null">
+            where status = #{status}
+        </if>
+        order by issueTime
         <if test="index != null and pageSize != null">
             limit #{index},#{pageSize}
         </if>
@@ -15,5 +19,36 @@
         update rimbursement set status = #{status} where rimbursementIssueId = #{id}
     </update>
 
+    <resultMap id="resultMap1" type="com.geek.pojo.Reimbursement">
+        <id property="reimbursementId" column="reimbursementId"></id>
+        <result property="applyEmpId" column="applyEmpId"></result>
+        <result property="taskSendId" column="taskSendId"></result>
+        <result property="sendTime" column="sendTime"></result>
+        <result property="sum" column="sum"></result>
+        <result property="checkEmpId" column="checkEmpId"></result>
+        <result property="checkTime" column="checkTime"></result>
+        <result property="checkStatus" column="checkStatus"></result>
+        <association property="emp" javaType="com.geek.pojo.Emp">
+            <id property="empId" column="empId"></id>
+            <result property="empName" column="empName"></result>
+            <result property="depId" column="depId"></result>
+        </association>
+        <association property="dep" javaType="com.geek.pojo.Dep">
+            <id property="depId" column="depId"></id>
+            <result property="depName" column="depName"></result>
+        </association>
+    </resultMap>
+
+    <select id="findReimbursementByReimbursementId" resultMap="resultMap1">
+        select *from reimbursement
+        join emp on reimbursement.applyEmpId = emp.empId
+        join dep on emp.depId = dep.depId
+        where reimbursementId = #{reimbursementId}
+    </select>
+
+
+    <update id="updateReimbursementStatus4ByReimbursementId">
+        update reimbursement set checkstatus = #{status} where reimbursementId = #{reimbursementId}
+    </update>
 
 </mapper>

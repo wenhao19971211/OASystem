@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import javax.xml.crypto.Data;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -130,5 +131,25 @@ public class HolidayHandler {
         result.setList(leave_bos);
         return result;
     }
+
+    /**
+     * 日历打卡
+     * @param depId 用户id
+     * @return
+     */
+    @PostMapping("calendar/{depId}")
+    public Result insertWorkOn(@PathVariable("depId") int depId){
+        Result result=new Result();
+        Date date= new Date();
+        Date date2=leaveService.changeDate(3);
+        int compareTo=date2.compareTo(date);
+        if (compareTo==-1&&compareTo==0){
+            result=leaveService.insertWorkonFrequency(depId,date);
+        }else{
+            result=leaveService.updateWorkonFrequency(depId,date);
+        }
+        return result;
+    }
+
 
 }

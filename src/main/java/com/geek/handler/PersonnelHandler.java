@@ -5,13 +5,11 @@ import com.geek.bo.CheckWork_bo;
 import com.geek.bo.Contract_bo;
 import com.geek.bo.PersonnelInformation_bo;
 import com.geek.dto.Result;
-import com.geek.pojo.CheckWork;
-import com.geek.pojo.Contract;
-import com.geek.pojo.Emp;
-import com.geek.pojo.WorkOn;
+import com.geek.pojo.*;
 import com.geek.service.CheckWorkService;
 import com.geek.service.ContractService;
 import com.geek.service.EmpService;
+import com.geek.service.ReAndPuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -33,7 +31,8 @@ public class PersonnelHandler {
     private ContractService contractService;
     @Autowired
     private CheckWorkService checkWorkService;
-
+    @Autowired
+    private ReAndPuService reAndPuService;
     /**
      * 人事信息（集合）
      * @param page
@@ -143,9 +142,6 @@ public class PersonnelHandler {
 
         Result result = new Result();
         List<CheckWork_bo> list = checkWorkService.findById(empId,startTime,endTime);
-        for (CheckWork_bo checkWork_bo : list) {
-            System.out.println(checkWork_bo.getWorkInTime()+"\t"+checkWork_bo.getWorkOutTime());
-        }
         result.setList(list);
         return result;
     }
@@ -171,8 +167,10 @@ public class PersonnelHandler {
      * @return
      */
     @GetMapping("prize")
-    public Result prize(){
+    public Result prize(int empId){
         Result result = new Result();
+        List<ReAndPu> list = reAndPuService.findById(empId);
+        result.setList(list);
         return result;
     }
 

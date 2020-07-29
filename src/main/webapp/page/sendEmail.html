@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <base href="http://localhost:8080/OASystem_war_exploded/">
+    <base href="http://localhost:8080/ssm_framework_war_exploded/">
     <script src="js/jquery.js"></script>
     <script src="js/common.js"></script>
     <link rel="stylesheet" href="js/dist/css/layui.css" />
@@ -161,7 +161,7 @@
             $("#selectSendEmail").show();
             $.ajax({
                 url:"findEmail",
-                data:{"empId":1,"type":1,"readStatus":1,"receiveEmpId":0},
+                data:{"emailId":0,"empId":1,"type":1,"readStatus":1,"receiveEmpId":0},
                 type:"get",
                 dataType:"json",
                 success:function (data) {
