@@ -12,7 +12,7 @@
 <body style="background-color:#F1F1F1">
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
-        <button class="layui-btn layui-btn-sm" lay-event="add">完成</button>
+        <button class="layui-btn layui-btn-sm" lay-event="add">发放</button>
         <!--
         <button class="layui-btn layui-btn-sm" lay-event="all">获取选中数目</button>
          <button class="layui-btn layui-btn-sm" lay-event="is">验证是否全选</button>
@@ -38,8 +38,9 @@
         table.render({
             elem: '#demo'
             ,height: 500
-            ,url:'findTaskByStatus1'
-            ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+            ,url:'findTaskByempId'
+            //,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+            ,toolbar:true
             ,type:'checkbox'
             ,page:true
             ,parseData:function(data){//res 即为原始返回的数据
@@ -47,15 +48,14 @@
                 return data;
             }
             ,cols: [[ //表头
-                {type: 'checkbox', fixed: 'left'}// 开启多选框
-                ,{field: 'taskSendId', title: '任务发布编号', width:100,edit: 'text', del:'test', fixed: 'left'}
-                ,{field: 'taskReceiveId', title: '任务接收编号',edit: 'text', width:100}
-                ,{field: 'title', title: '任务标题',edit: 'text', width:100}
-                ,{field: 'startTime', title: '开始时间', width:120,edit: 'text', sort: true, }
-                ,{field: 'finishTime', title: '规定完成时间', width:140, sort: true,}
-                ,{field: 'factFinishTime', title: '实际完成时间', width: 140, sort: true,}
-                ,{field: 'taskSendEmpName', title: '任务发布人', width: 100}
+                //{type: 'checkbox', fixed: 'left'}// 开启多选框
+                {field: 'taskSendId', title: '任务发布编号', width:100,edit: 'text', del:'test', fixed: 'left'}
+                ,{field: 'title', title: '任务标题',edit: 'text', width:150}
                 ,{field: 'status', title: '任务完成状态', width: 100}
+                ,{field: 'taskReceiveEmpName', title: '任务接收人', width: 100,}
+                ,{field: 'startTime', title: '开始时间', width:120, sort: true, }
+                ,{field: 'finishTime', title: '完成时间', width:120, sort: true,}
+                ,{field: 'taskSendEmpName', title: '任务发布人', width: 100}
                 ,{field: 'content', title: '任务内容'}
                 //,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:200}// 操作的工具栏
             ]]
@@ -95,8 +95,8 @@
                     for (var i in data)
                     {
                         //layer.alert(JSON.stringify(data[i]));
-                        console.log(JSON.stringify(data[i].taskReceiveId))
-                        issue(data[i].taskReceiveId);
+                        console.log(JSON.stringify(data[i].salaryIssueId))
+                        issue(data[i].salaryIssueId);
                     }
 
                     break;
@@ -136,13 +136,13 @@
 
     function issue(id) {
         $.ajax({
-            url:"finishTask?taskReceiveId="+id+"&status=2",
+            url:"updateSalaryIssueStatusBySalaryIssueId?salaryIssueId="+id+"&status=2",
             type:"PUT",
             //data:{"rimbursementIssueId":id,"status":2},
             success:function (result) {
                 console.log(result);
 
-                window.location.href="page/TaskNotFinish.html";
+                window.location.href="page/SalaryNotIssue.html";
 
             },
             error:function () {

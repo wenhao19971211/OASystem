@@ -56,4 +56,12 @@ public interface EmpDao {
      * @return
      */
     public int findCount();
+
+    /**
+     * 根据depId查询部门的所有员工
+     * @param empId
+     * @return
+     */
+    public List<Emp> findOneDepAllEmpsByEmpId(@Param("empId") Integer empId);
+
 }

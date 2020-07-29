@@ -99,8 +99,8 @@ public class Test {
     @org.junit.Test
     public void test5()
     {
-        String flag = taskSendHandler.finishTask(28);
-        System.out.println("flag:"+flag);
+        //String flag = taskSendHandler.finishTask(28);
+        //System.out.println("flag:"+flag);
     }
 
     @org.junit.Test
@@ -252,6 +252,12 @@ public class Test {
     @org.junit.Test
     public void test18()
     {
+        Emp emp = new Emp();
+        emp.setDepId(50);
+        List<Emp> emps = taskSendHandler.findfindOneDepAllEmpsByLoginEmp(emp);
+        for (Emp emp1 : emps) {
+            System.out.println(emp1);
+        }
 
     }
 
