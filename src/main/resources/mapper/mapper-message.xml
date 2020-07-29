@@ -46,4 +46,9 @@
         insert into releasetabe values (null,#{releaseTitle},#{releaseContent},#{releaseTime})
     </insert>
 
+    <select id="findReleaseInfo" resultType="com.geek.pojo.ReleaseTabe">
+        select * from releasetabe order by releaseTime limit 0,5
+    </select>
+
+
 </mapper>
