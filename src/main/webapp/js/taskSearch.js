@@ -13,7 +13,7 @@ layui.use(['form','layer','table','laytpl'],function(){
         page : true,
         height : "full-125",
         limits : [10,15,20,25],
-        limit : 20,
+        limit : 10,
         id : "userListTable",
         parseData:function(data){//res 即为原始返回的数据
             data =$.parseJSON(data);
