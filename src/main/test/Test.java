@@ -1,9 +1,6 @@
 import com.geek.bo.*;
 import com.geek.dao.*;
-import com.geek.handler.RimbursementIssueHandler;
-import com.geek.handler.SalaryHandler;
-import com.geek.handler.SalaryIssueHandler;
-import com.geek.handler.TaskSendHandler;
+import com.geek.handler.*;
 import com.geek.pojo.*;
 import com.geek.service.RimbursementIssueService;
 import com.geek.service.SalaryIssueService;
@@ -50,7 +47,8 @@ public class Test {
     private SalaryIssueService salaryIssueService;
     @Autowired
     private TaskSendService taskSendService;
-
+    @Autowired
+    private ReleaseInfoHandler releaseInfoHandler;
 
     @org.junit.Test
     public void test1()
@@ -259,6 +257,13 @@ public class Test {
             System.out.println(emp1);
         }
 
+    }
+
+    @org.junit.Test
+    public void test19()
+    {
+        String releaseInfo = releaseInfoHandler.findReleaseInfo();
+        System.out.println(releaseInfo);
     }
 
 

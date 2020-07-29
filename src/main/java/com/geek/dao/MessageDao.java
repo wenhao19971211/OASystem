@@ -60,4 +60,10 @@ public interface MessageDao {
      */
     public int addInfo(ReleaseTabe releaseTabe);
 
+    /**
+     * 查询信息公告
+     * @return
+     */
+    public List<ReleaseTabe> findReleaseInfo();
+
 }
