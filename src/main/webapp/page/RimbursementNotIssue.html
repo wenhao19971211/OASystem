@@ -9,7 +9,7 @@
     <script src="js/jquery.js"></script>
     <script src="js/dist/lay/modules/layer.js"></script>
 </head>
-<body>
+<body style="background-color:#F1F1F1">
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
         <button class="layui-btn layui-btn-sm" lay-event="add">发放</button>
@@ -35,7 +35,7 @@
         //第一个实例
         table.render({
             elem: '#demo'
-            ,height: 312
+            ,height: 500
             ,url:'findRimbursementByStatus1'
             ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
             ,type:'checkbox'
@@ -52,7 +52,7 @@
                 ,{field: 'sum', title: '报销金额', width:100}
                 ,{field: 'factMoney', title: '发放金额', width: 100}
                 ,{field: 'issueTime', title: '发放时间', width: 160, sort: true,}
-                ,{field: 'issueStatus', title: '是否发放', width: 90}
+                ,{field: 'issueStatus', title: '是否发放'}
                 //,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:200}// 操作的工具栏
             ]]
 
@@ -138,7 +138,7 @@
             success:function (result) {
                 console.log(result);
 
-                window.location.href="page/test.html";
+                window.location.href="page/RimbursementNotIssue.html";
 
             },
             error:function () {

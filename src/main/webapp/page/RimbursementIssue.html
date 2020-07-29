@@ -41,6 +41,7 @@
             ,height: 500
             ,url:'findRimbursementByStatus2'
             //,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+            ,toolbar:true
             ,type:'checkbox'
             ,page:true //分页按问好那个改
             ,parseData:function(data){//res 即为原始返回的数据
@@ -55,7 +56,7 @@
                 ,{field: 'sum', title: '报销金额', width:100}
                 ,{field: 'factMoney', title: '发放金额', width: 100}
                 ,{field: 'issueTime', title: '发放时间', width: 160, sort: true,}
-                ,{field: 'issueStatus', title: '是否发放', width: 90}
+                ,{field: 'issueStatus', title: '是否发放'}
                 //,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:200}// 操作的工具栏
             ]]
 

@@ -16,7 +16,7 @@
     </select>
 
     <update id="updateSalaryIssueStatusBySalaryIssueId">
-        update salaryissue set status = #{status} where salaryIssueId = #{id}
+        update salaryissue set status = #{status},issueTime = #{issueTime} where salaryIssueId = #{id}
     </update>
 
 

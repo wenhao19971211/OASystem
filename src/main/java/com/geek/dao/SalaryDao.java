@@ -37,9 +37,9 @@ public interface SalaryDao {
 
     /**
      * 根据salaryId查询薪资表
-     * @param slaryId
+     * @param salaryId
      * @return
      */
-    public Salary findSalaryBySalaryId(@Param("salaryId") Integer slaryId);
+    public Salary findSalaryBySalaryId(@Param("salaryId") Integer salaryId);
 
 }

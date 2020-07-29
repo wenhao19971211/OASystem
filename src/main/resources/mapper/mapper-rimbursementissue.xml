@@ -16,7 +16,7 @@
     </select>
 
     <update id="updateRimbursementIssueStatusByRimbursementIsuueId" >
-        update rimbursement set status = #{status} where rimbursementIssueId = #{id}
+        update rimbursement set status = #{status} ,issueTime = #{issueTime} where rimbursementIssueId = #{id}
     </update>
 
     <resultMap id="resultMap1" type="com.geek.pojo.Reimbursement">
@@ -48,7 +48,7 @@
 
 
     <update id="updateReimbursementStatus4ByReimbursementId">
-        update reimbursement set checkstatus = #{status} where reimbursementId = #{reimbursementId}
+        update reimbursement set checkstatus = #{status}  where reimbursementId = #{reimbursementId}
     </update>
 
 </mapper>

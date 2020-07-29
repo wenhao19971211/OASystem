@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -77,7 +78,7 @@ public class RimbursementIssueService {
     public boolean updateRimbursementIssueStatusByRimbursementIssueId(Integer rimbursementIssueId,Integer status)
     {
         //更新报销发放表的状态
-        int count1 = rimbursementIssueDao.updateRimbursementIssueStatusByRimbursementIsuueId(rimbursementIssueId, status);
+        int count1 = rimbursementIssueDao.updateRimbursementIssueStatusByRimbursementIsuueId(rimbursementIssueId, status,new Date());
         //更新报销表的状态
         int count2 = rimbursementIssueDao.updateReimbursementStatus4ByReimbursementId(rimbursementIssueId, 4);
 

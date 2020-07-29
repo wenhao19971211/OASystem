@@ -383,4 +383,18 @@ public class CommonUtil {
         String format = sf.format(date);
         return format;
     }
+
+    public static Date getYearMonthDate(String str)
+    {
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date = sf.parse(str);
+            return date;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 }

@@ -55,4 +55,10 @@
     <select id="findCount" resultType="java.lang.Integer">
         select count(*) from emp
     </select>
+
+    <select id="findOneDepAllEmpsByEmpId" resultType="com.geek.pojo.Emp">
+        select * from emp where depId = (select depId from emp where empId = #{empId})
+    </select>
+
+
 </mapper>
