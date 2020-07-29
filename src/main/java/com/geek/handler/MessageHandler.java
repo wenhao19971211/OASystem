@@ -2,6 +2,7 @@ package com.geek.handler;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.geek.bo.Message_bo;
 import com.geek.dto.Result;
 import com.geek.pojo.Message;
 import com.geek.service.MessageService;
@@ -9,25 +10,41 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class MessageHandler {
     @Autowired
     private MessageService messageService;
     @GetMapping("findAll")
-    public Result findAllById(int empId){
+    public String findAllById(Integer empId,Integer page,Integer limit){
         Result result = new Result();
-        List<Message> list = messageService.findAllById(empId);
-        result.setList(list);
-        return result;
+        Message_bo message_bo = messageService.findAllById(empId,page,limit);
+        Map<String,Object> map=new HashMap<>();
+        map.put("code",0);
+        map.put("msg","");
+        map.put("count",message_bo.getCount());
+        map.put("data",message_bo.getMessages());
+        JSONObject o = (JSONObject) JSONObject.toJSON(map);
+        String json = o.toJSONString();
+        //System.out.println(json);
+        return json;
     }
     @GetMapping("findNoExamine")
-    public Result findNoExamineById(int empId){
+    public String findNoExamineById(Integer empId,Integer page,Integer limit){
         Result result = new Result();
-        List<Message> list = messageService.findNoExamineById(empId);
-        result.setList(list);
-        return result;
+        Message_bo message_bo = messageService.findNoExamineById(empId,page,limit);
+        Map<String,Object> map=new HashMap<>();
+        map.put("code",0);
+        map.put("msg","");
+        map.put("count",message_bo.getCount());
+        map.put("data",message_bo.getMessages());
+        JSONObject o = (JSONObject) JSONObject.toJSON(map);
+        String json = o.toJSONString();
+        //System.out.println(json);
+        return json;
     }
 
     /**
@@ -36,11 +53,18 @@ public class MessageHandler {
      * @return
      */
     @GetMapping("examine")
-    public Result findExamineById(int empId){
+    public String findExamineById(Integer empId,Integer page,Integer limit){
         Result result = new Result();
-        List<Message> list = messageService.findExamineById(empId);
-        result.setList(list);
-        return result;
+        Message_bo message_bo = messageService.findExamineById(empId,page,limit);
+        Map<String,Object> map=new HashMap<>();
+        map.put("code",0);
+        map.put("msg","");
+        map.put("count",message_bo.getCount());
+        map.put("data",message_bo.getMessages());
+        JSONObject o = (JSONObject) JSONObject.toJSON(map);
+        String json = o.toJSONString();
+        //System.out.println(json);
+        return json;
     }
 
     /**
@@ -49,17 +73,31 @@ public class MessageHandler {
      * @return
      */
     @GetMapping("noRead")
-    public Result findNoReadById(int empId){
+    public String findNoReadById(Integer empId,Integer page,Integer limit){
         Result result = new Result();
-        List<Message> list = messageService.findNoReadById(empId);
-        result.setList(list);
-        return result;
+        Message_bo message_bo = messageService.findNoReadById(empId,page,limit);
+        Map<String,Object> map=new HashMap<>();
+        map.put("code",0);
+        map.put("msg","");
+        map.put("count",message_bo.getCount());
+        map.put("data",message_bo.getMessages());
+        JSONObject o = (JSONObject) JSONObject.toJSON(map);
+        String json = o.toJSONString();
+        //System.out.println(json);
+        return json;
     }
     @GetMapping("read")
-    public Result findReadById(int empId){
+    public String findReadById(Integer empId,Integer page,Integer limit){
         Result result = new Result();
-        List<Message> list = messageService.findReadById(empId);
-        result.setList(list);
-        return result;
+        Message_bo message_bo = messageService.findReadById(empId,page,limit);
+        Map<String,Object> map=new HashMap<>();
+        map.put("code",0);
+        map.put("msg","");
+        map.put("count",message_bo.getCount());
+        map.put("data",message_bo.getMessages());
+        JSONObject o = (JSONObject) JSONObject.toJSON(map);
+        String json = o.toJSONString();
+        //System.out.println(json);
+        return json;
     }
 }

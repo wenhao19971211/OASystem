@@ -1,5 +1,6 @@
 package com.geek.service;
 
+import com.geek.bo.Message_bo;
 import com.geek.dao.MessageDao;
 import com.geek.pojo.Message;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,15 @@ public class MessageService {
      * @param empId
      * @return
      */
-    public List<Message> findAllById(int empId){
-        return messageDao.findAllById(empId);
+    public Message_bo findAllById(int empId, Integer page, Integer limit){
+        Message_bo message_bo = new Message_bo();
+        List<Message> allById = messageDao.findAllById(empId, null, null);
+
+        List<Message> allById1 = messageDao.findAllById(empId, limit, limit * (page - 1));
+
+        message_bo.setCount(allById.size());
+        message_bo.setMessages(allById1);
+        return message_bo;
     }
 
     /**
@@ -51,8 +59,15 @@ public class MessageService {
      * @param empId
      * @return
      */
-    public List<Message> findNoExamineById(int empId){
-        return messageDao.findNoExamineById(empId);
+    public Message_bo findNoExamineById(int empId,Integer page,Integer limit){
+        Message_bo message_bo = new Message_bo();
+        List<Message> allById = messageDao.findNoExamineById(empId, null, null);
+
+        List<Message> allById1 = messageDao.findNoExamineById(empId,limit,limit*(page-1));
+
+        message_bo.setCount(allById.size());
+        message_bo.setMessages(allById1);
+        return message_bo;
     }
 
     /**
@@ -60,8 +75,16 @@ public class MessageService {
      * @param empId
      * @return
      */
-    public List<Message> findExamineById(int empId){
-        return messageDao.findExamineById(empId);
+    public Message_bo findExamineById(int empId,Integer page,Integer limit){
+
+        Message_bo message_bo = new Message_bo();
+        List<Message> allById = messageDao.findExamineById(empId, null, null);
+
+        List<Message> allById1 = messageDao.findExamineById(empId,limit,limit*(page-1));
+
+        message_bo.setCount(allById.size());
+        message_bo.setMessages(allById1);
+        return message_bo;
     }
 
     /**
@@ -69,8 +92,16 @@ public class MessageService {
      * @param empId
      * @return
      */
-    public List<Message> findNoReadById(int empId){
-        return messageDao.findNoReadById(empId);
+    public Message_bo findNoReadById(int empId,Integer page,Integer limit){
+
+        Message_bo message_bo = new Message_bo();
+        List<Message> allById = messageDao.findNoReadById(empId, null, null);
+
+        List<Message> allById1 = messageDao.findNoReadById(empId,limit,limit*(page-1));
+
+        message_bo.setCount(allById.size());
+        message_bo.setMessages(allById1);
+        return message_bo;
     }
 
     /**
@@ -78,7 +109,14 @@ public class MessageService {
      * @param empId
      * @return
      */
-    public List<Message> findReadById(int empId){
-        return messageDao.findReadById(empId);
+    public Message_bo findReadById(int empId,Integer page,Integer limit){
+        Message_bo message_bo = new Message_bo();
+        List<Message> allById = messageDao.findReadById(empId, null, null);
+
+        List<Message> allById1 = messageDao.findReadById(empId,limit,limit*(page-1));
+
+        message_bo.setCount(allById.size());
+        message_bo.setMessages(allById1);
+        return message_bo;
     }
 }
