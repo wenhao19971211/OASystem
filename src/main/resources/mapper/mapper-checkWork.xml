@@ -14,4 +14,8 @@
     <select id="findById" resultMap="checkWorkMap">
         select * from checkWork inner join emp on checkWork.empId=emp.empId where checkWork.empId=#{empId}
     </select>
+    <insert id="insertByEmpStatus" parameterType="checkWork">
+        insert into checkWork values(#{empId},#{today},#{isLate})
+    </insert>
+
 </mapper>
