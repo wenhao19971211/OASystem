@@ -143,7 +143,8 @@ public class HolidayHandler {
         Date date= new Date();
         Date date2=leaveService.changeDate(3);
         int compareTo=date2.compareTo(date);
-        if (compareTo==-1&&compareTo==0){
+        //-1 data2小于date 大于是1
+        if (compareTo==1||compareTo==0){
             result=leaveService.insertWorkonFrequency(depId,date);
         }else{
             result=leaveService.updateWorkonFrequency(depId,date);

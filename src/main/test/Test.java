@@ -1,9 +1,6 @@
 import com.geek.bo.*;
 import com.geek.dao.*;
-import com.geek.handler.RimbursementIssueHandler;
-import com.geek.handler.SalaryHandler;
-import com.geek.handler.SalaryIssueHandler;
-import com.geek.handler.TaskSendHandler;
+import com.geek.handler.*;
 import com.geek.pojo.*;
 import com.geek.service.RimbursementIssueService;
 import com.geek.service.SalaryIssueService;
@@ -50,6 +47,10 @@ public class Test {
     private SalaryIssueService salaryIssueService;
     @Autowired
     private TaskSendService taskSendService;
+    @Autowired
+    private ReleaseInfoHandler releaseInfoHandler;
+    @Autowired
+    private MessageHandler messageHandler;
 
 
     @org.junit.Test
@@ -259,6 +260,27 @@ public class Test {
             System.out.println(emp1);
         }
 
+    }
+
+    @org.junit.Test
+    public void test19()
+    {
+        String releaseInfo = releaseInfoHandler.findReleaseInfo();
+        System.out.println(releaseInfo);
+    }
+    @org.junit.Test
+    public void test20()
+    {
+        String allById = messageHandler.findAllById(1, 1, 5);
+        System.out.println(allById);
+        String examineById = messageHandler.findExamineById(1, 1, 5);
+        System.out.println(examineById);
+        String noExamineById = messageHandler.findNoExamineById(1, 1, 5);
+        System.out.println(noExamineById);
+        String noReadById = messageHandler.findNoReadById(1, 1, 5);
+        System.out.println(noReadById);
+        String readById = messageHandler.findReadById(1, 1, 5);
+        System.out.println(readById);
     }
 
 

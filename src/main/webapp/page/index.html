@@ -17,33 +17,70 @@
 		.dd{
 			margin-left: -20px; 
 			margin-top: -12px;
-			height: 1000px;
+			height: 694px;
 		}
 		a{
 			cursor:pointer;
 		}
+
+		.layui-tab-title .layui-this:after {
+			position: absolute;
+			left: 0;
+			top: 0;
+			content: '';
+			width: 100%;
+			height: 55px;
+			border-width: 1px;
+			border-style: solid;
+			border-bottom-color: #fff;
+			border-radius: 2px 2px 0 0;
+			box-sizing: border-box;
+			pointer-events: none;
+		}
+		.layui-tab-title li {
+			display: inline-block;
+			*display: inline;
+			*zoom: 1;
+			vertical-align: middle;
+			font-size: 14px;
+			transition: all .2s;
+			-webkit-transition: all .2s;
+			position: relative;
+			line-height: 58px;
+			min-width: 100px;
+			padding: 0 15px;
+			text-align: center;
+			cursor: pointer;
+		}
 	</style>
 
-	<body style="background-color:white" >
+	<body style="background-color: #C9C9C9; width: 100%;height: 694px;" >
 	<input type="hidden" id="empId">
 	<input type="hidden" id="depId">
    <div class="layui-row" >
 
 	<div class="layui-tab layui-tab-brief " lay-filter="docDemoTabBrief">
-		<ul class="layui-col-xs2 layui-col-sm2 layui-col-md2" style="height: 40px; text-align: center; width: 40px;" >
-			<img src="" class="head"><span class="empName" style="float: left;"></span></ul>
-	  <ul class="layui-tab-title layui-col-xs10 layui-col-sm10 layui-col-md10" style="background-color: #393D49; color: #F3F3F3; float: right; width: 90%;height: 40px; margin-top:-10px; ">
-<!--<a href="http://www.baidu.com" style="color: #000000;" target="dd">首页</a>-->
-
+		<ul class="layui-col-xs2 layui-col-sm2 layui-col-md2" style="height: 60px; text-align: center; width: 13%;margin-top: -10px;line-height: 60px; text-align: center;" >
+			<li class="layui-nav-item" lay-unselect="" style="">
+				<a href="javascript:;" style="color: #C9C9C9"><img src="//t.cn/RCzsdCq" class="layui-nav-img" >我</a>
+				<dl class="layui-nav-child">
+					<dd><a href="javascript:;">修改信息</a></dd>
+					<dd><a href="javascript:;">安全管理</a></dd>
+					<dd><a href="javascript:;">退了</a></dd>
+				</dl>
+			</li>
+		</ul>
+	  <ul class="layui-tab-title layui-col-xs10 layui-col-sm10 layui-col-md10" style="background-color: #393D49; color: #F3F3F3; float: right; width: 87%;height: 60px; margin-top:-10px; ">
 	    <li class="layui-this">个人办公</li>
 	    <li>流程管理</li>
 	    <li>任务管理</li>
 	    <li>人事管理</li>
 	    <li>财务管理</li>
 	  </ul>
-  <div class="layui-tab-content layui-col-xs4 layui-col-sm4 layui-col-md2" style="margin-left: -30px" >
+
+  <div class="layui-tab-content layui-col-xs4 layui-col-sm4 layui-col-md2"  >
 	  	<!--&lt;!&ndash;一号选项卡&ndash;&gt;-->
-	 <ul class="layui-nav layui-nav-tree layui-tab-item layui-show layui-col-xs6 layui-col-sm6 layui-col-md3 dd"  lay-filter="test">
+	 <ul class="layui-nav layui-nav-tree layui-tab-item layui-show layui-col-xs2 layui-col-sm2 layui-col-md2 dd"  lay-filter="test">
 	<!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
 		 <li class="layui-nav-item " >
 			<a  href="page/message.html" target="dd" >消息提醒</a>
@@ -56,22 +93,27 @@
 			 <dd id="ckqj"><a href="page/selectLeave.html" target="dd">查看请假</a></dd>
 		 </dl>
 		 </li>
-		 <li class="layui-nav-item"><a >报销管理</a></li>
+		 <li class="layui-nav-item"><a >报销管理</a>
+			 <dl class="layui-nav-child">
+				 <dd id="baoxiao"><a href="page/baoxiao.html" target="dd">报销申请</a></dd>
+				 <dd id="shenhebaoxiao"><a href="page/rimbursementList.html" target="dd">审核报销</a></dd>
+			 </dl>
+		 </li>
 	  	 <li class="layui-nav-item"><a >邮件管理</a>
 			 <dl class="layui-nav-child">
 				 <dd id="fsyj"><a>发送邮件</a></dd>
 				 <dd id="chyj"><a href="page/selectEmail.html" target="dd">查看邮件</a></dd>
 			 </dl>
 		 </li>
-		 <li class="layui-nav-item"><a >通讯录</a></li>
-		 <li class="layui-nav-item"><a href="page/Information.html" target="dd">个人信息</a></li>
+		 <li class="layui-nav-item"><a href="page/mobile.html" target="dd">通讯录</a></li>
+		 <li class="layui-nav-item"><a >个人信息</a></li>
 		 <li class="layui-nav-item"><a href="page/workOn.html" target="dd">打卡</a></li>
 
 		 <li class="layui-nav-item"><a id="departure">离职</a></li>
 	</ul>
 
 			  	  	<!--四号选项2卡-->
-	<ul class="layui-nav layui-nav-tree layui-tab-item layui-col-xs6 layui-col-sm6 layui-col-md3 dd" lay-filter="test">
+	<ul class="layui-nav layui-nav-tree layui-tab-item layui-col-xs2 layui-col-sm2 layui-col-md2 dd" lay-filter="test">
 			<!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
 		<li class="layui-nav-item"><a >待我审批</a>
 			<dl class="layui-nav-child">
@@ -91,7 +133,7 @@
 	</ul>
   	
   	  	<!--5号选项2卡-->
-	<ul class="layui-nav layui-nav-tree layui-tab-item layui-col-xs6 layui-col-sm6 layui-col-md3 dd" lay-filter="test">
+	<ul class="layui-nav layui-nav-tree layui-tab-item layui-col-xs2 layui-col-sm2 layui-col-md2 dd" lay-filter="test">
 		<!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
 		<li class="layui-nav-item ">
 		    <a href="page/MyTask.html" target="dd">我的任务</a>
@@ -109,7 +151,7 @@
 	</ul>
 
 	  	  	<!--六号选项2卡-->
-	<ul class="layui-nav layui-nav-tree layui-tab-item layui-col-xs6 layui-col-sm6 layui-col-md3 dd" lay-filter="test">
+	<ul class="layui-nav layui-nav-tree layui-tab-item layui-col-xs2 layui-col-sm2 layui-col-md2 dd" lay-filter="test">
 	<!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
 	  	<li class="layui-nav-item "><a href="page/personnelInformation.html" target="dd">人事信息</a></li>
 		<li class="layui-nav-item"><a href="page/personnelContract.html" target="dd">人事合同</a></li>
@@ -118,7 +160,7 @@
 
 	</ul>
 	  <!--七号-->
-	  <ul class="layui-nav layui-nav-tree layui-tab-item layui-col-xs6 layui-col-sm6 layui-col-md3 dd" lay-filter="test">
+	  <ul class="layui-nav layui-nav-tree layui-tab-item layui-col-xs2 layui-col-sm2 layui-col-md2 dd" lay-filter="test">
 		  <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
 		  <li class="layui-nav-item"><a >报销发放</a>
 			  <dl class="layui-nav-child">
@@ -133,15 +175,12 @@
 			  </dl>
 		  </li>
 	  </ul>
-
   	 	</div>
 			<!--//右边活动版块-->
-		 <div class="layui-col-xs8 layui-col-sm8 layui-col-md10 ss" style="margin-left:-50px; " id="d1">
-			  <div class="layui-row" style="width: 110%; height: 102%;">
-				<div class="layui-col-xs12 layui-col-sm12 layui-col-md12 imgss">
+		 <div class="layui-col-xs10 layui-col-sm10 layui-col-md10 ss" style="margin-left:-50px; " id="d1">
 
-				</div>
 				<div class="layui-col-xs12 layui-col-sm12 layui-col-md12" id="nr" >
+					<iframe src='' frameborder='0' name="dd" scrolling='no' width='1250px' height='694px' style="background-color: white; margin-left: 14px;"></iframe>
 
 					<iframe src='' frameborder='0' name="dd" scrolling='no' width='1250px' height='1000px' style="background-color: white"></iframe>
 					<iframe src='' frameborder='0' name="dd" scrolling='no' width='1250px' height='1000px' ></iframe>

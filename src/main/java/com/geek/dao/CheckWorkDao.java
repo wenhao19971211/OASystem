@@ -13,4 +13,14 @@ public interface CheckWorkDao {
      * @return
      */
     public List<CheckWork> findById(@Param("empId") int empId, @Param("start")Date start,@Param("end") Date end);
+
+    /**
+     * 添加打卡记录
+     * @param empId
+     * @param today
+     * @param isLate
+     */
+    public void insertByEmpStatus(@Param("empId") int empId,@Param("today") Date today,@Param("isLate") String isLate);
+
+
 }

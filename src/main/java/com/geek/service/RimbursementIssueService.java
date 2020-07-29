@@ -2,6 +2,7 @@ package com.geek.service;
 
 import com.geek.bo.RimbursementIssue_bo;
 import com.geek.dao.EmpDao;
+import com.geek.dao.ReimbursementDao;
 import com.geek.dao.RimbursementIssueDao;
 import com.geek.pojo.Emp;
 import com.geek.pojo.Reimbursement;
@@ -24,6 +25,7 @@ public class RimbursementIssueService {
     private RimbursementIssueDao rimbursementIssueDao;
     @Autowired
     private EmpDao empDao;
+
     /**
      * 根据发放状态查询所有的发放记录
      * @param status
@@ -85,6 +87,9 @@ public class RimbursementIssueService {
 
         return count1>0&&count2>0;
     }
+
+
+
 
     
 }

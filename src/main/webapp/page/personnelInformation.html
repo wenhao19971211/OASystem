@@ -85,6 +85,14 @@
                 layui.layer.full(window.sessionStorage.getItem("index"));
             })
         }
+    });
+    /**
+     * 查询详细信息
+     */
+    $("#content tr:first-child").click(function () {
+        var empId = $("#content tr:eq(2)").html();
+        console.log(empId);
+        location.href = "page/empInfo?empId="+empId;
     })
 
 

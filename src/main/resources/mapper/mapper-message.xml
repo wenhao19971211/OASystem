@@ -16,6 +16,10 @@
     </resultMap>
    <select id="findAllById" resultMap="messageMap">
        select * from message where empId=#{empId}
+       order by senddTime
+       <if test="index != null and limit != null">
+           limit #{index},#{limit}
+       </if>
    </select>
     <!--添加消息-->
     <insert id="addMessage">
@@ -24,18 +28,34 @@
 
     <select id="findNoExamineById" resultMap="messageMap">
         select * from message where empId=#{empId} and messageStatus=1
+        order by senddTime
+        <if test="index != null and limit != null">
+            limit #{index},#{limit}
+        </if>
     </select>
 
     <select id="findExamineById" resultMap="messageMap">
         select * from message where empId=#{empId} and messageStatus=2
+        order by senddTime
+        <if test="index != null and limit != null">
+            limit #{index},#{limit}
+        </if>
     </select>
 
     <select id="findNoReadById" resultMap="messageMap">
         select * from message where empId=#{empId} and readStatus=1
+        order by senddTime
+        <if test="index != null and limit != null">
+            limit #{index},#{limit}
+        </if>
     </select>
 
     <select id="findReadById" resultMap="messageMap">
         select * from message where empId=#{empId} and readStatus=2
+        order by senddTime
+        <if test="index != null and limit != null">
+            limit #{index},#{limit}
+        </if>
     </select>
 
     <select id="findEmpByEmpName" resultType="emp">
@@ -45,5 +65,10 @@
     <insert id="addInfo">
         insert into releasetabe values (null,#{releaseTitle},#{releaseContent},#{releaseTime})
     </insert>
+
+    <select id="findReleaseInfo" resultType="com.geek.pojo.ReleaseTabe">
+        select * from releasetabe order by releaseTime limit 0,5
+    </select>
+
 
 </mapper>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>文章列表--layui后台管理模板 2.0</title>
+	<meta name="renderer" content="webkit">
+	<base href="http://localhost:8081/OASystem_war_exploded/">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="js/dist/css/layui.css" media="all" />
+	<!--<link rel="stylesheet" href="css\public.css" media="all" />-->
+	<script type="text/javascript" src="js/dist/layui.js"></script>
+
+</head>
+<body class="childrenBody">
+<form class="layui-form" style="width:80%;">
+	<div class="layui-form-item layui-row layui-col-xs12">
+		<label class="layui-form-label">用户id:</label>
+		<div class="layui-input-block">
+	<p style="line-height: 40px;" class=" " >
+		<input type="text" class="empId" value="2" hidden="hidden">
+		2
+	</p>
+		</div>
+	</div>
+	<div class="layui-form-item layui-row layui-col-xs12">
+		<label class="layui-form-label">任务编号:</label>
+		<div class="layui-input-block">
+			<input type="text" class="layui-input taskSendId" lay-verify="required" placeholder="请输入任务编号">
+		</div>
+	</div>
+	<div class="layui-form-item layui-row layui-col-xs12">
+		<label class="layui-form-label">报销金额:</label>
+		<div class="layui-input-block">
+			<input type="text" class="layui-input sum" lay-verify="required" placeholder="请输入提交的金额">
+		</div>
+	</div>
+	<div class="layui-row">
+		<div class="magb15 layui-col-md4 layui-col-xs12">
+			<label class="layui-form-label">报销类型:</label>
+			<div class="layui-input-block">
+				<select name="userGrade" class="userGrade" lay-filter="userGrade">
+					<option value="1">差旅报销</option>
+					<option value="2">商务报销</option>
+					<option value="3">办公报销</option>
+					<option value="4">通讯报销</option>
+					<option value="5">燃油费报销</option>
+					<option value="6">其他</option>
+				</select>
+			</div>
+		</div>
+	</div>
+	<div class="layui-form-item layui-row layui-col-xs12">
+		<label class="layui-form-label">报销明细:</label>
+		<div class="layui-input-block">
+			<textarea placeholder="请输入报销原因" class="layui-textarea userDesc"></textarea>
+		</div>
+	</div>
+	<div class="layui-form-item layui-row layui-col-xs12">
+		<div class="layui-input-block">
+			<button class="layui-btn layui-btn-sm" lay-submit="" lay-filter="addUser">立即添加</button>
+			<button type="reset" class="layui-btn layui-btn-sm layui-btn-primary">取消</button>
+		</div>
+	</div>
+ </form>
+
+</body>
+</html>
+<script>
+	layui.use(['form','layer'],function(){
+		var form = layui.form
+		layer = parent.layer === undefined ? layui.layer : top.layer,
+				$ = layui.jquery;
+
+		form.on("submit(addUser)",function(data){
+			//弹出loading
+			var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
+			console.log($(".empId").val()+"这是empId");
+			console.log($(".taskSendId").val());
+			console.log($(".sum").val());
+			console.log(data.field.userGrade);
+			console.log($(".userDesc").val());
+			var empId=$(".empId").val();
+			var taskSendId=$(".taskSendId").val();
+			var sum=$(".sum").val();
+			var type=data.field.userGrade;
+			var detail=$(".userDesc").text();
+			// $.ajax({
+			// 	url:"rmMessage"
+			// 	,type:"GET",
+			// 	date:{"empId":$(".empId").val(),"taskSendId":$(".taskSendId").val(),"sum":$(".sum").val(),"type":data.field.userGrade,"detail":$(".userDesc").text()},
+			// 	dataType:"json",
+			// 	success:function(date){
+			// 		console.log(date.message);
+			// 	}
+			// });
+        // 实际使用时的提交信息
+			$.get("rmMessage",{
+				empId: $(".empId").val(),  //用户Id
+				taskSendId: $(".taskSendId").val(),  //任务id
+				sum : $(".sum").val(),  //报销金额
+				type : data.field.userGrade,  //报销类型
+				detail : $(".userDesc").text(),    //申请详情
+			},function(res){
+			});
+			setTimeout(function(){
+				top.layer.close(index);
+				top.layer.msg("用户添加成功！");
+				layer.closeAll("iframe");
+				//刷新父页面
+				// parent.location.reload();
+			},2000);
+			return false;
+		})
+
+//  //格式化时间
+//  function filterTime(val){
+//      if(val < 10){
+//          return "0" + val;
+//      }else{
+//          return val;
+//      }
+//  }
+//  //定时发布
+//  var time = new Date();
+//  var submitTime = time.getFullYear()+'-'+filterTime(time.getMonth()+1)+'-'+filterTime(time.getDate())+' '+filterTime(time.getHours())+':'+filterTime(time.getMinutes())+':'+filterTime(time.getSeconds());
+
+	})
+
+
+</script>
