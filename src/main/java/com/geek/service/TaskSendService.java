@@ -52,9 +52,9 @@ public class TaskSendService {
         {
             //查询任务发起信息
             TaskSend taskSend1 = taskSendDao.findTaskSenndByEmpIdAndToday(taskSend.getEmpId(), taskSend.getToday());
-            System.out.println("taskSend1:"+taskSend1);
+            //System.out.println("taskSend1:"+taskSend1);
             taskSend.setTaskSendId(taskSend1.getTaskSendId());
-            System.out.println("taskSend:"+taskSend);
+            //System.out.println("taskSend:"+taskSend);
 
         }
 
