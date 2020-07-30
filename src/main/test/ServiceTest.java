@@ -1,4 +1,5 @@
 import com.geek.bo.CheckWork_bo;
+import com.geek.bo.Prize_bo;
 import com.geek.dao.*;
 import com.geek.pojo.*;
 import com.geek.service.*;
@@ -130,5 +131,15 @@ public class ServiceTest {
 //        for (ReAndPu reAndPu : list) {
 //            System.out.println(reAndPu.getEmp().getEmpName());
 //        }
+//        Prize_bo prize_bo = reAndPuService.findById(1);
+//        System.out.println(prize_bo.getCause());
+//        ReAndPu reAndPu = new ReAndPu();
+//        reAndPu.setEmpId(1);
+//        reAndPu.setType(1);
+//        reAndPu.setItem(1);
+//        reAndPu.setCause("工作认真");
+//        reAndPu.setMoney(300);
+//        reAndPu.setReAndPuTime(new Date());
+//        reAndPuService.addPrize(reAndPu);
     }
 }

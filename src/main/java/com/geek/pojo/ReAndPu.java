@@ -13,6 +13,15 @@ public class ReAndPu {
     private String cause;
     private Integer item;
     private Date reAndPuTime;
+    private Integer empId;
+
+    public Integer getEmpId() {
+        return empId;
+    }
+
+    public void setEmpId(Integer empId) {
+        this.empId = empId;
+    }
 
     public Integer getRewardAndPuishId() {
         return rewardAndPuishId;

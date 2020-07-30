@@ -13,7 +13,7 @@
     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">同意</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">不同意</a>
 </script>
-<table class="" id="content" lay-filter="test"></table>
+<table class="" id="content" lay-filter="test" style="text-align: center"></table>
 </body>
 </html>
 <script>
@@ -26,27 +26,20 @@
         //第一个实例
         table.render({
             elem: '#content'
+            ,height:500
             ,url:'seeDeparture?checkEmpId='+empId
             ,parseData:function(data){//res 即为原始返回的数据
                 data =$.parseJSON(data);
                 return data;
             }
-            ,page:
-                { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
-                    layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
-                    ,curr: 1 //设定初始在第 5 页
-                    ,groups: 5//只显示 1 个连续页码
-                    ,limit:5
-                    ,first: true //不显示首页
-                    ,last: true //不显示尾页
-                }
+            ,page:true
             ,cols: [[ //表头
-                {field: 'empName', title: '姓名', width:100,fixed: 'left'}
-                ,{field: 'depName', title: '部门', width:150}
-                ,{field: 'position', title: '岗位', width: 150}
-                ,{field: 'lastTime', title: '申请离职时间', width:200}
-                ,{field: 'reason', title: '离职原因', width:200}
-                ,{fixed: 'right', title:'操作', toolbar: '#barDemo'}// 操作的工具栏
+                {field: 'empName', title: '姓名',fixed: 'left',align:'center'}
+                ,{field: 'depName', title: '部门',align:'center'}
+                ,{field: 'position', title: '岗位',align:'center'}
+                ,{field: 'lastTime', title: '申请离职时间',align:'center'}
+                ,{field: 'reason', title: '离职原因',align:'center'}
+                ,{fixed: 'right', title:'操作', toolbar: '#barDemo',align:'center'}// 操作的工具栏
             ]]
         })
         //行工具栏的点击
@@ -54,14 +47,12 @@
             var data = obj.data; //获得当前行数据
             var event = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
-            console.log(data);
-            console.log(event);
-            console.log(tr);
             if(event=='detail'){
                 agree(data.empId)
                 obj.del(tr);
             }
             else{
+                not(data.empId);
                 obj.del(tr);
             }
 
@@ -74,7 +65,7 @@ function agree(empId) {
         type:"put",
         dataType:"json",
         success:function (data) {
-
+            window.location.reload();
         }
 
     })
@@ -85,7 +76,6 @@ function not(empId) {
         type:"delete",
         dataType:"json",
         success:function (data) {
-
         }
 
     })

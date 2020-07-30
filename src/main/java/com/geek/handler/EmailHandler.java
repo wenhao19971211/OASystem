@@ -49,11 +49,6 @@ public class EmailHandler {
         if (title==null){
             title=" ";
         }
-        System.out.println(receive.length);
-        System.out.println("发送人编号"+empId);
-        System.out.println("发送的类别"+type);
-        System.out.println("发送人标题"+title);
-        System.out.println("发送人内容"+content);
         for (int receiveId : receive) {
            emailService.addEmail(empId,receiveId,title,content,type);
         }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <base href="http://localhost:8081/OASystem_war_exploded/">
+    <base href="http://localhost:8080/ssm_framework_war_exploded/">
     <meta charset="UTF-8">
     <title>个人信息</title>
     <script src="js/jquery.js"></script>
@@ -9,9 +9,7 @@
     <link rel="stylesheet" href="css/information.css" type="text/css">
 </head>
 <body>
-<input class="btn" type="button" value="保存" id="save">
-<input class="btn" type="button" value="返回" id="return"><br>
-<h3>个人资料</h3>
+<div style="margin: 15px auto;width: 700px;text-align: center"><h2>个人资料</h2></div>
 <hr>
     <div class="empInfo">
         <div class="head"><img src="" alt="" id="head"></div>
@@ -22,10 +20,8 @@
         <div class="info" id="position">职位：</div>
         <div class="info">电话：<input type="text" id="phone" class="contact"></div>
         <div class="info">邮箱：<input type="text" id="email" class="contact"></div>
-
     </div>
-
-
+<div class="btn" id="save">保存</div>
 </body>
 </html>
 <script>
@@ -69,7 +65,7 @@
             success:function (data) {
                 if (data.code == 1){
                     alert("保存成功");
-                    location.href = "page/index.html";
+                    window.location.reload();
                 }
             }
         })

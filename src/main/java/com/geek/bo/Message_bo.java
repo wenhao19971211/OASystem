@@ -5,22 +5,22 @@ import com.geek.pojo.Message;
 import java.util.List;
 
 public class Message_bo {
-    private List<Message> messages;//当页数据
+    private List<Messages_bo> messages;//当页数据
     private Integer count;//总共多少条
 
     public Message_bo() {
     }
 
-    public Message_bo(List<Message> messages, Integer count) {
+    public Message_bo(List<Messages_bo> messages, Integer count) {
         this.messages = messages;
         this.count = count;
     }
 
-    public List<Message> getMessages() {
+    public List<Messages_bo> getMessages() {
         return messages;
     }
 
-    public void setMessages(List<Message> messages) {
+    public void setMessages(List<Messages_bo> messages) {
         this.messages = messages;
     }
 

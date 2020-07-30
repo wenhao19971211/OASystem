@@ -6,15 +6,15 @@
     <title>Title</title>
     <script src="js/jquery.js"></script>
     <script src="js/common.js"></script>
-    <script src="js/index.js"></script>
+    <!--<script src="js/index.js"></script>-->
     <link rel="stylesheet" href="css/contract.css" type="text/css">
     <link rel="stylesheet" href="css/message.css" type="text/css">
     <link rel="stylesheet" href="js/dist/css/layui.css" />
 
 </head>
 <body>
-<h3>合同信息</h3>
-<p>&nbsp;&nbsp;基本信息</p>
+
+<div class="bq">丨基本信息</div>
 <hr>
 <div class="info" id="empId"></div>
 <div class="info" id="empName"></div>
@@ -33,10 +33,10 @@
 <div class="info">薪资：<input id="salary"></div>
 <div class="info">生效期：<input type="date" id="start"></div>
 <div class="info">失效期：<input type="date" id="end"></div>
-<p>&nbsp;续签记录</p>
+<div class="bq">丨续签记录</div>
 <hr>
 <table class="layui-table" style="width: 100%; text-align: center;" id="contractTable"></table>
-<input type="button" value="保存" id="save" class="btn">
+<div id="save" class="btn">保存</div>
 </body>
 </html>
 <script>
@@ -87,6 +87,15 @@
        var end = $("#end").val();
        var checkEmpName = $("#checkEmpName").html();
        var modifyTime = parseDate(new Date());
+       if (start == ""){
+        alert("请选择生效期");
+        return;
+       }
+       if (end == ""){
+           alert("请选择失效期");
+           return;
+       }
+
        $.ajax({
            url:"updateContract?empId="+empId+"&contractType="+contractType+"&salary="+salary+"&start="+start+"&end="+end,
            type:"put",
@@ -100,6 +109,7 @@
                        "<td>"+checkEmpName+"</td>" +
                        "<td>"+modifyTime+"</td></tr>"
                    $("#contractTable").append(contract);
+                   $(".btn").css({background:"#009688",color:"#white"});
                }
            }
        })

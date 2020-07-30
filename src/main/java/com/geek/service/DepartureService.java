@@ -66,5 +66,6 @@ public class DepartureService {
      */
     public void delDepartureById(int empId){
         departureDao.delDepartureById(empId);
+        System.out.println("删除成功");
     }
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <base href="http://localhost:8081/OASystem_war_exploded/">
+    <base href="http://localhost:8080/ssm_framework_war_exploded/">
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="js/dist/layui.js"></script>
@@ -13,7 +13,8 @@
 </head>
 <body>
 <div class="clear">
-    <h3>消息提醒</h3>
+    <div style="margin: 15px auto;width: 700px;text-align: center"><h2>消息提醒</h2></div>
+    <hr>
     <div id="btn">
         <input type="button" value="全部" id="all" class="btn"><br>
         <input type="button" value="待审" id="noExamine" class="btn"><br>
@@ -22,164 +23,91 @@
         <input type="button" value="已阅" id="read" class="btn"><br>
     </div>
     <div id="messageContent">
-        <table class="layui-table" style="width: 87%; text-align: center;" id="table1"></table>
+        <table class="" id="content" lay-filter="test" STYLE="text-align: center"></table>
+        <!--<table class="layui-table" style="width: 87%; text-align: center;" id="table1"></table>-->
     </div>
 </div>
 </body>
 </html>
 <script>
+    var emp = $(window.parent.document).find(":input#empId");
+    var empId = emp.val();
     layui.use('table', function() {
         var table = layui.table;
         // console.log(data);
         // data =$.parseJSON(data);
         //第一个实例
-    });
-    $(function () {
-        var emp = $(window.parent.document).find(":input#empId");
-        var empId = emp.val();
-        $(".layui-table").html(" <colgroup><col width="+100+"><col width="+100+"><col width="+100+"></colgroup><thead ><td>类型</td><td>内容</td><td>状态</td> </thead>");
-        $.ajax({
-            url:"findAll",
-            type:"get",
-            data:{"empId":empId},
-            dataType:"json",
-            success:function (data) {
-                for (var i = 0; i < data.list.length; i++){
-                    console.log(data.list[i].messageType);
-                    var type = "";
-                    if (data.list[i].messageType == 1){
-                        type = "任务";
-                    }
-                    else if (data.list[i].messageType == 2){
-                        type = "请假";
-                    }
-                    else if (data.list[i].messageType == 3){
-                        type = "报销";
-                    }
-                    else if (data.list[i].messageType == 4){
-                        type = "补录";
-                    }
-                    else if (data.list[i].messageType == 5) {
-                        type = "加班";
-                    }
-                    else{
-                        type = "离职";
-                    }
-                    var readStatus = "";
-                    if (data.list[i].readStatus ==1){
-                        readStatus = "待阅";
-                    }
-                    else{
-                        readStatus = "已阅";
-                    }
-                    // var message = "<tr type='text' value='"+type+"'> " +
-                    //     "<input type='text' value='"+data.list[i].messageContent+"'>" +
-                    //     " <input type='text' value='"+readStatus+"'><br>";
-                    var message = "<tr>" +
-                        "<td>"+type+"</td>" +
-                        "<td>"+data.list[i].messageContent+"</td>" +
-                        "<td>"+readStatus+"</td>" +
-                        "</tr>"
-                    $("#table1").append(message);
-                }
-
+        table.render({
+            elem: '#content'
+            ,height:500
+            , url: 'findAll?empId=' + empId
+            , parseData: function (data) {//res 即为原始返回的数据
+                data = $.parseJSON(data);
+                return data;
             }
+            ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+            ,page:true
+            , cols: [[ //表头
+                {field: 'messageType', title: '类型', fixed: 'left' ,align:'center'}
+                , {field: 'messageContent', title: '内容',align:'center'}
+                , {field: 'readStatus', title: '状态',align:'center'}
+            ]]
         })
+
+    })
         /**
          * 全部
          */
         $("#all").click(function () {
 
-            $.ajax({
-                url:"findAll",
-                type:"get",
-                data:{"empId":empId},
-                dataType:"json",
-                success:function (data) {
-                    $("#table1 tr:not(:first)").remove();
-                    for (var i = 0; i < data.list.length; i++){
-                        var type = "";
-                        if (data.list[i].messageType == 1){
-                            type = "任务";
-                        }
-                        else if (data.list[i].messageType == 2){
-                            type = "请假";
-                        }
-                        else if (data.list[i].messageType == 3){
-                            type = "报销";
-                        }
-                        else if (data.list[i].messageType == 4){
-                            type = "补录";
-                        }
-                        else if (data.list[i].messageType == 5) {
-                            type = "加班";
-                        }
-                        else{
-                            type = "离职";
-                        }
-                        var readStatus = "";
-                        if (data.list[i].readStatus ==1){
-                            readStatus = "待阅";
-                        }
-                        else{
-                            readStatus = "已阅";
-                        }
-                        var message = "<tr>" +
-                            "<td>"+type+"</td>" +
-                            "<td>"+data.list[i].messageContent+"</td>" +
-                            "<td>"+readStatus+"</td>" +
-                            "</tr>"
-                        $("#table1").append(message);
+            layui.use('table', function() {
+                var table = layui.table;
+                // console.log(data);
+                // data =$.parseJSON(data);
+                //第一个实例
+                table.render({
+                    elem: '#content'
+                    ,height:500
+                    , url: 'findAll?empId=' + empId
+                    , parseData: function (data) {//res 即为原始返回的数据
+                        data = $.parseJSON(data);
+                        return data;
                     }
+                    , page:true
+                    , cols: [[ //表头
+                        {field: 'messageType', title: '类型', fixed: 'left',align:'center'}
+                        , {field: 'messageContent', title: '内容',align:'center'}
+                        , {field: 'readStatus', title: '状态',align:'center'}
+                    ]]
+                })
 
-                }
             })
         })
         /**
          * 待审
          */
         $("#noExamine").click(function () {
-            var emp = $(window.parent.document).find(":input#empId");
-            var empId = emp.val();
-            $("#table1 tr:not(:first)").remove();
-            $.ajax({
-                url:"findNoExamine",
-                data:{"empId":empId},
-                type:"get",
-                dataType:"json",
-                success:function (data) {
-                    for (var i = 0; i < data.list.length; i++){
-                        var type = "";
-                        if (data.list[i].messageType == 1){
-                            type = "任务";
-                        }
-                        else if (data.list[i].messageType == 2){
-                            type = "请假";
-                        }
-                        else if (data.list[i].messageType == 3){
-                            type = "报销";
-                        }
-                        else if (data.list[i].messageType == 4){
-                            type = "补录";
-                        }
-                        else{
-                            type = "加班";
-                        }
-                        var readStatus = "";
-                        if (data.list[i].readStatus ==1){
-                            readStatus = "待阅";
-                        }
-                        else{
-                            readStatus = "已阅";
-                        }
-                        var message = "<tr>" +
-                            "<td>"+type+"</td>" +
-                            "<td>"+data.list[i].messageContent+"</td>" +
-                            "<td>"+readStatus+"</td>" +
-                            "</tr>"
-                        $("#table1").append(message);
+            layui.use('table', function() {
+                var table = layui.table;
+                // console.log(data);
+                // data =$.parseJSON(data);
+                //第一个实例
+                table.render({
+                    elem: '#content'
+                    ,height:500
+                    , url: 'findNoExamine?empId='+empId
+                    , parseData: function (data) {//res 即为原始返回的数据
+                        data = $.parseJSON(data);
+                        return data;
                     }
-                }
+                    , page:true
+                    , cols: [[ //表头
+                        {field: 'messageType', title: '类型', fixed: 'left',align:'center'}
+                        , {field: 'messageContent', title: '内容',align:'center'}
+                        , {field: 'readStatus', title: '状态',align:'center'}
+                    ]]
+                })
+
             })
         })
 
@@ -187,46 +115,27 @@
          * 已审
          */
         $("#examine").click(function () {
-            var emp = $(window.parent.document).find(":input#empId");
-            var empId = emp.val();
-            $("#table1 tr:not(:first)").remove();
-            $.ajax({
-                url:"examine",
-                data:{"empId":empId},
-                dataType:"json",
-                success:function (data) {
-                    for (var i = 0; i < data.list.length; i++){
-                        var type = "";
-                        if (data.list[i].messageType == 1){
-                            type = "任务";
-                        }
-                        else if (data.list[i].messageType == 2){
-                            type = "请假";
-                        }
-                        else if (data.list[i].messageType == 3){
-                            type = "报销";
-                        }
-                        else if (data.list[i].messageType == 4){
-                            type = "补录";
-                        }
-                        else{
-                            type = "加班";
-                        }
-                        var readStatus = "";
-                        if (data.list[i].readStatus ==1){
-                            readStatus = "待阅";
-                        }
-                        else{
-                            readStatus = "已阅";
-                        }
-                        var message = "<tr>" +
-                            "<td>"+type+"</td>" +
-                            "<td>"+data.list[i].messageContent+"</td>" +
-                            "<td>"+readStatus+"</td>" +
-                            "</tr>"
-                        $("#table1").append(message);
+            layui.use('table', function() {
+                var table = layui.table;
+                // console.log(data);
+                // data =$.parseJSON(data);
+                //第一个实例
+                table.render({
+                    elem: '#content'
+                    ,height:500
+                    , url: 'examine?empId='+empId
+                    , parseData: function (data) {//res 即为原始返回的数据
+                        data = $.parseJSON(data);
+                        return data;
                     }
-                }
+                    , page:true
+                    , cols: [[ //表头
+                        {field: 'messageType', title: '类型', fixed: 'left'}
+                        , {field: 'messageContent', title: '内容'}
+                        , {field: 'readStatus', title: '状态'}
+                    ]]
+                })
+
             })
         })
 
@@ -234,43 +143,27 @@
          * 待阅
          */
         $("#noRead").click(function () {
-            var emp = $(window.parent.document).find(":input#empId");
-            var empId = emp.val();
-            $("#table1 tr:not(:first)").remove();
-            $.ajax({
-                url:"noRead",
-                data:{"empId":empId},
-                dataType:"json",
-                success:function (data) {
-                    for (var i = 0; i < data.list.length; i++){
-                        var type = "";
-                        if (data.list[i].messageType == 1){
-                            type = "任务";
-                        }
-                        else if (data.list[i].messageType == 2){
-                            type = "请假";
-                        }
-                        else if (data.list[i].messageType == 3){
-                            type = "报销";
-                        }
-                        else if (data.list[i].messageType == 4){
-                            type = "补录";
-                        }
-                        else{
-                            type = "加班";
-                        }
-                        var readStatus = "";
-                        if (data.list[i].readStatus ==1){
-                            readStatus = "待阅";
-                        }
-                        var message = "<tr>" +
-                            "<td>"+type+"</td>" +
-                            "<td>"+data.list[i].messageContent+"</td>" +
-                            "<td>"+readStatus+"</td>" +
-                            "</tr>"
-                        $("#table1").append(message);
+            layui.use('table', function() {
+                var table = layui.table;
+                // console.log(data);
+                // data =$.parseJSON(data);
+                //第一个实例
+                table.render({
+                    elem: '#content'
+                    ,height:500
+                    , url: 'noRead?empId=' + empId
+                    , parseData: function (data) {//res 即为原始返回的数据
+                        data = $.parseJSON(data);
+                        return data;
                     }
-                }
+                    , page:true
+                    , cols: [[ //表头
+                        {field: 'messageType', title: '类型', fixed: 'left',align:'center'}
+                        , {field: 'messageContent', title: '内容',align:'center'}
+                        , {field: 'readStatus', title: '状态',align:'center'}
+                    ]]
+                })
+
             })
         })
 
@@ -278,45 +171,28 @@
          * 已阅
          */
         $("#read").click(function () {
-            var emp = $(window.parent.document).find(":input#empId");
-            var empId = emp.val();
-            $("#table1 tr:not(:first)").remove();
-            $.ajax({
-                url:"read",
-                data:{"empId":empId},
-                dataType:"json",
-                success:function (data) {
-                    for (var i = 0; i < data.list.length; i++){
-                        var type = "";
-                        if (data.list[i].messageType == 1){
-                            type = "任务";
-                        }
-                        else if (data.list[i].messageType == 2){
-                            type = "请假";
-                        }
-                        else if (data.list[i].messageType == 3){
-                            type = "报销";
-                        }
-                        else if (data.list[i].messageType == 4){
-                            type = "补录";
-                        }
-                        else{
-                            type = "加班";
-                        }
-                        var readStatus = "";
-                        if (data.list[i].readStatus ==2){
-                            readStatus = "已阅";
-                        }
-                        var message = "<tr>" +
-                            "<td>"+type+"</td>" +
-                            "<td>"+data.list[i].messageContent+"</td>" +
-                            "<td>"+readStatus+"</td>" +
-                            "</tr>"
-                        $("#table1").append(message);
+            layui.use('table', function() {
+                var table = layui.table;
+                // console.log(data);
+                // data =$.parseJSON(data);
+                //第一个实例
+                table.render({
+                    elem: '#content'
+                    ,height:500
+                    , url: 'read?empId=' + empId
+                    , parseData: function (data) {//res 即为原始返回的数据
+                        data = $.parseJSON(data);
+                        return data;
                     }
-                }
+                    , page:true
+                    , cols: [[ //表头
+                        {field: 'messageType', title: '类型', fixed: 'left',align:'center'}
+                        , {field: 'messageContent', title: '内容',align:'center'}
+                        , {field: 'readStatus', title: '状态',align:'center'}
+                    ]]
+                })
+
             })
-        })
     })
 
 </script>

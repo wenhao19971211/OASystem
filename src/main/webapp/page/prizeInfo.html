@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="http://localhost:8080/ssm_framework_war_exploded/">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery.js"></script>
+    <script src="js/common.js"></script>
+    <link rel="stylesheet" href="css/prizeInfo.css" type="text/css">
+</head>
+<body>
+<hr>
+<div class="left">奖惩类型</div><div class="right" id="type"></div>
+<div class="left">姓名</div><div class="right" id="empName"></div>
+<div class="left">授予单位</div><div class="right">极客营</div>
+<div class="left">奖惩名目</div><div class="right" id="item"></div>
+<div class="left">奖惩日期</div><div class="right" id="reAndPuTime"></div>
+<div class="left">奖惩金额</div><div class="right" id="money"></div>
+<div class="left">奖惩原因</div><div class="right" id="cause"></div>
+</body>
+</html>
+<script>
+    $(function () {
+        var param = parseUrl(location.href);
+        var rewardAndPuishId = param["rewardAndPuishId"];
+        console.log(rewardAndPuishId);
+        $.ajax({
+            url:"prizeInfo",
+            data:{"id":rewardAndPuishId},
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+                var type = "";
+                var item ="";
+                var reAndPuTime = parseDate(data.object.reAndPuTime);
+                if (data.object.type == 1){
+                    type = "奖励";
+                }
+                else{
+                    type = "惩罚";
+                }
+                if (data.object.item == 1){
+                    item = "季度之星";
+                }
+                else if (data.object.item == 2){
+                    item = "优秀员工";
+                }
+                else if (data.object.item == 3){
+                    item = "优秀团队";
+                }
+                else if (data.object.item == 4){
+                    item = "警告";
+                }
+                else{
+                    item = "严重警告";
+                }
+                $("#type").html(type);
+                $("#item").html(item);
+                $("#empName").html(data.object.empName);
+                $("#reAndPuTime").html(reAndPuTime);
+                $("#cause").html(data.object.cause);
+                $("#money").html(data.object.money);
+            }
+        })
+    })
+</script>

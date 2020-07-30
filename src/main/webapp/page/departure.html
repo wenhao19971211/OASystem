@@ -57,6 +57,19 @@
         var departureTime = $("#departureTime").val();
         var reason = $("#reason").html();
         var checkEmpId = $("#checkEmpId").val();
+        var jiaojie = $("#jiaojie").val();
+        if (departureTime == ""){
+            alert("请选择离职时间");
+            return;
+        }
+        if (reason == ""){
+            alert("请填写离职原因");
+            return;
+        }
+        if (jiaojie == ""){
+            alert("请填写任务交接");
+            return;
+        }
         $.ajax({
             url:"sendDeparture",
             data:{"empId":empId,"depId":depId,"position":position,"departureTime":departureTime,"reason":reason,"checkEmpId":checkEmpId},

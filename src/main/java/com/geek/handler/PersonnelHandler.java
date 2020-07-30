@@ -13,10 +13,7 @@ import com.geek.service.EmpService;
 import com.geek.service.ReAndPuService;
 import com.geek.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -45,8 +42,8 @@ public class PersonnelHandler {
     public String personnelInformation(int page,int limit){
        int start = limit*(page-1);
        int end = limit*page;
-       int count = empService.findCount();
        List<Emp> list = empService.findAll(start,end);
+        int count = list.size();
        List<PersonnelInformation_bo> empList = new ArrayList<>();
         for (Emp emp : list) {
             PersonnelInformation_bo person = new PersonnelInformation_bo();
@@ -171,7 +168,7 @@ public class PersonnelHandler {
     @GetMapping("prize")
     public Result prize(int empId){
         Result result = new Result();
-        List<ReAndPu> list = reAndPuService.findById(empId);
+        List<ReAndPu> list = reAndPuService.findByEmpId(empId);
         result.setList(list);
         return result;
     }
@@ -212,12 +209,14 @@ public class PersonnelHandler {
                 item = "严重警告";
             }
             Prize_bo prize_bo = new Prize_bo();
+            prize_bo.setRewardAndPuishId(reAndPu.getRewardAndPuishId());
             prize_bo.setCompany("极客营");
             prize_bo.setType(type);
             prize_bo.setItem(item);
             prize_bo.setCause(reAndPu.getCause());
             prize_bo.setMoney(reAndPu.getMoney());
             prize_bo.setReAndPuTime(CommonUtil.parseString(reAndPu.getReAndPuTime()));
+            prize_bo.setEmpName(reAndPu.getEmp().getEmpName());
             list.add(prize_bo);
         }
         Map<String,Object> map=new HashMap<>();
@@ -230,4 +229,43 @@ public class PersonnelHandler {
         return json;
     }
 
+    /**
+     * 查看奖惩详细
+     * @param id
+     * @return
+     */
+    @GetMapping("prizeInfo")
+    public Result findById(int id){
+        Result result = new Result();
+        Prize_bo prize_bo = reAndPuService.findById(id);
+        result.setObject(prize_bo);
+        return result;
+    }
+
+    /**
+     * 发布奖惩
+     * @param type
+     * @param money
+     * @param cause
+     * @param item
+     * @param reAndPuTime
+     * @param receive
+     * @return
+     */
+    @PostMapping("addPrize")
+    public Result addPrize(int type,double money,String cause ,int item,String reAndPuTime,int[] receive){
+        Result result = new Result();
+        for (int i : receive) {
+            ReAndPu reAndPu = new ReAndPu();
+            reAndPu.setEmpId(i);
+            reAndPu.setType(type);
+            reAndPu.setItem(item);
+            reAndPu.setMoney(money);
+            reAndPu.setCause(cause);
+            reAndPu.setReAndPuTime(CommonUtil.getTime(reAndPuTime));
+            reAndPuService.addPrize(reAndPu);
+        }
+        result.setCode(1);
+        return result;
+    }
 }

@@ -15,7 +15,7 @@
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
 </script>
-<table class="" id="content" lay-filter="test"></table>
+<table class="" id="content" lay-filter="test" style="text-align: center"></table>
 </body>
 </html>
 
@@ -27,30 +27,21 @@
         //第一个实例
         table.render({
             elem: '#content'
-            //height: 700
+            ,height: 500
             ,url:'personnelInformation'
             ,parseData:function(data){//res 即为原始返回的数据
                 data =$.parseJSON(data);
                 return data;
             }
-            ,page:
-                { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
-                    layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
-                    ,curr: 1 //设定初始在第 5 页
-                    ,groups: 5//只显示 1 个连续页码
-                    ,limit:5
-                    ,first: true //不显示首页
-                    ,last: true //不显示尾页
-                }
+            ,page:true
             ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
-            ,type:'checkbox'
             ,cols: [[ //表头
-                {field: 'empName', title: '姓名', width:150,fixed: 'left'}
-                ,{field: 'depName', title: '部门', width:200}
-                ,{field: 'empId', title: '工号', width:100,sort:true}
-                ,{field: 'position', title: '岗位', width:150}
-                ,{field: 'sex', title: '性别', width: 80}
-                ,{fixed: 'right', title:'操作', toolbar: '#barDemo'}// 操作的工具栏
+                {field: 'empName', title: '姓名',fixed: 'left',align:'center'}
+                ,{field: 'depName', title: '部门',align:'center'}
+                ,{field: 'empId', title: '工号',sort:true,align:'center'}
+                ,{field: 'position', title: '岗位',align:'center'}
+                ,{field: 'sex', title: '性别',align:'center'}
+                ,{fixed: 'right', title:'操作', toolbar: '#barDemo',align:'center'}// 操作的工具栏
             ]]
         });
         //行工具栏的点击

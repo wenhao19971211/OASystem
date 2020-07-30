@@ -15,11 +15,19 @@
             <result property="empName" column="empName"></result>
         </association>
     </resultMap>
-    <select id="findById" resultMap="reAndPuMap">
+    <select id="findByEmpId" resultMap="reAndPuMap">
        select * from reAndPu inner join emp on reAndPu.empId=emp.empId where emp.empId=#{empId}
     </select>
 
     <select id="findAll" resultMap="reAndPuMap">
-        select * from reAndPu inner join emp on reAndPu.empId=emp.empId limit #{start},#{end}
+        select * from reAndPu inner join emp on reAndPu.empId=emp.empId order by reAndPuTime desc limit #{start},#{end}
     </select>
+
+    <select id="findById" resultMap="reAndPuMap">
+        select * from reAndPu inner join emp on reAndPu.empId=emp.empId where rewardAndPuishId=#{id}
+    </select>
+
+    <insert id="addPrize" parameterType="reAndPu">
+        insert into reAndPu values(null,#{empId},#{type},#{money},#{cause},#{item},#{reAndPuTime})
+    </insert>
 </mapper>

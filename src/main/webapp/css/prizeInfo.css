@@ -1,0 +1,25 @@
+.left{
+    width: 100px;
+    height: 35px;
+    line-height: 35px;
+    padding-left: 10px;
+    color: #0C0C0C;
+    font-size: 16px;
+    background-color: #fcfcfc;
+    float: left;
+    border-bottom: 1px solid #f5f5f5;
+
+}
+.right{
+    width: 460px;
+    height: 35px;
+    line-height: 35px;
+    padding-left: 10px;
+    color: #999999;
+    float: left;
+    border-bottom: 1px solid #f5f5f5;
+}
+hr{
+    height: 2px;
+    background-color:#f5f5f5;
+}

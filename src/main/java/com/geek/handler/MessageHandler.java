@@ -150,7 +150,6 @@ public class MessageHandler {
         int start = limit*(page-1);
         int end = limit*page;
         List<Departure> departures = departureService.findDeparture(checkEmpId,start,end);
-        System.out.println(departures.size());
         List<Departure_bo> list = new ArrayList<>();
         for (Departure departure : departures) {
             Departure_bo departure_bo = new Departure_bo();
@@ -220,10 +219,12 @@ public class MessageHandler {
         return result;
     }
     @DeleteMapping("notDeparture")
-    public Result notDeparture(int empId){
+    public Result notDeparture(String empId){
         Result result = new Result();
-        departureService.delDepartureById(empId);
+        int id = Integer.parseInt(empId);
+        departureService.delDepartureById(id);
         result.setCode(1);
+        System.out.println("123");
         return result;
     }
 }

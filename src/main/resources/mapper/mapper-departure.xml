@@ -24,6 +24,6 @@
     </select>
 
     <delete id="delDepartureById">
-        delete form departure where empId=#{empId}
+        delete from departure where empId=#{empId}
     </delete>
 </mapper>

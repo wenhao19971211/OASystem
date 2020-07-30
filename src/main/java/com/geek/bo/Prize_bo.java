@@ -1,12 +1,30 @@
 package com.geek.bo;
 
 public class Prize_bo {
+    private Integer rewardAndPuishId;
+    private String empName;
     private String company;
     private String type;
     private String item;
     private String reAndPuTime;
     private double money;
     private String cause;
+
+    public String getEmpName() {
+        return empName;
+    }
+
+    public void setEmpName(String empName) {
+        this.empName = empName;
+    }
+
+    public Integer getRewardAndPuishId() {
+        return rewardAndPuishId;
+    }
+
+    public void setRewardAndPuishId(Integer rewardAndPuishId) {
+        this.rewardAndPuishId = rewardAndPuishId;
+    }
 
     public String getCause() {
         return cause;

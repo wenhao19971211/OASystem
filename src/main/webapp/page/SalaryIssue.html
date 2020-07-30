@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="js/dist/css/layui.css">
     <script src="js/dist/layui.js"></script>
     <script src="js/jquery.js"></script>
-    <script src="js/dist/lay/modules/layer.js"></script>
+    <!--<script src="js/dist/lay/modules/layer.js"></script>-->
 </head>
 <body  style="background-color:#F1F1F1">
 <!--//表头工具栏标签-->
@@ -19,7 +19,7 @@
     </div>
 </script>
 <!--表格主体-->
-<table  class="layui-hide" id="demo" lay-filter="text"></table>
+<table  class="layui-hide" id="demo" lay-filter="text" style="text-align: center"></table>
 <!--表内行工具栏-->
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
@@ -28,8 +28,6 @@
 </script>
 </body>
 </html>
-
-
 
 <script>
     var date=null;
@@ -43,20 +41,20 @@
             //,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
             ,toolbar:true
             ,type:'checkbox'
-            ,page:true //分页按问好那个改
+            ,page:true
             ,parseData:function(data){//res 即为原始返回的数据
                         data =$.parseJSON(data);
                         return data;
                         }
             ,cols: [[ //表头
                 //{type: 'checkbox', fixed: 'left'}// 开启多选框
-                {field: 'salaryIssueId', title: '薪资发放编号', width:130,edit: 'text', del:'test', fixed: 'left'}
-                ,{field: 'salaryReceiveEmpName', title: '接收人姓名',edit: 'text', width:100}
-                ,{field: 'salaryReceiveDepName', title: '接收人所在部门', width:150,edit: 'text',  }
-                ,{field: 'issueMoney', title: '发放金额', width:100}
-                ,{field: 'issueEmpName', title: '发放负责人', width: 100}
-                ,{field: 'issueTime', title: '发放时间', width: 160, sort: true,}
-                ,{field: 'status', title: '是否发放'}
+                {field: 'salaryIssueId', title: '薪资发放编号', width:130,edit: 'text', del:'test', fixed: 'left',align:'center'}
+                ,{field: 'salaryReceiveEmpName', title: '接收人姓名',edit: 'text', width:150,align:'center'}
+                ,{field: 'salaryReceiveDepName', title: '接收人所在部门', width:150,edit: 'text',align:'center' }
+                ,{field: 'issueMoney', title: '发放金额', width:150,align:'center'}
+                ,{field: 'issueEmpName', title: '发放负责人', width: 150,align:'center'}
+                ,{field: 'issueTime', title: '发放时间', width: 160, sort: true,align:'center'}
+                ,{field: 'status', title: '是否发放',align:'center'}
                 //,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:200}// 操作的工具栏
             ]]
 

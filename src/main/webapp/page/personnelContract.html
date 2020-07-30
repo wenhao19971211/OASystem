@@ -14,7 +14,7 @@
     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
 </script>
-<table class="" id="content" lay-filter="test"></table>
+<table class="" id="content" lay-filter="test" style="text-align: center"></table>
 </body>
 </html>
 <script>
@@ -25,29 +25,23 @@
         //第一个实例
         table.render({
             elem: '#content'
+            ,height:500
             ,url:'personnelContract'
             ,parseData:function(data){//res 即为原始返回的数据
                 data =$.parseJSON(data);
                 return data;
             }
-            ,page:
-                { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
-                    layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
-                    ,curr: 1 //设定初始在第 5 页
-                    ,groups: 5//只显示 1 个连续页码
-                    ,limit:5
-                    ,first: true //不显示首页
-                    ,last: true //不显示尾页
-                }
+            ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+            ,page:true
             ,cols: [[ //表头
-                {field: 'contractId', title: '合同编号', width:200, fixed: 'left'}
-                ,{field: 'empId', title: '工号', width:100,sort:true}
-                ,{field: 'empName', title: '姓名', width:100}
-                ,{field: 'effectTime', title: '生效期', width:150}
-                ,{field: 'failureTime', title: '失效期', width: 150}
-                ,{field: 'contractYear', title: '合同年限', width:100}
-                ,{field: 'contractType', title: '合同类型', width:150}
-                ,{fixed: 'right', title:'操作', toolbar: '#barDemo'}// 操作的工具栏
+                {field: 'contractId', title: '合同编号', fixed: 'left',align:'center'}
+                ,{field: 'empId', title: '工号',sort:true,align:'center'}
+                ,{field: 'empName', title: '姓名',align:'center'}
+                ,{field: 'effectTime', title: '生效期',align:'center'}
+                ,{field: 'failureTime', title: '失效期',align:'center'}
+                ,{field: 'contractYear', title: '合同年限',align:'center'}
+                ,{field: 'contractType', title: '合同类型',align:'center'}
+                ,{fixed: 'right', title:'操作', toolbar: '#barDemo',align:'center'}// 操作的工具栏
             ]]
         })
         //行工具栏的点击
@@ -57,6 +51,7 @@
             var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
             if(event=='detail'){
                 layer.open({
+                    title:"合同信息",
                     area: ['850px', '500px'],
                     type: 2,
                     content: ['page/contractInfo.html?empId='+data.empId, 'no'],
@@ -66,6 +61,7 @@
             }
             else {
                 layer.open({
+                    title:"合同信息",
                     area: ['850px', '500px'],
                     type: 2,
                     content: ['page/contractChange.html?empId='+data.empId, 'no'],

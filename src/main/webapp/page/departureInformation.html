@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<table class="" id="content" lay-filter="test"></table>
+<table class="" id="content" lay-filter="test" style="text-align: center"></table>
 </body>
 </html>
 <script>
@@ -21,28 +21,22 @@
         //第一个实例
         table.render({
             elem: '#content'
+            ,height:500
             ,url:'findDeparture'
             ,parseData:function(data){//res 即为原始返回的数据
                 data =$.parseJSON(data);
                 return data;
             }
-            ,page:
-                { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
-                    layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
-                    ,curr: 1 //设定初始在第 5 页
-                    ,groups: 5//只显示 1 个连续页码
-                    ,limit:5
-                    ,first: true //不显示首页
-                    ,last: true //不显示尾页
-                }
+            ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+            ,page:true
             ,cols: [[ //表头
-                {field: 'empId', title: '工号', width:100, fixed: 'left'}
-                ,{field: 'empName', title: '姓名', width:100}
-                ,{field: 'depName', title: '部门', width:150}
-                ,{field: 'position', title: '岗位', width: 150}
-                ,{field: 'lastTime', title: '最后工作日期', width:200}
-                ,{field: 'checkEmpName', title: '办理人', width:100}
-                ,{field: 'time', title: '办理日期', width:150}
+                {field: 'empId', title: '工号', fixed: 'left',align:'center'}
+                ,{field: 'empName', title: '姓名',align:'center'}
+                ,{field: 'depName', title: '部门',align:'center'}
+                ,{field: 'position', title: '岗位',align:'center'}
+                ,{field: 'lastTime', title: '最后工作日期',align:'center'}
+                ,{field: 'checkEmpName', title: '办理人',align:'center'}
+                ,{field: 'time', title: '办理日期',align:'center'}
             ]]
         })
     })
