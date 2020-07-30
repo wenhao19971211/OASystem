@@ -9,7 +9,6 @@ public class ReimbursementAll_bo {
     private Integer reimbursementId;
     private int empId;
     private int sendId;
-
     private Date sendTime;
     private double sum;
     private Date checkTime;

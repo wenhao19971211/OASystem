@@ -1,33 +1,33 @@
+
+
 layui.use(['form','layer','table','laytpl'],function(){
     var form = layui.form,
         layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery,
         laytpl = layui.laytpl,
         table = layui.table;
-
+    var emp = $(window.parent.document).find(":input#empId");
+    var empId = emp.val();
     //用户列表
     var tableIns = table.render({
         elem: '#userList',
-        url : 'changeStatue',
+        url : 'daKa?empId='+empId,
         cellMinWidth : 95,
         page : true,
         height : "full-125",
         limits : [10,15,20,25],
-        limit : 20,
+        limit : 10,
         parseData:function(data){//res 即为原始返回的数据
         data =$.parseJSON(data);
+        console.log(data);
         return data;
         },
-        id : "userListTable",
+        id:'userList',
         cols : [[
             {type: "checkbox", fixed:"left", width:50},
-            // {field: 'reimbursementId ', title: '申请编号', minWidth:100, align:"center"},
-            {field: 'empId', title: '申请人Id', minWidth:100, align:"center"},
-            {field: 'sendId', title: '发送的事件', minWidth:100, align:"center"},
-            {field: 'sendTime', title: '发送申请的时间', minWidth:100, align:"center"},
-            {field: 'sum', title: '总价', align:'center'},
-            {field: 'type', title: '报销的类型', align:'center',minWidth:150},
-            {field: 'detail', title: '报销的具体原因', align:'center',minWidth:150},
+            {field: 'today ', title: '打卡的日期', minWidth:100, align:"center"},
+            {field: 'workInTime ', title: '上班打卡时间', minWidth:100, align:"center"},
+            {field: 'workOutTime ', title: '下班打卡的时间', align:'center'},
             {title: '操作', minWidth:175, templet:'#userListBar',fixed:"right",align:"center"}
         ]]
     });

@@ -16,7 +16,7 @@
     </resultMap>
    <select id="findAllById" resultMap="messageMap">
        select * from message where empId=#{empId}
-       order by senddTime
+       order by senddTime desc
        <if test="index != null and limit != null">
            limit #{index},#{limit}
        </if>
@@ -28,7 +28,7 @@
 
     <select id="findNoExamineById" resultMap="messageMap">
         select * from message where empId=#{empId} and messageStatus=1
-        order by senddTime
+        order by senddTime desc
         <if test="index != null and limit != null">
             limit #{index},#{limit}
         </if>
@@ -36,7 +36,7 @@
 
     <select id="findExamineById" resultMap="messageMap">
         select * from message where empId=#{empId} and messageStatus=2
-        order by senddTime
+        order by senddTime desc
         <if test="index != null and limit != null">
             limit #{index},#{limit}
         </if>
@@ -44,7 +44,7 @@
 
     <select id="findNoReadById" resultMap="messageMap">
         select * from message where empId=#{empId} and readStatus=1
-        order by senddTime
+        order by senddTime desc
         <if test="index != null and limit != null">
             limit #{index},#{limit}
         </if>
@@ -52,7 +52,7 @@
 
     <select id="findReadById" resultMap="messageMap">
         select * from message where empId=#{empId} and readStatus=2
-        order by senddTime
+        order by senddTime desc
         <if test="index != null and limit != null">
             limit #{index},#{limit}
         </if>
@@ -67,7 +67,7 @@
     </insert>
 
     <select id="findReleaseInfo" resultType="com.geek.pojo.ReleaseTabe">
-        select * from releasetabe order by releaseTime limit 0,5
+        select * from releasetabe order by releaseTime desc limit 0,5
     </select>
 
 

@@ -67,4 +67,5 @@ public interface MessageDao {
      */
     public List<ReleaseTabe> findReleaseInfo();
 
+
 }

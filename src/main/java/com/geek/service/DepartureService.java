@@ -2,6 +2,7 @@ package com.geek.service;
 
 import com.geek.dao.DepartureDao;
 import com.geek.dao.EmpDao;
+import com.geek.dao.MessageDao;
 import com.geek.pojo.Departure;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,8 @@ public class DepartureService {
     private DepartureDao departureDao;
     @Autowired
     private EmpDao empDao;
-
+    @Autowired
+    private MessageDao messageDao;
     /**
      * 添加离职信息
      * @param departure

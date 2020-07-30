@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta http-equiv="Content-Type" content="text/html; charset=GBK">
-		<base href="http://localhost:8080/ssm_framework_war_exploded/">
+		<base href="http://192.168.6.145:8080/ssm_framework_war_exploded/">
  		<link rel="stylesheet" href="js/dist/css/layui.css"  media="all">
  		<!--<link rel="stylesheet" href="page/success.html" />-->
  		<link rel="stylesheet" href="page/leave.html" />
@@ -17,7 +17,7 @@
 		.dd{
 			margin-left: -20px; 
 			margin-top: -12px;
-			height: 694px;
+			height: 664px;
 		}
 		a{
 			cursor:pointer;
@@ -54,15 +54,15 @@
 		}
 	</style>
 
-	<body style="background-color: #C9C9C9; width: 100%;height: 694px;" >
+	<body style="background-image: url('img/timg.jpg'); width: 100%;height: 694px;" >
 	<input type="hidden" id="empId">
 	<input type="hidden" id="depId">
    <div class="layui-row" >
 
 	<div class="layui-tab layui-tab-brief " lay-filter="docDemoTabBrief">
-		<ul class="layui-col-xs2 layui-col-sm2 layui-col-md2" style="height: 60px; text-align: center; width: 13%;margin-top: -10px;line-height: 60px; text-align: center;" >
+		<ul class="layui-col-xs2 layui-col-sm2 layui-col-md2" style="height: 60px; text-align: center; width: 12.5%;margin-top: -10px;line-height: 60px; text-align: center;" >
 			<li class="layui-nav-item" lay-unselect="" style="">
-				<a href="javascript:;" style="color: #C9C9C9"><img src="//t.cn/RCzsdCq" class="layui-nav-img" >我</a>
+				<a href="javascript:;" style="color: #C9C9C9"><img src="" style="width: 50px;height: 50px; border: 1px solid #0C0C0C; border-radius: 25px"  class="layui-nav-img head" ><a class="empName"></a> </a>
 				<dl class="layui-nav-child">
 					<dd><a href="javascript:;">修改信息</a></dd>
 					<dd><a href="javascript:;">安全管理</a></dd>
@@ -70,12 +70,12 @@
 				</dl>
 			</li>
 		</ul>
-	  <ul class="layui-tab-title layui-col-xs10 layui-col-sm10 layui-col-md10" style="background-color: #393D49; color: #F3F3F3; float: right; width: 87%;height: 60px; margin-top:-10px; ">
+	  <ul class="layui-tab-title layui-col-xs10 layui-col-sm10 layui-col-md10" style="background-color: #393D49; color: #F3F3F3; float: right; width: 87.5%;height: 60px; margin-top:-10px; ">
 	    <li class="layui-this">个人办公</li>
-	    <li>流程管理</li>
+	    <li id="lcgl">流程管理</li>
 	    <li>任务管理</li>
-	    <li>人事管理</li>
-	    <li>财务管理</li>
+	    <li id="rsgl">人事管理</li>
+	    <li id="cwgl">财务管理</li>
 	  </ul>
 
   <div class="layui-tab-content layui-col-xs4 layui-col-sm4 layui-col-md2"  >
@@ -85,7 +85,7 @@
 		 <li class="layui-nav-item " >
 			<a  href="page/message.html" target="dd" >消息提醒</a>
 		 </li>
-		 <li class="layui-nav-item" ><a href="http://www.asd.com" target="dd" >个人考勤</a></li>
+		 <li class="layui-nav-item" ><a href="page/workOnList.html" target="dd" >个人考勤</a></li>
 		 <li class="layui-nav-item"><a href="page/MySalary.html" target="dd" >我的薪资</a></li>
 		 <li class="layui-nav-item"><a >请假管理</a>
 		 <dl class="layui-nav-child">
@@ -96,7 +96,6 @@
 		 <li class="layui-nav-item"><a >报销管理</a>
 			 <dl class="layui-nav-child">
 				 <dd id="baoxiao"><a href="page/baoxiao.html" target="dd">报销申请</a></dd>
-				 <dd id="shenhebaoxiao"><a href="page/rimbursementList.html" target="dd">审核报销</a></dd>
 			 </dl>
 		 </li>
 	  	 <li class="layui-nav-item"><a >邮件管理</a>
@@ -109,7 +108,7 @@
 		 <li class="layui-nav-item"><a href="page/Information.html" target="dd">个人信息</a></li>
 		 <li class="layui-nav-item"><a href="page/workOn.html" target="dd">打卡</a></li>
 
-		 <li class="layui-nav-item"><a id="departure">离职</a></li>
+		 <li class="layui-nav-item"><a id="departure">离职申请</a></li>
 	</ul>
 
 			  	  	<!--四号选项2卡-->
@@ -119,13 +118,12 @@
 			<dl class="layui-nav-child">
 				<dd id="spqj"><a href="page/leaveAudit.html" target="dd">审批请假</a></dd>
 				<dd><a href="page/departureList.html" target="dd">审批离职</a></dd>
-				<dd><a>审批补卡</a></dd>
+				<dd id="shenhebaoxiao"><a href="page/rimbursementList.html" target="dd">审核报销</a></dd>
 			</dl>
 		</li>
 		<li class="layui-nav-item"><a >已审批</a>
             <dl class="layui-nav-child">
                 <dd id="spyqj"><a href="page/managerSelectLeave.html" target="dd">已审批请假</a></dd>
-                <dd ><a>已审批补卡</a></dd>
             </dl>
         </li>
 		<li class="layui-nav-item"><a href="page/InfoAdd.html" target="dd">信息发布</a></li>
@@ -179,7 +177,8 @@
 		 <div class="layui-col-xs10 layui-col-sm10 layui-col-md10 ss" style="margin-left:-50px; " id="d1">
 
 				<div class="layui-col-xs12 layui-col-sm12 layui-col-md12" id="nr" >
-					<iframe src='' frameborder='0' name="dd" scrolling='no' width='1250px' height='694px' style="background-color: white; margin-left: 14px;"></iframe>
+
+					<iframe src='page/hand.html' frameborder='0' name="dd" scrolling='no' width='1325px' height='664px' style="background-color: white;margin-left: -10PX" ></iframe>
 				  <!--<div class="grid-demo layui-bg-blue"></div>-->
 				</div>
 				  <!--style="background-color: #1E9FFF"-->
@@ -192,6 +191,9 @@
 </html>
 
 	<script type="text/javascript">
+
+
+		var empId=$("#empId").val();
 	//注意：选项卡 依赖 element 模块，否则无法进行功能性操作
 	layui.use('element', function(){
 	  var element = layui.element;
@@ -246,4 +248,6 @@
 			content: ['page/sendEmail.html', 'no']
 		});
 	});
+
+
 	</script>

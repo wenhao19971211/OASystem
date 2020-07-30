@@ -2,9 +2,11 @@ package com.geek.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.geek.bo.Leave_bo;
+import com.geek.bo.WorkOn_bo;
 import com.geek.dao.*;
 import com.geek.dto.Result;
 import com.geek.pojo.*;
+import com.geek.util.CommonUtil;
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -351,5 +353,21 @@ public class LeaveService {
     public void insertMessageToCheckWork(String mess,Date date, int empId){
         checkWorkDao.insertByEmpStatus(empId,date,mess);
     }
+
+    @Transactional
+    public List<WorkOn_bo> findByEmpIdS(int empId){
+        List<WorkOn_bo> list = new ArrayList<>();
+        List<WorkOn> list1= workOnDao.finByEmpId(empId);
+        for (WorkOn workOn : list1) {
+            WorkOn_bo workOn_bo = new WorkOn_bo();
+            workOn_bo.setToday(CommonUtil.parseString(workOn.getToday()));
+            workOn_bo.setWorkInTime(CommonUtil.parseString(workOn.getWorkInTime()));
+            workOn_bo.setWorkOutTime(CommonUtil.parseString(workOn.getWorkOutTime()));
+            list.add(workOn_bo);
+        }
+        return list;
+
+    }
+
 
 }

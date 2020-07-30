@@ -214,6 +214,7 @@ public class MessageHandler {
     @PutMapping("agreeDeparture")
     public Result agreeDeparture(int empId){
         Result result = new Result();
+        messageService.addMessage(6,0,1,"同意离职",new Date(),empId);
         departureService.updateDeparture(empId);
         result.setCode(1);
         return result;
@@ -222,6 +223,7 @@ public class MessageHandler {
     public Result notDeparture(String empId){
         Result result = new Result();
         int id = Integer.parseInt(empId);
+        messageService.addMessage(6,0,1,"驳回离职",new Date(),id);
         departureService.delDepartureById(id);
         result.setCode(1);
         System.out.println("123");

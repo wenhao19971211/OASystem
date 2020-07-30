@@ -2,10 +2,12 @@ package com.geek.handler;
 
 import com.alibaba.fastjson.JSONObject;
 import com.geek.bo.Leave_bo;
+import com.geek.bo.WorkOn_bo;
 import com.geek.dto.Result;
 import com.geek.pojo.DayOff;
 import com.geek.pojo.Dominant;
 import com.geek.pojo.Emp;
+import com.geek.pojo.WorkOn;
 import com.geek.service.EmpService;
 import com.geek.service.LeaveService;
 import com.geek.util.SessionNameUtil;
@@ -30,6 +32,9 @@ public class HolidayHandler {
     LeaveService leaveService;
     @Autowired
     EmpService empService;
+
+
+
     @PostMapping("leave")
     public Integer addLeaveAndAddMessage(int type, String startDate, String endDate, String cause, HttpSession session){
 //        时间转化,字符转转date
@@ -134,22 +139,40 @@ public class HolidayHandler {
 
     /**
      * 日历打卡
-     * @param depId 用户id
+     * @param empId 用户id
      * @return
      */
-    @PostMapping("calendar/{depId}")
-    public Result insertWorkOn(@PathVariable("depId") int depId){
-        Result result=new Result();
+    @GetMapping("calendar")
+    public Result insertWorkOn( int empId){
+        Result result= new Result();
         Date date= new Date();
         Date date2=leaveService.changeDate(3);
         int compareTo=date2.compareTo(date);
         //-1 data2小于date 大于是1
         if (compareTo==1||compareTo==0){
-            result=leaveService.insertWorkonFrequency(depId,date);
+            result=leaveService.insertWorkonFrequency(empId,date);
         }else{
-            result=leaveService.updateWorkonFrequency(depId,date);
+            result=leaveService.updateWorkonFrequency(empId,date);
         }
         return result;
+    }
+
+    /**
+     * 打卡记录
+     */
+    @GetMapping("daKa")
+    public String findAllByEmpId( int empId,int page,int limit){
+        List<WorkOn_bo> list =leaveService.findByEmpIdS(empId);
+        int count = list.size();
+        Map<String,Object> map=new HashMap<>();
+        map.put("code",0);
+        map.put("msg","");
+        map.put("count",count);
+        map.put("data",list);
+        JSONObject o = (JSONObject) JSONObject.toJSON(map);
+        String json = o.toJSONString();
+        System.out.println(json);
+        return json;
     }
 
 

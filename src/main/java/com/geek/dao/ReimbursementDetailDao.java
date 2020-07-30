@@ -13,7 +13,7 @@ public interface ReimbursementDetailDao {
      * @param money 报销的总金额
      * @Param ReimbursementId 报销的Id
      */
-    public void insertDetailMessge(@Param("type") int type,@Param("detail") String detail,@Param("money") double money,@Param("ReimbursementId") int ReimbursementId);
+    public void insertDetailMessge(@Param("type") int type,@Param("detail") String detail,@Param("money") double money,@Param("ReimbursementId") Integer ReimbursementId);
 
 
 

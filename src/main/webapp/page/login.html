@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <base href="http://localhost:8080/ssm_framework_war_exploded/">
+    <base href="http://192.168.6.145:8080/ssm_framework_war_exploded/">
     <meta charset="UTF-8">
     <script src="js/jquery.js"></script>
     <link rel="stylesheet" href="js/dist/css/layui.css" />
@@ -70,7 +70,6 @@
             data:{"account":account,"password":password,"verCode":verCode},
             success:function (data) {
                 if (data==1){
-                    alert("登录成功！");
                     location.href="page/index.html";
                 } else if (data==2){
                     alert("密码错误");

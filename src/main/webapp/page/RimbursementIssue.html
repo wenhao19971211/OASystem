@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <base href="http://localhost:8080/ssm_framework_war_exploded/">
+    <base href="http://192.168.6.145:8080/ssm_framework_war_exploded/">
     <link rel="stylesheet" href="js/dist/css/layui.css">
     <script src="js/dist/layui.js"></script>
     <script src="js/jquery.js"></script>
@@ -50,13 +50,13 @@
                         }
             ,cols: [[ //表头
                 //{type: 'checkbox', fixed: 'left'}// 开启多选框
-                {field: 'rimbursementIssueId', title: '报销发放编号', width:130,edit: 'text', del:'test', fixed: 'left'}
-                ,{field: 'applyEmpName', title: '报销接收人',edit: 'text', width:100}
-                ,{field: 'applyDepName', title: '接收人所在部门', width:150,edit: 'text',  }
-                ,{field: 'sum', title: '报销金额', width:100}
-                ,{field: 'factMoney', title: '发放金额', width: 100}
-                ,{field: 'issueTime', title: '发放时间', width: 160, sort: true,}
-                ,{field: 'issueStatus', title: '是否发放'}
+                {field: 'rimbursementIssueId', title: '报销发放编号',edit: 'text', del:'test', fixed: 'left',align:'center'}
+                ,{field: 'applyEmpName', title: '报销接收人',edit: 'text',align:'center'}
+                ,{field: 'applyDepName', title: '接收人所在部门',edit: 'text',align:'center'  }
+                ,{field: 'sum', title: '报销金额',align:'center'}
+                ,{field: 'factMoney', title: '发放金额',align:'center'}
+                ,{field: 'issueTime', title: '发放时间', sort: true,align:'center'}
+                ,{field: 'issueStatus', title: '是否发放',align:'center'}
                 //,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:200}// 操作的工具栏
             ]]
 

@@ -21,9 +21,9 @@ public interface ReimbursementDao {
      * @param sum 报销的总金额
      */
     @Transactional
-    public void insertReimbursement(@Param("reimbursementId") int reimbursementId, @Param("empId") int empId, @Param("taskSendId") int taskSendId, @Param("sendTime") Date date,@Param("sum") double sum,@Param("date") Date dates);
+    public void insertReimbursement(@Param("reimbursementId") Integer reimbursementId, @Param("empId") int empId, @Param("taskSendId") int taskSendId, @Param("sendTime") Date date,@Param("sum") double sum,@Param("date") Date dates,@Param("type") int type);
 
 
     @Transactional
-    public void updateSomeStatues(@Param("statue") int statue,@Param("empId") int empId);
+    public void updateSomeStatues(@Param("statue") int statue,@Param("reimbursementId") Integer reimbursementId);
 }

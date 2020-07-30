@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <base href="http://localhost:8080/ssm_framework_war_exploded/">
+    <base href="http://192.168.6.145:8080/ssm_framework_war_exploded/">
     <link rel="stylesheet" href="js/dist/css/layui.css"  media="all">
     <script src="js/dist/layui.js" charset="utf-8"></script>
     <script src="js/jquery.js" ></script>
@@ -25,53 +25,36 @@
     }
 
 </style>
-<body style="background-color: #1E9FFF; ">
+<body style="background-image: url('img/timg.jpg');">
 <div class="layui-fluid" >
-    <div class="layui-col-xs12 layui-col-sm12 layui-col-md12 site-demo-button" id="layerDemo" style="margin-bottom: 0;">>
-        <button type="button" data-method="confirmTrans" class="layui-btn layui-btn-lg layui-btn-primary layui-btn-radius" name="test2" id="test2" style="float: right;">大型加圆角</button>
-    </div>
+
     <div class="layui-col-xs4 layui-col-sm4 layui-col-md4" style="width: 300px; height: 700px; font-size: 30px; text-align: center; " >
+        <div class="layui-col-xs12 layui-col-sm12 layui-col-md12 site-demo-button" id="layerDemo" style="margin-bottom: 0;">
+            <button type="button" data-method="confirmTrans" class="layui-btn layui-btn-lg layui-btn-primary layui-btn-radius" name="test2" id="test2" style="float: left; margin-top: 0px">打&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;卡</button>
+        </div>
+        <div class="layui-col-xs12 layui-col-sm12 layui-col-md12 site-demo-button" id="dsad" style="margin-bottom: 0;">
+            <button type="button" data-method="confirmTrans" class="layui-btn layui-btn-lg layui-btn-primary layui-btn-radius" name="test2" id="test3" style="float: left; margin-top: 50px">查看打卡记&nbsp;录</button>
+        </div>
+        <div class="layui-col-xs12 layui-col-sm12 layui-col-md12 site-demo-button" id="ddasd" style="margin-bottom: 0;">
+            <button type="button" data-method="confirmTrans" class="layui-btn layui-btn-lg layui-btn-primary layui-btn-radius" name="test2" id="test4" style="float: left; margin-top: 50px">查看打卡的信息</button>
+        </div>
+        <div class="layui-col-xs12 layui-col-sm12 layui-col-md12 site-demo-button" id="asdasd" style="margin-bottom: 0;">
+            <button type="button" data-method="confirmTrans" class="layui-btn layui-btn-lg layui-btn-primary layui-btn-radius" name="test2" id="test5" style="float: left; margin-top: 50px">查看打卡&nbsp;&nbsp;人</button>
+        </div>
     </div>
     <div class="layui-col-xs8 layui-col-sm8 layui-col-md8 " id="dd" style="float: right">
         <div class="layui-inline" id="test-n1" style="float: right; margin-left: 0px;"></div>
     </div>
 </div>
 
-<!--<div class="site-demo-button" id="layerDemo" style="margin-bottom: 0;">-->
-    <!--<blockquote class="layui-elem-quote layui-quote-nm">-->
-        <!--Tips：为了更清晰演示，每触发下述一个例子之前，都会关闭所有已经演示的层-->
-    <!--</blockquote>-->
-    <!--<button data-method="setTop" class="layui-btn">多窗口模式，层叠置顶</button>-->
-    <!--<button data-method="confirmTrans" class="layui-btn">配置一个透明的询问框</button>-->
-    <!--<button data-method="notice" class="layui-btn">示范一个公告层</button>-->
-    <!--<button data-method="offset" data-type="t" class="layui-btn layui-btn-normal">上弹出</button>-->
-    <!--<button data-method="offset" data-type="r" class="layui-btn layui-btn-normal">右弹出</button>-->
-    <!--<button data-method="offset" data-type="b" class="layui-btn layui-btn-normal">下弹出</button>-->
-    <!--<button data-method="offset" data-type="l" class="layui-btn layui-btn-normal">左弹出</button>-->
-    <!--<button data-method="offset" data-type="lt" class="layui-btn layui-btn-normal">左上弹出</button>-->
-    <!--<button data-method="offset" data-type="lb" class="layui-btn layui-btn-normal">左下弹出</button>-->
-    <!--<button data-method="offset" data-type="rt" class="layui-btn layui-btn-normal">右上弹出</button>-->
-    <!--<button data-method="offset" data-type="rb" class="layui-btn layui-btn-normal">右下弹出</button>-->
-    <!--<button data-method="offset" data-type="auto" class="layui-btn layui-btn-normal">居中弹出</button>-->
-<!--</div>-->
+
 </body>
 </html>
 
 
 <script>
     var ds=null;
-    //		var date=null;
-    //		var dateTime=new Date();
-    //			$.ajax({
-    //				type:"get",
-    //				url:"wgg",
-    //				data:"dateTime",
-    //				async:true,
-    //				success:function(data){
-    //				date=data.result.newTime;
-    //
-    //				}
-    //			});
+
     layui.use(['laydate','layer'], function() {
         var $ = layui.$;
         var laydate = layui.laydate;
@@ -99,16 +82,16 @@
             }
         });
         lay('#test2').on('click', function (e) { //假设 test1 是一个按钮
-            $("#test-n1").empty();
+
             var ds;
             var emp = $(window.parent.document).find(":input#empId");
             console.log(emp);
             var empId = emp.val();
             console.log(empId);
             $.ajax({
-                url:"calendar/"+empId,
+                url:"calendar?empId="+empId,
                 dataType:"json",
-                type:"post",
+                type:"GET",
                 success:function (data) {
                     console.log(data.object);
                     ds=data.object;
@@ -117,19 +100,20 @@
                     layer.msg('<a style="background-color: #C9C9C9">今天的日期是'+ds+'</a><br>' +
                         '<a style="background-color: #C9C9C9">您好'+dk+'</a><br>', {
                         time: 20000, //20s后自动关闭
-                        btn: ['明白了', '知道了', '哦']
+                        btn: ['明白了']
                     });
-                    var ss=laydate.render({
-                        elem: '#test-n1'
-                        , position: 'static'
-                        , calendar: true
-                        , type: 'datetime'
-                        , value: dates
-                        , isInitValue: false
-                        , done: function (value, date, endDate) {
-                            console.log(ds);
-                        }
-                    });
+                   // laydate.render({
+                   //      elem: '#test-n1'
+                   //      , position: 'static'
+                   //      , calendar: true
+                   //      , type: 'datetime'
+                   //      , value: dates
+                   //      , isInitValue: false
+                   //      , done: function (value, date, endDate) {
+                   //          console.log(ds);
+                   //      }
+                   //  });
+
 
                 }
             });
