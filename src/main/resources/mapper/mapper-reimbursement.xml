@@ -37,7 +37,7 @@
     </resultMap>
 
     <insert id="insertReimbursement" >
-        insert into Reimbursement values(#{reimbursementId},#{empId},#{taskSendId},#{sendTime},#{sum},1,#{date},1)
+        insert into Reimbursement values(#{reimbursementId},#{empId},#{taskSendId},#{sendTime},#{sum},1,#{date},#{type})
     </insert>
 
 

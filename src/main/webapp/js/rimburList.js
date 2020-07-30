@@ -21,7 +21,7 @@ layui.use(['form','layer','table','laytpl'],function(){
         id : "userListTable",
         cols : [[
             {type: "checkbox", fixed:"left", width:50},
-            {field: 'reimbursementId ', title: '申请编号', minWidth:100, align:"center"},
+            // {field: 'reimbursementId ', title: '申请编号', minWidth:100, align:"center"},
             {field: 'empId', title: '申请人Id', minWidth:100, align:"center"},
             {field: 'sendId', title: '发送的事件', minWidth:100, align:"center"},
             {field: 'sendTime', title: '发送申请的时间', minWidth:100, align:"center"},

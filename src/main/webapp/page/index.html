@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta http-equiv="Content-Type" content="text/html; charset=GBK">
-		<base href="http://localhost:8080/ssm_framework_war_exploded/">
+		<base href="http://localhost:8080/OASystem_war_exploded/">
  		<link rel="stylesheet" href="js/dist/css/layui.css"  media="all">
  		<!--<link rel="stylesheet" href="page/success.html" />-->
  		<link rel="stylesheet" href="page/leave.html" />
@@ -54,7 +54,7 @@
 		}
 	</style>
 
-	<body style="background-color: #C9C9C9; width: 100%;height: 694px;" >
+	<body style="background-image: url('img/timg.jpg'); width: 100%;height: 694px;" >
 	<input type="hidden" id="empId">
 	<input type="hidden" id="depId">
    <div class="layui-row" >
@@ -62,7 +62,7 @@
 	<div class="layui-tab layui-tab-brief " lay-filter="docDemoTabBrief">
 		<ul class="layui-col-xs2 layui-col-sm2 layui-col-md2" style="height: 60px; text-align: center; width: 13%;margin-top: -10px;line-height: 60px; text-align: center;" >
 			<li class="layui-nav-item" lay-unselect="" style="">
-				<a href="javascript:;" style="color: #C9C9C9"><img src="//t.cn/RCzsdCq" class="layui-nav-img" >我</a>
+				<a href="javascript:;" style="color: #C9C9C9"><img src="" style="width: 128px;height: 50px;"  class="layui-nav-img head" ><a class="empName"></a> </a>
 				<dl class="layui-nav-child">
 					<dd><a href="javascript:;">修改信息</a></dd>
 					<dd><a href="javascript:;">安全管理</a></dd>
@@ -180,10 +180,8 @@
 		 <div class="layui-col-xs10 layui-col-sm10 layui-col-md10 ss" style="margin-left:-50px; " id="d1">
 
 				<div class="layui-col-xs12 layui-col-sm12 layui-col-md12" id="nr" >
-					<iframe src='' frameborder='0' name="dd" scrolling='no' width='1250px' height='694px' style="background-color: white; margin-left: 14px;"></iframe>
 
-					<iframe src='' frameborder='0' name="dd" scrolling='no' width='1250px' height='1000px' style="background-color: white"></iframe>
-					<iframe src='' frameborder='0' name="dd" scrolling='no' width='1250px' height='1000px' ></iframe>
+					<iframe src='page/hand.html' frameborder='0' name="dd" scrolling='no' width='1250px' height='694px' style="background-color: white" ></iframe>
 				  <!--<div class="grid-demo layui-bg-blue"></div>-->
 				</div>
 				  <!--style="background-color: #1E9FFF"-->
@@ -222,6 +220,7 @@
 			$("#depId").val(data.object.dep.depId);
 			$(".head").attr("src","img/"+data.object.head);
 			$(".empName").html(data.object.empName);
+
 		}
 
 	});

@@ -24,10 +24,11 @@ public class ReimbursementHandler {
      * @param
      * @return
      */
-    @GetMapping("rmMessage")
-    public Result insertEmpSomeMassge(int empId,int taskSendId,double sum,int type,String detail){
+    @PostMapping("rmMessage")
+    public Result insertEmpSomeMassge(Integer empId,Integer taskSendId,Double sum,Integer type,String detail){
             Result result=new Result();
             Date date=new Date();
+        System.out.println(empId+taskSendId+sum+type+detail+"这是上传的");
             reimbursementService.insertByEmpId(empId,taskSendId,date,sum,type,detail);
             System.out.println("提交成功");
             result.setMessage("提交成功");
@@ -58,11 +59,8 @@ public class ReimbursementHandler {
      */
     @GetMapping("changeStatue")
     public String selectAllStatue(){
-//        String mess="";
-//            Result result=new Result();
-        //System.out.println("statue:"+statue);
-        Integer statue = 1;
-            List<ReimbursementAll_bo> list=reimbursementService.selectAllStatue(statue);
+
+            List<ReimbursementAll_bo> list=reimbursementService.selectAllStatue(1);
             Map<String,Object> map=new HashMap<>();
             map.put("code",0);
             map.put("msg","");

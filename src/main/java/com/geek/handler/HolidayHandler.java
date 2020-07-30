@@ -141,8 +141,8 @@ public class HolidayHandler {
      * @param depId 用户id
      * @return
      */
-    @PostMapping("calendar/{depId}")
-    public Result insertWorkOn(@PathVariable("depId") int depId){
+    @PostMapping("calendar/{empId}")
+    public Result insertWorkOn(@PathVariable("empId") int depId){
         Result result=new Result();
         Date date= new Date();
         Date date2=leaveService.changeDate(3);
@@ -172,9 +172,7 @@ public class HolidayHandler {
         map.put("data",list);
         JSONObject o = (JSONObject) JSONObject.toJSON(map);
         String json = o.toJSONString();
-
-
-
+        System.out.println("发卡"+json);
         return json;
     }
 

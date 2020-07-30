@@ -29,8 +29,9 @@ public class ReimbursementService {
     @Transactional
     public void insertByEmpId(int empId,int taskSenId,Date sendTime,double sum,int type,String detail){
         Date date=new Date();
-        reimbursementDao.insertReimbursement(11,1,taskSenId,sendTime,sum,date);
-        reimbursementDetailDao.insertDetailMessge(type,detail,sum,11);
+
+        reimbursementDao.insertReimbursement(null,empId,taskSenId,sendTime,sum,date,type);
+        reimbursementDetailDao.insertDetailMessge(type,detail,sum,null);
 
     }
 
@@ -41,7 +42,7 @@ public class ReimbursementService {
      */
     public List<ReimbursementAll_bo> selectAllStatue(int statue){
         List<ReimbursementAll_bo> list=new ArrayList<>();
-        list=reimbursementAll_boDao.findAllReimbursement(statue);
+        list=reimbursementAll_boDao.findAllReimbursement(1);
         return list;
     }
 
